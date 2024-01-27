@@ -2,7 +2,6 @@
 
 class WPLUXSymcon extends IPSModule
 {
-
     private $updateTimer;
 
     protected function Log($Message)
@@ -12,7 +11,6 @@ class WPLUXSymcon extends IPSModule
 
     public function Create()
     {
-        //Never delete this line!
         parent::Create();
 
         $this->RegisterPropertyString('IPAddress', '192.168.178.59');
@@ -20,52 +18,41 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
-        // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
     }
 
     public function Destroy()
     {
-        //Never delete this line!
         parent::Destroy();
     }
 
     public function ApplyChanges()
     {
-        //Never delete this line!
         parent::ApplyChanges();
 
-        // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
     }
 
     public function Update()
     {
-        //Verbindung zur Lux
         $IpWwc = "{$this->ReadPropertyString('IPAddress')}";
         $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
         $SiteTitle = "WÄRMEPUMPE";
 
-        // Integriere Variabelbeschreibung aus Java Daten
         require_once __DIR__ . '/../java_daten.php';
 
-        // Lesen Sie die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
-        // Debug-Ausgabe
         $this->Log("ID-Liste: " . print_r($idListe, true));
 
-        // Variablen
         $sBuff = 0;
         $time1 = time();
         $filename = "test.tst";
         $JavaWerte = 0;
         $refreshtime = 5; // Sekunden
 
-        // Connecten
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
 
@@ -74,7 +61,6 @@ class WPLUXSymcon extends IPSModule
             exit("Socket connect failed with error code: $error_code\n");
         }
 
-        // Daten holen
         $msg = pack('N*',3004);
         $send=socket_write($socket, $msg, 4); //3004 senden
 
@@ -97,66 +83,54 @@ class WPLUXSymcon extends IPSModule
             socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
             $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-        //socket wieder schliessen
+
         socket_close($socket);
 
-		// Werte anzeigen
-for ($i = 0; $i < $JavaWerte; ++$i) {
-    // Testbereich für weitere Variablen basierend auf ID-Liste
-    if (in_array($i, array_column($idListe, 'id'))) {
-        $minusTest = $daten_raw[$i] * 0.1;
-        if ($minusTest > 429496000) {
-            $daten_raw[$i] -= 4294967296;
-            $daten_raw[$i] *= 0.1;
-        } else {
-            $daten_raw[$i] *= 0.1;
+        for ($i = 0; $i < $JavaWerte; ++$i) {
+            if (in_array($i, array_column($idListe, 'id'))) {
+                $minusTest = $daten_raw[$i] * 0.1;
+                if ($minusTest > 429496000) {
+                    $daten_raw[$i] -= 4294967296;
+                    $daten_raw[$i] *= 0.1;
+                } else {
+                    $daten_raw[$i] *= 0.1;
+                }
+                $daten_raw[$i] = round($daten_raw[$i], 1);
+
+                $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
+
+                $ident = 'WP_' . $java_dataset[$i];
+                $variableID = $idListe[$i]['variableID'];
+                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $variableID);
+            } else {
+                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+            }
         }
-        $daten_raw[$i] = round($daten_raw[$i], 1);
+    }
 
-        // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
+    private function CreateOrUpdateVariable($ident, $value, $variableID)
+    {
+        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
 
-        // Direkte Erstellung der Variable mit Ident basierend auf ID
-        $ident = 'WP_' . $idListe[$i]['id'];
-        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
-    } else {
-        // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists('WP_' . $idListe[$i]['id']);
+        if ($variableID === false) {
+            $variableID = IPS_CreateVariable(2); // 2 steht für Float
+            IPS_SetParent($variableID, $this->InstanceID);
+            IPS_SetIdent($variableID, $ident);
+        }
+
+        SetValueFloat($variableID, $value);
+
+        return $variableID;
+    }
+
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+
+        if ($variableID !== false) {
+            $this->Log("Variable löschen: " . $ident);
+
+            IPS_DeleteVariable($variableID);
+        }
     }
 }
-
-		}
-
-		private function CreateOrUpdateVariable($ident, $value)
-		{
-		$minusTest = $value * 0.1;
-		if ($minusTest > 429496000) {
-			$value -= 4294967296;
-			$value *= 0.1;
-		} else {
-			$value *= 0.1;
-		}
-		$value = round($value, 1);
-
-		// Debug-Ausgabe
-		$this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
-
-		// Direkte Erstellung der Variable mit Ident
-		$varid = $this->RegisterVariableFloat($ident, $ident);
-		SetValueFloat($varid, $value);
-
-		return $varid;
-		}
-
-		private function DeleteVariableIfExists($ident)
-		{
-		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-		if ($variableID !== false) {
-			// Debug-Ausgabe
-			$this->Log("Variable löschen: " . $ident);
-
-			// Variable löschen
-			IPS_DeleteVariable($variableID);
-		}
-		}
-		}
