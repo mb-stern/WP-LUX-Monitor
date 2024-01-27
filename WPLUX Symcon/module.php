@@ -50,9 +50,6 @@
 
 		// Integriere Variabelbeschreibung aus Java Daten
 		require_once __DIR__ . '/../java_daten.php';
-
-		// Debug-Ausgabe, um den erfolgreichen Ladevorgang anzuzeigen
-		echo "Die Datei java_daten.php wurde erfolgreich geladen.";
 	
 		// Variablen
 		$sBuff = 0;
