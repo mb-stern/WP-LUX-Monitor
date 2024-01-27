@@ -101,29 +101,30 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
 
 		// Werte anzeigen
-		for ($i = 0; $i < $JavaWerte; ++$i) {
-			// Testbereich für weitere Variablen basierend auf ID-Liste
-			if (in_array($i, array_column($idListe, 'id'))) {
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
+for ($i = 0; $i < $JavaWerte; ++$i) {
+    // Testbereich für weitere Variablen basierend auf ID-Liste
+    if (in_array($i, array_column($idListe, 'id'))) {
+        $minusTest = $daten_raw[$i] * 0.1;
+        if ($minusTest > 429496000) {
+            $daten_raw[$i] -= 4294967296;
+            $daten_raw[$i] *= 0.1;
+        } else {
+            $daten_raw[$i] *= 0.1;
+        }
+        $daten_raw[$i] = round($daten_raw[$i], 1);
 
-				// Debug-Ausgabe
-				$this->Log("Variable erstellen/aktualisieren für ID: " . $i);
+        // Debug-Ausgabe
+        $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
 
-				// Direkte Erstellung der Variable mit Ident
-				$ident = 'WP_' . $java_dataset[$i];
-				$varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
-			} else {
-				// Variable löschen, da sie nicht mehr in der ID-Liste ist
-				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-			}
-		}
+        // Direkte Erstellung der Variable mit Ident basierend auf ID
+        $ident = 'WP_' . $idListe[$i]['id'];
+        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
+    } else {
+        // Variable löschen, da sie nicht mehr in der ID-Liste ist
+        $this->DeleteVariableIfExists('WP_' . $idListe[$i]['id']);
+    }
+}
+
 		}
 
 		private function CreateOrUpdateVariable($ident, $value)
