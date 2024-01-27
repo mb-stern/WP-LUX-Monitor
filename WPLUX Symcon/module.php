@@ -3,6 +3,8 @@
 	class WPLUXSymcon extends IPSModule
 	{
 
+		private $updateTimer;
+
 		protected function Log($Message)
 		{
 			IPS_LogMessage(__CLASS__, $Message);
@@ -48,7 +50,7 @@
 		$SiteTitle = "WÄRMEPUMPE";
 
 		// Integriere Variabelbeschreibung aus Java Daten
-		include_once(__DIR__ . '/../java_daten.php');
+		require_once __DIR__ . '/../java_daten.php';
 
 		// Debug-Ausgabe, um den erfolgreichen Ladevorgang anzuzeigen
 		echo "Die Datei java_daten.php wurde erfolgreich geladen.";
@@ -65,8 +67,8 @@
 		$connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
 
 		if (!$connect) {
-			$error_code = socket_last_error();
-			exit("Socket connect failed with error code: $error_code\n");
+		$error_code = socket_last_error();
+		exit("Socket connect failed with error code: $error_code\n");
 		}
 	
 		// Daten holen
@@ -108,24 +110,24 @@
 		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 		{
 		
-			// Testbereich
-			
-			if ($i >= 10 && $i <= 18) // Temperaturen
-			{
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
-			
-				$varid = CreateVariableByName($dummyModuleID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
-				setValueFloat($varid, $daten_raw[$i]);
-			}
-	
-			//Ende Testbereich
+	       // Werte anzeigen
+        for ($i = 0; $i < $JavaWerte; ++$i) {
+            // Testbereich
+            if ($i >= 10 && $i <= 18) { // Temperaturen
+                $minusTest = $daten_raw[$i] * 0.1;
+                if ($minusTest > 429496000) {
+                    $daten_raw[$i] -= 4294967296;
+                    $daten_raw[$i] *= 0.1;
+                } else {
+                    $daten_raw[$i] *= 0.1;
+                }
+                $daten_raw[$i] = round($daten_raw[$i], 1);
+
+                // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+                $varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+                SetValueFloat($varid, $daten_raw[$i]);
+            }
+            // Ende Testbereich
 
 		}
 
