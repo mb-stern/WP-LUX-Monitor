@@ -50,10 +50,7 @@
 
 		// Integriere Variabelbeschreibung aus Java Daten
 		require_once __DIR__ . '/../java_daten.php';
-	   
-		// Lesen Sie die ID-Liste
-	   	$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-
+	
 		// Variablen
 		$sBuff = 0;
 		$time1 = time();
@@ -105,23 +102,20 @@
 		//socket wieder schliessen
 		socket_close($socket);
 		
-		// Werte anzeigen
-		
-			if ($i == 56)
-			{
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
-			
-				// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
-				SetValueFloat($varid, $daten_raw[$i]);
+		if ($i == 56) // Zähler
+		{
+			$minusTest = $daten_raw[$i] * 0.1;
+			if ($minusTest > 429496000) {
+				$daten_raw[$i] -= 4294967296;
+				$daten_raw[$i] *= 0.1;
+			} else {
+				$daten_raw[$i] *= 0.1;
 			}
+			$daten_raw[$i] = round($daten_raw[$i], 1);
+		
+			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+			SetValueFloat($varid, $daten_raw[$i]);
+		}
 
 		}
 
