@@ -3,6 +3,13 @@
 	class WPLUXSymcon extends IPSModule
 	{
 
+		// Integriere Variabelbeschreibung aus Java Daten
+		require_once __DIR__ . '/../java_daten.php';
+		// Überprüfen, ob die Funktion nach dem Einbinden verfügbar ist
+		if (!function_exists('CreateVariableByName')) {
+			die('Die Funktion CreateVariableByName() wurde nicht gefunden.');
+		}
+		
 		protected function Log($Message)
 		{
 			IPS_LogMessage(__CLASS__, $Message);
@@ -46,13 +53,6 @@
 		$IpWwc = "{$this->ReadPropertyString('IPAddress')}";
 		$WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
 		$SiteTitle = "WÄRMEPUMPE";
-
-		// Integriere Variabelbeschreibung aus Java Daten
-		require_once __DIR__ . '/../java_daten.php';
-		// Überprüfen, ob die Funktion nach dem Einbinden verfügbar ist
-if (!function_exists('CreateVariableByName')) {
-    die('Die Funktion CreateVariableByName() wurde nicht gefunden.');
-}
 	
 		// Variablen
 		$sBuff = 0;
