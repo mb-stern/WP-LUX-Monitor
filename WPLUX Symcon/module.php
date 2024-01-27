@@ -109,22 +109,20 @@
 		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 		{
 		
-			// Testbereich
+		// Testbereich für weitere Variablen basierend auf ID-Liste
+		if (in_array($i, $idListe)) {
+			$minusTest = $daten_raw[$i] * 0.1;
+			if ($minusTest > 429496000) {
+				$daten_raw[$i] -= 4294967296;
+				$daten_raw[$i] *= 0.1;
+			} else {
+				$daten_raw[$i] *= 0.1;
+			}
+			$daten_raw[$i] = round($daten_raw[$i], 1);
 			
-			if ($i == 257) // Zähler
-			{
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
-			
-				// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
-				SetValueFloat($varid, $daten_raw[$i]);
+			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+			SetValueFloat($varid, $daten_raw[$i]);
 			}
 	
 			//Ende Testbereich
