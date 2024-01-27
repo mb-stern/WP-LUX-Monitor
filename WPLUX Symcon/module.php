@@ -42,6 +42,8 @@
 		$this->Update();
 		}
 
+		/*
+		
 		public function Update()
 		{
 		//Verbindung zur Lux
@@ -146,5 +148,7 @@
 		}
 	
 	}
+
+	*/
 
 	}
