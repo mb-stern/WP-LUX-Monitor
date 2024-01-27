@@ -106,14 +106,14 @@ class WPLUXSymcon extends IPSModule
 
             // Testbereich für weitere Variablen basierend auf ID-Liste
             if (in_array($i, array_column($idListe, 'id'))) {
-                $this->CreateOrUpdateVariable($i, $daten_raw[$i]);
+                $this->CreateOrUpdateVariable($i, $daten_raw[$i], $java_dataset);
             } else {
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
     }
 
-    private function CreateOrUpdateVariable($id, $value)
+    private function CreateOrUpdateVariable($id, $value, $java_dataset)
     {
         $minusTest = $value * 0.1;
         if ($minusTest > 429496000) {
@@ -127,27 +127,40 @@ class WPLUXSymcon extends IPSModule
         // Debug-Ausgabe
         $this->Log("Variable erstellen/aktualisieren für ID: " . $id);
 
-        // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-        $variableID = @IPS_GetObjectIDByName('WP_' . $java_dataset[$id], $this->InstanceID);
-        if ($variableID === false) {
-            // Variable existiert nicht, also erstellen
-            $variableID = IPS_CreateVariable(.....); // Fügen Sie die entsprechenden Parameter hinzu
-        }
-
-        SetValueFloat($variableID, $value);
-    }
-
-    private function DeleteVariableIfExists($variableName)
-    {
-        $variableID = @IPS_GetObjectIDByName($variableName, $this->InstanceID);
-        if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->Log("Variable löschen: " . $variableName);
-
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
-        }
-    }
-}
-
-?>
+                // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$id], $java_dataset[$id]);
+				SetValueFloat($varid, $value);
+			}
+		
+			private function DeleteVariableIfExists($variableName)
+			{
+				$variableID = @IPS_GetObjectIDByName($variableName, $this->InstanceID);
+				if ($variableID !== false) {
+					// Debug-Ausgabe
+					$this->Log("Variable löschen: " . $variableName);
+		
+					// Variable löschen
+					IPS_DeleteVariable($variableID);
+				}
+			}
+		
+			// Funktion zur Erstellung von Variablen nach Name
+			private function CreateVariableByName($dummyModuleID, $name, $type, $ident, $profile, $position)
+			{
+				$vid = @IPS_GetObjectIDByIdent($ident, $dummyModuleID);
+				if ($vid === false) {
+					$vid = IPS_CreateVariable($type);
+					IPS_SetParent($vid, $dummyModuleID);  // Setzen Sie das Dummy-Modul als Eltern-Objekt
+					IPS_SetName($vid, $name);
+					IPS_SetIdent($vid, $ident);
+					IPS_SetInfo($vid, "");
+					IPS_SetPosition($vid, $position);
+		
+					if ($profile !== "") {
+						IPS_SetVariableCustomProfile($vid, $profile);
+					}
+				}
+				return $vid;
+			}
+		}
+		
