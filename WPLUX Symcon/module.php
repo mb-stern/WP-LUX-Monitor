@@ -50,7 +50,10 @@
 
 		// Integriere Variabelbeschreibung aus Java Daten
 		require_once __DIR__ . '/../java_daten.php';
-	
+	   
+		// Lesen Sie die ID-Liste
+	   	$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+
 		// Variablen
 		$sBuff = 0;
 		$time1 = time();
@@ -103,12 +106,8 @@
 		socket_close($socket);
 		
 		// Werte anzeigen
-		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
-		{
 		
-			// Testbereich
-			
-			if ($i >= 10 && $i <= 18) // Temperaturen
+			if ($i == 56)
 			{
 				$minusTest = $daten_raw[$i] * 0.1;
 				if ($minusTest > 429496000) {
@@ -123,8 +122,6 @@
 				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
 				SetValueFloat($varid, $daten_raw[$i]);
 			}
-	
-			//Ende Testbereich
 
 		}
 
