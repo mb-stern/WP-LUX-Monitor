@@ -112,27 +112,14 @@
 		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 		{
 		
-		// Testbereich für weitere Variablen basierend auf ID-Liste
-		if (in_array($i, array_column($idListe, 'id'))) {
-			$minusTest = $daten_raw[$i] * 0.1;
-			if ($minusTest > 429496000) {
-				$daten_raw[$i] -= 4294967296;
-				$daten_raw[$i] *= 0.1;
+		      // Testbereich für weitere Variablen basierend auf ID-Liste
+			  if (in_array($i, array_column($idListe, 'id'))) {
+				// Variablen für vorhandene IDs erstellen oder aktualisieren
+				$this->CreateOrUpdateVariable($i, $daten_raw[$i]);
 			} else {
-				$daten_raw[$i] *= 0.1;
+				// Variable löschen, da sie nicht mehr in der ID-Liste ist
+				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
 			}
-			$daten_raw[$i] = round($daten_raw[$i], 1);
-
-			// Debug-Ausgabe
-			$this->Log("Variable erstellen für ID: " . $i);
-			
-			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
-			SetValueFloat($varid, $daten_raw[$i]);
-			}
-	
-			//Ende Testbereich
-
 		}
 
 		// Funktion zur Erstellung von Variablen nach Name
@@ -156,33 +143,32 @@
 	}
 
 	private function CreateOrUpdateVariable($id, $value)
-{
-    $minusTest = $value * 0.1;
-    if ($minusTest > 429496000) {
-        $value -= 4294967296;
-        $value *= 0.1;
-    } else {
-        $value *= 0.1;
-    }
-    $value = round($value, 1);
+    {
+        $minusTest = $value * 0.1;
+        if ($minusTest > 429496000) {
+            $value -= 4294967296;
+            $value *= 0.1;
+        } else {
+            $value *= 0.1;
+        }
+        $value = round($value, 1);
 
-    // Debug-Ausgabe
-    $this->Log("Variable erstellen/aktualisieren für ID: " . $id);
-
-    // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-    $varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$id], $java_dataset[$id]);
-    SetValueFloat($varid, $value);
-}
-
-	private function DeleteVariableIfExists($variableName)
-{
-    $variableID = @IPS_GetObjectIDByName($variableName, $this->InstanceID);
-    if ($variableID !== false) {
         // Debug-Ausgabe
-        $this->Log("Variable löschen: " . $variableName);
+        $this->Log("Variable erstellen/aktualisieren für ID: " . $id);
 
-        // Variable löschen
-        IPS_DeleteVariable($variableID);
+        // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+        $varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$id], $java_dataset[$id]);
+        SetValueFloat($varid, $value);
     }
 
-	}
+    private function DeleteVariableIfExists($variableName)
+    {
+        $variableID = @IPS_GetObjectIDByName($variableName, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->Log("Variable löschen: " . $variableName);
+
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
+        }
+    }
