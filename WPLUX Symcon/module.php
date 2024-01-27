@@ -53,7 +53,8 @@ class WPLUXSymcon extends IPSModule
         require_once __DIR__ . '/../java_daten.php';
 
         // Lesen Sie die ID-Liste
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+		$this->SetPropertyString('IDListe', json_encode($idListe));
+		IPS_ApplyChanges($this->InstanceID);
 
         // Debug-Ausgabe
         $this->Log("ID-Liste: " . print_r($idListe, true));
