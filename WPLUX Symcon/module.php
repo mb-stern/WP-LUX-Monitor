@@ -2,6 +2,7 @@
 
 class WPLUXSymcon extends IPSModule
 {
+
     private $updateTimer;
 
     protected function Log($Message)
@@ -74,59 +75,42 @@ class WPLUXSymcon extends IPSModule
         }
 
         // Daten holen
-        $msg = pack('N*', 3004);
-        $send = socket_write($socket, $msg, 4);
+        $msg = pack('N*',3004);
+        $send=socket_write($socket, $msg, 4); //3004 senden
 
-        $msg = pack('N*', 0);
-        $send = socket_write($socket, $msg, 4);
+        $msg = pack('N*',0);
+        $send=socket_write($socket, $msg, 4); //0 senden
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL);
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+        $Test = unpack('N*',$Test);
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL);
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL); // Status
+        $Test = unpack('N*',$Test);
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL);
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL); // Länge der nachfolgenden Werte
+        $Test = unpack('N*',$Test);
 
         $JavaWerte = implode($Test);
 
-        for ($i = 0; $i < $JavaWerte; ++$i) {
-            socket_recv($socket, $InBuff[$i], 4, MSG_WAITALL);
-            $daten_raw[$i] = implode(unpack('N*', $InBuff[$i]));
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        {
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-
+        //socket wieder schliessen
         socket_close($socket);
 
         // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i) {
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        {
+
             // Testbereich für weitere Variablen basierend auf ID-Liste
             if (in_array($i, array_column($idListe, 'id'))) {
-                // Variablen für vorhandene IDs erstellen oder aktualisieren
                 $this->CreateOrUpdateVariable($i, $daten_raw[$i]);
             } else {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
-    }
-
-    private function CreateVariableByName($dummyModuleID, $name, $type, $ident, $profile, $position)
-    {
-        $vid = @IPS_GetObjectIDByIdent($ident, $dummyModuleID);
-        if ($vid === false) {
-            $vid = IPS_CreateVariable($type);
-            IPS_SetParent($vid, $dummyModuleID);
-            IPS_SetName($vid, $name);
-            IPS_SetIdent($vid, $ident);
-            IPS_SetInfo($vid, "");
-            IPS_SetPosition($vid, $position);
-
-            if ($profile !== "") {
-                IPS_SetVariableCustomProfile($vid, $profile);
-            }
-        }
-        return $vid;
     }
 
     private function CreateOrUpdateVariable($id, $value)
@@ -140,18 +124,30 @@ class WPLUXSymcon extends IPSModule
         }
         $value = round($value, 1);
 
+        // Debug-Ausgabe
         $this->Log("Variable erstellen/aktualisieren für ID: " . $id);
 
-        $varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$id], $java_dataset[$id]);
-        SetValueFloat($varid, $value);
+        // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+        $variableID = @IPS_GetObjectIDByName('WP_' . $java_dataset[$id], $this->InstanceID);
+        if ($variableID === false) {
+            // Variable existiert nicht, also erstellen
+            $variableID = IPS_CreateVariable(.....); // Fügen Sie die entsprechenden Parameter hinzu
+        }
+
+        SetValueFloat($variableID, $value);
     }
 
     private function DeleteVariableIfExists($variableName)
     {
         $variableID = @IPS_GetObjectIDByName($variableName, $this->InstanceID);
         if ($variableID !== false) {
+            // Debug-Ausgabe
             $this->Log("Variable löschen: " . $variableName);
+
+            // Variable löschen
             IPS_DeleteVariable($variableID);
         }
     }
 }
+
+?>
