@@ -1,55 +1,54 @@
 <?php
+class WPLUXSymcon extends IPSModule
+{
+    private $updateTimer;
 
-	class WPLUXSymcon extends IPSModule
-	{
+    protected function Log($Message)
+    {
+        IPS_LogMessage(__CLASS__, $Message);
+    }
 
-		private $updateTimer;
-		protected function Log($Message)
-		{
-			IPS_LogMessage(__CLASS__, $Message);
-		}
+    public function Create()
+    {
+        //Never delete this line!
+        parent::Create();
 
-		public function Create()
-		{
-		//Never delete this line!
-		parent::Create();
+        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+        $this->RegisterPropertyInteger('Port', 8889);
+        $this->RegisterPropertyString('IDListe', '[]');
+        $this->RegisterPropertyInteger('UpdateInterval', 0);
 
-		$this->RegisterPropertyString('IPAddress', '192.168.178.59');
-		$this->RegisterPropertyInteger('Port', 8889);
-		$this->RegisterPropertyString('IDListe', '[]');
-		$this->RegisterPropertyInteger('UpdateInterval', 0);
-	
-		// Timer für Aktualisierung registrieren
-		$this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
-		}
+        // Timer für Aktualisierung registrieren
+        $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+    }
 
-		public function Destroy()
-		{
-		//Never delete this line!
-		parent::Destroy();
-		}
+    public function Destroy()
+    {
+        //Never delete this line!
+        parent::Destroy();
+    }
 
-		public function ApplyChanges()
-		{
-		//Never delete this line!
-		parent::ApplyChanges();
+    public function ApplyChanges()
+    {
+        //Never delete this line!
+        parent::ApplyChanges();
 
-		// Timer für Aktualisierung aktualisieren
-		$this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
+        // Timer für Aktualisierung aktualisieren
+        $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-		// Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
-		$this->Update();
-		}
+        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+        $this->Update();
+    }
 
-		public function Update()
-		{
-		//Verbindung zur Lux
-		$IpWwc = "{$this->ReadPropertyString('IPAddress')}";
-		$WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
-		$SiteTitle = "WÄRMEPUMPE";
+    public function Update()
+    {
+        // Verbindung zur Lux
+        $IpWwc = "{$this->ReadPropertyString('IPAddress')}";
+        $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
+        $SiteTitle = "WÄRMEPUMPE";
 
-		// Integriere Variabelbeschreibung aus Java Daten
-		require_once __DIR__ . '/../java_daten.php';
+        // Integriere Variabelbeschreibung aus Java Daten
+        require_once __DIR__ . '/../java_daten.php';
 	
 		// Variablen
 		$sBuff = 0;
@@ -106,25 +105,24 @@
 		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 		{
 		
-			// Testbereich
-			
-			if ($i >= 10 && $i <= 18) // Temperaturen
-			{
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
-			
-				// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
-				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
-				SetValueFloat($varid, $daten_raw[$i]);
-			}
-	
-			//Ende Testbereich
+	       // Werte anzeigen
+		   for ($i = 0; $i < $JavaWerte; ++$i) {
+            // Testbereich
+            if ($i >= 10 && $i <= 18) { // Temperaturen
+                $minusTest = $daten_raw[$i] * 0.1;
+                if ($minusTest > 429496000) {
+                    $daten_raw[$i] -= 4294967296;
+                    $daten_raw[$i] *= 0.1;
+                } else {
+                    $daten_raw[$i] *= 0.1;
+                }
+                $daten_raw[$i] = round($daten_raw[$i], 1);
+
+                // Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+                $varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+                SetValueFloat($varid, $daten_raw[$i]);
+            }
+            // Ende Testbereich
 
 		}
 
