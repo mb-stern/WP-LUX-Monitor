@@ -50,6 +50,9 @@
 
 		// Integriere Variabelbeschreibung aus Java Daten
 		require_once __DIR__ . '/../java_daten.php';
+
+		// Lesen Sie die ID-Liste
+		$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 	
 		// Variablen
 		$sBuff = 0;
