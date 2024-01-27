@@ -113,7 +113,7 @@
 		{
 		
 		// Testbereich für weitere Variablen basierend auf ID-Liste
-		if (in_array($i, $idListe)) {
+		if (in_array($i, array_column($idListe, 'id'))) {
 			$minusTest = $daten_raw[$i] * 0.1;
 			if ($minusTest > 429496000) {
 				$daten_raw[$i] -= 4294967296;
@@ -125,14 +125,10 @@
 
 			// Debug-Ausgabe
 			$this->Log("Variable erstellen für ID: " . $i);
-			
+
 			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
 			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
 			SetValueFloat($varid, $daten_raw[$i]);
-			}
-	
-			//Ende Testbereich
-
 		}
 
 		// Funktion zur Erstellung von Variablen nach Name
