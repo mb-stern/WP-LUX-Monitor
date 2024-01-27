@@ -102,30 +102,31 @@ class WPLUXSymcon extends IPSModule
 
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
-			// Testbereich für weitere Variablen basierend auf ID-Liste
-			if (in_array($i, array_column($idListe, 'id'))) {
-				$positionsnummer = $idListe[array_search($i, array_column($idListe, 'id'))]['id'];
-		
-				$minusTest = $daten_raw[$i] * 0.1;
-				if ($minusTest > 429496000) {
-					$daten_raw[$i] -= 4294967296;
-					$daten_raw[$i] *= 0.1;
-				} else {
-					$daten_raw[$i] *= 0.1;
-				}
-				$daten_raw[$i] = round($daten_raw[$i], 1);
-		
-				// Debug-Ausgabe
-				$this->Log("Variable erstellen/aktualisieren für ID: " . $i . ", Positionsnummer: " . $positionsnummer);
-		
-				// Direkte Erstellung der Variable mit Ident und Positionsnummer
-				$ident = 'WP_' . $java_dataset[$i] . '_' . $positionsnummer;
-				$varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
-			} else {
-				// Variable löschen, da sie nicht mehr in der ID-Liste ist oder 'id' fehlt
-				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-			}
-		}
+            // Testbereich für weitere Variablen basierend auf ID-Liste
+            if (in_array($i, array_column($idListe, 'id'))) {
+                $positionsnummer = $idListe[array_search($i, array_column($idListe, 'id'))]['Position'];
+
+                $minusTest = $daten_raw[$i] * 0.1;
+                if ($minusTest > 429496000) {
+                    $daten_raw[$i] -= 4294967296;
+                    $daten_raw[$i] *= 0.1;
+                } else {
+                    $daten_raw[$i] *= 0.1;
+                }
+                $daten_raw[$i] = round($daten_raw[$i], 1);
+
+                // Debug-Ausgabe
+                $this->Log("Variable erstellen/aktualisieren für ID: " . $i . ", Positionsnummer: " . $positionsnummer);
+
+                // Direkte Erstellung der Variable mit Ident und Positionsnummer
+                $ident = 'WP_' . $java_dataset[$i] . '_' . $positionsnummer;
+                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
+            } else {
+                // Variable löschen, da sie nicht mehr in der ID-Liste ist
+                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+            }
+        }
+    }
 
     private function CreateOrUpdateVariable($ident, $value)
     {
