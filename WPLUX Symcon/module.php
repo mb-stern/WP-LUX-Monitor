@@ -100,25 +100,38 @@ class WPLUXSymcon extends IPSModule
                 $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
 
                 $ident = 'WP_' . $java_dataset[$i];
-                $variableID = $idListe[$i]['variableID'];
-                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $variableID);
+                $id = $idListe[$i]['id'];
+                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $id);
             } else {
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
     }
 
-    private function CreateOrUpdateVariable($ident, $value, $variableID)
+    private function CreateOrUpdateVariable($ident, $value, $id)
     {
         $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
 
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        
         if ($variableID === false) {
+            // Variable existiert noch nicht, erstelle sie mit der angegebenen ID
             $variableID = IPS_CreateVariable(2); // 2 steht für Float
             IPS_SetParent($variableID, $this->InstanceID);
             IPS_SetIdent($variableID, $ident);
         }
 
+        // Setze den Variablenwert
         SetValueFloat($variableID, $value);
+
+        // Setze die Variable-ID aus der IDListe
+        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+        $idListeIndex = array_search($id, array_column($idListe, 'id'));
+        
+        if ($idListeIndex !== false) {
+            $idListe[$idListeIndex]['variableID'] = $variableID;
+            $this->WritePropertyString('IDListe', json_encode($idListe));
+        }
 
         return $variableID;
     }
