@@ -48,7 +48,11 @@
 		$SiteTitle = "WÄRMEPUMPE";
 
 		// Integriere Variabelbeschreibung aus Java Daten
-		require_once __DIR__ . '/../java_daten.php';  
+		require_once __DIR__ . '/../java_daten.php';
+		// Überprüfen, ob die Funktion nach dem Einbinden verfügbar ist
+if (!function_exists('CreateVariableByName')) {
+    die('Die Funktion CreateVariableByName() wurde nicht gefunden.');
+}
 	
 		// Variablen
 		$sBuff = 0;
