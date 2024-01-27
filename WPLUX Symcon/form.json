@@ -1,5 +1,55 @@
 {
-    "elements": [],
-    "actions": [],
-    "status": []
-}
+    "elements": [
+      {
+        "type": "ExpansionPanel",
+        "caption": "Info zum Modul",
+        "items": [
+          {
+            "type": "Label",
+            "label": "Dieses Modul ermöglicht, Daten von der Luxtronic verschiedener Wärmepumpen-Hersteller abzugreifen."
+          },
+          {
+            "type": "Label",
+            "label": "Dazu muss sichergestellt werden, dass der Port 8888 oder 8889 nicht durch die Firewall blockiert ist."
+          }
+        ]
+      },
+      {
+        "name": "IPAddress",
+        "type": "ValidationTextBox",
+        "caption": "IP-Address"
+      },
+      {
+        "name": "Port",
+        "type": "NumberSpinner",
+        "caption": "Port (8888 oder 8889)"
+      },
+      {
+        "type": "IntervalBox",
+        "name": "UpdateInterval",
+        "caption": "Sekunden"
+      },
+      {
+        "type": "List",
+        "name": "IDListe",
+        "caption": "Überwachte ID's",
+        "rowCount": 5,
+        "add": true,
+        "delete": true,
+        "columns": 
+        [
+            {
+                "name": "id",
+                "caption": "ID des Wertes",
+                "width": "150",
+                "add": 0,
+                "edit": 
+                {
+                    "type": "NumberSpinner"
+                }
+            }
+        ]
+    }
+]
+  }
+  
