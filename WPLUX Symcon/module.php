@@ -112,14 +112,27 @@
 		for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 		{
 		
-		      // Testbereich für weitere Variablen basierend auf ID-Liste
-			  if (in_array($i, array_column($idListe, 'id'))) {
-				// Variablen für vorhandene IDs erstellen oder aktualisieren
-				$this->CreateOrUpdateVariable($i, $daten_raw[$i]);
+		// Testbereich für weitere Variablen basierend auf ID-Liste
+		if (in_array($i, array_column($idListe, 'id'))) {
+			$minusTest = $daten_raw[$i] * 0.1;
+			if ($minusTest > 429496000) {
+				$daten_raw[$i] -= 4294967296;
+				$daten_raw[$i] *= 0.1;
 			} else {
-				// Variable löschen, da sie nicht mehr in der ID-Liste ist
-				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+				$daten_raw[$i] *= 0.1;
 			}
+			$daten_raw[$i] = round($daten_raw[$i], 1);
+
+			// Debug-Ausgabe
+			$this->Log("Variable erstellen für ID: " . $i);
+			
+			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+			SetValueFloat($varid, $daten_raw[$i]);
+			}
+	
+			//Ende Testbereich
+
 		}
 
 		// Funktion zur Erstellung von Variablen nach Name
