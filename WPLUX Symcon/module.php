@@ -118,7 +118,7 @@ class WPLUXSymcon extends IPSModule
 
 				// Direkte Erstellung der Variable mit Ident
 				$ident = 'WP_' . $java_dataset[$i];
-				$varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
+				$varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $id);
 			} else {
 				// Variable löschen, da sie nicht mehr in der ID-Liste ist
 				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
