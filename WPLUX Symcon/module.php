@@ -130,40 +130,41 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
 		}
 
 		private function CreateOrUpdateVariable($ident, $value, $id)
-		{
-			$this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . " mit ID: " . $id);
-		
-			// Suche nach der Variable mit dem Ident
-			$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-		
-			// Wenn die Variable nicht gefunden wird, erstelle sie
-			if ($variableID === false) {
-				$variableID = IPS_CreateVariable(2); // 2 steht für Float
-				IPS_SetParent($variableID, $this->InstanceID);
-				IPS_SetIdent($variableID, $ident);
-			}
-		
-			// Setze die Position der Variable basierend auf der idListe
-			$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-			$idListeIndex = array_search($id, array_column($idListe, 'id'));
-		
-			if ($idListeIndex !== false) {
-				$position = $idListe[$idListeIndex]['position'];
-				IPS_SetPosition($variableID, $position);
-			}
-		
-			// Setze den Variablenwert
-			SetValueFloat($variableID, $value);
-		
-			// Setze die Variable-ID aus der IDListe
-			if ($idListeIndex !== false) {
-				$idListe[$idListeIndex]['variableID'] = $variableID;
-				$this->WritePropertyString('IDListe', json_encode($idListe));
-			}
-		
-			return $variableID;
-		}
-		
+{
+    $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . " mit ID: " . $id);
+
+    // Suche nach der Variable mit dem Ident
+    $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+
+    // Wenn die Variable nicht gefunden wird, erstelle sie
+    if ($variableID === false) {
+        $variableID = IPS_CreateVariable(2); // 2 steht für Float
+        IPS_SetParent($variableID, $this->InstanceID);
+        IPS_SetIdent($variableID, $ident);
+    }
+
+    // Setze die Position der Variable basierend auf der idListe
+    $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+    $idListeIndex = array_search($id, array_column($idListe, 'id'));
+
+    if ($idListeIndex !== false && isset($idListe[$idListeIndex]['position'])) {
+        $position = $idListe[$idListeIndex]['position'];
+        IPS_SetPosition($variableID, $position);
+    }
+
+    // Setze den Variablenwert
+    SetValueFloat($variableID, $value);
+
+    // Setze die Variable-ID aus der IDListe
+    if ($idListeIndex !== false) {
+        $idListe[$idListeIndex]['variableID'] = $variableID;
+        IPS_SetProperty($this->InstanceID, 'IDListe', json_encode($idListe));
+        IPS_ApplyChanges($this->InstanceID);
+    }
+
+    return $variableID;
+}
+
 		private function DeleteVariableIfExists($ident)
 		{
 		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
