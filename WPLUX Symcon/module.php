@@ -53,6 +53,9 @@
 
 		// Lesen Sie die ID-Liste
 		$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+
+		// Debug-Ausgabe
+		$this->Log("ID-Liste: " . print_r($idListe, true));
 	
 		// Variablen
 		$sBuff = 0;
@@ -119,6 +122,9 @@
 				$daten_raw[$i] *= 0.1;
 			}
 			$daten_raw[$i] = round($daten_raw[$i], 1);
+
+			// Debug-Ausgabe
+			$this->Log("Variable erstellen für ID: " . $i);
 			
 			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
 			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
