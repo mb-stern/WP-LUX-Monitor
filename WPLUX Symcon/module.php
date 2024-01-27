@@ -1,20 +1,19 @@
 <?php
 
-declare(strict_types=1);
 	class WPLUXSymcon extends IPSModule
 	{
 		public function Create()
 		{
-			//Never delete this line!
-			parent::Create();
+		//Never delete this line!
+		parent::Create();
 
-			$this->RegisterPropertyString('IPAddress', '192.168.178.59');
-			$this->RegisterPropertyInteger('Port', 8889);
-			$this->RegisterPropertyString('IDListe', '[]');
-			$this->RegisterPropertyInteger('UpdateInterval', 0);
+		$this->RegisterPropertyString('IPAddress', '192.168.178.59');
+		$this->RegisterPropertyInteger('Port', 8889);
+		$this->RegisterPropertyString('IDListe', '[]');
+		$this->RegisterPropertyInteger('UpdateInterval', 0);
 	
-			// Timer für Aktualisierung registrieren
-			$this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+		// Timer für Aktualisierung registrieren
+		$this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 		}
 
 		public function Destroy()
@@ -25,14 +24,14 @@ declare(strict_types=1);
 
 		public function ApplyChanges()
 		{
-			//Never delete this line!
-			parent::ApplyChanges();
+		//Never delete this line!
+		parent::ApplyChanges();
 
-			// Timer für Aktualisierung aktualisieren
-			$this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
+		// Timer für Aktualisierung aktualisieren
+		$this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-			// Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
-			$this->Update();
+		// Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+		$this->Update();
 		}
 
 		public function Update()
