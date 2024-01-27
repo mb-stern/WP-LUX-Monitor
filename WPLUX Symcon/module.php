@@ -3,8 +3,6 @@
 	class WPLUXSymcon extends IPSModule
 	{
 
-		private $updateTimer;
-
 		protected function Log($Message)
 		{
 			IPS_LogMessage(__CLASS__, $Message);
@@ -26,8 +24,8 @@
 
 		public function Destroy()
 		{
-			//Never delete this line!
-			parent::Destroy();
+		//Never delete this line!
+		parent::Destroy();
 		}
 
 		public function ApplyChanges()
@@ -42,8 +40,6 @@
 		$this->Update();
 		}
 
-		/*
-		
 		public function Update()
 		{
 		//Verbindung zur Lux
@@ -51,7 +47,8 @@
 		$WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
 		$SiteTitle = "WÄRMEPUMPE";
 
-		require_once __DIR__ . '/../java_daten.php';  // Integriere Variabelbeschreibung
+		// Integriere Variabelbeschreibung aus Java Daten
+		require_once __DIR__ . '/../java_daten.php';  
 	
 		// Variablen
 		$sBuff = 0;
@@ -148,7 +145,5 @@
 		}
 	
 	}
-
-	*/
 
 	}
