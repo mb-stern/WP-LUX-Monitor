@@ -108,7 +108,7 @@
 		
 			// Testbereich
 			
-			if ($i >= 10 && $i <= 18) // Temperaturen
+			if ($i == 56) // Zähler
 			{
 				$minusTest = $daten_raw[$i] * 0.1;
 				if ($minusTest > 429496000) {
