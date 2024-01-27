@@ -101,33 +101,37 @@ class WPLUXSymcon extends IPSModule
 
                 $ident = 'WP_' . $java_dataset[$i];
                 $id = $idListe[$i]['id'];
-                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $id);
+                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $id, $idListe[$i]['position']);
             } else {
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
     }
 
-    private function CreateOrUpdateVariable($ident, $value, $id)
+    private function CreateOrUpdateVariable($ident, $value, $id, $position)
     {
-        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
+        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . " mit ID: " . $id);
 
+        // Suche nach der Variable mit dem Ident
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        
+
+        // Wenn die Variable nicht gefunden wird, erstelle sie
         if ($variableID === false) {
-            // Variable existiert noch nicht, erstelle sie mit der angegebenen ID
             $variableID = IPS_CreateVariable(2); // 2 steht für Float
             IPS_SetParent($variableID, $this->InstanceID);
             IPS_SetIdent($variableID, $ident);
+
+            // Setze die Position der Variable basierend auf der idListe
+            IPS_SetPosition($variableID, $position);
         }
 
         // Setze den Variablenwert
         SetValueFloat($variableID, $value);
 
         // Setze die Variable-ID aus der IDListe
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+		$idListe = json_decode($this->ReadPropertyString('IDListe'), true);
         $idListeIndex = array_search($id, array_column($idListe, 'id'));
-        
+    
         if ($idListeIndex !== false) {
             $idListe[$idListeIndex]['variableID'] = $variableID;
             $this->WritePropertyString('IDListe', json_encode($idListe));
@@ -147,3 +151,4 @@ class WPLUXSymcon extends IPSModule
         }
     }
 }
+
