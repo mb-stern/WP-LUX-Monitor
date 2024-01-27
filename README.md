@@ -1,4 +1,4 @@
-# WPLUX Symcon
+# Modul für Wärmepumpen mit Luxtronic für IP-Symcon
 
 Folgende Module beinhaltet das WPLUX Symcon Repository:
 
