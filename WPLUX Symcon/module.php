@@ -122,8 +122,9 @@
 				}
 				$daten_raw[$i] = round($daten_raw[$i], 1);
 			
-				$varid = CreateVariableByName($dummyModuleID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
-				setValueFloat($varid, $daten_raw[$i]);
+				// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
+				$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
+				SetValueFloat($varid, $daten_raw[$i]);
 			}
 	
 			//Ende Testbereich
