@@ -125,10 +125,14 @@
 
 			// Debug-Ausgabe
 			$this->Log("Variable erstellen für ID: " . $i);
-
+			
 			// Direkte Erstellung der Variable ohne Dummy-Modul-Bezug
 			$varid = $this->RegisterVariableFloat('WP_' . $java_dataset[$i], $java_dataset[$i]);
 			SetValueFloat($varid, $daten_raw[$i]);
+			}
+	
+			//Ende Testbereich
+
 		}
 
 		// Funktion zur Erstellung von Variablen nach Name
