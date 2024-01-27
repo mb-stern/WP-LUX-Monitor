@@ -254,4 +254,9 @@ $java_dataset = array("1","2","3",
 "254",
 "255",
 "256",
-"Waermeleistung");
+"Waermeleistung"),
+"258",
+"259",
+"260",
+"261",
+"262";
