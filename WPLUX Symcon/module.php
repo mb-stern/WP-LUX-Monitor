@@ -2,6 +2,14 @@
 
 	class WPLUXSymcon extends IPSModule
 	{
+
+		private $updateTimer;
+
+		protected function Log($Message)
+		{
+			IPS_LogMessage(__CLASS__, $Message);
+		}
+
 		public function Create()
 		{
 		//Never delete this line!
