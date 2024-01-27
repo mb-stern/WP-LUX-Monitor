@@ -108,7 +108,7 @@
 		
 			// Testbereich
 			
-			if ($i == 56) // Zähler
+			if ($i == 257) // Zähler
 			{
 				$minusTest = $daten_raw[$i] * 0.1;
 				if ($minusTest > 429496000) {
