@@ -49,10 +49,9 @@
 
 		// Integriere Variabelbeschreibung aus Java Daten
 		require_once __DIR__ . '/../java_daten.php';
-		// Überprüfen, ob die Funktion nach dem Einbinden verfügbar ist
-		if (!function_exists('CreateVariableByName')) {
-		die('Die Funktion CreateVariableByName() wurde nicht gefunden.');
-		}
+
+		// Debug-Ausgabe, um den erfolgreichen Ladevorgang anzuzeigen
+		echo "Die Datei java_daten.php wurde erfolgreich geladen.";
 	
 		// Variablen
 		$sBuff = 0;
