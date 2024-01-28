@@ -118,24 +118,6 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    private function AssignVariableProfiles($varid, $id)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                break;
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                break;
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                break;
-        }
-    }
-
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         $value = $this->convertValueBasedOnID($value, $id);
@@ -161,6 +143,24 @@ class WPLUXSymcon extends IPSModule
         }
 
         return $varid;
+    }
+
+    private function AssignVariableProfiles($varid, $id)
+    {
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+        switch ($id) {
+            case 10:
+                IPS_SetVariableCustomProfile($varid, '~Temperature');
+                break;
+            case 29:
+                IPS_SetVariableCustomProfile($varid, '~Switch');
+                break;
+            // Weitere Zuordnungen für andere 'id' hinzufügen
+            default:
+                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                IPS_SetVariableCustomProfile($varid, '');
+                break;
+        }
     }
 
     private function getVariableTypeBasedOnID($id)
