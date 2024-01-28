@@ -94,16 +94,15 @@ class WPLUXSymcon extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
-            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
+        socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+        $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
         //socket wieder schliessen
         socket_close($socket);
 
-// Werte anzeigen
-for ($i = 0; $i < $JavaWerte; ++$i) {
-    // Testbereich für weitere Variablen basierend auf ID-Liste
-    if (in_array($i, array_column($idListe, 'id'))) {
+        // Werte anzeigen
+        for ($i = 0; $i < $JavaWerte; ++$i) {
+        if (in_array($i, array_column($idListe, 'id'))) {
         $minusTest = $daten_raw[$i] * 0.1;
         if ($minusTest > 429496000) {
             $daten_raw[$i] -= 4294967296;
@@ -112,12 +111,9 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
             $daten_raw[$i] *= 0.1;
         }
         $daten_raw[$i] = round($daten_raw[$i], 1);
-
-        // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
         
         //Debug senden
-        $this->SendDebug("Gewälte IDs", "$i", 0);
+        $this->SendDebug("Gewälte IDs", "$daten_raw", 0);
 
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
