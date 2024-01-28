@@ -124,7 +124,7 @@ class WPLUXSymcon extends IPSModule
             switch ($id) {
                 case 10:
                     IPS_SetVariableCustomProfile($varid, '~Temperature');
-                    return 2; // Integer-Typ
+                    return 1; // Integer-Typ
                 case 29:
                     IPS_SetVariableCustomProfile($varid, '~Switch');
                     return 0; // Boolean-Typ
