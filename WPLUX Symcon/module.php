@@ -7,8 +7,7 @@ class WPLUXSymcon extends IPSModule
 
     protected function Log($Message)
     {
-        //IPS_LogMessage(__CLASS__, $Message);
-        $this->SendDebug($Message);
+        IPS_LogMessage(__CLASS__, $Message);
     }
 
     public function Create()
@@ -58,6 +57,7 @@ class WPLUXSymcon extends IPSModule
 
         // Debug-Ausgabe
         $this->Log("ID-Liste: " . print_r($idListe, true));
+        $this->SendDebug(__FUNCTION__, 'IPAddress', 'Port');
 
         // Variablen
         $sBuff = 0;
