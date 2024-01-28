@@ -140,7 +140,6 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomAction($varid, $profileData['Type']);
                     }
                     
-                
                     private function CreateOrUpdateVariable($ident, $value, $position)
                     {
                         $minusTest = $value * 0.1;
