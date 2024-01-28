@@ -74,6 +74,9 @@ class WPLUXSymcon extends IPSModule
             exit("Socket connect failed with error code: $error_code\n");
         }
 
+        //Debug senden
+        $this->SendDebug("Verbindung zu Socket fehlgeschlagen", "$error_code", 0);
+
         // Daten holen
         $msg = pack('N*',3004);
         $send=socket_write($socket, $msg, 4); //3004 senden
