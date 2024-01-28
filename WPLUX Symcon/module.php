@@ -2,7 +2,6 @@
 
 class WPLUXSymcon extends IPSModule
 {
-
     private $updateTimer;
 
     protected function Log($Message)
@@ -66,7 +65,7 @@ class WPLUXSymcon extends IPSModule
         if (!$connect) {
             $error_code = socket_last_error();
             $this->SendDebug("Verbindung zum Socket fehlgeschlagen. Error:", "$error_code", 0);
-            } else {
+        } else {
             $this->SendDebug("Verbindung zum Socket erfolgreich", "".$IpWwc.":".$WwcJavaPort."", 0);
         }
 
@@ -93,7 +92,7 @@ class WPLUXSymcon extends IPSModule
             socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
             $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-        
+
         //socket wieder schließen
         socket_close($socket);
 
@@ -108,31 +107,10 @@ class WPLUXSymcon extends IPSModule
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = 'WP_' . $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-
-                // Zuordnung des Variablenprofils basierend auf der 'id'
-                $this->AssignVariableProfiles($varid, $i);
             } else {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
-        }
-    }
-
-    private function AssignVariableProfiles($varid, $id)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                break;
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                break;
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                break;
         }
     }
 
@@ -148,7 +126,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($existingVarID === false) {
             // Variable existiert nicht, also erstellen
-            $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
+            $varid = IPS_CreateVariable($this->AssignVariableSettings($id));
             IPS_SetParent($varid, $this->InstanceID);
             IPS_SetIdent($varid, $ident);
             IPS_SetName($varid, $ident);
@@ -158,23 +136,35 @@ class WPLUXSymcon extends IPSModule
             // Variable existiert, also aktualisieren
             $varid = $existingVarID;
             SetValue($varid, $value);
+            $this->AssignVariableSettings($varid, $id); // Aktualisiere auch die Einstellungen
         }
 
         return $varid;
     }
 
-    private function getVariableTypeBasedOnID($id)
+    private function AssignVariableSettings($id)
     {
-        // Hier erfolgt die Zuordnung des Variablentyps basierend auf der 'id'
+        // Hier erfolgt die Zuordnung der Einstellungen basierend auf der 'id'
         switch ($id) {
             case 10:
-                return 2; // Integer-Typ
+                $variableType = 2; // Integer-Typ
+                $profile = '~Temperature';
+                break;
             case 29:
-                return 0; // Boolean-Typ
+                $variableType = 0; // Boolean-Typ
+                $profile = '~Switch';
+                break;
             // Weitere Zuordnungen für andere 'id' hinzufügen
             default:
-                return 2; // Standardmäßig Integer-Typ
+                $variableType = 2; // Standardmäßig Integer-Typ
+                $profile = '';
+                break;
         }
+
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+        IPS_SetVariableCustomProfile($varid, $profile);
+
+        return $variableType;
     }
 
     private function convertValueBasedOnID($value, $id)
@@ -188,19 +178,18 @@ class WPLUXSymcon extends IPSModule
                 // Weitere Zuordnungen für andere 'id' hinzufügen
             default:
                 return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
-            }
-        }
-    
-        private function DeleteVariableIfExists($ident)
-        {
-            $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-            if ($variableID !== false) {
-                // Debug-Ausgabe
-                $this->Log("Variable löschen: " . $ident);
-    
-                // Variable löschen
-                IPS_DeleteVariable($variableID);
-            }
         }
     }
-    
+
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->Log("Variable löschen: " . $ident);
+
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
+        }
+    }
+}
