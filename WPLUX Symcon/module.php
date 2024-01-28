@@ -105,7 +105,7 @@ class WPLUXSymcon extends IPSModule
                 // Debug senden
                 $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
-                // Direkte Erstellung der Variable mit Ident und Positionsnummer
+                // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = 'WP_' . $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
 
@@ -143,16 +143,22 @@ class WPLUXSymcon extends IPSModule
         // Debug-Ausgabe
         $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
 
-        // Direkte Erstellung der Variable mit Ident
-        $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
-        IPS_SetParent($varid, $this->InstanceID);
-        IPS_SetIdent($varid, 'WP_' . $id . '_' . $ident);
-        IPS_SetName($varid, $ident);
-        
-        SetValue($varid, $value);
+        // Überprüfen, ob die Variable bereits existiert
+        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
-        // Position setzen
-        IPS_SetPosition($varid, $id);
+        if ($existingVarID === false) {
+            // Variable existiert nicht, also erstellen
+            $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
+            IPS_SetParent($varid, $this->InstanceID);
+            IPS_SetIdent($varid, $ident);
+            IPS_SetName($varid, $ident);
+            SetValue($varid, $value);
+            IPS_SetPosition($varid, $id);
+        } else {
+            // Variable existiert, also aktualisieren
+            $varid = $existingVarID;
+            SetValue($varid, $value);
+        }
 
         return $varid;
     }
@@ -180,8 +186,8 @@ class WPLUXSymcon extends IPSModule
             case 29:
                 return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
                 // Weitere Zuordnungen für andere 'id' hinzufügen
-                default:
-                    return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
+            default:
+                return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
             }
         }
     
