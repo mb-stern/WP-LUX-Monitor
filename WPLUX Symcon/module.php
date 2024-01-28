@@ -63,7 +63,7 @@ class WPLUXSymcon extends IPSModule
                 
         //Debug senden
         //$this->SendDebug("IP-Adresse" = ".$IpWwc.", 0);
-        $this->SendDebug("IP-Adresse" = "", 0);
+        $this->SendDebug("Verbindung zu WP", ".$IpWw.", 0);
 
         // Variablen
         $sBuff = 0;
