@@ -113,7 +113,7 @@ class WPLUXSymcon extends IPSModule
         $daten_raw[$i] = round($daten_raw[$i], 1);
         
         //Debug senden
-        $this->SendDebug("Gewälte ID für die Abfrage", "$i", 0);
+        $this->SendDebug("Gewälte ID für Abfrage", "$i", 0);
 
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
@@ -122,9 +122,9 @@ class WPLUXSymcon extends IPSModule
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
         $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
         }
-    }
-
+        }
 	}
+
 	private function CreateOrUpdateVariable($ident, $value, $position)
     {
         $minusTest = $value * 0.1;
@@ -138,6 +138,7 @@ class WPLUXSymcon extends IPSModule
 
         // Debug-Ausgabe
         $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
+        $this->SendDebug("Variable erstellt/aktualisiert", "$ident", 0);
 
         // Direkte Erstellung der Variable mit Ident
         $varid = $this->RegisterVariableFloat($ident, $ident);
@@ -147,7 +148,7 @@ class WPLUXSymcon extends IPSModule
         IPS_SetPosition($varid, $position);
 
         return $varid;
-        }
+    }
 
 	private function DeleteVariableIfExists($ident)
 	{
