@@ -146,7 +146,7 @@ class WPLUXSymcon extends IPSModule
         // Direkte Erstellung der Variable mit Ident
         $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
         IPS_SetParent($varid, $this->InstanceID);
-        IPS_SetIdent($varid, $ident);
+        IPS_SetIdent($varid, 'WP_' . $this->InstanceID . '_' . $id . '_' . $ident);
         IPS_SetName($varid, $ident);
         
         SetValue($varid, $value);
