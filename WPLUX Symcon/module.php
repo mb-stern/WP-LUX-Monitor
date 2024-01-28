@@ -59,11 +59,11 @@ class WPLUXSymcon extends IPSModule
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
         // Variablen
-        $sBuff = 0;
-        $time1 = time();
-        $filename = "test.tst";
-        $JavaWerte = 0;
-        $refreshtime = 5; // Sekunden
+        //$sBuff = 0;
+        //$time1 = time();
+        //$filename = "test.tst";
+        //$JavaWerte = 0;
+        //$refreshtime = 5; // Sekunden
 
         // Connecten
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
