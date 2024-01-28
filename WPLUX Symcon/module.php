@@ -50,7 +50,7 @@ class WPLUXSymcon extends IPSModule
         $SiteTitle = "WÄRMEPUMPE";
 
         //Debug senden
-        $this->SendDebug("Pfadangabe zur WP", "".$IpWwc.":".$WwcJavaPort."", 0);
+        $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
         // Integriere Name der Variable aus den Java Daten
         require_once __DIR__ . '/java_daten.php';
@@ -65,9 +65,9 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         if (!$connect) {
             $error_code = socket_last_error();
-            $this->SendDebug("Verbindung zum Socket fehlgeschlagen", "$error_code", 0);
+            $this->SendDebug("Verbindung zum Socket fehlgeschlagen. Error:", "$error_code", 0);
             } else {
-            $this->SendDebug("Verbindung zum Socket hergestellt", "".$connect." ".$IpWwc." ".$WwcJavaPort."", 0);
+            $this->SendDebug("Verbindung zum Socket erolgreich hergestellt", "".$IpWwc." ".$WwcJavaPort."", 0);
         }
 
         // Daten holen
