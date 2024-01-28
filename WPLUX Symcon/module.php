@@ -117,7 +117,7 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
         $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
         
         //Debug senden
-        $this->SendDebug("Gewälte IDs", ".$i.", 0);
+        $this->SendDebug("Gewälte IDs", "$i", 0);
 
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
