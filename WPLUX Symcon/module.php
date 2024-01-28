@@ -55,19 +55,19 @@ class WPLUXSymcon extends IPSModule
         // Integriere Name der Variable aus den Java Daten
         require_once __DIR__ . '/java_daten.php';
 
-        // Lesen Sie die ID-Liste
+        // Lese die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
-        // Connecten
+        // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
 
         //Debug senden
         if (!$connect) {
             $error_code = socket_last_error();
-            $this->SendDebug("Verbindung zu Socket fehlgeschlagen", "$error_code", 0);
+            $this->SendDebug("Verbindung zum Socket fehlgeschlagen", "$error_code", 0);
             } else {
-            $this->SendDebug("Verbindung zu Socket hergestellt", "", 0);
+            $this->SendDebug("Verbindung zum Socket hergestellt", "$connect", 0);
         }
 
         // Daten holen
@@ -93,6 +93,7 @@ class WPLUXSymcon extends IPSModule
         socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
         $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
+        
         //socket wieder schliessen
         socket_close($socket);
 
