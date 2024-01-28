@@ -14,7 +14,7 @@
           },
           {
             "type": "Label",
-            "label": "Dazu muss sichergestellt werden, dass der Port 8888 oder 8889 nicht durch die Firewall blockiert ist."
+            "label": "Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
           },
           {
             "type": "Label",
