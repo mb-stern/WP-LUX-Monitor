@@ -113,7 +113,7 @@ class WPLUXSymcon extends IPSModule
         $daten_raw[$i] = round($daten_raw[$i], 1);
         
         //Debug senden
-        $this->SendDebug("Gewälte IDs", "$daten_raw", 0);
+        $this->SendDebug("Gewälte IDs", "$JavaWerte", 0);
 
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
