@@ -142,7 +142,7 @@ class WPLUXSymcon extends IPSModule
         return isset($varid) ? $varid : 0; // Rückgabe von $varid oder 0, wenn nicht gesetzt
     }
     
-    private function AssignVariableSettings($varid, $id)
+    private function AssignVariableSettings($id)
     {
         // Hier erfolgt die Zuordnung der Einstellungen basierend auf der 'id'
         switch ($id) {
@@ -162,7 +162,7 @@ class WPLUXSymcon extends IPSModule
         }
     
         // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        IPS_SetVariableCustomProfile($varid, $profile);
+        IPS_SetVariableCustomProfile($this->InstanceID, $id, $profile);
     
         return $variableType;
     }
