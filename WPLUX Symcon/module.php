@@ -126,12 +126,15 @@ class WPLUXSymcon extends IPSModule
     
         if ($existingVarID === false) {
             // Variable existiert nicht, also erstellen
-            $varid = IPS_CreateVariable($this->AssignVariableSettings($id));
+            $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
             IPS_SetParent($varid, $this->InstanceID);
             IPS_SetIdent($varid, $ident);
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
+    
+            // Einstellungen der Variable zuweisen
+            $this->AssignVariableSettings($varid, $id);
         } else {
             // Variable existiert, also aktualisieren
             SetValue($existingVarID, $value);
@@ -160,13 +163,13 @@ class WPLUXSymcon extends IPSModule
                 $profile = '';
                 break;
         }
-
-                // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-                IPS_SetVariableCustomProfile($varid, $profile);
-
-                return $variableType;
-            }
-        
+    
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+        IPS_SetVariableCustomProfile($varid, $profile);
+    
+        return $variableType;
+    }
+    
             private function convertValueBasedOnID($value, $id)
             {
                 // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
