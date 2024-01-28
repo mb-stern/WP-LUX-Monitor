@@ -62,7 +62,7 @@ class WPLUXSymcon extends IPSModule
         $this->Log("ID-Liste: " . print_r($idListe, true));
                 
         //Debug senden
-        $this->SendDebug('ID-Liste= ' . $idListe);
+        $this->SendDebug('ID-Liste', print_r($idListe, true));
 
         // Variablen
         $sBuff = 0;
