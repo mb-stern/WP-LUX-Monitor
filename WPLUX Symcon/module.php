@@ -116,23 +116,28 @@ class WPLUXSymcon extends IPSModule
                 
                     private function AssignVariableProfilesAndType($varid, $id)
                     {
-                        if ($varid > 0) {
-                            // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
-                            switch ($id) {
-                                case 10:
+                        // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
+                        switch ($id) {
+                            case 10:
+                                if ($varid > 0) {
                                     IPS_SetVariableCustomProfile($varid, '~Temperature');
-                                    return 2; // Float-Typ
-                                case 29:
+                                }
+                                return 2; // Float-Typ
+                            case 29:
+                                if ($varid > 0) {
                                     IPS_SetVariableCustomProfile($varid, '~Switch');
-                                    return 0; // Boolean-Typ
-                                // Weitere Zuordnungen für andere 'id' hinzufügen
-                                default:
-                                    // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                                }
+                                return 0; // Boolean-Typ
+                            // Weitere Zuordnungen für andere 'id' hinzufügen
+                            default:
+                                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                                if ($varid > 0) {
                                     IPS_SetVariableCustomProfile($varid, '');
-                                    return 2; // Standardmäßig Integer-Typ
-                            }
+                                }
+                                return 2; // Standardmäßig Integer-Typ
                         }
-                
+                    }
+                    
                         return false;
                     }
                 
