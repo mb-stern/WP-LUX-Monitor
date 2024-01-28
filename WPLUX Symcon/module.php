@@ -57,7 +57,7 @@ class WPLUXSymcon extends IPSModule
 
         // Debug-Ausgabe
         $this->Log("ID-Liste: " . print_r($idListe, true));
-        $this->SendDebug(__FUNCTION__, 'IPAddress', 'Port');
+        $this->SendDebug(__FUNCTION__, 'IPAddress');
 
         // Variablen
         $sBuff = 0;
