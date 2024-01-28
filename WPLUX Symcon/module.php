@@ -96,55 +96,54 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schließen
         socket_close($socket);
 
-        // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i) {
-            if (in_array($i, array_column($idListe, 'id'))) {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+    // Werte anzeigen
+    for ($i = 0; $i < $JavaWerte; ++$i) {
+        if (in_array($i, array_column($idListe, 'id'))) {
+            $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
-                // Debug senden
-                $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
+            // Debug senden
+            $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
-                // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-                $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-            } else {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-            }
-        }
-    }
-
-    private function CreateOrUpdateVariable($ident, $value, $id)
-    {
-        $value = $this->convertValueBasedOnID($value, $id);
-    
-        // Debug-Ausgabe
-        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
-    
-        // Überprüfen, ob die Variable bereits existiert
-        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-    
-        if ($existingVarID === false) {
-            // Variable existiert nicht, also erstellen
-            $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
-            IPS_SetParent($varid, $this->InstanceID);
-            IPS_SetIdent($varid, $ident);
-            IPS_SetName($varid, $ident);
-            SetValue($varid, $value);
-            IPS_SetPosition($varid, $id);
-    
-            // Einstellungen der Variable zuweisen
-            $this->AssignVariableSettings($varid, $id);
+            // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+            $ident = 'WP_' . $java_dataset[$i];
+            $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
         } else {
-            // Variable existiert, also aktualisieren
-            SetValue($existingVarID, $value);
-            $this->AssignVariableSettings($existingVarID, $id); // Aktualisiere auch die Einstellungen
-            $varid = $existingVarID; // Setze $varid auf die existierende ID
+            // Variable löschen, da sie nicht mehr in der ID-Liste ist
+            $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
         }
-    
-        return isset($varid) ? $varid : 0; // Rückgabe von $varid oder 0, wenn nicht gesetzt
     }
-    
+}
+
+private function CreateOrUpdateVariable($ident, $value, $id)
+{
+    $value = $this->convertValueBasedOnID($value, $id);
+
+    // Debug-Ausgabe
+    $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
+
+    // Überprüfen, ob die Variable bereits existiert
+    $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+
+    if ($existingVarID === false) {
+        // Variable existiert nicht, also erstellen
+        $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
+        IPS_SetParent($varid, $this->InstanceID);
+        IPS_SetIdent($varid, $ident);
+        IPS_SetName($varid, $ident);
+        SetValue($varid, $value);
+        IPS_SetPosition($varid, $id);
+
+        // Einstellungen der Variable zuweisen
+        $this->AssignVariableSettings($varid, $id);
+    } else {
+        // Variable existiert, also aktualisieren
+        SetValue($existingVarID, $value);
+        $this->AssignVariableSettings($existingVarID, $id); // Aktualisiere auch die Einstellungen
+        $varid = $existingVarID; // Setze $varid auf die existierende ID
+    }
+
+    return isset($varid) ? $varid : 0; // Rückgabe von $varid oder 0, wenn nicht gesetzt
+}
     private function AssignVariableSettings($varid, $id)
     {
         // Hier erfolgt die Zuordnung der Einstellungen basierend auf der 'id'
