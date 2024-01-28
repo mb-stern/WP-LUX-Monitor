@@ -137,7 +137,6 @@ class WPLUXSymcon extends IPSModule
         $value = round($value, 1);
 
         // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
         $this->SendDebug("Variable erstellt/aktualisiert", "$ident", 0);
 
         // Direkte Erstellung der Variable mit Ident
