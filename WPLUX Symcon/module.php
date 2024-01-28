@@ -170,20 +170,20 @@ class WPLUXSymcon extends IPSModule
         return $variableType;
     }
     
-            private function convertValueBasedOnID($value, $id)
-            {
-                // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
-                switch ($id) {
-                    case 10:
-                        return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
-                    case 29:
-                        return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
-                        // Weitere Zuordnungen für andere 'id' hinzufügen
-                    default:
-                        return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
-                }
-            }
-        
+    private function getVariableTypeBasedOnID($id)
+    {
+        // Hier erfolgt die Zuordnung des Variablentyps basierend auf der 'id'
+        switch ($id) {
+            case 10:
+                return 2; // Integer-Typ
+            case 29:
+                return 0; // Boolean-Typ
+            // Weitere Zuordnungen für andere 'id' hinzufügen
+            default:
+                return 2; // Standardmäßig Integer-Typ
+        }
+    }
+    
             private function DeleteVariableIfExists($ident)
             {
                 $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
