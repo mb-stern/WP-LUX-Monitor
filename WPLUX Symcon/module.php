@@ -150,29 +150,29 @@ class WPLUXSymcon extends IPSModule
     }
 
     private function AssignVariableProfiles($varid, $id)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils und Typs basierend auf der 'id'
-        //0 für BOOLEAN
-        //1 für INTEGER
-        //2 für FLOAT
-        //3 für STRING
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                IPS_SetVariableType($varid, 2); // 2 steht für FLOAT
-                break;
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                IPS_SetVariableType($varid, 0); // 0 steht für BOOLEAN
-                break;
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil und Typ, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                IPS_SetVariableType($varid, 1); // 1 steht für INTEGER
-                break;
-        }
+{
+    // Hier erfolgt die Zuordnung des Variablenprofils und Typs basierend auf der 'id'
+    //0 für BOOLEAN
+    //1 für INTEGER
+    //2 für FLOAT
+    //3 für STRING
+    switch ($id) {
+        case 10:
+            IPS_SetVariableCustomProfile($varid, '~Temperature');
+            IPS_SetVariable($varid, $this->RegisterVariableFloat($varid, 'Temperature', '~Temperature'));
+            break;
+        case 29:
+            IPS_SetVariableCustomProfile($varid, '~Switch');
+            IPS_SetVariable($varid, $this->RegisterVariableBoolean($varid, 'Switch', '~Switch'));
+            break;
+        // Weitere Zuordnungen für andere 'id' hinzufügen
+        default:
+            // Standardprofil und Typ, falls keine spezifische Zuordnung gefunden wird
+            IPS_SetVariableCustomProfile($varid, '');
+            IPS_SetVariable($varid, $this->RegisterVariableInteger($varid, 'Default', ''));
+            break;
     }
+}
 
 	private function DeleteVariableIfExists($ident)
 	{
