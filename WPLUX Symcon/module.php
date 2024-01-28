@@ -109,8 +109,8 @@ class WPLUXSymcon extends IPSModule
                 $ident = 'WP_' . $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
 
-                // Zuordnung des Variablenprofils basierend auf der 'id'
-                $this->AssignVariableProfiles($varid, $i);
+                // Zuordnung des Variablenprofils und des Variablentyps basierend auf der 'id'
+                $variableType = $this->AssignVariableProfileAndType($varid, $i);
             } else {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
@@ -145,36 +145,27 @@ class WPLUXSymcon extends IPSModule
         return $varid;
     }
 
-    private function AssignVariableProfiles($varid, $id)
+    private function AssignVariableProfileAndType($varid, $id)
     {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+        // Hier erfolgt die Zuordnung des Variablenprofils und des Variablentyps basierend auf der 'id'
         switch ($id) {
             case 10:
                 IPS_SetVariableCustomProfile($varid, '~Temperature');
+                $variableType = 2; // Integer-Typ
                 break;
             case 29:
                 IPS_SetVariableCustomProfile($varid, '~Switch');
+                $variableType = 0; // Boolean-Typ
                 break;
             // Weitere Zuordnungen für andere 'id' hinzufügen
             default:
                 // Standardprofil, falls keine spezifische Zuordnung gefunden wird
                 IPS_SetVariableCustomProfile($varid, '');
+                $variableType = 2; // Standardmäßig Integer-Typ
                 break;
         }
-    }
 
-    private function getVariableTypeBasedOnID($id)
-    {
-        // Hier erfolgt die Zuordnung des Variablentyps basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                return 2; // Integer-Typ
-            case 29:
-                return 0; // Boolean-Typ
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                return 2; // Standardmäßig Integer-Typ
-        }
+        return $variableType;
     }
 
     private function convertValueBasedOnID($value, $id)
@@ -185,22 +176,22 @@ class WPLUXSymcon extends IPSModule
                 return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
             case 29:
                 return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
-                // Weitere Zuordnungen für andere 'id' hinzufügen
+            // Weitere Zuordnungen für andere 'id' hinzufügen
             default:
                 return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
-            }
-        }
-    
-        private function DeleteVariableIfExists($ident)
-        {
-            $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-            if ($variableID !== false) {
-                // Debug-Ausgabe
-                $this->Log("Variable löschen: " . $ident);
-    
-                // Variable löschen
-                IPS_DeleteVariable($variableID);
-            }
         }
     }
-    
+
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->Log("Variable löschen: " . $ident);
+
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
+        }
+    }
+}
+
