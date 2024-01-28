@@ -57,9 +57,6 @@ class WPLUXSymcon extends IPSModule
 
         // Lesen Sie die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-         
-        //Debug senden
-        //$this->SendDebug("Gewälte IDs", ".$idListe.", 0);
 
         // Variablen
         $sBuff = 0;
@@ -118,6 +115,9 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
 
         // Debug-Ausgabe
         $this->Log("Variable erstellen/aktualisieren für ID: " . $i);
+        
+        //Debug senden
+        $this->SendDebug("Gewälte IDs", ".$i.", 0);
 
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
