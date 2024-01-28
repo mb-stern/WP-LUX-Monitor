@@ -90,10 +90,10 @@ class WPLUXSymcon extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
-        socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-        $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-        
+
         //socket wieder schliessen
         socket_close($socket);
 
@@ -112,66 +112,69 @@ class WPLUXSymcon extends IPSModule
                 // Debug senden
                 $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
-                // Direkte Erstellung der Variable mit Ident und Positionsnummer
-                $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
-
-                // Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
-                $this->AssignVariableProfiles($varid, $i, $daten_raw[$i]);
-            } else {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-            }
+                                // Direkte Erstellung der Variable mit Ident und Positionsnummer
+                                $ident = 'WP_' . $java_dataset[$i];
+                                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
+                
+                                // Zuordnung des Variablenprofils basierend auf der 'id'
+                                $this->AssignVariableProfiles($varid, $i, $daten_raw[$i]);
+                            } else {
+                                // Variable löschen, da sie nicht mehr in der ID-Liste ist
+                                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+                            }
+                        }
+                    }
+                
+                    private function AssignVariableProfiles($varid, $id, $value)
+                    {
+                        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
+                        $profileMapping = [
+                            10 => ['Profile' => '~Temperature', 'Type' => 1], // 1 für Integer, 2 für Float, 3 für String
+                            29 => ['Profile' => '~Switch', 'Type' => 0], // 0 für Boolean
+                            // Weitere Zuordnungen für andere 'id' hinzufügen
+                        ];
+                
+                        // Setze das Profil basierend auf der 'id'
+                        $profileData = $profileMapping[$id] ?? ['Profile' => '', 'Type' => 2]; // Standardmäßig Float
+                        IPS_SetVariableCustomProfile($varid, $profileData['Profile']);
+                
+                        // Setze den Variablentyp basierend auf dem Mapping
+                        IPS_SetVariableCustomAction($varid, $profileData['Type']);
+                    }
+                
+                    private function CreateOrUpdateVariable($ident, $value, $position)
+                    {
+                        $minusTest = $value * 0.1;
+                        if ($minusTest > 429496000) {
+                            $value -= 4294967296;
+                            $value *= 0.1;
+                        } else {
+                            $value *= 0.1;
+                        }
+                        $value = round($value, 1);
+                
+                        // Debug-Ausgabe
+                        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
+                
+                        // Direkte Erstellung der Variable mit Ident
+                        $varid = $this->RegisterVariableFloat($ident, $ident);
+                        SetValue($varid, $value);
+                
+                        // Position setzen
+                        IPS_SetPosition($varid, $position);
+                
+                        return $varid;
+                    }
+                
+                    private function DeleteVariableIfExists($ident)
+                    {
+                        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+                        if ($variableID !== false) {
+                            // Debug-Ausgabe
+                            $this->Log("Variable löschen: " . $ident);
+                
+                            // Variable löschen
+                            IPS_DeleteVariable($variableID);
         }
     }
-
-    private function AssignVariableProfiles($varid, $id, $value)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
-        $profileMapping = [
-            10 => $value >= 0 ? '~Temperature' : '',
-            29 => ($value == 0 || $value == 1) ? '~Switch' : '',
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-        ];
-
-        // Setze das Profil basierend auf der 'id'
-        IPS_SetVariableCustomProfile($varid, $profileMapping[$id] ?? '');
-    }
-
-    private function CreateOrUpdateVariable($ident, $value, $position)
-    {
-        $minusTest = $value * 0.1;
-        if ($minusTest > 429496000) {
-            $value -= 4294967296;
-            $value *= 0.1;
-        } else {
-            $value *= 0.1;
-        }
-        $value = round($value, 1);
-
-        // Debug-Ausgabe
-        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
-
-        // Direkte Erstellung der Variable mit Ident
-        $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValueFloat($varid, $value);
-
-        // Position setzen
-        IPS_SetPosition($varid, $position);
-
-        return $varid;
-    }
-
-    private function DeleteVariableIfExists($ident)
-    {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->Log("Variable löschen: " . $ident);
-
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
-        }
-    }
-}
-
+}                
