@@ -98,110 +98,113 @@ class WPLUXSymcon extends IPSModule
 
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
-            if (in_array($i, array_column($idListe, 'id'))) {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+        if (in_array($i, array_column($idListe, 'id'))) {
+        $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
-                // Debug senden
-                $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
+        // Debug senden
+        $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
-                // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-                $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-            } else {
-                                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-                            }
-                        }
-                    }
+        // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+        $ident = 'WP_' . $java_dataset[$i];
+        $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+        } else {
+        // Variable löschen, da sie nicht mehr in der ID-Liste ist
+        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+            }
+        }
+    }
                 
-                    private function AssignVariableProfilesAndType($varid, $id)
-                    {
-                        // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
-                        switch ($id) {
-                            case 10:
-                                if ($varid > 0) {
-                                    IPS_SetVariableCustomProfile($varid, '~Temperature');
-                                }
-                                return 2; // Float-Typ
-                            case 29:
-                                if ($varid > 0) {
-                                    IPS_SetVariableCustomProfile($varid, '~Switch');
-                                }
-                                return 0; // Boolean-Typ
-                            // Weitere Zuordnungen für andere 'id' hinzufügen
-                            default:
-                                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                                if ($varid > 0) {
-                                    IPS_SetVariableCustomProfile($varid, '');
-                                }
-                                return 2; // Standardmäßig Integer-Typ
-                        }
-                    }
+    private function AssignVariableProfilesAndType($varid, $id)
+    {
+        // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
+        switch ($id) {
+        
+        case 10:
+            if ($varid > 0) {
+            IPS_SetVariableCustomProfile($varid, '~Temperature');
+            }
+            return 2; // Float-Typ
+        
+        case 29:
+            if ($varid > 0) {
+            IPS_SetVariableCustomProfile($varid, '~Switch');
+            }
+            return 0; // Boolean-Typ
+        
+        // Weitere Zuordnungen für andere 'id' hinzufügen
+        default:
+            // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+            if ($varid > 0) {
+            IPS_SetVariableCustomProfile($varid, '');
+            }
+            return 2; // Standardmäßig Integer-Typ
+            }
+    }
+    
+    private function convertValueBasedOnID($value, $id)
+    {
+        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
+        switch ($id) {
+        case 10:
+            return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
+        
+        case 29:
+            return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
+        
+        // Weitere Zuordnungen für andere 'id' hinzufügen
+        default:
+            return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
+        }
+    }
+            
+    private function CreateOrUpdateVariable($ident, $value, $id)
+    {
+        $value = $this->convertValueBasedOnID($value, $id);
                     
-                    private function CreateOrUpdateVariable($ident, $value, $id)
-                    {
-                        $value = $this->convertValueBasedOnID($value, $id);
+        // Debug-Ausgabe
+        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
                     
-                        // Debug-Ausgabe
-                        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
+        // Überprüfen, ob die Variable bereits existiert
+        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
                     
-                        // Überprüfen, ob die Variable bereits existiert
-                        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-                    
-                        if ($existingVarID === false) {
-                            // Variable existiert nicht, also erstellen
-                            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-                            IPS_SetParent($varid, $this->InstanceID);
-                            IPS_SetIdent($varid, $ident);
-                            IPS_SetName($varid, $ident);
-                            SetValue($varid, $value);
-                            IPS_SetPosition($varid, $id);
-                        } else {
-                            // Variable existiert, also aktualisieren
-                            $varid = $existingVarID;
-                            // Überprüfen, ob der Variablentyp stimmt
-                            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
-                                // Variablentyp stimmt nicht überein, also Variable neu erstellen
-                                IPS_DeleteVariable($varid);
-                                $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-                                IPS_SetParent($varid, $this->InstanceID);
-                                IPS_SetIdent($varid, $ident);
-                                IPS_SetName($varid, $ident);
-                                SetValue($varid, $value);
-                                IPS_SetPosition($varid, $id);
-                            } else {
-                                // Variablentyp stimmt überein, also nur Wert aktualisieren
-                                SetValue($varid, $value);
-                            }
-                        }
-                    
-                        return $varid;
-                    }
-                    
-                    private function convertValueBasedOnID($value, $id)
-                    {
-                        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
-                        switch ($id) {
-                            case 10:
-                                return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
-                            case 29:
-                                return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
-                            // Weitere Zuordnungen für andere 'id' hinzufügen
-                            default:
-                                return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
-                        }
-                    }
+        if ($existingVarID === false) {
+            // Variable existiert nicht, also erstellen
+            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+            IPS_SetParent($varid, $this->InstanceID);
+            IPS_SetIdent($varid, $ident);
+            IPS_SetName($varid, $ident);
+            SetValue($varid, $value);
+            IPS_SetPosition($varid, $id);
+        } else {
+            // Variable existiert, also aktualisieren
+            $varid = $existingVarID;
+            // Überprüfen, ob der Variablentyp stimmt
+        if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+            // Variablentyp stimmt nicht überein, also Variable neu erstellen
+            IPS_DeleteVariable($varid);
+            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+            IPS_SetParent($varid, $this->InstanceID);
+            IPS_SetIdent($varid, $ident);
+            IPS_SetName($varid, $ident);
+            SetValue($varid, $value);
+            IPS_SetPosition($varid, $id);
+        } else {
+            // Variablentyp stimmt überein, also nur Wert aktualisieren
+            SetValue($varid, $value);
+            }
+        }   
+        return $varid;
+    }
+                        
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->Log("Variable löschen: " . $ident);
                 
-                    private function DeleteVariableIfExists($ident)
-                    {
-                        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-                        if ($variableID !== false) {
-                            // Debug-Ausgabe
-                            $this->Log("Variable löschen: " . $ident);
-                
-                            // Variable löschen
-                            IPS_DeleteVariable($variableID);
-                        }
-                    }
-                }
-                
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
+        }
+    }
+}
