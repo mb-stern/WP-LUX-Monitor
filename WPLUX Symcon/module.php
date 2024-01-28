@@ -22,9 +22,6 @@ class WPLUXSymcon extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
-
-        //Debug senden
-        $this->SendDebug("","", 0);
     }
 
     public function Destroy()
@@ -52,18 +49,17 @@ class WPLUXSymcon extends IPSModule
         $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
         $SiteTitle = "WÄRMEPUMPE";
 
+        //Debug senden
+        $this->SendDebug("Pfadangabe zur WP", "".$IpWwc.":".$WwcJavaPort."", 0);
+
         // Integriere Variabelbeschreibung aus Java Daten
         require_once __DIR__ . '/../java_daten.php';
 
         // Lesen Sie die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-
-        // Debug-Ausgabe
-        $this->Log("ID-Liste: " . print_r($idListe, true));
-                
+         
         //Debug senden
-        //$this->SendDebug("IP-Adresse" = ".$IpWwc.", 0);
-        $this->SendDebug("Verbindung zu WP", "".$IpWwc.":".$WwcJavaPort."", 0);
+        $this->SendDebug("Gewälte IDs", ".$idListe.", 0);
 
         // Variablen
         $sBuff = 0;
