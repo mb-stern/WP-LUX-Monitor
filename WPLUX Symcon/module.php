@@ -143,7 +143,12 @@ class WPLUXSymcon extends IPSModule
                         }
                     
                         // Jetzt das Profil und den Typ zuordnen
-                        $this->AssignVariableProfilesAndType($varid, $id);
+                        $type = $this->AssignVariableProfilesAndType($varid, $id);
+                    
+                        if ($existingVarID === false) {
+                            // Wenn die Variable neu erstellt wurde, setzen Sie den Typ erneut, um sicherzustellen, dass er richtig ist
+                            IPS_SetVariableCustomProfile($varid, $type);
+                        }
                     
                         return $varid;
                     }
