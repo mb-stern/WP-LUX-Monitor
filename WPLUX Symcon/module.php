@@ -8,7 +8,7 @@ class WPLUXSymcon extends IPSModule
     protected function Log($Message)
     {
         //IPS_LogMessage(__CLASS__, $Message);
-        IPS_Debugger($Message);
+        $this->SendDebugr($Message);
     }
 
     public function Create()
