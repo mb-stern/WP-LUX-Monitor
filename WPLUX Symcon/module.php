@@ -125,12 +125,12 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
 }
 }
 
-    private function AssignVariableProfiles($varid, $id, $value)
+    private function AssignVariableProfiles($varid, $id)
     {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
         $profileMapping = [
-            10 => $value >= 0 ? '~Temperature' : '',
-            29 => ($value == 0 || $value == 1) ? '~Switch' : '',
+            10 => '~Temperature',
+            29 => '~Switch',
             // Weitere Zuordnungen für andere 'id' hinzufügen
         ];
 
