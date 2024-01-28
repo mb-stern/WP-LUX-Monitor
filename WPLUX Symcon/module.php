@@ -118,48 +118,46 @@ class WPLUXSymcon extends IPSModule
         // Direkte Erstellung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
         $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
-    } else {
+        } else {
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
         $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+        }
     }
-}
 
-		}
+	}
+	private function CreateOrUpdateVariable($ident, $value, $position)
+    {
+        $minusTest = $value * 0.1;
+        if ($minusTest > 429496000) {
+            $value -= 4294967296;
+            $value *= 0.1;
+        } else {
+            $value *= 0.1;
+        }
+        $value = round($value, 1);
 
-		private function CreateOrUpdateVariable($ident, $value, $position)
-        {
-            $minusTest = $value * 0.1;
-            if ($minusTest > 429496000) {
-                $value -= 4294967296;
-                $value *= 0.1;
-            } else {
-                $value *= 0.1;
-            }
-            $value = round($value, 1);
+        // Debug-Ausgabe
+        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
 
-            // Debug-Ausgabe
-            $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
+        // Direkte Erstellung der Variable mit Ident
+        $varid = $this->RegisterVariableFloat($ident, $ident);
+        SetValueFloat($varid, $value);
 
-            // Direkte Erstellung der Variable mit Ident
-            $varid = $this->RegisterVariableFloat($ident, $ident);
-            SetValueFloat($varid, $value);
+        // Position setzen
+        IPS_SetPosition($varid, $position);
 
-            // Position setzen
-            IPS_SetPosition($varid, $position);
-
-            return $varid;
+        return $varid;
         }
 
-
-		private function DeleteVariableIfExists($ident)
-		{
+	private function DeleteVariableIfExists($ident)
+	{
 		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 		if ($variableID !== false) {
-			// Debug-Ausgabe
-			$this->Log("Variable löschen: " . $ident);
+		// Debug-Ausgabe
+		$this->Log("Variable löschen: " . $ident);
 
-			// Variable löschen
-			IPS_DeleteVariable($variableID);
+		// Variable löschen
+		IPS_DeleteVariable($variableID);
 		}
-		}
-		} 
+	}
+} 
