@@ -67,7 +67,7 @@ class WPLUXSymcon extends IPSModule
             $error_code = socket_last_error();
             $this->SendDebug("Verbindung zum Socket fehlgeschlagen. Error:", "$error_code", 0);
             } else {
-            $this->SendDebug("Verbindung zum Socket erolgreich", "".$IpWwc." ".$WwcJavaPort."", 0);
+            $this->SendDebug("Verbindung zum Socket erolgreich", "".$IpWwc.": ".$WwcJavaPort."", 0);
         }
 
         // Daten holen
