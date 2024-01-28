@@ -41,24 +41,6 @@ class WPLUXSymcon extends IPSModule
         $this->Update();
     }
 
-    private function AssignVariableProfilesAndType($varid, $id)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                return 2; // Integer-Typ
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                return 0; // Boolean-Typ
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                return 2; // Standardmäßig Integer-Typ
-        }
-    }
-
     public function Update()
     {
         //Verbindung zur Lux
@@ -162,6 +144,24 @@ class WPLUXSymcon extends IPSModule
                         return $varid;
                     }
                 
+                    private function AssignVariableProfilesAndType($varid, $id)
+                    {
+                        // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
+                        switch ($id) {
+                            case 10:
+                                IPS_SetVariableCustomProfile($varid, '~Temperature');
+                                return 2; // Integer-Typ
+                            case 29:
+                                IPS_SetVariableCustomProfile($varid, '~Switch');
+                                return 0; // Boolean-Typ
+                            // Weitere Zuordnungen für andere 'id' hinzufügen
+                            default:
+                                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                                IPS_SetVariableCustomProfile($varid, '');
+                                return 2; // Standardmäßig Integer-Typ
+                        }
+                    }
+                    
                     private function convertValueBasedOnID($value, $id)
                     {
                         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
