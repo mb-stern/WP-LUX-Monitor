@@ -142,8 +142,6 @@ class WPLUXSymcon extends IPSModule
         return isset($varid) ? $varid : 0; // Rückgabe von $varid oder 0, wenn nicht gesetzt
     }
     
-    
-
     private function AssignVariableSettings($id)
     {
         // Hier erfolgt die Zuordnung der Einstellungen basierend auf der 'id'
