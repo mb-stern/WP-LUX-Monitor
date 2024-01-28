@@ -130,7 +130,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
         switch ($id) {
             case 10:
-                IPS_SetVariableCustomProfile($varid, 'MyFloatProfile');
+                IPS_SetVariableCustomProfile($varid, '~Temperature');
                 break;
             case 29:
                 IPS_SetVariableCustomProfile($varid, '~Switch');
