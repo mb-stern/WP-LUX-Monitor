@@ -125,6 +125,24 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
+    private function AssignVariableProfiles($varid, $id)
+    {
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+        switch ($id) {
+            case 10:
+                IPS_SetVariableCustomProfile($varid, '~Temperature');
+                break;
+            case 29:
+                IPS_SetVariableCustomProfile($varid, '~Switch');
+                break;
+            // Weitere Zuordnungen für andere 'id' hinzufügen
+            default:
+                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                IPS_SetVariableCustomProfile($varid, '');
+                break;
+        }
+    }
+
 	private function CreateOrUpdateVariable($ident, $value, $position)
     {
         $minusTest = $value * 0.1;
@@ -141,39 +159,13 @@ class WPLUXSymcon extends IPSModule
 
         // Direkte Erstellung der Variable mit Ident
         $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValue($varid, $value);
+        SetValueFloat($varid, $value);
 
         // Position setzen
         IPS_SetPosition($varid, $position);
 
         return $varid;
     }
-
-    private function AssignVariableProfiles($varid, $id)
-    {
-        // Hier erfolgt die Zuordnung des Variablenprofils und Typs basierend auf der 'id'
-        //0 für BOOLEAN
-        //1 für INTEGER
-        //2 für FLOAT
-        //3 für STRING
-        switch ($id) {
-            case 10:
-                $this->RegisterVariableFloat($varid, 'Temperature', '~Temperature');
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                break;
-            case 29:
-                $this->RegisterVariableBoolean($varid, 'Switch', '~Switch');
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                break;
-            // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil und Typ, falls keine spezifische Zuordnung gefunden wird
-                $this->RegisterVariableInteger($varid, 'Default', '');
-                IPS_SetVariableCustomProfile($varid, '');
-                break;
-        }
-    }
-    
 
 	private function DeleteVariableIfExists($ident)
 	{
