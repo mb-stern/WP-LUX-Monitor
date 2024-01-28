@@ -130,7 +130,8 @@ class WPLUXSymcon extends IPSModule
 
         if ($existingVarID === false) {
             // Variable existiert nicht, also erstellen
-            $varid = IPS_CreateVariable($this->getVariableTypeBasedOnID($id));
+            $variableType = $this->AssignVariableProfileAndType($varid, $i);
+            $varid = IPS_CreateVariable($variableType);
             IPS_SetParent($varid, $this->InstanceID);
             IPS_SetIdent($varid, $ident);
             IPS_SetName($varid, $ident);
