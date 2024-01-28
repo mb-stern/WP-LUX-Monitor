@@ -52,7 +52,7 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         $this->SendDebug("Pfadangabe zur WP", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Integriere Variabelbeschreibung aus Java Daten
+        // Integriere Name der Variable aus den Java Daten
         require_once __DIR__ . '/../java_daten.php';
 
         // Lesen Sie die ID-Liste
@@ -75,8 +75,6 @@ class WPLUXSymcon extends IPSModule
             //Debug senden
             $this->SendDebug("Verbindung zu Socket fehlgeschlagen", "$error_code", 0);
         }
-
-        
 
         // Daten holen
         $msg = pack('N*',3004);
