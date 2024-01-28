@@ -90,31 +90,24 @@ class WPLUXSymcon extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
-        socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-        $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
         
-        //socket wieder schliessen
+        //socket wieder schließen
         socket_close($socket);
 
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
             if (in_array($i, array_column($idListe, 'id'))) {
-                $minusTest = $daten_raw[$i] * 0.1;
-                if ($minusTest > 429496000) {
-                    $daten_raw[$i] -= 4294967296;
-                    $daten_raw[$i] *= 0.1;
-                } else {
-                    $daten_raw[$i] *= 0.1;
-                }
-                $daten_raw[$i] = round($daten_raw[$i], 1);
-                
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+
                 // Debug senden
                 $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
                 // Direkte Erstellung der Variable mit Ident und Positionsnummer
                 $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
+                $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
 
                 // Zuordnung des Variablenprofils basierend auf der 'id'
                 $this->AssignVariableProfiles($varid, $i);
@@ -143,39 +136,61 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-	private function CreateOrUpdateVariable($ident, $value, $position)
+    private function CreateOrUpdateVariable($ident, $value, $id)
     {
-        $minusTest = $value * 0.1;
-        if ($minusTest > 429496000) {
-            $value -= 4294967296;
-            $value *= 0.1;
-        } else {
-            $value *= 0.1;
-        }
-        $value = round($value, 1);
+        $value = $this->convertValueBasedOnID($value, $id);
 
         // Debug-Ausgabe
         $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
 
         // Direkte Erstellung der Variable mit Ident
-        $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValueFloat($varid, $value);
+        $varid = $this->RegisterVariable($ident, $ident, $this->getVariableTypeBasedOnID($id));
+        SetValue($varid, $value);
 
         // Position setzen
-        IPS_SetPosition($varid, $position);
+        IPS_SetPosition($varid, $id);
 
         return $varid;
     }
 
-	private function DeleteVariableIfExists($ident)
-	{
-		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-		if ($variableID !== false) {
-		// Debug-Ausgabe
-		$this->Log("Variable löschen: " . $ident);
+    private function getVariableTypeBasedOnID($id)
+    {
+        // Hier erfolgt die Zuordnung des Variablentyps basierend auf der 'id'
+        switch ($id) {
+            case 10:
+                return 2; // Integer-Typ
+            case 29:
+                return 0; // Boolean-Typ
+            // Weitere Zuordnungen für andere 'id' hinzufügen
+            default:
+                return 2; // Standardmäßig Integer-Typ
+        }
+    }
 
-		// Variable löschen
-		IPS_DeleteVariable($variableID);
-		}
-	}
-} 
+    private function convertValueBasedOnID($value, $id)
+    {
+        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
+        switch ($id) {
+            case 10:
+                return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
+            case 29:
+                return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
+                // Weitere Zuordnungen für andere 'id' hinzufügen
+                default:
+                    return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
+            }
+        }
+    
+        private function DeleteVariableIfExists($ident)
+        {
+            $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+            if ($variableID !== false) {
+                // Debug-Ausgabe
+                $this->Log("Variable löschen: " . $ident);
+    
+                // Variable löschen
+                IPS_DeleteVariable($variableID);
+            }
+        }
+    }
+    
