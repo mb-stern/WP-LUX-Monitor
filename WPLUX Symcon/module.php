@@ -138,9 +138,6 @@ class WPLUXSymcon extends IPSModule
                         }
                     }
                     
-                        return false;
-                    }
-                
                     private function CreateOrUpdateVariable($ident, $value, $id)
                     {
                         $value = $this->convertValueBasedOnID($value, $id);
