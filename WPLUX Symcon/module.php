@@ -75,37 +75,36 @@ class WPLUXSymcon extends IPSModule
         }
 
         // Daten holen
-        $msg = pack('N*', 3004);
-        $send = socket_write($socket, $msg, 4); //3004 senden
+        $msg = pack('N*',3004);
+        $send=socket_write($socket, $msg, 4); //3004 senden
 
-        $msg = pack('N*', 0);
-        $send = socket_write($socket, $msg, 4); //0 senden
+        $msg = pack('N*',0);
+        $send=socket_write($socket, $msg, 4); //0 senden
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+        $Test = unpack('N*',$Test);
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL); // Status
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL); // Status
+        $Test = unpack('N*',$Test);
 
-        socket_recv($socket, $Test, 4, MSG_WAITALL); // Länge der nachfolgenden Werte
-        $Test = unpack('N*', $Test);
+        socket_recv($socket,$Test,4,MSG_WAITALL); // Länge der nachfolgenden Werte
+        $Test = unpack('N*',$Test);
 
         $JavaWerte = implode($Test);
 
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
-            socket_recv($socket, $InBuff[$i], 4, MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-            $daten_raw[$i] = implode(unpack('N*', $InBuff[$i]));
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-        //socket wieder schließen
+        //socket wieder schliessen
         socket_close($socket);
 
-        // Werte anzeigen
+		// Werte anzeigen
 for ($i = 0; $i < $JavaWerte; ++$i) {
     // Testbereich für weitere Variablen basierend auf ID-Liste
     if (in_array($i, array_column($idListe, 'id'))) {
-        // Hier wird die 'id' aus der ID-Liste extrahiert
-        $positionsnummer = $idListe[array_search($i, array_column($idListe, 'id'))]['id'];
+        $idInIdListe = $idListe[array_search($i, array_column($idListe, 'id'))]['id'];
 
         $minusTest = $daten_raw[$i] * 0.1;
         if ($minusTest > 429496000) {
@@ -117,48 +116,49 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
         $daten_raw[$i] = round($daten_raw[$i], 1);
 
         // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für ID: " . $i . ", Positionsnummer: " . $positionsnummer);
+        $this->Log("Variable erstellen/aktualisieren für ID: " . $idInIdListe);
 
-        // Direkte Erstellung der Variable mit Ident und Positionsnummer
-        $ident = 'WP_' . $java_dataset[$i] . '_' . $positionsnummer;
-        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
+        // Direkte Erstellung der Variable mit Ident
+        $ident = 'WP_' . $java_dataset[$i];
+        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $idInIdListe);
     } else {
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
         $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
     }
 }
-    }
+		}
 
-    private function CreateOrUpdateVariable($ident, $value)
-    {
-        $minusTest = $value * 0.1;
-        if ($minusTest > 429496000) {
-            $value -= 4294967296;
-            $value *= 0.1;
-        } else {
-            $value *= 0.1;
-        }
-        $value = round($value, 1);
+		private function CreateOrUpdateVariable($ident, $value, $positionsnummer)
+		{
+			$minusTest = $value * 0.1;
+			if ($minusTest > 429496000) {
+				$value -= 4294967296;
+				$value *= 0.1;
+			} else {
+				$value *= 0.1;
+			}
+			$value = round($value, 1);
+		
+			// Debug-Ausgabe
+			$this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . ", Positionsnummer: " . $positionsnummer);
+		
+			// Direkte Erstellung der Variable mit Ident
+			$varid = $this->RegisterVariableFloat($ident, $ident);
+			SetIdent($varid, $positionsnummer);
+			SetValueFloat($varid, $value);
+		
+			return $varid;
+		}
 
-        // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
+		private function DeleteVariableIfExists($ident)
+		{
+		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+		if ($variableID !== false) {
+			// Debug-Ausgabe
+			$this->Log("Variable löschen: " . $ident);
 
-        // Direkte Erstellung der Variable mit Ident
-        $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValueFloat($varid, $value);
-
-        return $varid;
-    }
-
-    private function DeleteVariableIfExists($ident)
-    {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->Log("Variable löschen: " . $ident);
-
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
-        }
-    }
-}
+			// Variable löschen
+			IPS_DeleteVariable($variableID);
+		}
+		}
+		}
