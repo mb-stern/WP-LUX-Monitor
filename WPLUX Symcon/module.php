@@ -62,11 +62,12 @@ class WPLUXSymcon extends IPSModule
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
 
+        //Debug senden
         if (!$connect) {
             $error_code = socket_last_error();
-            exit("Socket connect failed with error code: $error_code\n");
-            //Debug senden
             $this->SendDebug("Verbindung zu Socket fehlgeschlagen", "$error_code", 0);
+            } else {
+            $this->SendDebug("Verbindung zu Socket hergestellt", "", 0);
         }
 
         // Daten holen
@@ -132,7 +133,7 @@ class WPLUXSymcon extends IPSModule
         $value = round($value, 1);
 
         // Debug-Ausgabe
-        $this->SendDebug("Variable erstellt/aktualisiert", "$ident", 0);
+        $this->SendDebug("Variable aktualisiert", "$ident", 0);
 
         // Direkte Erstellung der Variable mit Ident
         $varid = $this->RegisterVariableFloat($ident, $ident);
