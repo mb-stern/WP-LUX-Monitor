@@ -162,7 +162,10 @@ class WPLUXSymcon extends IPSModule
         }
     
         // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        IPS_SetVariableCustomProfile($this->InstanceID, $id, $profile);
+        $varid = IPS_GetObjectIDByIdent($this->InstanceID, $id);
+        if ($varid !== false) {
+            IPS_SetVariableCustomProfile($varid, $profile);
+        }
     
         return $variableType;
     }
