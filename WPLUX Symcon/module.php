@@ -134,10 +134,12 @@ class WPLUXSymcon extends IPSModule
                             // Weitere Zuordnungen für andere 'id' hinzufügen
                         ];
                     
-                        // Setze das Profil und den Typ basierend auf der 'id'
-                        $profileData = $profileMapping[$id] ?? ['Profile' => '', 'Type' => 2]; // Standardmäßig Float
-                        IPS_SetVariableCustomProfile($varid, $profileData['Profile']);
-                        IPS_SetVariableCustomAction($varid, $profileData['Type']);
+                        // Setze das Profil und den Typ basierend auf der 'id', wenn vorhanden
+                        if (array_key_exists($id, $profileMapping)) {
+                            $profileData = $profileMapping[$id];
+                            IPS_SetVariableCustomProfile($varid, $profileData['Profile']);
+                            IPS_SetVariableCustomAction($varid, $profileData['Type']);
+                        }
                     }
                     
                     private function CreateOrUpdateVariable($ident, $value, $position)
