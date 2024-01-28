@@ -142,11 +142,11 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableType($varid, 0); // 0 steht für BOOLEAN
             break;
         // Weitere Zuordnungen für andere 'id' hinzufügen
-        default:
+        //default:
             // Standardprofil und Typ, falls keine spezifische Zuordnung gefunden wird
-            IPS_SetVariableCustomProfile($varid, '');
-            IPS_SetVariableType($varid, 1); // 1 steht für INTEGER
-            break;
+        //    IPS_SetVariableCustomProfile($varid, '');
+         //   IPS_SetVariableType($varid, 1); // 1 steht für INTEGER
+         //   break;
     }
 }
 
