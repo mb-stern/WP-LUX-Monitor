@@ -108,7 +108,7 @@ class WPLUXSymcon extends IPSModule
                     $daten_raw[$i] *= 0.1;
                 }
                 $daten_raw[$i] = round($daten_raw[$i], 1);
-                
+
                 // Debug senden
                 $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
 
@@ -116,8 +116,8 @@ class WPLUXSymcon extends IPSModule
                 $ident = 'WP_' . $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
 
-                // Zuordnung des Variablenprofils basierend auf der 'id'
-                $this->AssignVariableProfiles($varid, $i);
+                // Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
+                $this->AssignVariableProfiles($varid, $i, $daten_raw[$i]);
             } else {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
                 $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
@@ -125,25 +125,20 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    private function AssignVariableProfiles($varid, $id)
+    private function AssignVariableProfiles($varid, $id, $value)
     {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                break;
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                break;
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
+        $profileMapping = [
+            10 => $value >= 0 ? '~Temperature' : '',
+            29 => ($value == 0 || $value == 1) ? '~Switch' : '',
             // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                break;
-        }
+        ];
+
+        // Setze das Profil basierend auf der 'id'
+        IPS_SetVariableCustomProfile($varid, $profileMapping[$id] ?? '');
     }
 
-	private function CreateOrUpdateVariable($ident, $value, $position)
+    private function CreateOrUpdateVariable($ident, $value, $position)
     {
         $minusTest = $value * 0.1;
         if ($minusTest > 429496000) {
@@ -167,15 +162,16 @@ class WPLUXSymcon extends IPSModule
         return $varid;
     }
 
-	private function DeleteVariableIfExists($ident)
-	{
-		$variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-		if ($variableID !== false) {
-		// Debug-Ausgabe
-		$this->Log("Variable löschen: " . $ident);
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->Log("Variable löschen: " . $ident);
 
-		// Variable löschen
-		IPS_DeleteVariable($variableID);
-		}
-	}
-} 
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
+        }
+    }
+}
+
