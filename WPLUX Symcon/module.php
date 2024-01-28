@@ -129,26 +129,29 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
 		}
 
 		private function CreateOrUpdateVariable($ident, $value, $positionsnummer)
-		{
-			$minusTest = $value * 0.1;
-			if ($minusTest > 429496000) {
-				$value -= 4294967296;
-				$value *= 0.1;
-			} else {
-				$value *= 0.1;
-			}
-			$value = round($value, 1);
-		
-			// Debug-Ausgabe
-			$this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . ", Positionsnummer: " . $positionsnummer);
-		
-			// Direkte Erstellung der Variable mit Ident
-			$varid = $this->RegisterVariableFloat($ident, $ident);
-			SetIdent($varid, $positionsnummer);
-			SetValueFloat($varid, $value);
-		
-			return $varid;
-		}
+{
+    $minusTest = $value * 0.1;
+    if ($minusTest > 429496000) {
+        $value -= 4294967296;
+        $value *= 0.1;
+    } else {
+        $value *= 0.1;
+    }
+    $value = round($value, 1);
+
+    // Debug-Ausgabe
+    $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . ", Positionsnummer: " . $positionsnummer);
+
+    // Direkte Erstellung der Variable mit Ident
+    $varid = $this->RegisterVariableFloat($ident, $ident);
+    
+    // Setzen Sie den Objektidentifikator (Ident)
+    IPS_SetIdent($varid, (string)$positionsnummer);
+    
+    SetValueFloat($varid, $value);
+
+    return $varid;
+}
 
 		private function DeleteVariableIfExists($ident)
 		{
