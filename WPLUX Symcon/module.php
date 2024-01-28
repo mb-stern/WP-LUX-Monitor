@@ -129,7 +129,7 @@ class WPLUXSymcon extends IPSModule
                     {
                         // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
                         $profileMapping = [
-                            10 => ['Profile' => '~Temperature', 'Type' => 2], // Beispiel für einen Integer-Typ
+                            10 => ['Profile' => '~Temperature', 'Type' => 1], // Beispiel für einen Integer-Typ
                             29 => ['Profile' => '~Switch', 'Type' => 0],     // Beispiel für einen Boolean-Typ
                             // Weitere Zuordnungen für andere 'id' hinzufügen
                         ];
