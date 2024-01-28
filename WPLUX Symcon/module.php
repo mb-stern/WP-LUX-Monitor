@@ -97,51 +97,47 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schliessen
         socket_close($socket);
 
-        // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i) {
-            if (in_array($i, array_column($idListe, 'id'))) {
-                $minusTest = $daten_raw[$i] * 0.1;
-                if ($minusTest > 429496000) {
-                    $daten_raw[$i] -= 4294967296;
-                    $daten_raw[$i] *= 0.1;
-                } else {
-                    $daten_raw[$i] *= 0.1;
-                }
-                $daten_raw[$i] = round($daten_raw[$i], 1);
-                
-                // Debug senden
-                $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
-
-                // Direkte Erstellung der Variable mit Ident und Positionsnummer
-                $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
-
-                // Zuordnung des Variablenprofils basierend auf der 'id'
-                $this->AssignVariableProfiles($varid, $i);
-            } else {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-            }
+// Werte anzeigen
+for ($i = 0; $i < $JavaWerte; ++$i) {
+    if (in_array($i, array_column($idListe, 'id'))) {
+        $minusTest = $daten_raw[$i] * 0.1;
+        if ($minusTest > 429496000) {
+            $daten_raw[$i] -= 4294967296;
+            $daten_raw[$i] *= 0.1;
+        } else {
+            $daten_raw[$i] *= 0.1;
         }
-    }
+        $daten_raw[$i] = round($daten_raw[$i], 1);
 
-    private function AssignVariableProfiles($varid, $id)
+        // Debug senden
+        $this->SendDebug("Gewählte ID für Abfrage", "$i", 0);
+
+        // Direkte Erstellung der Variable mit Ident und Positionsnummer
+        $ident = 'WP_' . $java_dataset[$i];
+        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $i);
+
+        // Zuordnung des Variablenprofils basierend auf der 'id'
+        $this->AssignVariableProfiles($varid, $i, $daten_raw[$i]);
+    } else {
+        // Variable löschen, da sie nicht mehr in der ID-Liste ist
+        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+    }
+}
+}
+
+    private function AssignVariableProfiles($varid, $id, $value)
     {
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-                break;
-            case 29:
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-                break;
+        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id' und dem Wert
+        $profileMapping = [
+            10 => $value >= 0 ? '~Temperature' : '',
+            29 => ($value == 0 || $value == 1) ? '~Switch' : '',
             // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                IPS_SetVariableCustomProfile($varid, '');
-                break;
-        }
+        ];
+
+        // Setze das Profil basierend auf der 'id'
+        IPS_SetVariableCustomProfile($varid, $profileMapping[$id] ?? '');
     }
+}
 
 	private function CreateOrUpdateVariable($ident, $value, $position)
     {
@@ -159,7 +155,7 @@ class WPLUXSymcon extends IPSModule
 
         // Direkte Erstellung der Variable mit Ident
         $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValue($varid, $value);
+        SetValueFloat($varid, $value);
 
         // Position setzen
         IPS_SetPosition($varid, $position);
