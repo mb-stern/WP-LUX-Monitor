@@ -142,7 +142,7 @@ class WPLUXSymcon extends IPSModule
         return isset($varid) ? $varid : 0; // Rückgabe von $varid oder 0, wenn nicht gesetzt
     }
     
-    private function AssignVariableSettings($id)
+    private function AssignVariableSettings($varid, $id)
     {
         // Hier erfolgt die Zuordnung der Einstellungen basierend auf der 'id'
         switch ($id) {
@@ -160,39 +160,37 @@ class WPLUXSymcon extends IPSModule
                 $profile = '';
                 break;
         }
-    
-        // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
-        $varid = IPS_GetObjectIDByIdent($this->InstanceID, $id);
-        if ($varid !== false) {
-            IPS_SetVariableCustomProfile($varid, $profile);
-        }
-    
-        return $variableType;
-    }
 
-    private function convertValueBasedOnID($value, $id)
-    {
-        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
-        switch ($id) {
-            case 10:
-                return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
-            case 29:
-                return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
-                // Weitere Zuordnungen für andere 'id' hinzufügen
-            default:
-                return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
-        }
-    }
+                // Hier erfolgt die Zuordnung des Variablenprofils basierend auf der 'id'
+                IPS_SetVariableCustomProfile($varid, $profile);
 
-    private function DeleteVariableIfExists($ident)
-    {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->Log("Variable löschen: " . $ident);
-
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
+                return $variableType;
+            }
+        
+            private function convertValueBasedOnID($value, $id)
+            {
+                // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
+                switch ($id) {
+                    case 10:
+                        return round($value * 0.1, 1); // Hier ggf. Anpassungen für Integer-Typ
+                    case 29:
+                        return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
+                        // Weitere Zuordnungen für andere 'id' hinzufügen
+                    default:
+                        return round($value * 0.1, 1); // Standardmäßig Konvertierung für Integer-Typ
+                }
+            }
+        
+            private function DeleteVariableIfExists($ident)
+            {
+                $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+                if ($variableID !== false) {
+                    // Debug-Ausgabe
+                    $this->Log("Variable löschen: " . $ident);
+        
+                    // Variable löschen
+                    IPS_DeleteVariable($variableID);
+                }
+            }
         }
-    }
-}
+        
