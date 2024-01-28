@@ -159,7 +159,7 @@ class WPLUXSymcon extends IPSModule
 
         // Direkte Erstellung der Variable mit Ident
         $varid = $this->RegisterVariableFloat($ident, $ident);
-        SetValueFloat($varid, $value);
+        SetValue($varid, $value);
 
         // Position setzen
         IPS_SetPosition($varid, $position);
