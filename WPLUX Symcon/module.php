@@ -139,13 +139,13 @@ class WPLUXSymcon extends IPSModule
                     private function CreateOrUpdateVariable($ident, $value, $id)
                     {
                         $value = $this->convertValueBasedOnID($value, $id);
-                
+                    
                         // Debug-Ausgabe
                         $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
-                
+                    
                         // Überprüfen, ob die Variable bereits existiert
                         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-                
+                    
                         if ($existingVarID === false) {
                             // Variable existiert nicht, also erstellen
                             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
@@ -157,12 +157,25 @@ class WPLUXSymcon extends IPSModule
                         } else {
                             // Variable existiert, also aktualisieren
                             $varid = $existingVarID;
-                            SetValue($varid, $value);
+                            // Überprüfen, ob der Variablentyp stimmt
+                            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+                                // Variablentyp stimmt nicht überein, also Variable neu erstellen
+                                IPS_DeleteVariable($varid);
+                                $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+                                IPS_SetParent($varid, $this->InstanceID);
+                                IPS_SetIdent($varid, $ident);
+                                IPS_SetName($varid, $ident);
+                                SetValue($varid, $value);
+                                IPS_SetPosition($varid, $id);
+                            } else {
+                                // Variablentyp stimmt überein, also nur Wert aktualisieren
+                                SetValue($varid, $value);
+                            }
                         }
-                
+                    
                         return $varid;
                     }
-                
+                    
                     private function convertValueBasedOnID($value, $id)
                     {
                         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
