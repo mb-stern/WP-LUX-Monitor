@@ -23,6 +23,7 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
+        //Debug senden
         $this->SendDebug("","", 0);
     }
 
@@ -59,6 +60,9 @@ class WPLUXSymcon extends IPSModule
 
         // Debug-Ausgabe
         $this->Log("ID-Liste: " . print_r($idListe, true));
+                
+        //Debug senden
+        $this->SendDebug("","", 0);
 
         // Variablen
         $sBuff = 0;
