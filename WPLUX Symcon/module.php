@@ -101,57 +101,51 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
 
 		// Werte anzeigen
-for ($i = 0; $i < $JavaWerte; ++$i) {
-    // Testbereich für weitere Variablen basierend auf ID-Liste
-    if (in_array($i, array_column($idListe, 'id'))) {
-        $idInIdListe = $idListe[array_search($i, array_column($idListe, 'id'))]['id'];
+		for ($i = 0; $i < $JavaWerte; ++$i) {
+			// Testbereich für weitere Variablen basierend auf ID-Liste
+			if (in_array($i, array_column($idListe, 'id'))) {
+				$minusTest = $daten_raw[$i] * 0.1;
+				if ($minusTest > 429496000) {
+					$daten_raw[$i] -= 4294967296;
+					$daten_raw[$i] *= 0.1;
+				} else {
+					$daten_raw[$i] *= 0.1;
+				}
+				$daten_raw[$i] = round($daten_raw[$i], 1);
 
-        $minusTest = $daten_raw[$i] * 0.1;
-        if ($minusTest > 429496000) {
-            $daten_raw[$i] -= 4294967296;
-            $daten_raw[$i] *= 0.1;
-        } else {
-            $daten_raw[$i] *= 0.1;
-        }
-        $daten_raw[$i] = round($daten_raw[$i], 1);
+				// Debug-Ausgabe
+				$this->Log("Variable erstellen/aktualisieren für ID: " . $i);
 
-        // Debug-Ausgabe
-        $this->Log("Variable erstellen/aktualisieren für ID: " . $idInIdListe);
-
-        // Direkte Erstellung der Variable mit Ident
-        $ident = 'WP_' . $java_dataset[$i];
-        $varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i], $idInIdListe);
-    } else {
-        // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-    }
-}
+				// Direkte Erstellung der Variable mit Ident
+				$ident = 'WP_' . $java_dataset[$i];
+				$varid = $this->CreateOrUpdateVariable($ident, $daten_raw[$i]);
+			} else {
+				// Variable löschen, da sie nicht mehr in der ID-Liste ist
+				$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+			}
+		}
 		}
 
-		private function CreateOrUpdateVariable($ident, $value, $positionsnummer)
-{
-    $minusTest = $value * 0.1;
-    if ($minusTest > 429496000) {
-        $value -= 4294967296;
-        $value *= 0.1;
-    } else {
-        $value *= 0.1;
-    }
-    $value = round($value, 1);
+		private function CreateOrUpdateVariable($ident, $value)
+		{
+		$minusTest = $value * 0.1;
+		if ($minusTest > 429496000) {
+			$value -= 4294967296;
+			$value *= 0.1;
+		} else {
+			$value *= 0.1;
+		}
+		$value = round($value, 1);
 
-    // Debug-Ausgabe
-    $this->Log("Variable erstellen/aktualisieren für Ident: " . $ident . ", Positionsnummer: " . $positionsnummer);
+		// Debug-Ausgabe
+		$this->Log("Variable erstellen/aktualisieren für Ident: " . $ident);
 
-    // Direkte Erstellung der Variable mit Ident
-    $varid = $this->RegisterVariableFloat($ident, $ident);
-    
-    // Setzen Sie den Objektidentifikator (Ident)
-    IPS_SetIdent($varid, (string)$positionsnummer);
-    
-    SetValueFloat($varid, $value);
+		// Direkte Erstellung der Variable mit Ident
+		$varid = $this->RegisterVariableFloat($ident, $ident);
+		SetValueFloat($varid, $value);
 
-    return $varid;
-}
+		return $varid;
+		}
 
 		private function DeleteVariableIfExists($ident)
 		{
