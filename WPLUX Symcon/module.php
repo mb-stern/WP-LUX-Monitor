@@ -133,12 +133,13 @@ class WPLUXSymcon extends IPSModule
                             29 => ['Profile' => '~Switch', 'Type' => 0],     // Beispiel für einen Boolean-Typ
                             // Weitere Zuordnungen für andere 'id' hinzufügen
                         ];
-
+                    
                         // Setze das Profil und den Typ basierend auf der 'id'
                         $profileData = $profileMapping[$id] ?? ['Profile' => '', 'Type' => 2]; // Standardmäßig Float
                         IPS_SetVariableCustomProfile($varid, $profileData['Profile']);
                         IPS_SetVariableCustomAction($varid, $profileData['Type']);
                     }
+                    
                 
                     private function CreateOrUpdateVariable($ident, $value, $position)
                     {
