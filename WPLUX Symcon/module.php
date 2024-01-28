@@ -137,7 +137,6 @@ for ($i = 0; $i < $JavaWerte; ++$i) {
         // Setze das Profil basierend auf der 'id'
         IPS_SetVariableCustomProfile($varid, $profileMapping[$id] ?? '');
     }
-}
 
 	private function CreateOrUpdateVariable($ident, $value, $position)
     {
