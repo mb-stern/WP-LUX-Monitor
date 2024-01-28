@@ -148,7 +148,6 @@ class WPLUXSymcon extends IPSModule
         return $varid;
     }
     
-
     private function AssignVariableProfileAndType($varid, $id)
     {
         // Hier erfolgt die Zuordnung des Variablenprofils und des Variablentyps basierend auf der 'id'
