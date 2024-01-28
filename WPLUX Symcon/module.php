@@ -53,7 +53,7 @@ class WPLUXSymcon extends IPSModule
         $this->SendDebug("Pfadangabe zur WP", "".$IpWwc.":".$WwcJavaPort."", 0);
 
         // Integriere Name der Variable aus den Java Daten
-        require_once __DIR__ . '/../java_daten.php';
+        require_once __DIR__ . '/java_daten.php';
 
         // Lesen Sie die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
