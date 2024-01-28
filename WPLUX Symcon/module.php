@@ -59,7 +59,7 @@ class WPLUXSymcon extends IPSModule
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
          
         //Debug senden
-        $this->SendDebug("Gewälte IDs", ".$idListe.", 0);
+        //$this->SendDebug("Gewälte IDs", ".$idListe.", 0);
 
         // Variablen
         $sBuff = 0;
