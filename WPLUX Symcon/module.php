@@ -23,7 +23,7 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
         //Variablenprofil zuordnen
-        $this->AssignVariableProfilesAndType($exampleVarID, $exampleID);
+        $this->AssignVariableProfilesAndType($varid, $id);
     }
 
     public function Destroy()
