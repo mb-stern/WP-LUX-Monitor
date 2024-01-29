@@ -137,7 +137,7 @@ class WPLUXSymcon extends IPSModule
                 if ($varid > 0) {
                     IPS_SetVariableCustomProfile($varid, '');
                 }
-                return 4; // Standardmäßig Integer-Typ
+                return 1; // Standardmäßig Integer-Typ
         }
     }
     
