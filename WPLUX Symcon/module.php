@@ -170,6 +170,9 @@ class WPLUXSymcon extends IPSModule
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
+
+            // Hier die Methode aufrufen, um das Profil zuzuweisen
+            $this->AssignVariableProfilesAndType($varid, $id);
         } else {
             // Variable existiert, also aktualisieren
             $varid = $existingVarID;
@@ -190,7 +193,7 @@ class WPLUXSymcon extends IPSModule
         }
         return $varid;
     }
-                        
+
     private function DeleteVariableIfExists($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
