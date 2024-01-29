@@ -119,17 +119,24 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch (true) {
 
-            /*case ($id >= 10 && $id <= 28):
+            case ($id >= 10 && $id <= 28):
                 if ($varid > 0) {
                     IPS_SetVariableCustomProfile($varid, '~Temperature');
                 }
                 return 2; // Float-Typ
-            */
-            case ($id == 29):
+            
+            case ($id >= 29 && $id <= 55):
                 if ($varid > 0) {
                     IPS_SetVariableCustomProfile($varid, '~Switch');
                 }
                 return 0; // Boolean-Typ
+                /*
+            case ($id == 29):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, '~Switch');
+                    }
+                    return 0; // Boolean-Typ
+                    */
             
             // Weitere Zuordnungen für andere 'id'-Bereiche hinzufügen
             default:
@@ -146,15 +153,15 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
         switch ($id) {
         
-        //case ($id >= 10 && $id <= 28):
-         //   return round($value * 0.1, 1);
+        case ($id >= 10 && $id <= 28):
+            return round($value * 0.1, 1);
         
-        case 29:
-            return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
+        case ($id >= 29 && $id <= 55):
+            return boolval($value);
         
         // Weitere Zuordnungen für andere 'id' hinzufügen
         default:
-            return round($value * 0.1, 1); // Standardmäßig Konvertierung
+            return round($value * 1, 1); // Standardmäßig Konvertierung
         }
     }
             
