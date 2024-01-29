@@ -151,7 +151,7 @@ class WPLUXSymcon extends IPSModule
         
         // Weitere Zuordnungen für andere 'id' hinzufügen
         default:
-            return round($value * 1, 1); // Standardmäßig Konvertierung
+            return round($value * 0.1, 1); // Standardmäßig Konvertierung
         }
     }
             
