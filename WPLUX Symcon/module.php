@@ -102,7 +102,7 @@ class WPLUXSymcon extends IPSModule
         $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
         // Debug senden
-        $this->SendDebug("Gewählte ID für Abfrage", "".$i.":".$value."", 0);
+        $this->SendDebug("ID:Wert der Abfrage", "".$i.":".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
@@ -144,7 +144,7 @@ class WPLUXSymcon extends IPSModule
         switch ($id) {
         
         case ($id >= 10 && $id <= 28):
-            return round($value * 1, 1); // Hier ggf. Anpassungen für Float-Typ
+            return round($value * 0.1, 1); // Hier ggf. Anpassungen für Float-Typ
         
         case 29:
             return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
