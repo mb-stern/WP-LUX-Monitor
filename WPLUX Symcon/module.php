@@ -23,11 +23,17 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
         // Benötigte Varaiblen erstellen
-        if (!IPS_VariableProfileExists("WPLUX.Sekunden")) {
-			IPS_CreateVariableProfile("WPLUX.Sekunden", 2); //2 für Float
-			IPS_SetVariableProfileValues("WPLUX.Sekunden", 0, 0, 1); //Min, Max, Schritt
-            IPS_SetVariableProfileDigits("WPLUX.Sekunden", 0); //Nachkommastellen
-			IPS_SetVariableProfileText("WPLUX.Sekunden", "", " sec"); //Präfix, Suffix
+        if (!IPS_VariableProfileExists("WPLUX.Sec")) {
+			IPS_CreateVariableProfile("WPLUX.Sec", 2); //2 für Float
+			IPS_SetVariableProfileValues("WPLUX.Sec", 0, 0, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Sec", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Sec", "", " sec"); //Präfix, Suffix
+		}
+        if (!IPS_VariableProfileExists("WPLUX.Imp")) {
+			IPS_CreateVariableProfile("WPLUX.Imp", 2); //2 für Float
+			IPS_SetVariableProfileValues("WPLUX.Imp", 0, 0, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Imp", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Imp", "", " imp"); //Präfix, Suffix
 		}
     }
 
@@ -139,9 +145,9 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
-                    if ($varid > 0) {
-                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Sekunden');
+            case ($id == 57 || $id == 59):
+                if ($varid > 0) {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                     }
                 return 2; // Float-Typ
                 /*
