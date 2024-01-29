@@ -21,6 +21,14 @@ class WPLUXSymcon extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+
+        // Benötigte Varaiblen erstellen
+        if (!IPS_VariableProfileExists("WPLUX.Sekunden")) {
+			IPS_CreateVariableProfile("WPLUX.Sekunden", 2); //2 für Float
+			IPS_SetVariableProfileValues("WPLUX.Sekunden", 0, 0, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Sekunden", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Sekunden", "", " sec"); //Präfix, Suffix
+		}
     }
 
     public function Destroy()
@@ -130,6 +138,12 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, '~Switch');
                 }
                 return 0; // Boolean-Typ
+
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Sekunden');
+                    }
+                return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
@@ -156,8 +170,10 @@ class WPLUXSymcon extends IPSModule
         case ($id >= 10 && $id <= 28):
             return round($value * 0.1, 1);
         
+        /*
         case ($id >= 29 && $id <= 55):
             return boolval($value);
+        */    
         
         // Weitere Zuordnungen für andere 'id' hinzufügen
         default:

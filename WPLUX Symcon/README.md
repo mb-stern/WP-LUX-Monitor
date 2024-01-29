@@ -48,7 +48,7 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 Name   | Typ     | Beschreibung
 ------ | ------- | ------------
-       |         |
+  WPLUX.Sekunden     |    Sekunden     |
        |         |
 
 #### Profile
