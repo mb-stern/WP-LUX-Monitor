@@ -120,7 +120,7 @@ class WPLUXSymcon extends IPSModule
         switch (true) {
             case ($id >= 10 && $id <= 28):
                 if ($varid > 0) {
-                    IPS_SetVariableCustomProfile($varid, 'HW.Temp');
+                    IPS_SetVariableCustomProfile($varid, '~Temperature');
                 }
                 return 2; // Float-Typ
             case ($id == 29):
