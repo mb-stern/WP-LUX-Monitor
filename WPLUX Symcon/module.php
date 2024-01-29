@@ -119,7 +119,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch ($id) {
         
-        case 10:
+        case ($id >= 10 && $id <= 28):
             if ($varid > 0) {
             IPS_SetVariableCustomProfile($varid, '~Temperature');
             }
@@ -202,7 +202,7 @@ class WPLUXSymcon extends IPSModule
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID !== false) {
             // Debug-Ausgabe
-            $this->Log("Variable löschen: " . $ident);
+            $this->SendDebug("Variable gelöscht", "$ident", 0);
                 
             // Variable löschen
             IPS_DeleteVariable($variableID);
