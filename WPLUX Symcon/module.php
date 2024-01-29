@@ -144,7 +144,7 @@ class WPLUXSymcon extends IPSModule
         switch ($id) {
         
         case ($id >= 10 && $id <= 28):
-            return round($value * 10, 1); // Hier ggf. Anpassungen für Float-Typ
+            return round($value * 1, 1); // Hier ggf. Anpassungen für Float-Typ
         
         case 29:
             return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
