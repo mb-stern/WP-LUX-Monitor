@@ -117,28 +117,25 @@ class WPLUXSymcon extends IPSModule
     private function AssignVariableProfilesAndType($varid, $id)
     {
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
-        switch ($id) {
-        
-        case ($id >= 10 && $id <= 28):
-            if ($varid > 0) {
-            IPS_SetVariableCustomProfile($varid, '~Temperature');
-            }
-            return 2; // Float-Typ
-        
-        case 29:
-            if ($varid > 0) {
-            IPS_SetVariableCustomProfile($varid, '~Switch');
-            }
-            return 0; // Boolean-Typ
-        
-        // Weitere Zuordnungen für andere 'id' hinzufügen
-        default:
-            // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-            if ($varid > 0) {
-            IPS_SetVariableCustomProfile($varid, '');
-            }
-            return 2; // Standardmäßig Integer-Typ
-            }
+        switch (true) {
+            case ($id >= 10 && $id <= 28):
+                if ($varid > 0) {
+                    IPS_SetVariableCustomProfile($varid, '~Temperature');
+                }
+                return 2; // Float-Typ
+            case ($id == 29):
+                if ($varid > 0) {
+                    IPS_SetVariableCustomProfile($varid, '~Switch');
+                }
+                return 0; // Boolean-Typ
+            // Weitere Zuordnungen für andere 'id'-Bereiche hinzufügen
+            default:
+                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                if ($varid > 0) {
+                    IPS_SetVariableCustomProfile($varid, '');
+                }
+                return 2; // Standardmäßig Integer-Typ
+        }
     }
     
     private function convertValueBasedOnID($value, $id)
@@ -161,13 +158,10 @@ class WPLUXSymcon extends IPSModule
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         $value = $this->convertValueBasedOnID($value, $id);
-                    
-        // Debug-Ausgabe
-        $this->SendDebug("Variabelwert aktualisiert", "$ident", 0);
-                    
+
         // Überprüfen, ob die Variable bereits existiert
         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-                    
+
         if ($existingVarID === false) {
             // Variable existiert nicht, also erstellen
             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
@@ -180,20 +174,20 @@ class WPLUXSymcon extends IPSModule
             // Variable existiert, also aktualisieren
             $varid = $existingVarID;
             // Überprüfen, ob der Variablentyp stimmt
-        if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
-            // Variablentyp stimmt nicht überein, also Variable neu erstellen
-            IPS_DeleteVariable($varid);
-            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-            IPS_SetParent($varid, $this->InstanceID);
-            IPS_SetIdent($varid, $ident);
-            IPS_SetName($varid, $ident);
-            SetValue($varid, $value);
-            IPS_SetPosition($varid, $id);
-        } else {
-            // Variablentyp stimmt überein, also nur Wert aktualisieren
-            SetValue($varid, $value);
+            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+                // Variablentyp stimmt nicht überein, also Variable neu erstellen
+                IPS_DeleteVariable($varid);
+                $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+                IPS_SetParent($varid, $this->InstanceID);
+                IPS_SetIdent($varid, $ident);
+                IPS_SetName($varid, $ident);
+                SetValue($varid, $value);
+                IPS_SetPosition($varid, $id);
+            } else {
+                // Variablentyp stimmt überein, also nur Wert aktualisieren
+                SetValue($varid, $value);
             }
-        }   
+        }
         return $varid;
     }
                         
