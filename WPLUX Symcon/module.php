@@ -21,9 +21,6 @@ class WPLUXSymcon extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
-
-        // Beim Erstellen der Variable ausführen
-        $this->ApplyChanges();
     }
 
     public function Destroy()
