@@ -176,8 +176,6 @@ class WPLUXSymcon extends IPSModule
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
-            // Beim Erstellen der Variable ausführen
-            $this->Update();
         } else {
             // Variable existiert, also aktualisieren
             $varid = $existingVarID;
@@ -197,6 +195,9 @@ class WPLUXSymcon extends IPSModule
             }
         }   
         return $varid;
+
+        // Beim Erstellen der Variable ausführen
+        $this->Update();
     }
                         
     private function DeleteVariableIfExists($ident)
