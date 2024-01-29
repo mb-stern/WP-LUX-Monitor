@@ -21,9 +21,6 @@ class WPLUXSymcon extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
-
-        //Variablenprofil zuordnen
-        $this->AssignVariableProfilesAndType($varid, $id);
     }
 
     public function Destroy()
@@ -179,6 +176,8 @@ class WPLUXSymcon extends IPSModule
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
+            // Beim Erstellen der Variable ausführen
+            $this->Update();
         } else {
             // Variable existiert, also aktualisieren
             $varid = $existingVarID;
