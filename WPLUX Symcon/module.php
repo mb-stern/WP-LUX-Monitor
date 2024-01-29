@@ -143,15 +143,15 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
         switch ($id) {
         
-        //case ($id >= 10 && $id <= 28):
-        //    return round($value * 0.1, 1);
+        case ($id >= 10 && $id <= 28):
+            return round($value * 0.1, 0);
         
         case 29:
             return boolval($value); // Hier ggf. Anpassungen für Boolean-Typ
         
         // Weitere Zuordnungen für andere 'id' hinzufügen
         default:
-            return round($value * 0.1, 1); // Standardmäßig Konvertierung
+            return round($value * 1, 1); // Standardmäßig Konvertierung
         }
     }
             
