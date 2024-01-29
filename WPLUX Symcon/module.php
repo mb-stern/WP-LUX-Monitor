@@ -150,6 +150,7 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
                     }
                 return 2; // Float-Typ
+            
             case ($id == 57 || $id == 59):
                 if ($varid > 0) {
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
