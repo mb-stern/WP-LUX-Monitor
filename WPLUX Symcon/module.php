@@ -122,7 +122,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch (true) {
 
-                case (($id >= 10 && $id <= 28) || $id == 122):
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Temperature');
                     }
