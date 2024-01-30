@@ -219,13 +219,13 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case ($id >= 95 && $id <= 99):
+                case (($id >= 95 && $id <= 99) || ($id >= 111 && $id <= 115)):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
                         }
                         return 1; // Integer
 
-                case ($id == 106):
+                case ($id >= 106 && $id <= 110):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
                         }
