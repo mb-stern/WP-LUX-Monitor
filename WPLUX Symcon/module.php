@@ -87,6 +87,19 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.Comf", 0, "nicht verbaut", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.Comf", 1, "verbaut", "", -1);
 		}
+        if (!IPS_VariableProfileExists("WPLUX.Men1")) {
+			IPS_CreateVariableProfile("WPLUX.Men1", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.Men1", 0, 7, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Men1", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Men1", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 0, "Wärmepumpe läuft", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 1, "Wärmepumpe steht", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 2, "Wärmepumpe kommt", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 3, "Fehlercode Speicherplatz 0", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 4, "Abtauen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 5, "Warte auf LIN-Verbindung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 6, "Verdichter heizt auf", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men1", 7, "Pumpenvorlauf ", "", -1);
     }
 
     public function Destroy()
@@ -244,6 +257,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Comf');
                         }
                         return 0; // Boolean-Typ
+
+                case ($id == 117):
+                        if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Men1');
+                        }
+                        return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {
