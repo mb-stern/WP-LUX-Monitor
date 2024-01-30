@@ -203,6 +203,12 @@ class WPLUXSymcon extends IPSModule
                                 IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
                             }
                             return 1; // Integer
+
+                case ($id >= 95 && $id <= 99):
+                            if ($varid) {
+                                IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
+                            }
+                            return 1; // Integer-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
