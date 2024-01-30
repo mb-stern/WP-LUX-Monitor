@@ -22,6 +22,7 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
+        //Variableprofile laden und erstellen
         require_once __DIR__ . '/variable.php';
     }
 
@@ -53,7 +54,7 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Integriere Variabelbenennung aus den Java Daten
+        // Namen der Variablen laden
         require_once __DIR__ . '/java_daten.php';
 
         // Lese die ID-Liste
@@ -163,7 +164,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case (($id >= 95 && $id <= 99) || ($id >= 111 && $id <= 115)):
+                case (($id >= 95 && $id <= 99) || ($id >= 111 && $id <= 115) || $id == 134):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
                         }
