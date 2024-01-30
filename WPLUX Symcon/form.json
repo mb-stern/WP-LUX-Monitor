@@ -18,10 +18,6 @@
           },
           {
             "type": "Label",
-            "label": "Dieses Modul funktioniert nur mit Java-Abfrage, ab einem gewissen FW-Stand findet die Abfrage über Websocket statt."
-          },
-          {
-            "type": "Label",
             "label": "Die Bedeutung den Typ der Varaibalen sind hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
           }
         ]

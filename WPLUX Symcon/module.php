@@ -35,6 +35,12 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileDigits("WPLUX.Imp", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Imp", "", " imp"); //Präfix, Suffix
 		}
+        if (!IPS_VariableProfileExists("WPLUX.Typ")) {
+			IPS_CreateVariableProfile("WPLUX.Typ", 2); //1 für Float
+			IPS_SetVariableProfileValues("WPLUX.Typ", 0, 0, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Typ", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Typ", "", ""); //Präfix, Suffix
+		}
     }
 
     public function Destroy()
@@ -156,6 +162,12 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                     }
                 return 2; // Float-Typ
+
+            case ($id == 78):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
+                    }
+                    return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {

@@ -50,6 +50,7 @@ Name   | Typ     | Beschreibung
 ------ | ------- | ------------
 WPLUX.Sec     |    Float     |
 WPLUX.Imp    |     Float    |
+WPLUX.Typ    |     Float    |
 
 #### Profile
 
