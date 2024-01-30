@@ -33,13 +33,22 @@ class WPLUXSymcon extends IPSModule
 			IPS_CreateVariableProfile("WPLUX.Imp", 2); //2 für Float
 			IPS_SetVariableProfileValues("WPLUX.Imp", 0, 0, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Imp", 0); //Nachkommastellen
-			IPS_SetVariableProfileText("WPLUX.Imp", "", " imp"); //Präfix, Suffix
+			IPS_SetVariableProfileText("WPLUX.Imp", "", " impulse"); //Präfix, Suffix
 		}
         if (!IPS_VariableProfileExists("WPLUX.Typ")) {
-			IPS_CreateVariableProfile("WPLUX.Typ", 2); //1 für Float
+			IPS_CreateVariableProfile("WPLUX.Typ", 1); //1 für Integer
 			IPS_SetVariableProfileValues("WPLUX.Typ", 0, 0, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Typ", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Typ", "", ""); //Präfix, Suffix
+		}
+        if (!IPS_VariableProfileExists("WPLUX.Biv")) {
+			IPS_CreateVariableProfile("WPLUX.Biv", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.Biv", 1, 3, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Biv", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Biv", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "1", "ein Verdichter darf laufen", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "2", "zwei Verdichter dürfen laufen", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "3", "zusätzlicher Wärmeerzeuger darf mitlaufen", -1);
 		}
     }
 
@@ -167,7 +176,13 @@ class WPLUXSymcon extends IPSModule
                     if ($varid > 0) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
                     }
-                    return 2; // Float-Typ
+                    return 1; // Integer
+
+            case ($id == 79):
+                        if ($varid > 0) {
+                            IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
+                        }
+                        return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {
@@ -176,7 +191,6 @@ class WPLUXSymcon extends IPSModule
                     return 0; // Boolean-Typ
                     */
             
-            // Weitere Zuordnungen für andere 'id'-Bereiche hinzufügen
             default:
                 // Standardprofil, falls keine spezifische Zuordnung gefunden wird
                 if ($varid > 0) {
