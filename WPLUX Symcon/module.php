@@ -24,13 +24,13 @@ class WPLUXSymcon extends IPSModule
 
         // Benötigte Varaiblen erstellen
         if (!IPS_VariableProfileExists("WPLUX.Sec")) {
-			IPS_CreateVariableProfile("WPLUX.Sec", 2); //2 für Float
+			IPS_CreateVariableProfile("WPLUX.Sec", 1); //1 für Integer
 			IPS_SetVariableProfileValues("WPLUX.Sec", 0, 0, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Sec", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Sec", "", " sec"); //Präfix, Suffix
 		}
         if (!IPS_VariableProfileExists("WPLUX.Imp")) {
-			IPS_CreateVariableProfile("WPLUX.Imp", 2); //2 für Float
+			IPS_CreateVariableProfile("WPLUX.Imp", 1); //1 für Integer
 			IPS_SetVariableProfileValues("WPLUX.Imp", 0, 0, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Imp", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Imp", "", " impulse"); //Präfix, Suffix
@@ -178,13 +178,13 @@ class WPLUXSymcon extends IPSModule
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
                         }
-                    return 2; // Float-Typ
+                    return 1; // Integer
                 
                 case ($id == 57 || $id == 59):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                         }
-                    return 2; // Float-Typ
+                    return 1; // Integer
 
                 case ($id == 78):
                         if ($varid) {

@@ -52,8 +52,8 @@ Es werden Variablen je nach Wahl der Werte erstellt.
 
 Name   | Typ
 ------ | -------
-WPLUX.Sec |  Float  
-WPLUX.Imp |  Float    
+WPLUX.Sec |  Integer  
+WPLUX.Imp |  Integer   
 WPLUX.Typ |  Integer   
 WPLUX.Biv |  Integer   
 WPLUX.BZ  |  Integer 
