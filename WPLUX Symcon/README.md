@@ -53,12 +53,13 @@ Es werden Variablen je nach Wahl der Werte erstellt.
 
 Name   | Typ
 ------ | -------
-WPLUX.Sec |  Integer  
-WPLUX.Imp |  Integer   
-WPLUX.Typ |  Integer   
-WPLUX.Biv |  Integer   
-WPLUX.BZ  |  Integer 
-WPLUX.Comf|  Bool 
+WPLUX.Sec     |  Integer  
+WPLUX.Imp     |  Integer   
+WPLUX.Typ     |  Integer   
+WPLUX.Biv     |  Integer   
+WPLUX.BZ      |  Integer 
+WPLUX.Comf    |  Bool 
+WPLUX.Men1    |  Integer
 
 ### 6. WebFront
 
