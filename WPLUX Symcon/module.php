@@ -241,7 +241,7 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 0; // Boolean-Typ
 
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
                         }
