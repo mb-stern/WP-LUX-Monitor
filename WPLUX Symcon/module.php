@@ -156,25 +156,25 @@ class WPLUXSymcon extends IPSModule
         switch (true) {
 
                 case ($id >= 10 && $id <= 28):
-                    if ($varid > 0) {
+                    if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Temperature');
                     }
                     return 2; // Float-Typ
                 
                 case ($id >= 29 && $id <= 55):
-                    if ($varid > 0) {
+                    if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Switch');
                     }
                     return 0; // Boolean-Typ
 
                 case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
-                    if ($varid > 0) {
+                    if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
                         }
                     return 2; // Float-Typ
                 
                 case ($id == 57 || $id == 59):
-                    if ($varid > 0) {
+                    if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                         }
                     return 2; // Float-Typ
@@ -186,7 +186,7 @@ class WPLUXSymcon extends IPSModule
                         return 1; // Integer
 
                 case ($id == 79):
-                            if ($varid > 0) {
+                            if ($varid) {
                                 IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
                             }
                             return 1; // Integer
