@@ -46,9 +46,9 @@ class WPLUXSymcon extends IPSModule
 			IPS_SetVariableProfileValues("WPLUX.Biv", 1, 3, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Biv", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Biv", "", ""); //Präfix, Suffix
-            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "1", "ein Verdichter darf laufen", -1);
-            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "2", "zwei Verdichter dürfen laufen", -1);
-            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "3", "zusätzlicher Wärmeerzeuger darf mitlaufen", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "ein Verdichter darf laufen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 2, "zwei Verdichter dürfen laufen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Biv", 3, "zusätzlicher Wärmeerzeuger darf mitlaufen", "", -1);
 		}
     }
 
