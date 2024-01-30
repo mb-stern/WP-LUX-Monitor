@@ -50,6 +50,13 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.Biv", 2, "zwei Verdichter dürfen laufen", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.Biv", 3, "zusätzlicher Wärmeerzeuger darf mitlaufen", "", -1);
 		}
+        if (!IPS_VariableProfileExists("WPLUX.BZ")) {
+			IPS_CreateVariableProfile("WPLUX.BZ", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.BZ", 1, 3, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.BZ", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.BZ", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 0, "Heizen", "", -1);
+		}
     }
 
     public function Destroy()
@@ -148,41 +155,47 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch (true) {
 
-            case ($id >= 10 && $id <= 28):
-                if ($varid > 0) {
-                    IPS_SetVariableCustomProfile($varid, '~Temperature');
-                }
-                return 2; // Float-Typ
-            
-            case ($id >= 29 && $id <= 55):
-                if ($varid > 0) {
-                    IPS_SetVariableCustomProfile($varid, '~Switch');
-                }
-                return 0; // Boolean-Typ
-
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
-                if ($varid > 0) {
-                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
-                    }
-                return 2; // Float-Typ
-            
-            case ($id == 57 || $id == 59):
-                if ($varid > 0) {
-                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
-                    }
-                return 2; // Float-Typ
-
-            case ($id == 78):
+                case ($id >= 10 && $id <= 28):
                     if ($varid > 0) {
-                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
+                        IPS_SetVariableCustomProfile($varid, '~Temperature');
                     }
-                    return 1; // Integer
+                    return 2; // Float-Typ
+                
+                case ($id >= 29 && $id <= 55):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, '~Switch');
+                    }
+                    return 0; // Boolean-Typ
 
-            case ($id == 79):
-                        if ($varid > 0) {
-                            IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77)):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
+                        }
+                    return 2; // Float-Typ
+                
+                case ($id == 57 || $id == 59):
+                    if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
+                        }
+                    return 2; // Float-Typ
+
+                case ($id == 78):
+                        if ($varid) {
+                            IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
                         }
                         return 1; // Integer
+
+                case ($id == 79):
+                            if ($varid > 0) {
+                                IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
+                            }
+                            return 1; // Integer
+
+                case ($id == 80):
+                            if ($varid > 0) {
+                                IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
+                            }
+                            return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {
