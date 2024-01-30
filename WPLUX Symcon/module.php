@@ -64,6 +64,21 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.BZ", 6, "Heizen ext. Energiequelle", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.BZ", 7, "Kühlbetrieb ", "", -1);
 		}
+        if (!IPS_VariableProfileExists("WPLUX.Off")) {
+			IPS_CreateVariableProfile("WPLUX.Off", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.Off", 1, 9, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Off", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Off", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 1, "Wärmepumpe Störung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 2, "Anlagen Störung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 3, "Betriebsart Zweiter Wärmeerzeuger", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 4, "EVU-Sperre", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 5, "Lauftabtau (nur LW-Geräte)", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 6, "Temperatur Einsatzgrenze maximal", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 7, "Temperatur Einsatzgrenze minimal", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 8, "Untere Einsatzgrenze", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Off", 9, "Keine Anforderung ", "", -1);
+		}
     }
 
     public function Destroy()
@@ -188,27 +203,33 @@ class WPLUXSymcon extends IPSModule
 
                 case ($id == 78):
                         if ($varid) {
-                            IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
                         }
                         return 1; // Integer
 
                 case ($id == 79):
-                            if ($varid) {
-                                IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
-                            }
-                            return 1; // Integer
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
+                        }
+                        return 1; // Integer
 
                 case ($id == 80):
-                            if ($varid > 0) {
-                                IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
-                            }
-                            return 1; // Integer
+                        if ($varid > 0) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
+                        }
+                        return 1; // Integer
 
                 case ($id >= 95 && $id <= 99):
-                            if ($varid) {
-                                IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
-                            }
-                            return 1; // Integer-Typ
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
+                        }
+                        return 1; // Integer
+
+                case ($id == 106):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
+                        }
+                        return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {
