@@ -17,7 +17,8 @@ Die Bedeutung den Typ der Varaibalen sind hier zu finden: https://loxwiki.atlass
 
 ### 1. Funktionsumfang
 
-*
+* Abfrage der Istwerte aus der Luxtronic, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
+* Es werden nicht alle Werte augeschlüsselt, bei Bedarf ist hier ein eigenes Variabelprofil zu erstellen
 
 ### 2. Voraussetzungen
 
@@ -57,6 +58,7 @@ WPLUX.Imp |  Integer
 WPLUX.Typ |  Integer   
 WPLUX.Biv |  Integer   
 WPLUX.BZ  |  Integer 
+WPLUX.Comf|  Bool 
 
 ### 6. WebFront
 

@@ -79,6 +79,14 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.Off", 8, "Untere Einsatzgrenze", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.Off", 9, "Keine Anforderung ", "", -1);
 		}
+        if (!IPS_VariableProfileExists("WPLUX.Comf")) {
+			IPS_CreateVariableProfile("WPLUX.Comf", 0); //0 für Bool
+			IPS_SetVariableProfileValues("WPLUX.Comf", 0, 1, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Comf", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Comf", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Comf", 1, "nicht verbaut", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Comf", 2, "verbaut", "", -1);
+		}
     }
 
     public function Destroy()
@@ -230,6 +238,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
                         }
                         return 1; // Integer
+
+                case ($id == 116 ):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, '~Switch');
+                        }
+                        return 0; // Boolean-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
