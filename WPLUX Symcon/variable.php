@@ -1,6 +1,6 @@
 <?php
 
-// Benötigte Varaiblen erstellen
+// Benötigte Variabelprofile erstellen
 if (!IPS_VariableProfileExists("WPLUX.Sec")) {
     IPS_CreateVariableProfile("WPLUX.Sec", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Sec", 0, 0, 1); //Min, Max, Schritt
