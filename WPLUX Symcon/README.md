@@ -46,19 +46,17 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-WPLUX.Sec     |    Float     |
-WPLUX.Imp    |     Float    |
-WPLUX.Typ    |     Integer   |
-WPLUX.Biv    |     Integer   |
+Es werden Variablen je nach Wahl der Werte erstellt.
 
 #### Profile
 
 Name   | Typ
 ------ | -------
-       |
-       |
+WPLUX.Sec |  Float  
+WPLUX.Imp |  Float    
+WPLUX.Typ |  Integer   
+WPLUX.Biv |  Integer   
+WPLUX.BZ  |  Integer 
 
 ### 6. WebFront
 

@@ -52,10 +52,17 @@ class WPLUXSymcon extends IPSModule
 		}
         if (!IPS_VariableProfileExists("WPLUX.BZ")) {
 			IPS_CreateVariableProfile("WPLUX.BZ", 1); //1 für Integer
-			IPS_SetVariableProfileValues("WPLUX.BZ", 1, 3, 1); //Min, Max, Schritt
+			IPS_SetVariableProfileValues("WPLUX.BZ", 0, 7, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.BZ", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.BZ", "", ""); //Präfix, Suffix
             IPS_SetVariableProfileAssociation("WPLUX.BZ", 0, "Heizen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 1, "Warmwasser", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 2, "Schwimmbad / Photovoltaik", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 3, "EVU", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 4, "Abtauen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 5, "Keine Anforderung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 6, "Heizen ext. Energiequelle", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.BZ", 7, "Kühlbetrieb ", "", -1);
 		}
     }
 
