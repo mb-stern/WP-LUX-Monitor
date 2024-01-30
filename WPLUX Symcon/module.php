@@ -101,6 +101,38 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.Men1", 6, "Verdichter heizt auf", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.Men1", 7, "Pumpenvorlauf ", "", -1);
         }
+        if (!IPS_VariableProfileExists("WPLUX.Men2")) {
+			IPS_CreateVariableProfile("WPLUX.Men2", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.Men2", 0, 1, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Men2", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Men2", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Men2", 0, "seit :", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men2", 1, "in : ", "", -1);
+        }
+        if (!IPS_VariableProfileExists("WPLUX.Men3")) {
+			IPS_CreateVariableProfile("WPLUX.Men3", 1); //1 für Integer
+			IPS_SetVariableProfileValues("WPLUX.Men3", 0, 17, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Men3", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Men3", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 0, "Heizbetrieb", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 1, "Keine Anforderung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 2, "Netz-Einschaltverzögerung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 3, "Schaltspielsperre", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 4, "Sperrzeit", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 5, "Brauchwasser", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 6, "Info Ausheizprogramm", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 7, "Abtauen", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 8, "Pumpenvorlauf", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 9, "Thermische Desinfektion", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 10, "", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 11, "Heizbetrieb", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 12, "Schwimmbad / Photovoltaik", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 13, "Heizen ext. Energiequelle", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 14, "Brauchwasser ext. Energiequelle", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 15, "", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 16, "Durchflussüberachung", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Men3", 17, "Zweiter Wärmeerzeuger 1 Betrieb ", "", -1);
+        }
     }
 
     public function Destroy()
@@ -260,8 +292,20 @@ class WPLUXSymcon extends IPSModule
                         return 0; // Boolean-Typ
 
                 case ($id == 117):
-                        if ($varid > 0) {
+                        if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Men1');
+                        }
+                        return 1; // Integer
+                        
+                case ($id == 118):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Men2');
+                        }
+                        return 1; // Integer
+
+                case ($id == 119):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Men3');
                         }
                         return 1; // Integer
                 /*
