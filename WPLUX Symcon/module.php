@@ -81,7 +81,7 @@ class WPLUXSymcon extends IPSModule
 		}
         if (!IPS_VariableProfileExists("WPLUX.Comf")) {
 			IPS_CreateVariableProfile("WPLUX.Comf", 0); //0 für Bool
-			IPS_SetVariableProfileValues("WPLUX.Comf", 0, 1, 1); //Min, Max, Schritt
+			IPS_SetVariableProfileValues("WPLUX.Comf", 0, 0, 1); //Min, Max, Schritt
             IPS_SetVariableProfileDigits("WPLUX.Comf", 0); //Nachkommastellen
 			IPS_SetVariableProfileText("WPLUX.Comf", "", ""); //Präfix, Suffix
             IPS_SetVariableProfileAssociation("WPLUX.Comf", 1, "nicht verbaut", "", -1);
