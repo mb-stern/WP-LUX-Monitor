@@ -131,6 +131,14 @@ class WPLUXSymcon extends IPSModule
             IPS_SetVariableProfileAssociation("WPLUX.Men3", 16, "Durchflussüberachung", "", -1);
             IPS_SetVariableProfileAssociation("WPLUX.Men3", 17, "Zweiter Wärmeerzeuger 1 Betrieb ", "", -1);
         }
+        if (!IPS_VariableProfileExists("WPLUX.Akt")) {
+			IPS_CreateVariableProfile("WPLUX.Akt", 0); //0 für Bool
+			IPS_SetVariableProfileValues("WPLUX.Akt", 0, 1, 1); //Min, Max, Schritt
+            IPS_SetVariableProfileDigits("WPLUX.Akt", 0); //Nachkommastellen
+			IPS_SetVariableProfileText("WPLUX.Akt", "", ""); //Präfix, Suffix
+            IPS_SetVariableProfileAssociation("WPLUX.Akt", 0, "inaktiv", "", -1);
+            IPS_SetVariableProfileAssociation("WPLUX.Akt", 1, "aktiv", "", -1);
+		}
     }
 
     public function Destroy()
@@ -241,7 +249,7 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 0; // Boolean-Typ
 
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120):
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
                         }
@@ -306,6 +314,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Men3');
                         }
                         return 1; // Integer
+
+                case ($id == 124 ):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Akt');
+                        }
+                        return 0; // Boolean-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {

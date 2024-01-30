@@ -60,6 +60,9 @@ WPLUX.Biv     |  Integer
 WPLUX.BZ      |  Integer 
 WPLUX.Comf    |  Bool 
 WPLUX.Men1    |  Integer
+WPLUX.Men2    |  Integer
+WPLUX.Men3    |  Integer
+WPLUX.Akt     |  Bool
 
 ### 6. WebFront
 
