@@ -241,7 +241,7 @@ class WPLUXSymcon extends IPSModule
 
                 case ($id == 116 ):
                         if ($varid) {
-                        IPS_SetVariableCustomProfile($varid, '~Switch');
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Comf');
                         }
                         return 0; // Boolean-Typ
                 /*
