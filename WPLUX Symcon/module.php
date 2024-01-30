@@ -227,7 +227,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
         switch ($id) {
         
-        ccase (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137):
+        case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137):
             return round($value * 0.1, 1);
         
         /*
