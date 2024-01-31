@@ -22,14 +22,8 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
-        //Variableprofile laden und erstellen
+        //Variableprofile erstellen
         require_once __DIR__ . '/variable.php';
-    }
-
-    public function Destroy()
-    {
-        //Never delete this line!
-        parent::Destroy();
     }
 
     public function ApplyChanges()
