@@ -122,7 +122,7 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 2; // Float-Typ
                 
-                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186):
+                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Switch');
                     }
@@ -164,7 +164,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case ($id >= 106 && $id <= 110):
+                case (($id >= 106 && $id <= 110) || ($id >= 217 && $id <= 221)):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
                         }
