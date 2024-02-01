@@ -122,7 +122,7 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 2; // Float-Typ
                 
-                case ($id >= 29 && $id <= 55):
+                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140)):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Switch');
                     }
