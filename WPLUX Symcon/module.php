@@ -220,9 +220,9 @@ class WPLUXSymcon extends IPSModule
 
                 case ($id == 183):
                         if ($varid) {
-                        IPS_SetVariableCustomProfile($varid, '~Valve');
+                        IPS_SetVariableCustomProfile($varid, '~Valve.F');
                         }
-                        return 1; // Integer
+                        return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
