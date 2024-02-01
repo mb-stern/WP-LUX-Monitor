@@ -200,7 +200,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 0; // Boolean-Typ
 
-                        ase ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165)|| ($id >= 168 && $id <= 169)):
+                        ase ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169)):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Volt');
                         }
