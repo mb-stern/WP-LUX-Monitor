@@ -289,11 +289,6 @@ class WPLUXSymcon extends IPSModule
             
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
-        //$value = $this->convertValueBasedOnID($value, $id);
-
-        // Debug senden
-        $this->SendDebug("ID : Wert nach Umrechnung", "".$id." : ".$value."", 0);
-
         // Überprüfen, ob die Variable bereits existiert
         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
