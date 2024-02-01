@@ -247,20 +247,13 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, '~Hertz');
                         }
                         return 2; // Float
-                /*
-            case ($id == 29):
+ 
+                default:
+                    // Standardprofil, falls keine spezifische Zuordnung gefunden wird
                     if ($varid > 0) {
-                        IPS_SetVariableCustomProfile($varid, '~Switch');
-                    }
-                    return 0; // Boolean-Typ
-                    */
-            
-            default:
-                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                if ($varid > 0) {
                     IPS_SetVariableCustomProfile($varid, '');
-                }
-                return 1; // Standardmäßig Integer-Typ
+                    }
+                    return 1; // Standardmäßig Integer-Typ
         }
     }
     
@@ -287,12 +280,6 @@ class WPLUXSymcon extends IPSModule
         case ($id >= 187 && $id <= 188):
                 return round($value * 0.01, 1);
         
-        /*
-        case ($id >= 29 && $id <= 55):
-            return boolval($value);
-        */    
-        
-        // Weitere Zuordnungen für andere 'id' hinzufügen
         default:
             return round($value * 1, 1); // Standardmäßig Konvertierung
         }
@@ -301,6 +288,9 @@ class WPLUXSymcon extends IPSModule
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         $value = $this->convertValueBasedOnID($value, $id);
+
+        // Debug senden
+        $this->SendDebug("ID : Wert nach Umrechnung", "".$id." : ".$value."", 0);
 
         // Überprüfen, ob die Variable bereits existiert
         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
