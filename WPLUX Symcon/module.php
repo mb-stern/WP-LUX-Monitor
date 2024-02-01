@@ -170,7 +170,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case ($id == 116 ):
+                case ($id == 116 || $id == 172 || $id == 174):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Comf');
                         }
@@ -194,7 +194,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case ($id == 124 || $id == 172 || $id == 174):
+                case ($id == 124):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Akt');
                         }
