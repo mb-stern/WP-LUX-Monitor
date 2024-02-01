@@ -18,7 +18,8 @@ Die Bedeutung den Typ der Varaibalen sind hier zu finden: https://loxwiki.atlass
 ### 1. Funktionsumfang
 
 * Abfrage der Istwerte aus der Luxtronic, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
-* Es werden nicht alle Werte augeschlüsselt, bei Bedarf ist hier ein eigenes Variabelprofil zu erstellen
+* Es werden nicht alle Werte aufgeschlüsselt, bei Bedarf ist hier ein eigenes Variabelprofil zu erstellen
+* Es werden je nach Wärmepumpe nicht alle Werte geliefert. Offensichtlich wird mit einer Software für die Lux alle Wärmepumentypen abgedeckt
 
 ### 2. Voraussetzungen
 
