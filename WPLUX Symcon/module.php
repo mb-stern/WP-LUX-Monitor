@@ -76,13 +76,11 @@ class WPLUXSymcon extends IPSModule
         socket_recv($socket,$Test,4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
         $Test = unpack('N*',$Test);
 
-        /*
         socket_recv($socket,$Test,4,MSG_WAITALL); // Status
         $Test = unpack('N*',$Test);
 
         socket_recv($socket,$Test,4,MSG_WAITALL); // Länge der nachfolgenden Werte
         $Test = unpack('N*',$Test);
-        */
 
         $JavaWerte = implode($Test);
 
