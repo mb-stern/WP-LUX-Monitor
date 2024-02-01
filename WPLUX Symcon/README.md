@@ -64,6 +64,7 @@ WPLUX.Men2    |  Integer
 WPLUX.Men3    |  Integer
 WPLUX.Akt     |  Bool
 WPLUX.Pres    |  Float
+WPLUX.Fan    |  Integer
 
 ### 6. WebFront
 

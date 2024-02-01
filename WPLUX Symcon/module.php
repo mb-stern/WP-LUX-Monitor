@@ -223,6 +223,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, '~Valve.F');
                         }
                         return 2; // Float-Typ
+
+                case ($id == 184):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.Fan');
+                        }
+                        return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {

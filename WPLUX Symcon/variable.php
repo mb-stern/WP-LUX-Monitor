@@ -123,3 +123,9 @@ if (!IPS_VariableProfileExists("WPLUX.Pres")) {
     IPS_SetVariableProfileDigits("WPLUX.Pres", 1); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Pres", "", " bar"); //Präfix, Suffix
 }
+if (!IPS_VariableProfileExists("WPLUX.Fan")) {
+    IPS_CreateVariableProfile("WPLUX.Fan", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Fan", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Fan", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Fan", "", " RPM"); //Präfix, Suffix
+}
