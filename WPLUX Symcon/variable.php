@@ -117,3 +117,9 @@ if (!IPS_VariableProfileExists("WPLUX.Akt")) {
     IPS_SetVariableProfileAssociation("WPLUX.Akt", 0, "inaktiv", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Akt", 1, "aktiv", "", -1);
 }
+if (!IPS_VariableProfileExists("WPLUX.Pres")) {
+    IPS_CreateVariableProfile("WPLUX.Pres", 2); //2 für Float
+    IPS_SetVariableProfileValues("WPLUX.Pres", 0, 0, 0.1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Pres", 1); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Pres", "", " bar"); //Präfix, Suffix
+}
