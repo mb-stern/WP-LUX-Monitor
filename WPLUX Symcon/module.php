@@ -246,7 +246,7 @@ class WPLUXSymcon extends IPSModule
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Hertz');
                         }
-                        return 1; // Integer
+                        return 2; // Float
                 /*
             case ($id == 29):
                     if ($varid > 0) {
