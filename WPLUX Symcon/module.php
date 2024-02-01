@@ -116,7 +116,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch (true) {
 
-                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144)):
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177)):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Temperature');
                     }
@@ -205,6 +205,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, '~Volt');
                         }
                         return 2; // Float-Typ
+
+                case ($id >= 178 && $id <= 179):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, '~Temperature.Difference');
+                        }
+                        return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
@@ -227,7 +233,7 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
         switch ($id) {
         
-        case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137):
+            case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179)):
             return round($value * 0.1, 1);
 
         case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165)|| ($id >= 168 && $id <= 169)):
