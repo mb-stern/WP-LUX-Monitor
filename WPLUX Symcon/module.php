@@ -96,10 +96,12 @@ class WPLUXSymcon extends IPSModule
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
         if (in_array($i, array_column($idListe, 'id'))) {
-        //$value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+        
+        // Werte umrechnen wenn nötig
+        $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
         // Debug senden
-        $this->SendDebug("ID : Wert nach Datenempfang", "".$i." : ".$value."", 0);
+        $this->SendDebug("ID : Wert nach Datenempfang und umrechnen", "".$i." : ".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = 'WP_' . $java_dataset[$i];
@@ -287,7 +289,7 @@ class WPLUXSymcon extends IPSModule
             
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
-        $value = $this->convertValueBasedOnID($value, $id);
+        //$value = $this->convertValueBasedOnID($value, $id);
 
         // Debug senden
         $this->SendDebug("ID : Wert nach Umrechnung", "".$id." : ".$value."", 0);
