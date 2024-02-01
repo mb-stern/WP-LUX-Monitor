@@ -241,6 +241,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Bet');
                         }
                         return 1; // Integer
+
+                case ($id == 231):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, '~Hertz');
+                        }
+                        return 1; // Integer
                 /*
             case ($id == 29):
                     if ($varid > 0) {
