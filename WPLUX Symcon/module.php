@@ -199,6 +199,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Akt');
                         }
                         return 0; // Boolean-Typ
+
+                case ($id == 147):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, '~Volt');
+                        }
+                        return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
@@ -223,6 +229,9 @@ class WPLUXSymcon extends IPSModule
         
         case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137):
             return round($value * 0.1, 1);
+
+        case ($id == 147):
+            return round($value * 0.01, 1);
         
         /*
         case ($id >= 29 && $id <= 55):
