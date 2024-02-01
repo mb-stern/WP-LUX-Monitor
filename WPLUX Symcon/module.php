@@ -95,12 +95,7 @@ class WPLUXSymcon extends IPSModule
 
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
-        if (in_array($i, array_column($idListe, 'id'))) 
-                
-        // Debug senden
-        $this->SendDebug("ID : Wert nach Datenempfang und umrechnen", "".$i." : ".$daten_raw[$i]."", 0);
-        
-        {
+        if (in_array($i, array_column($idListe, 'id'))) {
         
         // Werte umrechnen wenn nötig
         $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
