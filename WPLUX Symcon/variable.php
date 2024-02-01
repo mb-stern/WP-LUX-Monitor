@@ -129,22 +129,22 @@ if (!IPS_VariableProfileExists("WPLUX.Fan")) {
     IPS_SetVariableProfileDigits("WPLUX.Fan", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Fan", "", " RPM"); //Präfix, Suffix
 }
-if (!IPS_VariableProfileExists("WPLUX.Sec")) {
-    IPS_CreateVariableProfile("WPLUX.Sec", 1); //1 für Integer
-    IPS_SetVariableProfileValues("WPLUX.Sec", 0, 12, 1); //Min, Max, Schritt
-    IPS_SetVariableProfileDigits("WPLUX.Sec", 0); //Nachkommastellen
-    IPS_SetVariableProfileText("WPLUX.Sec", "", ""); //Präfix, Suffix
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 0, "Aus", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 1, "Kühlung", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 2, "Heizung", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 3, "Störung", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 4, "Übergang", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 5, "Abtauen", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 6, "Warte", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 7, "Warte", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 8, "Übergang", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 9, "Stop", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 10, "Manuell ", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 11, "Simulation Start", "", -1);
-    IPS_SetVariableProfileAssociation("WPLUX.Sec", 12, "EVU Sperre", "", -1);
+if (!IPS_VariableProfileExists("WPLUX.Bet")) {
+    IPS_CreateVariableProfile("WPLUX.Bet", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Bet", 0, 12, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Bet", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Bet", "", ""); //Präfix, Suffix
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 0, "Aus", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 1, "Kühlung", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 2, "Heizung", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 3, "Störung", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 4, "Übergang", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 5, "Abtauen", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 6, "Warte", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 7, "Warte", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 8, "Übergang", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 9, "Stop", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 10, "Manuell ", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 11, "Simulation Start", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Bet", 12, "EVU Sperre", "", -1);
 }
