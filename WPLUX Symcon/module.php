@@ -122,7 +122,7 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 2; // Float-Typ
                 
-                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182):
+                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186):
                     if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Switch');
                     }
@@ -229,6 +229,12 @@ class WPLUXSymcon extends IPSModule
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Fan');
                         }
                         return 1; // Integer
+
+                case ($id >= 187 && $id <= 188):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'Electricity');
+                        }
+                        return 2; // Float-Typ
                 /*
             case ($id == 29):
                     if ($varid > 0) {
@@ -264,6 +270,9 @@ class WPLUXSymcon extends IPSModule
                 return round($value * 0.01, 1);
 
         case ($id == 183):
+                return round($value * 0.01, 1);
+
+        case ($id >= 187 && $id <= 188):
                 return round($value * 0.01, 1);
         
         /*
