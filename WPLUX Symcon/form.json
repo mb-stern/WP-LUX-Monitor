@@ -53,19 +53,32 @@
                 "onDelete": "IPS_RequestAction($id, 'DelHostVariable', $HostVariables['ident']);",
                 "loadValuesFromConfiguration": false,
                 "sort": {
-                    "column": "id",
+                    "column": "name",
                     "direction": "ascending"
                 },
                 "columns": [
                     {
                         "name": "ident",
-                        "caption": "Id",
+                        "caption": "Ident",
+                        "visible": false,
                         "save": true
                     },
                     {
                         "name": "address",
                         "caption": "Address",
                         "width": "200px",
+                        "save": false
+                    },
+                    {
+                        "name": "host",
+                        "caption": "Hostname",
+                        "width": "300px",
+                        "save": false
+                    },
+                    {
+                        "name": "name",
+                        "caption": "Variable name",
+                        "width": "300px",
                         "save": false
                     },
                     {
