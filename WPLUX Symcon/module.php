@@ -38,6 +38,20 @@ class WPLUXSymcon extends IPSModule
         $this->Update();
     }
 
+    public function GetConfigurationForm()
+{
+    $elements = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+
+    // Hier die aktuelle Liste aus der Property laden
+    $javaDataList = json_decode($this->ReadPropertyString('JavaDatenListe'), true);
+
+    // Die Werte der Listenelemente aktualisieren
+    $elements[4]['values'] = $javaDataList;
+
+    return json_encode(['elements' => $elements]);
+}
+
+
     public function Update()
     {
         //Verbindung zur Lux
@@ -252,6 +266,8 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 1; // Standardmäßig Integer-Typ
         }
+
+        $this->WritePropertyString('JavaDatenListe', json_encode($javaDataList));
     }
     
     private function convertValueBasedOnID($value, $id)
