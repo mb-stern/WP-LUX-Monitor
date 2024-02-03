@@ -66,7 +66,7 @@ class WPLUXSymcon extends IPSModule
                 'isChecked' => in_array($id, $selectedIDs),
             ];
         }
-        $form['elements'][5]['items'][0]['options'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
+        $form['elements'][1]['items'][0]['options'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
 
         return json_encode($form);
     }
