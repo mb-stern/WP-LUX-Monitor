@@ -38,13 +38,11 @@
       "caption": "Sekunden"
     },
     {
-      "type": "ExpansionPanel",
-      "caption": "Auswahl der zu erstellenden Variablen",
-      "items": [
+      "elements": [
           {
               "type": "CheckBox",
-              "name": "Checkbox_1",
-              "caption": "ID: 1 - Wert 1"
+              "name": "Checkbox_{id}",
+              "caption": "ID: {id} - {value}"
           }
       ]
   }

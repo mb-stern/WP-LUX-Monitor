@@ -19,9 +19,6 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
-        // Hinzufügen der Checkboxen für die ausgewählten Werte
-        $this->RegisterPropertyString('SelectedIDs', '');
-
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
@@ -39,64 +36,34 @@ class WPLUXSymcon extends IPSModule
 
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
-
-        // Hinzufügen der Checkboxen für die ausgewählten Werte
-        $selectedIDs = $this->ReadPropertyString('SelectedIDs');
-        if (empty($selectedIDs)) {
-        $this->UpdateSelectedIDs(); // Erste Aktualisierung beim Anlegen des Moduls
-        }
     }
 
-    public function GetConfigurationForm()
-    {
-        $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-    
-        // Namen der Variablen laden
-        require_once __DIR__ . '/java_daten.php';
-    
-        // Hinzufügen der Checkboxen für die ausgewählten Werte
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-        $selectedIDs = json_decode($this->ReadPropertyString('SelectedIDs'), true);
-    
-        $options = [];
-        foreach ($idListe as $idItem) {
-            $id = $idItem['id'];
-            $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
-    
-            $options[] = [
-                'type'    => 'CheckBox',
-                'name'    => "Checkbox_$id",
-                'caption' => "ID: $id - $name",
-                'visible' => true,
-                'enabled' => true,
-                'checked' => in_array($id, $selectedIDs),
-            ];
-        }
-    
-        $form['elements'][1]['items'][0]['items'][0]['items'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
-    
-        return json_encode($form);
+    public function CreateConfigurationForm()
+{
+    // Lade die Daten aus java_daten.php
+    require_once __DIR__ . '/java_daten.php';
+
+    // Erstelle das Grundgerüst für das Konfigurationsformular
+    $form = json_decode('{"elements": []}', true);
+
+    // Füge dynamisch Elemente basierend auf java_daten.php hinzu
+    foreach ($java_dataset as $id => $text) {
+        $form["elements"][] = [
+            "type" => "CheckBox",
+            "name" => "Checkbox_" . ($id + 1),
+            "caption" => "ID: " . ($id + 1) . " - " . $text
+        ];
     }
-    private function UpdateSelectedIDs()
-    {
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-        $selectedIDs = [];
-    
-        foreach ($idListe as $idItem) {
-            $id = $idItem['id'];
-            $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
-    
-            $checkboxProperty = "Checkbox_$id"; // Eigenschaft für die Checkbox
-            if (property_exists($this, $checkboxProperty)) {
-                $isChecked = $this->$checkboxProperty;
-                if ($isChecked) {
-                    $selectedIDs[] = $id;
-                }
-            }
-        }
-    
-        IPS_SetProperty($this->InstanceID, 'SelectedIDs', json_encode($selectedIDs));
-    }    
+
+    // Setze das Konfigurationsformular
+    IPS_SetProperty($this->InstanceID, 'configuration', json_encode($form));
+}
+
+public function GetConfigurationForm()
+{
+    $this->CreateConfigurationForm();
+    return parent::GetConfigurationForm();
+}
 
     public function Update()
     {
