@@ -45,7 +45,7 @@
         "items": [
             {
                 "type": "List",
-                "name": "HostVariables",
+                "name": "IDListe",
                 "caption": "Istwert",
                 "rowCount": 30,
                 "add": false,
@@ -58,7 +58,7 @@
                 },
                 "columns": [
                     {
-                        "name": "IDListe",
+                        "name": "id",
                         "caption": "Ident",
                         "visible": false,
                         "save": true
