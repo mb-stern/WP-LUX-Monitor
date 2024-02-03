@@ -65,13 +65,13 @@
                     },
                     {
                         "name": "name",
-                        "caption": "Variable name",
+                        "caption": "Istwert",
                         "width": "600px",
                         "save": false
                     },
                     {
                         "name": "use",
-                        "caption": "used",
+                        "caption": "verwendet",
                         "width": "75px",
                         "save": true,
                         "add": false,
