@@ -50,30 +50,33 @@ class WPLUXSymcon extends IPSModule
     public function GetConfigurationForm()
     {
         $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-        
+    
+        // Namen der Variablen laden
+        require_once __DIR__ . '/java_daten.php';
+    
         // Hinzufügen der Checkboxen für die ausgewählten Werte
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
         $selectedIDs = json_decode($this->ReadPropertyString('SelectedIDs'), true);
-        if ($selectedIDs === null) {
-            $selectedIDs = [];
-        }
-
+    
         $options = [];
         foreach ($idListe as $idItem) {
             $id = $idItem['id'];
             $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
-
+    
             $options[] = [
-                'label' => "ID: $id - $name",
-                'value' => $id,
-                'isChecked' => in_array($id, $selectedIDs),
+                'type'    => 'CheckBox',
+                'name'    => "Checkbox_$id",
+                'caption' => "ID: $id - $name",
+                'visible' => true,
+                'enabled' => true,
+                'checked' => in_array($id, $selectedIDs),
             ];
         }
-        $form['elements'][1]['items'][0]['options'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
-
+    
+        $form['elements'][1]['items'][0]['items'][0]['items'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
+    
         return json_encode($form);
     }
-
     private function UpdateSelectedIDs()
     {
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
