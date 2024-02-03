@@ -39,18 +39,21 @@ class WPLUXSymcon extends IPSModule
     }
 
     public function GetConfigurationForm()
-{
-    $elements = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
-
-    // Hier die aktuelle Liste aus der Property laden
-    $javaDataList = json_decode($this->ReadPropertyString('JavaDatenListe'), true);
-
-    // Die Werte der Listenelemente aktualisieren
-    $elements[4]['values'] = $javaDataList;
-
-    return json_encode(['elements' => $elements]);
-}
-
+    {
+        $jsonForm = '{
+            "elements": [
+                {
+                    "type": "TextField",
+                    "name": "exampleField",
+                    "caption": "Example Field"
+                }
+                // ... weitere Konfigurationselemente ...
+            ]
+        }';
+    
+        return json_decode($jsonForm, true);
+    }
+    
 
     public function Update()
     {
