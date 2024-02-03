@@ -22,58 +22,25 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
-        // Array für Java-Werte im Konfigurationsformular registrieren
-        $this->RegisterPropertyString('JavaValues', '[]');
-
-        // Variableprofile erstellen
+        //Variableprofile erstellen
         require_once __DIR__ . '/variable.php';
     }
 
     public function ApplyChanges()
     {
-        // Überprüfe, ob das Formular gesendet wurde
-        if ($_IPS['SENDER'] == 'WebFront') {
-            // Lese die ausgewählten Java-Werte
-            $selectedJavaValues = json_decode($this->ReadPropertyString('JavaValues'), true);
-
-            // Erstelle oder aktualisiere Variablen basierend auf den ausgewählten Werten
-            foreach ($selectedJavaValues as $selectedValue) {
-                $id = $selectedValue['value'];
-                $value = $java_dataset[$id]; // Der eigentliche Wert aus der java_daten.php
-
-                // Hier kannst du die Variable erstellen oder aktualisieren, basierend auf $id und $value
-                $this->CreateOrUpdateVariable($id, $value);
-            }
-        }
+        //Never delete this line!
+        parent::ApplyChanges();
 
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
-
-        // Führe die restlichen Anpassungen durch
-        parent::ApplyChanges();
     }
 
-    public function GetJavaValues()
-    {
-        // Lese die Java-Werte aus java_daten.php
-        require_once __DIR__ . '/java_daten.php';
-
-        $options = [];
-
-        // Erstelle ein Array mit den Werten aus der java_dataset-Variable
-        foreach ($java_dataset as $id => $value) {
-            $options[] = [
-                'name' => 'JavaValue_' . $id,
-                'type' => 'CheckBox',
-                'caption' => $value,
-            ];
-        }
-
-        return $options;
-    }
+            // GetJavaValues Funktion
+            $javaValues = $this->GetJavaValues();
+            $this->SendDebug("Java Values", json_encode($javaValues), 0);
 
     public function Update()
     {
@@ -372,5 +339,13 @@ class WPLUXSymcon extends IPSModule
             // Variable löschen
             IPS_DeleteVariable($variableID);
         }
+    }
+
+    private function GetJavaValues()
+    {
+        // Hier die Funktion, die die Java-Werte abruft und zurückgibt
+        // Beispiel:
+        $javaValues = array("JavaWert1" => "Wert1", "JavaWert2" => "Wert2");
+        return $javaValues;
     }
 }
