@@ -10,7 +10,7 @@
         },
         {
           "type": "Label",
-          "label": "Mit der aktuellen Varsion des Moduls ist kein Eingriff in die Steuerung möglich."
+          "label": "Mit der aktuellen Version des Moduls ist kein Eingriff in die Steuerung möglich."
         },
         {
           "type": "Label",
@@ -44,19 +44,26 @@
       "rowCount": 5,
       "add": true,
       "delete": true,
-      "columns": 
-      [
-          {
-              "name": "id",
-              "caption": "ID des Wertes",
-              "width": "150",
-              "add": 0,
-              "edit": 
-              {
-                  "type": "NumberSpinner"
-              }
+      "columns": [
+        {
+          "name": "id",
+          "caption": "ID des Wertes",
+          "width": "150",
+          "add": 0,
+          "edit": {
+            "type": "NumberSpinner"
           }
+        },
+        {
+          "name": "Istwert",
+          "caption": "Istwert",
+          "width": "600",
+          "add": "",
+          "edit": {
+            "type": "TextBox"
+          }
+        }
       ]
-  }
-]
+    }
+  ]
 }
