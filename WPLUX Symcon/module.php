@@ -9,6 +9,14 @@ class WPLUXSymcon extends IPSModule
         IPS_LogMessage(__CLASS__, $Message);
     }
 
+    private function GetJavaValues()
+    {
+        // Hier die Funktion, die die Java-Werte abruft und zurückgibt
+        // Beispiel:
+        $javaValues = array("JavaWert1" => "Wert1", "JavaWert2" => "Wert2");
+        return $javaValues;
+    }
+
     public function Create()
     {
         //Never delete this line!
@@ -37,10 +45,6 @@ class WPLUXSymcon extends IPSModule
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
     }
-
-            // GetJavaValues Funktion
-            $javaValues = $this->GetJavaValues();
-            $this->SendDebug("Java Values", json_encode($javaValues), 0);
 
     public function Update()
     {
@@ -96,6 +100,10 @@ class WPLUXSymcon extends IPSModule
 
         //socket wieder schließen
         socket_close($socket);
+
+               // GetJavaValues Funktion
+               $javaValues = $this->GetJavaValues();
+               $this->SendDebug("Java Values", json_encode($javaValues), 0);
 
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) {
@@ -339,13 +347,5 @@ class WPLUXSymcon extends IPSModule
             // Variable löschen
             IPS_DeleteVariable($variableID);
         }
-    }
-
-    private function GetJavaValues()
-    {
-        // Hier die Funktion, die die Java-Werte abruft und zurückgibt
-        // Beispiel:
-        $javaValues = array("JavaWert1" => "Wert1", "JavaWert2" => "Wert2");
-        return $javaValues;
     }
 }
