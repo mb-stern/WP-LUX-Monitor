@@ -53,7 +53,7 @@
                 "onDelete": "IPS_RequestAction($id, 'DelHostVariable', $HostVariables['ident']);",
                 "loadValuesFromConfiguration": false,
                 "sort": {
-                    "column": "name",
+                    "column": "ident",
                     "direction": "ascending"
                 },
                 "columns": [
