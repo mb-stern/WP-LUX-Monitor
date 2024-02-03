@@ -38,13 +38,8 @@
       "caption": "Sekunden"
     },
     {
-      "elements": [
-          {
-              "type": "CheckBox",
-              "name": "Checkbox_{id}",
-              "caption": "ID: {id} - {value}"
-          }
-      ]
+      "type": "Dummy",
+      "name": "CheckboxContainer"
   }
 ]
 }

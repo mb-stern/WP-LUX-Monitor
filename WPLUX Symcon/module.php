@@ -85,6 +85,34 @@ public function GetConfigurationForm()
         // Lese die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
+          // Erstelle ein leeres Array für die Checkbox-Elemente
+    $checkboxElements = [];
+
+    // Iteriere durch die ID-Liste und erstelle Checkbox-Elemente
+    foreach ($idListe as $idItem) {
+        $checkboxElement = [
+            "type" => "CheckBox",
+            "name" => "Checkbox_" . $idItem['id'],
+            "caption" => "ID: " . $idItem['id'] . " - " . $java_dataset[$idItem['id']]
+        ];
+
+        // Füge das Checkbox-Element zum Array hinzu
+        $checkboxElements[] = $checkboxElement;
+    }
+
+    // Erstelle das JSON-Array für die Checkbox-Elemente
+    $checkboxArray = [
+        "elements" => $checkboxElements
+    ];
+
+    // Konvertiere das JSON-Array in einen JSON-String
+    $checkboxJson = json_encode($checkboxArray, JSON_PRETTY_PRINT);
+
+    // Speichere das Checkbox-JSON als Property
+    IPS_SetProperty($this->InstanceID, 'configuration', $checkboxJson);
+    IPS_ApplyChanges($this->InstanceID);
+
+
         // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
