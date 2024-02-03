@@ -37,8 +37,10 @@ class WPLUXSymcon extends IPSModule
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
 
-                // Lese die ID-Liste
-                $idListe = $this->ReadPropertyArray('JavaDatenListe');
+   // Lese die ID-Liste
+   $javaDatenListeJson = $this->ReadPropertyString('JavaDatenListe');
+   $javaDatenListe = json_decode($javaDatenListeJson, true);
+   
     }
 
     public function Update()
