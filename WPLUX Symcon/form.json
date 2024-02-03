@@ -60,9 +60,10 @@
           "width": "150",
           "add": "",
           "edit": {
-            "type": "String"
+            "type": "ValidationTextBox"
           }
-        }        
+        }
+        
       ]
     }
   ]
