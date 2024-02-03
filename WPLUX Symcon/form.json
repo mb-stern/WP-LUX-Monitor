@@ -10,7 +10,7 @@
         },
         {
           "type": "Label",
-          "label": "Mit der aktuellen Version des Moduls ist kein Eingriff in die Steuerung möglich."
+          "label": "Mit der aktuellen Varsion des Moduls ist kein Eingriff in die Steuerung möglich."
         },
         {
           "type": "Label",
@@ -38,40 +38,25 @@
       "caption": "Sekunden"
     },
     {
-      "elements": [
-        {
-          "type": "Configurator",
-          "name": "JavaValues",
-          "caption": "Select Java Values",
-          "rowCount": 15,
-          "add": false,
-          "delete": false,
-          "sort": false,
-          "columns": [
-            {
-              "caption": "ID",
-              "name": "value",
-              "width": "auto",
-              "edit": {
-                "type": "ValidationTextBox"
+      "type": "List",
+      "name": "IDListe",
+      "caption": "Überwachte ID's",
+      "rowCount": 5,
+      "add": true,
+      "delete": true,
+      "columns": 
+      [
+          {
+              "name": "id",
+              "caption": "ID des Wertes",
+              "width": "150",
+              "add": 0,
+              "edit": 
+              {
+                  "type": "NumberSpinner"
               }
-            },
-            {
-              "caption": "Java Value",
-              "name": "JavaValue",
-              "width": "auto",
-              "edit": {
-                "type": "ValidationTextBox"
-              }
-            }
-          ]
-        }
+          }
       ]
-    },
-    {
-      "type": "Button",
-      "caption": "Hilfe",
-      "onClick": "echo 'Weitere Informationen finden Sie unter: https://deine-dokumentation-url';"
-    }
-  ]
+  }
+]
 }
