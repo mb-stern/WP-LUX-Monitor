@@ -58,7 +58,7 @@
                 },
                 "columns": [
                     {
-                        "name": "ident",
+                        "name": "IDListe",
                         "caption": "Ident",
                         "visible": false,
                         "save": true
