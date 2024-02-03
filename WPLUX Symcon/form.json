@@ -38,23 +38,13 @@
       "caption": "Sekunden"
     },
     {
-      "type": "List",
-      "name": "IDListe",
-      "caption": "Überwachte ID's",
-      "rowCount": 5,
-      "add": true,
-      "delete": true,
-      "columns": 
-      [
+      "type": "ExpansionPanel",
+      "caption": "Auswahl der zu erstellenden Variablen",
+      "items": [
           {
-              "name": "id",
-              "caption": "ID des Wertes",
-              "width": "150",
-              "add": 0,
-              "edit": 
-              {
-                  "type": "NumberSpinner"
-              }
+              "type": "CheckBox",
+              "name": "Checkbox_1",
+              "caption": "ID: 1 - Wert 1"
           }
       ]
   }

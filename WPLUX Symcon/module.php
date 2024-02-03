@@ -19,6 +19,9 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
+        // Hinzufügen der Checkboxen für die ausgewählten Werte
+        $this->RegisterPropertyString('SelectedIDs', '');
+
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
@@ -36,8 +39,56 @@ class WPLUXSymcon extends IPSModule
 
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
+
+        // Hinzufügen der Checkboxen für die ausgewählten Werte
+        $selectedIDs = $this->ReadPropertyString('SelectedIDs');
+        if (empty($selectedIDs)) {
+        $this->UpdateSelectedIDs(); // Erste Aktualisierung beim Anlegen des Moduls
+        }
     }
 
+    public function GetConfigurationForm()
+    {
+        $form = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
+        
+        // Hinzufügen der Checkboxen für die ausgewählten Werte
+        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+        $selectedIDs = json_decode($this->ReadPropertyString('SelectedIDs'), true);
+
+        $options = [];
+        foreach ($idListe as $idItem) {
+            $id = $idItem['id'];
+            $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
+
+            $options[] = [
+                'label' => "ID: $id - $name",
+                'value' => $id,
+                'isChecked' => in_array($id, $selectedIDs),
+            ];
+        }
+        $form['elements'][4]['values'] = $options; // Annahme, dass die Checkboxen in der 5. Gruppe sind
+
+        return json_encode($form);
+    }
+
+    private function UpdateSelectedIDs()
+    {
+        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+        $selectedIDs = [];
+
+        foreach ($idListe as $idItem) {
+            $id = $idItem['id'];
+            $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
+
+            $isChecked = $this->ReadPropertyBoolean("Checkbox_$id");
+            if ($isChecked) {
+                $selectedIDs[] = $id;
+            }
+        }
+
+        $this->WritePropertyString('SelectedIDs', json_encode($selectedIDs));
+    }
+}
     public function Update()
     {
         //Verbindung zur Lux
