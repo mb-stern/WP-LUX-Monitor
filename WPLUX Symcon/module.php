@@ -89,7 +89,7 @@ class WPLUXSymcon extends IPSModule
             }
         }
     
-        $this->WritePropertyString('SelectedIDs', json_encode($selectedIDs));
+        IPS_SetProperty($this->InstanceID, 'SelectedIDs', json_encode($selectedIDs));
     }    
 
     public function Update()
