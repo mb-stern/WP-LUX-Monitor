@@ -38,19 +38,35 @@
         "caption": "Sekunden"
       },
       {
-        "type": "ExpansionPanel",
-        "caption": "Auswahl der Java-Werte",
-        "items": [
+        "elements": [
             {
-                "type": "CheckBox",
+                "type": "Configurator",
                 "name": "JavaValues",
-                "caption": "Java-Werte auswählen",
-                "options": {
-                    "values": "WPLUXSymcon_GetJavaValues",
-                    "rowCount": 10
-                }
+                "caption": "Select Java Values",
+                "rowCount": 15,
+                "add": false,
+                "delete": false,
+                "sort": false,
+                "columns": [
+                    {
+                        "caption": "ID",
+                        "name": "value",
+                        "width": "auto",
+                        "edit": {
+                            "type": "ValidationTextBox"
+                        }
+                    },
+                    {
+                        "caption": "Java Value",
+                        "name": "JavaValue",
+                        "width": "auto",
+                        "edit": {
+                            "type": "ValidationTextBox"
+                        }
+                    }
+                ]
             }
         ]
     }
-]
+  ]
 }

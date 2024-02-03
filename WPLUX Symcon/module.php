@@ -22,10 +22,10 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
-        // Checkbox für Java-Werte im Konfigurationsformular registrieren
+        // Array für Java-Werte im Konfigurationsformular registrieren
         $this->RegisterPropertyString('JavaValues', '[]');
 
-        //Variableprofile erstellen
+        // Variableprofile erstellen
         require_once __DIR__ . '/variable.php';
     }
 
@@ -54,6 +54,25 @@ class WPLUXSymcon extends IPSModule
 
         // Führe die restlichen Anpassungen durch
         parent::ApplyChanges();
+    }
+
+    public function GetJavaValues()
+    {
+        // Lese die Java-Werte aus java_daten.php
+        require_once __DIR__ . '/java_daten.php';
+
+        $options = [];
+
+        // Erstelle ein Array mit den Werten aus der java_dataset-Variable
+        foreach ($java_dataset as $id => $value) {
+            $options[] = [
+                'name' => 'JavaValue_' . $id,
+                'type' => 'CheckBox',
+                'caption' => $value,
+            ];
+        }
+
+        return $options;
     }
 
     public function Update()
