@@ -72,23 +72,26 @@ class WPLUXSymcon extends IPSModule
     }
 
     private function UpdateSelectedIDs()
-    {
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-        $selectedIDs = [];
+{
+    $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+    $selectedIDs = [];
 
-        foreach ($idListe as $idItem) {
-            $id = $idItem['id'];
-            $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
+    foreach ($idListe as $idItem) {
+        $id = $idItem['id'];
+        $name = isset($java_dataset[$id]) ? $java_dataset[$id] : "Unbekannt";
 
-            $isChecked = $this->ReadPropertyBoolean("Checkbox_$id");
+        $checkboxProperty = "Checkbox_$id"; // Eigenschaft für die Checkbox
+        if (property_exists($this, $checkboxProperty)) {
+            $isChecked = $this->$checkboxProperty;
             if ($isChecked) {
                 $selectedIDs[] = $id;
             }
         }
-
-        $this->WritePropertyString('SelectedIDs', json_encode($selectedIDs));
     }
-    
+
+    $this->WritePropertyString('SelectedIDs', json_encode($selectedIDs));
+}
+
     public function Update()
     {
         //Verbindung zur Lux
