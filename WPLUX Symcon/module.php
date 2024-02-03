@@ -54,6 +54,9 @@ class WPLUXSymcon extends IPSModule
         // Hinzufügen der Checkboxen für die ausgewählten Werte
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
         $selectedIDs = json_decode($this->ReadPropertyString('SelectedIDs'), true);
+        if ($selectedIDs === null) {
+            $selectedIDs = [];
+        }
 
         $options = [];
         foreach ($idListe as $idItem) {
