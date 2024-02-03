@@ -19,6 +19,8 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
+        $this->RegisterPropertyString('JavaDatenListe', '[]');
+
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
@@ -40,7 +42,7 @@ class WPLUXSymcon extends IPSModule
    // Lese die ID-Liste
    $javaDatenListeJson = $this->ReadPropertyString('JavaDatenListe');
    $javaDatenListe = json_decode($javaDatenListeJson, true);
-   
+
     }
 
     public function Update()
