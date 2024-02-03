@@ -88,7 +88,7 @@ class WPLUXSymcon extends IPSModule
 
         $this->WritePropertyString('SelectedIDs', json_encode($selectedIDs));
     }
-}
+    
     public function Update()
     {
         //Verbindung zur Lux
