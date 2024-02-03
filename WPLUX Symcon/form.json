@@ -47,7 +47,7 @@
                 "type": "List",
                 "name": "IDListe",
                 "caption": "Istwert",
-                "rowCount": 30,
+                "rowCount": 20,
                 "add": false,
                 "delete": true,
                 "onDelete": "IPS_RequestAction($id, 'DelHostVariable', $HostVariables['ident']);",
