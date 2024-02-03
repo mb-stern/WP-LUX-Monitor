@@ -38,8 +38,29 @@
       "caption": "Sekunden"
     },
     {
-      "type": "Dummy",
-      "name": "CheckboxContainer"
+      "type": "List",
+      "name": "JavaDatenListe",
+      "caption": "Java Daten",
+      "rowCount": 10,
+      "add": "Hinzufügen",
+      "delete": true,
+      "columns": [
+          {
+              "caption": "ID",
+              "name": "id",
+              "width": "30px",
+              "add": 0,
+              "edit": "readonly"
+          },
+          {
+              "caption": "Wert",
+              "name": "Wert",
+              "width": "auto",
+              "edit": {
+                  "type": "ValidationTextBox"
+              }
+          }
+      ]
   }
 ]
 }
