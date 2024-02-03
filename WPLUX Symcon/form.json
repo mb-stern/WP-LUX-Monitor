@@ -39,47 +39,17 @@
       },
       {
         "type": "ExpansionPanel",
-        "name": "HostvariablesPanel",
-        "caption": "Werte der Luxtronic",
-        "onClick": "",
+        "caption": "Auswahl der Java-Werte",
         "items": [
             {
-                "type": "List",
-                "name": "IDListe",
-                "caption": "Istwert",
-                "rowCount": 20,
-                "add": false,
-                "delete": true,
-                "onDelete": "IPS_RequestAction($id, 'DelHostVariable', $HostVariables['ident']);",
-                "loadValuesFromConfiguration": false,
-                "sort": {
-                    "column": "name",
-                    "direction": "ascending"
-                },
-                "columns": [
-                    {
-                        "name": "id",
-                        "caption": "Ident",
-                        "visible": false,
-                        "save": true
-                    },
-                    {
-                        "name": "name",
-                        "caption": "Istwert",
-                        "width": "600px",
-                        "save": false
-                    },
-                    {
-                        "name": "use",
-                        "caption": "verwendet",
-                        "width": "100px",
-                        "save": true,
-                        "add": false,
-                        "edit": {
-                            "type": "CheckBox"
-                        }
-                    }
-                ]
+                "type": "CheckBox",
+                "name": "SelectedJavaValues",
+                "caption": "Java-Werte auswählen",
+                "options": {
+                    "values": "WPLUXSymcon_GetJavaValues",
+                    "columnNames": ["id", "name", "checked"],
+                    "rowCount": 10
+                }
             }
         ]
     }
