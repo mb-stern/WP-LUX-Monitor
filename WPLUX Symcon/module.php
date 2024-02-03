@@ -16,7 +16,7 @@ class WPLUXSymcon extends IPSModule
 
         $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
-        $this->RegisterPropertyString('JavaDatenListe', '[]');
+        $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
         // Timer für Aktualisierung registrieren
@@ -38,32 +38,6 @@ class WPLUXSymcon extends IPSModule
         $this->Update();
     }
 
-    public function GetConfigurationForm()
-    {
-        $filePath = __DIR__ . '/form.json';
-        
-        if (file_exists($filePath)) {
-            $jsonForm = file_get_contents($filePath);
-    
-            if ($jsonForm === false) {
-                $this->Log('Fehler beim Laden der Datei ' . $filePath);
-                return false;
-            }
-    
-            $decodedForm = json_decode($jsonForm, true);
-    
-            if ($decodedForm === null) {
-                $this->Log('Fehler beim Dekodieren des JSON in der Datei ' . $filePath);
-                return false;
-            }
-    
-            return $decodedForm;
-        } else {
-            $this->Log('Die Datei ' . $filePath . ' existiert nicht.');
-            return false;
-        }
-    }
-    
     public function Update()
     {
         //Verbindung zur Lux
@@ -74,8 +48,11 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Lade die Liste aus der JavaDatenListe
-        $javaDataList = json_decode($this->ReadPropertyString('JavaDatenListe'), true);
+        // Namen der Variablen laden
+        require_once __DIR__ . '/java_daten.php';
+
+        // Lese die ID-Liste
+        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
         // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
@@ -117,23 +94,26 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
 
         // Werte anzeigen
-        foreach ($javaDataList as $javaData) {
-            $id = $javaData['id'];
-            $wert = $javaData['Wert'];
-            // Werte umrechnen wenn nötig
-            $value = $this->convertValueBasedOnID($daten_raw[$id], $id);
+        for ($i = 0; $i < $JavaWerte; ++$i) {
+        if (in_array($i, array_column($idListe, 'id'))) {
+        
+        // Werte umrechnen wenn nötig
+        $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
-            // Debug senden
-            $this->SendDebug("ID : Wert nach Empfang", "".$id." : ".$daten_raw[$id]."", 0);
-            $this->SendDebug("ID : Wert nach umrechnen", "".$id." : ".$value."", 0);
+        // Debug senden
+        $this->SendDebug("ID : Wert nach Empfang", "".$i." : ".$daten_raw[$i]."", 0);
+        $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
 
-            // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-            $ident = 'WP_' . $wert;
-            $varid = $this->CreateOrUpdateVariable($ident, $value, $id);
+        // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+        $ident = 'WP_' . $java_dataset[$i];
+        $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+        } else {
+        // Variable löschen, da sie nicht mehr in der ID-Liste ist
+        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+            }
         }
     }
                 
-            
     private function AssignVariableProfilesAndType($varid, $id)
     {
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
@@ -278,8 +258,6 @@ class WPLUXSymcon extends IPSModule
                     }
                     return 1; // Standardmäßig Integer-Typ
         }
-
-        $this->WritePropertyString('JavaDatenListe', json_encode($javaDataList));
     }
     
     private function convertValueBasedOnID($value, $id)
@@ -311,51 +289,51 @@ class WPLUXSymcon extends IPSModule
     }
             
     private function CreateOrUpdateVariable($ident, $value, $id)
-{
-    // Überprüfen, ob die Variable bereits existiert
-    $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+    {
+        // Überprüfen, ob die Variable bereits existiert
+        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
-    if ($existingVarID === false) {
-        // Variable existiert nicht, also erstellen
-        $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-        IPS_SetParent($varid, $this->InstanceID);
-        IPS_SetIdent($varid, $ident);
-        IPS_SetName($varid, $ident);
-        SetValue($varid, $value);
-        IPS_SetPosition($varid, $id);
-
-        // Hier die Methode aufrufen, um das Profil zuzuweisen
-        $this->AssignVariableProfilesAndType($varid, $id);
-    } else {
-        // Variable existiert, also aktualisieren
-        $varid = $existingVarID;
-        // Überprüfen, ob der Variablentyp stimmt
-        if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
-            // Variablentyp stimmt nicht überein, also Variable neu erstellen
-            IPS_DeleteVariable($varid);
+        if ($existingVarID === false) {
+            // Variable existiert nicht, also erstellen
             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
             IPS_SetParent($varid, $this->InstanceID);
             IPS_SetIdent($varid, $ident);
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
+
+            // Hier die Methode aufrufen, um das Profil zuzuweisen
+            $this->AssignVariableProfilesAndType($varid, $id);
         } else {
-            // Variablentyp stimmt überein, also nur Wert aktualisieren
-            SetValue($varid, $value);
+            // Variable existiert, also aktualisieren
+            $varid = $existingVarID;
+            // Überprüfen, ob der Variablentyp stimmt
+            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+                // Variablentyp stimmt nicht überein, also Variable neu erstellen
+                IPS_DeleteVariable($varid);
+                $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+                IPS_SetParent($varid, $this->InstanceID);
+                IPS_SetIdent($varid, $ident);
+                IPS_SetName($varid, $ident);
+                SetValue($varid, $value);
+                IPS_SetPosition($varid, $id);
+            } else {
+                // Variablentyp stimmt überein, also nur Wert aktualisieren
+                SetValue($varid, $value);
+            }
+        }
+        return $varid;
+    }
+
+    private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) {
+            // Debug-Ausgabe
+            $this->SendDebug("Variable gelöscht", "$ident", 0);
+                
+            // Variable löschen
+            IPS_DeleteVariable($variableID);
         }
     }
-    return $varid;
-}
-
-private function DeleteVariableIfExists($ident)
-{
-    $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-    if ($variableID !== false) {
-        // Debug-Ausgabe
-        $this->SendDebug("Variable gelöscht", "$ident", 0);
-        
-        // Variable löschen
-        IPS_DeleteVariable($variableID);
-    }
-}
 }

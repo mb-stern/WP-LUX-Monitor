@@ -39,29 +39,24 @@
     },
     {
       "type": "List",
-      "name": "JavaDatenListe",
-      "caption": "Java Daten",
-      "rowCount": 10,
-      "add": "Hinzufügen",
+      "name": "IDListe",
+      "caption": "Überwachte ID's",
+      "rowCount": 5,
+      "add": true,
       "delete": true,
-      "columns": [
-        {
-          "caption": "ID",
-          "name": "id",
-          "width": "30px",
-          "add": 0,
-          "edit": "readonly"
-        },
-        {
-          "caption": "Wert",
-          "name": "Wert",
-          "width": "auto",
-          "edit": {
-            "type": "ValidationTextBox"
+      "columns": 
+      [
+          {
+              "name": "id",
+              "caption": "ID des Wertes",
+              "width": "150",
+              "add": 0,
+              "edit": 
+              {
+                  "type": "NumberSpinner"
+              }
           }
-        }
-      ],
-      "values": []
-    }
-  ]
+      ]
+  }
+]
 }
