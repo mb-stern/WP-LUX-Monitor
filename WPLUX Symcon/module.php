@@ -16,10 +16,8 @@ class WPLUXSymcon extends IPSModule
 
         $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
-        $this->RegisterPropertyString('IDListe', '[]');
+        $this->RegisterPropertyString('JavaDatenListe', '[]'); // Updated property name
         $this->RegisterPropertyInteger('UpdateInterval', 0);
-
-        $this->RegisterPropertyString('JavaDatenListe', '[]');
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
@@ -38,11 +36,6 @@ class WPLUXSymcon extends IPSModule
 
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
-
-   // Lese die ID-Liste
-   $javaDatenListeJson = $this->ReadPropertyString('JavaDatenListe');
-   $javaDatenListe = json_decode($javaDatenListeJson, true);
-
     }
 
     public function Update()
@@ -55,11 +48,8 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Namen der Variablen laden
-        require_once __DIR__ . '/java_daten.php';
-
-        // Lese die ID-Liste
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+        // Lade die Liste aus der JavaDatenListe
+        $javaDataList = json_decode($this->ReadPropertyString('JavaDatenListe'), true);
 
         // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
@@ -101,22 +91,22 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
 
         // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i) {
-        if (in_array($i, array_column($idListe, 'id'))) {
-        
-        // Werte umrechnen wenn nötig
-        $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+        foreach ($javaDataList as $javaData) {
+            $id = $javaData['id'];
+            $wert = $javaData['Wert'];
+            // Werte umrechnen wenn nötig
+            $value = $this->convertValueBasedOnID($daten_raw[$id], $id);
 
-        // Debug senden
-        $this->SendDebug("ID : Wert nach Empfang", "".$i." : ".$daten_raw[$i]."", 0);
-        $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
+            // Debug senden
+            $this->SendDebug("ID : Wert nach Empfang", "".$id." : ".$daten_raw[$id]."", 0);
+            $this->SendDebug("ID : Wert nach umrechnen", "".$id." : ".$value."", 0);
 
-        // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-        $ident = 'WP_' . $java_dataset[$i];
-        $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+            // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+            $ident = 'WP_' . $wert;
+            $varid = $this->CreateOrUpdateVariable($ident, $value, $id);
         } else {
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+        //$this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
     }
