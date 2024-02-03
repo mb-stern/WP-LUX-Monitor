@@ -79,13 +79,15 @@ public function GetConfigurationForm()
         //Debug senden
         $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Namen der Variablen laden
-        require_once __DIR__ . '/java_daten.php';
+   // Prüfe, ob die Konfiguration bereits aktualisiert wurde
+   if (!$this->HasUpdatedConfiguration()) {
+    // Namen der Variablen laden
+    require_once __DIR__ . '/java_daten.php';
 
-        // Lese die ID-Liste
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+    // Lese die ID-Liste
+    $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
-          // Erstelle ein leeres Array für die Checkbox-Elemente
+    // Erstelle ein leeres Array für die Checkbox-Elemente
     $checkboxElements = [];
 
     // Iteriere durch die ID-Liste und erstelle Checkbox-Elemente
@@ -112,7 +114,9 @@ public function GetConfigurationForm()
     IPS_SetProperty($this->InstanceID, 'configuration', $checkboxJson);
     IPS_ApplyChanges($this->InstanceID);
 
-
+    // Setze die Flagge für die aktualisierte Konfiguration
+    $this->SetUpdatedConfigurationFlag();
+}
         // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
