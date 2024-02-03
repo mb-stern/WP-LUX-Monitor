@@ -40,13 +40,13 @@
       {
         "type": "ExpansionPanel",
         "name": "HostvariablesPanel",
-        "caption": "Variables for Hosts",
+        "caption": "Werte der Luxtronic",
         "onClick": "",
         "items": [
             {
                 "type": "List",
                 "name": "HostVariables",
-                "caption": "Statevariables",
+                "caption": "Istwert",
                 "rowCount": 30,
                 "add": false,
                 "delete": true,
@@ -60,13 +60,13 @@
                     {
                         "name": "ident",
                         "caption": "Ident",
-                        "visible": false,
+                        "visible": true,
                         "save": true
                     },
                     {
                         "name": "name",
                         "caption": "Variable name",
-                        "width": "300px",
+                        "width": "600px",
                         "save": false
                     },
                     {
