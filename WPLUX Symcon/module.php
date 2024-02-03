@@ -10,21 +10,25 @@ class WPLUXSymcon extends IPSModule
     }
 
     public function Create()
-    {
-        //Never delete this line!
-        parent::Create();
+{
+    // Never delete this line!
+    parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
-        $this->RegisterPropertyInteger('Port', 8889);
-        $this->RegisterPropertyString('IDListe', '[]');
-        $this->RegisterPropertyInteger('UpdateInterval', 0);
+    $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+    $this->RegisterPropertyInteger('Port', 8889);
+    $this->RegisterPropertyString('IDListe', '[]');
+    $this->RegisterPropertyInteger('UpdateInterval', 0);
 
-        // Timer für Aktualisierung registrieren
-        $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+    // Register the configuration property
+    $this->RegisterPropertyString('configuration', '{}');
 
-        //Variableprofile erstellen
-        require_once __DIR__ . '/variable.php';
-    }
+    // Timer für Aktualisierung registrieren
+    $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+
+    // Variableprofile erstellen
+    require_once __DIR__ . '/variable.php';
+}
+
 
     public function ApplyChanges()
     {
@@ -38,22 +42,75 @@ class WPLUXSymcon extends IPSModule
         $this->Update();
     }
 
-    public function Update()
-    {
-        //Verbindung zur Lux
-        $IpWwc = "{$this->ReadPropertyString('IPAddress')}";
-        $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
-        $SiteTitle = "WÄRMEPUMPE";
+    public function CreateConfigurationForm()
+{
+    // Lade die Daten aus java_daten.php
+    require_once __DIR__ . '/java_daten.php';
 
-        //Debug senden
-        $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
+    // Erstelle das Grundgerüst für das Konfigurationsformular
+    $form = json_decode('{"elements": []}', true);
 
+    // Füge dynamisch Elemente basierend auf java_daten.php hinzu
+    foreach ($java_dataset as $id => $text) {
+        $form["elements"][] = [
+            "type" => "CheckBox",
+            "name" => "Checkbox_" . ($id + 1),
+            "caption" => "ID: " . ($id + 1) . " - " . $text
+        ];
+    }
+
+    // Setze das Konfigurationsformular
+    IPS_SetProperty($this->InstanceID, 'configuration', json_encode($form));
+}
+
+public function Update()
+{
+    // Verbindung zur Lux
+    $IpWwc = "{$this->ReadPropertyString('IPAddress')}";
+    $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
+    $SiteTitle = "WÄRMEPUMPE";
+
+    // Debug senden
+    $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
+
+    // Prüfe, ob die Konfiguration bereits aktualisiert wurde
+    if (!$this->HasUpdatedConfiguration()) {
         // Namen der Variablen laden
         require_once __DIR__ . '/java_daten.php';
 
         // Lese die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
 
+        // Erstelle ein leeres Array für die Checkbox-Elemente
+        $checkboxElements = [];
+
+        // Iteriere durch die ID-Liste und erstelle Checkbox-Elemente
+        foreach ($idListe as $idItem) {
+            $checkboxElement = [
+                "type" => "CheckBox",
+                "name" => "Checkbox_" . $idItem['id'],
+                "caption" => "ID: " . $idItem['id'] . " - " . $java_dataset[$idItem['id']]
+            ];
+
+            // Füge das Checkbox-Element zum Array hinzu
+            $checkboxElements[] = $checkboxElement;
+        }
+
+        // Erstelle das JSON-Array für die Checkbox-Elemente
+        $checkboxArray = [
+            "elements" => $checkboxElements
+        ];
+
+        // Konvertiere das JSON-Array in einen JSON-String
+        $checkboxJson = json_encode($checkboxArray, JSON_PRETTY_PRINT);
+
+        // Speichere das Checkbox-JSON als Property
+        IPS_SetProperty($this->InstanceID, 'configuration', $checkboxJson);
+        IPS_ApplyChanges($this->InstanceID);
+
+        // Setze die Flagge für die aktualisierte Konfiguration
+        $this->SetUpdatedConfigurationFlag();
+    }
         // Socket verbinden
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $IpWwc, $WwcJavaPort);
@@ -112,6 +169,8 @@ class WPLUXSymcon extends IPSModule
         $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
+        // Setze die Flagge für die aktualisierte Konfiguration zurück
+        $this->SetUpdatedConfigurationFlag();
     }
                 
     private function AssignVariableProfilesAndType($varid, $id)
@@ -336,4 +395,16 @@ class WPLUXSymcon extends IPSModule
             IPS_DeleteVariable($variableID);
         }
     }
+
+    private function HasUpdatedConfiguration()
+{
+    return $this->ReadPropertyBoolean('ConfigUpdated');
+}
+
+private function SetUpdatedConfigurationFlag()
+{
+    IPS_SetProperty($this->InstanceID, 'ConfigUpdated', true);
+    IPS_ApplyChanges($this->InstanceID);
+}
+
 }

@@ -38,25 +38,8 @@
       "caption": "Sekunden"
     },
     {
-      "type": "List",
-      "name": "IDListe",
-      "caption": "Überwachte ID's",
-      "rowCount": 5,
-      "add": true,
-      "delete": true,
-      "columns": 
-      [
-          {
-              "name": "id",
-              "caption": "ID des Wertes",
-              "width": "150",
-              "add": 0,
-              "edit": 
-              {
-                  "type": "NumberSpinner"
-              }
-          }
-      ]
+      "type": "Dummy",
+      "name": "CheckboxContainer"
   }
 ]
 }
