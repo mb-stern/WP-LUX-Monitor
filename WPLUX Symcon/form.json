@@ -64,7 +64,7 @@
                         "save": true
                     },
                     {
-                        "name": "name",
+                        "name": "id",
                         "caption": "Variable name",
                         "width": "600px",
                         "save": false
