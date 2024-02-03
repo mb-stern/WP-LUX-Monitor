@@ -40,9 +40,20 @@ class WPLUXSymcon extends IPSModule
 
     public function GetConfigurationForm()
     {
-        $jsonForm = file_get_contents(__DIR__ . '/form.json');
+        $jsonForm = '{
+            "elements": [
+                {
+                    "type": "TextField",
+                    "name": "exampleField",
+                    "caption": "Example Field"
+                }
+                // ... weitere Konfigurationselemente ...
+            ]
+        }';
+    
         return json_decode($jsonForm, true);
     }
+    
 
     public function Update()
     {
