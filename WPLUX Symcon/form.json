@@ -67,11 +67,6 @@
                   ]
               }
           ]
-      },
-      {
-          "type": "Button",
-          "caption": "Hilfe",
-          "onClick": "echo 'Weitere Informationen finden Sie unter: https://deine-dokumentation-url';"
       }
   ]
 }
