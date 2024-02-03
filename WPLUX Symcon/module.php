@@ -40,21 +40,30 @@ class WPLUXSymcon extends IPSModule
 
     public function GetConfigurationForm()
     {
-        $jsonForm = '{
-            "elements": [
-                {
-                    "type": "TextField",
-                    "name": "exampleField",
-                    "caption": "Example Field"
-                }
-                // ... weitere Konfigurationselemente ...
-            ]
-        }';
+        $filePath = __DIR__ . '/form.json';
+        
+        if (file_exists($filePath)) {
+            $jsonForm = file_get_contents($filePath);
     
-        return json_decode($jsonForm, true);
+            if ($jsonForm === false) {
+                $this->Log('Fehler beim Laden der Datei ' . $filePath);
+                return false;
+            }
+    
+            $decodedForm = json_decode($jsonForm, true);
+    
+            if ($decodedForm === null) {
+                $this->Log('Fehler beim Dekodieren des JSON in der Datei ' . $filePath);
+                return false;
+            }
+    
+            return $decodedForm;
+        } else {
+            $this->Log('Die Datei ' . $filePath . ' existiert nicht.');
+            return false;
+        }
     }
     
-
     public function Update()
     {
         //Verbindung zur Lux
