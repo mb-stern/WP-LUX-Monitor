@@ -57,12 +57,12 @@
         {
           "name": "Istwert",
           "caption": "Istwert",
-          "width": "600",
+          "width": "150",
           "add": "",
           "edit": {
-            "type": "TextBox"
+            "type": "String"
           }
-        }
+        }        
       ]
     }
   ]
