@@ -55,14 +55,6 @@
                           "edit": {
                               "type": "ValidationTextBox"
                           }
-                      },
-                      {
-                          "caption": "Java Value",
-                          "name": "JavaValue",
-                          "width": "auto",
-                          "edit": {
-                              "type": "ValidationTextBox"
-                          }
                       }
                   ]
               }
