@@ -22,20 +22,38 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
+        // Checkbox für Java-Werte im Konfigurationsformular registrieren
+        $this->RegisterPropertyString('JavaValues', '[]');
+
         //Variableprofile erstellen
         require_once __DIR__ . '/variable.php';
     }
 
     public function ApplyChanges()
     {
-        //Never delete this line!
-        parent::ApplyChanges();
+        // Überprüfe, ob das Formular gesendet wurde
+        if ($_IPS['SENDER'] == 'WebFront') {
+            // Lese die ausgewählten Java-Werte
+            $selectedJavaValues = json_decode($this->ReadPropertyString('JavaValues'), true);
+
+            // Erstelle oder aktualisiere Variablen basierend auf den ausgewählten Werten
+            foreach ($selectedJavaValues as $selectedValue) {
+                $id = $selectedValue['value'];
+                $value = $java_dataset[$id]; // Der eigentliche Wert aus der java_daten.php
+
+                // Hier kannst du die Variable erstellen oder aktualisieren, basierend auf $id und $value
+                $this->CreateOrUpdateVariable($id, $value);
+            }
+        }
 
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
         // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
         $this->Update();
+
+        // Führe die restlichen Anpassungen durch
+        parent::ApplyChanges();
     }
 
     public function Update()
@@ -345,21 +363,13 @@ class WPLUXSymcon extends IPSModule
         $options = [];
 
         // Erstelle ein Array mit den Werten aus der java_dataset-Variable
-        foreach ($java_dataset as $key => $value) {
+        foreach ($java_dataset as $id => $value) {
             $options[] = [
-                'id' => $key,
-                'name' => $value,
-                'checked' => $this->IsJavaValueSelected($key),
+                'label' => $value,
+                'value' => $id,
             ];
         }
 
         return $options;
-    }
-
-    public function IsJavaValueSelected($id)
-    {
-        // Überprüfe, ob der Java-Wert in der ID-Liste gespeichert ist
-        $selectedValues = $this->GetSelectedValues();
-        return in_array($id, $selectedValues);
     }
 }

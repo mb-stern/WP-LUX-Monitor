@@ -43,7 +43,7 @@
         "items": [
             {
                 "type": "CheckBox",
-                "name": "SelectedJavaValues",
+                "name": "JavaValues",
                 "caption": "Java-Werte auswählen",
                 "options": {
                     "values": "WPLUXSymcon_GetJavaValues",
