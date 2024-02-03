@@ -10,21 +10,25 @@ class WPLUXSymcon extends IPSModule
     }
 
     public function Create()
-    {
-        //Never delete this line!
-        parent::Create();
+{
+    // Never delete this line!
+    parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
-        $this->RegisterPropertyInteger('Port', 8889);
-        $this->RegisterPropertyString('IDListe', '[]');
-        $this->RegisterPropertyInteger('UpdateInterval', 0);
+    $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+    $this->RegisterPropertyInteger('Port', 8889);
+    $this->RegisterPropertyString('IDListe', '[]');
+    $this->RegisterPropertyInteger('UpdateInterval', 0);
 
-        // Timer für Aktualisierung registrieren
-        $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+    // Register the configuration property
+    $this->RegisterPropertyString('configuration', '{}');
 
-        //Variableprofile erstellen
-        require_once __DIR__ . '/variable.php';
-    }
+    // Timer für Aktualisierung registrieren
+    $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+
+    // Variableprofile erstellen
+    require_once __DIR__ . '/variable.php';
+}
+
 
     public function ApplyChanges()
     {
