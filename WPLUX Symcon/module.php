@@ -16,7 +16,7 @@ class WPLUXSymcon extends IPSModule
 
         $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
-        $this->RegisterPropertyString('JavaDatenListe', '[]'); // Updated property name
+        $this->RegisterPropertyString('JavaDatenListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
         // Timer für Aktualisierung registrieren
@@ -104,13 +104,10 @@ class WPLUXSymcon extends IPSModule
             // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
             $ident = 'WP_' . $wert;
             $varid = $this->CreateOrUpdateVariable($ident, $value, $id);
-        } else {
-        // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists('WP_' . $wert[$i]);
-            }
         }
     }
                 
+            
     private function AssignVariableProfilesAndType($varid, $id)
     {
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
@@ -286,51 +283,51 @@ class WPLUXSymcon extends IPSModule
     }
             
     private function CreateOrUpdateVariable($ident, $value, $id)
-    {
-        // Überprüfen, ob die Variable bereits existiert
-        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+{
+    // Überprüfen, ob die Variable bereits existiert
+    $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
-        if ($existingVarID === false) {
-            // Variable existiert nicht, also erstellen
+    if ($existingVarID === false) {
+        // Variable existiert nicht, also erstellen
+        $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
+        IPS_SetParent($varid, $this->InstanceID);
+        IPS_SetIdent($varid, $ident);
+        IPS_SetName($varid, $ident);
+        SetValue($varid, $value);
+        IPS_SetPosition($varid, $id);
+
+        // Hier die Methode aufrufen, um das Profil zuzuweisen
+        $this->AssignVariableProfilesAndType($varid, $id);
+    } else {
+        // Variable existiert, also aktualisieren
+        $varid = $existingVarID;
+        // Überprüfen, ob der Variablentyp stimmt
+        if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+            // Variablentyp stimmt nicht überein, also Variable neu erstellen
+            IPS_DeleteVariable($varid);
             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
             IPS_SetParent($varid, $this->InstanceID);
             IPS_SetIdent($varid, $ident);
             IPS_SetName($varid, $ident);
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
-
-            // Hier die Methode aufrufen, um das Profil zuzuweisen
-            $this->AssignVariableProfilesAndType($varid, $id);
         } else {
-            // Variable existiert, also aktualisieren
-            $varid = $existingVarID;
-            // Überprüfen, ob der Variablentyp stimmt
-            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
-                // Variablentyp stimmt nicht überein, also Variable neu erstellen
-                IPS_DeleteVariable($varid);
-                $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-                IPS_SetParent($varid, $this->InstanceID);
-                IPS_SetIdent($varid, $ident);
-                IPS_SetName($varid, $ident);
-                SetValue($varid, $value);
-                IPS_SetPosition($varid, $id);
-            } else {
-                // Variablentyp stimmt überein, also nur Wert aktualisieren
-                SetValue($varid, $value);
-            }
+            // Variablentyp stimmt überein, also nur Wert aktualisieren
+            SetValue($varid, $value);
         }
-        return $varid;
     }
+    return $varid;
+}
 
-    private function DeleteVariableIfExists($ident)
-    {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->SendDebug("Variable gelöscht", "$ident", 0);
-                
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
-        }
+private function DeleteVariableIfExists($ident)
+{
+    $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+    if ($variableID !== false) {
+        // Debug-Ausgabe
+        $this->SendDebug("Variable gelöscht", "$ident", 0);
+        
+        // Variable löschen
+        IPS_DeleteVariable($variableID);
     }
+}
 }
