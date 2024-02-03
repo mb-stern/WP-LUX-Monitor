@@ -60,6 +60,7 @@
                     {
                         "name": "id",
                         "caption": "Ident",
+                        "visible": false,
                         "save": true
                     },
                     {
