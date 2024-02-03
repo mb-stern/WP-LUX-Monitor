@@ -38,26 +38,62 @@
         "caption": "Sekunden"
       },
       {
-        "type": "List",
-        "name": "IDListe",
-        "caption": "Überwachte ID's",
-        "rowCount": 5,
-        "add": true,
-        "delete": true,
-        "columns": 
-        [
+        "type": "ExpansionPanel",
+        "name": "HostvariablesPanel",
+        "caption": "Variables for Hosts",
+        "onClick": "",
+        "items": [
             {
-                "name": "id",
-                "caption": "ID des Wertes",
-                "width": "150",
-                "add": 0,
-                "edit": 
-                {
-                    "type": "NumberSpinner"
-                }
+                "type": "List",
+                "name": "HostVariables",
+                "caption": "Statevariables",
+                "rowCount": 30,
+                "add": false,
+                "delete": true,
+                "onDelete": "IPS_RequestAction($id, 'DelHostVariable', $HostVariables['ident']);",
+                "loadValuesFromConfiguration": false,
+                "sort": {
+                    "column": "name",
+                    "direction": "ascending"
+                },
+                "columns": [
+                    {
+                        "name": "ident",
+                        "caption": "Ident",
+                        "visible": false,
+                        "save": true
+                    },
+                    {
+                        "name": "address",
+                        "caption": "Address",
+                        "width": "200px",
+                        "save": false
+                    },
+                    {
+                        "name": "host",
+                        "caption": "Hostname",
+                        "width": "300px",
+                        "save": false
+                    },
+                    {
+                        "name": "name",
+                        "caption": "Variable name",
+                        "width": "300px",
+                        "save": false
+                    },
+                    {
+                        "name": "use",
+                        "caption": "used",
+                        "width": "75px",
+                        "save": true,
+                        "add": false,
+                        "edit": {
+                            "type": "CheckBox"
+                        }
+                    }
+                ]
             }
         ]
     }
 ]
-  }
-  
+}
