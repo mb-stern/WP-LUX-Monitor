@@ -58,7 +58,7 @@
                 },
                 "columns": [
                     {
-                        "name": "ident",
+                        "name": "id",
                         "caption": "Ident",
                         "visible": false,
                         "save": true
@@ -67,18 +67,6 @@
                         "name": "address",
                         "caption": "Address",
                         "width": "200px",
-                        "save": false
-                    },
-                    {
-                        "name": "host",
-                        "caption": "Hostname",
-                        "width": "300px",
-                        "save": false
-                    },
-                    {
-                        "name": "name",
-                        "caption": "Variable name",
-                        "width": "300px",
                         "save": false
                     },
                     {
