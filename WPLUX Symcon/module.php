@@ -349,19 +349,17 @@ class WPLUXSymcon extends IPSModule
             $options[] = [
                 'id' => $key,
                 'name' => $value,
-                'checked' => in_array($key, $this->GetSelectedValues()),
+                'checked' => $this->IsJavaValueSelected($key),
             ];
         }
 
         return $options;
     }
 
-    public function GetSelectedValues()
+    public function IsJavaValueSelected($id)
     {
-        // Lese die ID-Liste aus den Modul-Properties
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-
-        // Extrahiere die IDs
-        return array_column($idListe, 'id');
+        // Überprüfe, ob der Java-Wert in der ID-Liste gespeichert ist
+        $selectedValues = $this->GetSelectedValues();
+        return in_array($id, $selectedValues);
     }
 }

@@ -47,7 +47,6 @@
                 "caption": "Java-Werte auswählen",
                 "options": {
                     "values": "WPLUXSymcon_GetJavaValues",
-                    "columnNames": ["id", "name", "checked"],
                     "rowCount": 10
                 }
             }
