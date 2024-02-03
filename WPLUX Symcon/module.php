@@ -373,22 +373,4 @@ class WPLUXSymcon extends IPSModule
             IPS_DeleteVariable($variableID);
         }
     }
-
-    public function GetJavaValues()
-    {
-        // Lese die Java-Werte aus java_daten.php
-        require_once __DIR__ . '/java_daten.php';
-
-        $options = [];
-
-        // Erstelle ein Array mit den Werten aus der java_dataset-Variable
-        foreach ($java_dataset as $id => $value) {
-            $options[] = [
-                'label' => $value,
-                'value' => $id,
-            ];
-        }
-
-        return $options;
-    }
 }
