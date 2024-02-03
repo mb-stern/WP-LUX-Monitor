@@ -36,29 +36,6 @@
           "type": "IntervalBox",
           "name": "UpdateInterval",
           "caption": "Sekunden"
-      },
-      {
-          "elements": [
-              {
-                  "type": "Configurator",
-                  "name": "JavaValues",
-                  "caption": "Select Java Values",
-                  "rowCount": 15,
-                  "add": false,
-                  "delete": false,
-                  "sort": false,
-                  "columns": [
-                      {
-                          "caption": "ID",
-                          "name": "value",
-                          "width": "auto",
-                          "edit": {
-                              "type": "ValidationTextBox"
-                          }
-                      }
-                  ]
-              }
-          ]
       }
   ]
 }
