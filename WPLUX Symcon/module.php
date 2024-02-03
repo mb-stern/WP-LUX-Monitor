@@ -93,34 +93,26 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schließen
         socket_close($socket);
 
-           // Werte anzeigen
-           for ($i = 0; $i < $JavaWerte; ++$i) {
-            if (in_array($i, array_column($idListe, 'id'))) {
+        // Werte anzeigen
+        for ($i = 0; $i < $JavaWerte; ++$i) {
+        if (in_array($i, array_column($idListe, 'id'))) {
         
-                // Werte umrechnen wenn nötig
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-        
-                // Debug senden
-                $this->SendDebug("ID : Wert nach Empfang", "".$i." : ".$daten_raw[$i]."", 0);
-                $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
-        
-                // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-                $ident = 'WP_' . $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-        
-                // Verarbeite 'Istwert'
-                if (isset($idListe[$i]['Istwert'])) {
-                    $istwertIdent = 'WP_Istwert_' . $java_dataset[$i];
-                    $istwertVarid = $this->CreateOrUpdateVariable($istwertIdent, $idListe[$i]['Istwert'], $i);
-                }
-            } else {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
-                // Lösche auch 'Istwert' Variable
-                $this->DeleteVariableIfExists('WP_Istwert_' . $java_dataset[$i]);
+        // Werte umrechnen wenn nötig
+        $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+
+        // Debug senden
+        $this->SendDebug("ID : Wert nach Empfang", "".$i." : ".$daten_raw[$i]."", 0);
+        $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
+
+        // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+        $ident = 'WP_' . $java_dataset[$i];
+        $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+        } else {
+        // Variable löschen, da sie nicht mehr in der ID-Liste ist
+        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
             }
         }
-}
+    }
                 
     private function AssignVariableProfilesAndType($varid, $id)
     {
