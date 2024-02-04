@@ -126,7 +126,7 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Varaiblenverarbeitung", "Variabel ist in der ID-Liste nicht vorhanden und wird gelöscht - ID: $i, Ident: $ident", 0);
 
             $this->DeleteVariableIfExists($java_dataset[$i]);
-        }
+       
         }
     }
 }
