@@ -106,11 +106,28 @@ class WPLUXSymcon extends IPSModule
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = $java_dataset[$i];
+
+        // Debug senden
+        $this->SendDebug("CreateOrUpdateVariable", "Before Condition - ID: $i, Ident: $ident, Value: $value", 0);
+
         $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+
+        // Debug senden
+        $this->SendDebug("CreateOrUpdateVariable", "After CreateOrUpdateVariable - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
+
+        if (in_array($i, array_column($idListe, 'id'))) {
+            // Restlicher Code
+
+            // Debug senden
+            $this->SendDebug("CreateOrUpdateVariable", "Inside Condition - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
         } else {
-        // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists($java_dataset[$i]);
-            }
+            // Variable löschen, da sie nicht mehr in der ID-Liste ist
+
+            // Debug senden
+            $this->SendDebug("CreateOrUpdateVariable", "Inside Else Condition - ID: $i, Ident: $ident", 0);
+
+            $this->DeleteVariableIfExists($java_dataset[$i]);
+        }
         }
     }
                 
@@ -338,9 +355,8 @@ class WPLUXSymcon extends IPSModule
     private function DeleteVariableIfExists($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID === false) {
+        if ($variableID !== false) {
         
-        } else {
         // Debug-Ausgabe
          $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
                 
