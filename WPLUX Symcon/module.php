@@ -101,8 +101,8 @@ class WPLUXSymcon extends IPSModule
         $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
         // Debug senden
-        $this->SendDebug("Wert empfangen", "ID: ".$i."  Wert: ".$daten_raw[$i]."", 0);
-        $this->SendDebug("Wert umgerechnet", "ID: ".$i."  Wert: ".$value."", 0);
+        $this->SendDebug("Wert empfangen", "Der Wert der ID ".$i." wurde empfangen: ".$daten_raw[$i]."", 0);
+        $this->SendDebug("Wert umgerechnet", "Der Wert der ID ".$i." wurde empfangen: ".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = $java_dataset[$i];
@@ -303,7 +303,7 @@ class WPLUXSymcon extends IPSModule
             IPS_SetPosition($varid, $id);
 
             //Debug senden
-            $this->SendDebug("Variable erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+            $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             // Hier die Methode aufrufen, um das Profil zuzuweisen
             $this->AssignVariableProfilesAndType($varid, $id);
@@ -322,14 +322,14 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetPosition($varid, $id);
 
                 //Debug senden
-                $this->SendDebug("Variable gelöscht und erneut erstellt wegen geändertem Variablentyp", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+                $this->SendDebug("Variable erneut erstellt", "Variabletyp stimmt nicht überein, daher Variable gelöscht und erneut erstellt - ID: ".$id.", Variablen-ID: ".$varid.", Name: ".$ident.", Wert: ".$value."", 0);
 
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
                 SetValue($varid, $value);
 
                 //Debug senden
-                $this->SendDebug("Variable aktualisiert", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+                $this->SendDebug("Variable aktualisiert", "Variablentyp stimmt überein, daher wird nur der Wert aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
             }
         }
         return $varid;
@@ -341,7 +341,7 @@ class WPLUXSymcon extends IPSModule
         if ($variableID !== false) {
         
         // Debug-Ausgabe
-         $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
+         $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
                 
         // Variable löschen
         IPS_DeleteVariable($variableID);
