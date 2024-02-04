@@ -104,33 +104,32 @@ class WPLUXSymcon extends IPSModule
         $this->SendDebug("Wert empfangen", "ID: ".$i."  Wert: ".$daten_raw[$i]."", 0);
         $this->SendDebug("Wert umgerechnet", "ID: ".$i."  Wert: ".$value."", 0);
 
-        // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-        $ident = $java_dataset[$i];
+ // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+$ident = $java_dataset[$i];
 
-        // Debug senden
-        $this->SendDebug("CreateOrUpdateVariable", "Before Condition - ID: $i, Ident: $ident, Value: $value", 0);
+// Debug senden
+$this->SendDebug("CreateOrUpdateVariable", "Before Condition - ID: $i, Ident: $ident, Value: $value", 0);
 
-        $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+$varid = $this->CreateOrUpdateVariable($ident, $value, $i);
 
-        // Debug senden
-        $this->SendDebug("CreateOrUpdateVariable", "After CreateOrUpdateVariable - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
+// Debug senden
+$this->SendDebug("CreateOrUpdateVariable", "After CreateOrUpdateVariable - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
 
-        if (in_array($i, array_column($idListe, 'id'))) {
-            // Restlicher Code
+if (in_array($i, array_column($idListe, 'id'))) {
+    // Restlicher Code
 
-            // Debug senden
-            $this->SendDebug("CreateOrUpdateVariable", "Inside Condition - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
-        } else {
-            // Variable löschen, da sie nicht mehr in der ID-Liste ist
+    // Debug senden
+    $this->SendDebug("CreateOrUpdateVariable", "Inside Condition - ID: $i, Ident: $ident, Value: $value, VarID: $varid", 0);
+} else {
+    // Variable löschen, da sie nicht mehr in der ID-Liste ist
 
-            // Debug senden
-            $this->SendDebug("CreateOrUpdateVariable", "Inside Else Condition - ID: $i, Ident: $ident", 0);
+    // Debug senden
+    $this->SendDebug("CreateOrUpdateVariable", "Inside Else Condition - ID: $i, Ident: $ident", 0);
 
-            $this->DeleteVariableIfExists($java_dataset[$i]);
+    $this->DeleteVariableIfExists($java_dataset[$i]);
+}
         }
     }
-}
-}
                 
     private function AssignVariableProfilesAndType($varid, $id)
     {
