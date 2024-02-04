@@ -14,6 +14,7 @@ Die Bedeutung und ID's der Varaibalen sind hier zu finden: https://loxwiki.atlas
 5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
 6. [WebFront](#6-webfront)
 7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
+8. [Versionen](#8-versionen)
 
 ### 1. Funktionsumfang
 
@@ -83,3 +84,9 @@ Erklärung der Funktion.
 
 Beispiel:
 `WPLUX_Update(12345);`
+
+### 8. Versionen
+
+Version 1.0 (04.2.2024)
+
+- Initiale Version
