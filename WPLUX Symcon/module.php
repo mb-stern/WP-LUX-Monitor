@@ -232,7 +232,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 2; // Float-Typ
 
-                case ($id == 184 || $id == 193):
+                case ($id == 184 || $id == 193  || $id == 231):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, 'WPLUX.Fan');
                         }
