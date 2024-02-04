@@ -41,7 +41,7 @@
       "type": "List",
       "name": "IDListe",
       "caption": "Überwachte ID's",
-      "rowCount": 15,
+      "rowCount": 20,
       "add": true,
       "delete": true,
       "sort": {
