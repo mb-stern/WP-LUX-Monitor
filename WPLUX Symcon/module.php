@@ -324,6 +324,9 @@ class WPLUXSymcon extends IPSModule
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
                 SetValue($varid, $value);
+
+                //Debug senden
+                $this->SendDebug("Variable aktualisiert", "".$varid.":".$value."", 0)
             }
         }
         return $varid;
