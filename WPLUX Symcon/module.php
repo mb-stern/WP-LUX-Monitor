@@ -322,7 +322,7 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetPosition($varid, $id);
 
                 //Debug senden
-                $this->SendDebug("Variablen-Typ erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+                $this->SendDebug("Variable erneut erstellt wegen geändertem Variablentyp", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
