@@ -317,6 +317,10 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetName($varid, $ident);
                 SetValue($varid, $value);
                 IPS_SetPosition($varid, $id);
+
+                //Debug senden
+                $this->SendDebug("Variable erstellt", "".$id.":".$varid.":".$ident."", 0);
+
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
                 SetValue($varid, $value);
@@ -329,11 +333,12 @@ class WPLUXSymcon extends IPSModule
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID !== false) {
-            // Debug-Ausgabe
-            $this->SendDebug("Variable gelöscht", "$ident", 0);
+        
+        // Debug-Ausgabe
+         $this->SendDebug("Variable gelöscht", "$ident", 0);
                 
-            // Variable löschen
-            IPS_DeleteVariable($variableID);
+        // Variable löschen
+        IPS_DeleteVariable($variableID);
         }
     }
 }
