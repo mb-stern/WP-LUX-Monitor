@@ -93,7 +93,8 @@ Beispiel:
 
 Version 1.1 (04.02.2024)
 
-- Kleine Anpassungen an der Variabelzuweisung
+- Kleine Anpassungen an der Variabelzuweisung und Umrechnungstabelle
+- Vergössertes Fenster Sortierung der ID's im Konfigurationsformular
 
 Version 1.0 (04.02.2024)
 
