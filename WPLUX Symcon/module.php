@@ -270,23 +270,11 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
         switch ($id) {
         
-        case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
+        case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209) || ($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
             return round($value * 0.1, 1);
 
-        case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165)|| ($id >= 168 && $id <= 169)):
+        case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188) || ($id >= 180 && $id <= 181) || ($id >= 210 && $id <= 211) || $id == 147 || $id == 183 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165)|| ($id >= 168 && $id <= 169)):
             return round($value * 0.01, 1);
-
-        case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
-                return round($value * 0.1, 1);
-
-        case (($id >= 180 && $id <= 181) || ($id >= 210 && $id <= 211)):
-                return round($value * 0.01, 1);
-
-        case ($id == 183):
-                return round($value * 0.01, 1);
-
-        case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
-                return round($value * 0.01, 1);
 
         case ($id == 257):
                 return round($value * 0.001, 1);
