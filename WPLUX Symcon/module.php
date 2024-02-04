@@ -341,7 +341,7 @@ class WPLUXSymcon extends IPSModule
         if ($variableID !== false) {
         
         // Debug-Ausgabe
-         $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident.", 0);
+         $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
                 
         // Variable löschen
         IPS_DeleteVariable($variableID);
