@@ -303,7 +303,7 @@ class WPLUXSymcon extends IPSModule
             IPS_SetPosition($varid, $id);
 
             //Debug senden
-            $this->SendDebug("Variablen erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
+            $this->SendDebug("Variable erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
 
             // Hier die Methode aufrufen, um das Profil zuzuweisen
             $this->AssignVariableProfilesAndType($varid, $id);
