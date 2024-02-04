@@ -313,7 +313,7 @@ class WPLUXSymcon extends IPSModule
             // Überprüfen, ob der Variablentyp stimmt
             if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
                 // Variablentyp stimmt nicht überein, also Variable neu erstellen
-                IPS_DeleteVariable($varid);
+                //IPS_DeleteVariable($varid);
                 $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
                 IPS_SetParent($varid, $this->InstanceID);
                 IPS_SetIdent($varid, $ident);
