@@ -340,6 +340,7 @@ class WPLUXSymcon extends IPSModule
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID === false) {
         
+        } else {
         // Debug-Ausgabe
          $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
                 
