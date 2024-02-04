@@ -1,5 +1,9 @@
 # WPLUX Symcon
-Beschreibung des Moduls.
+Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen.
+Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
+Vorerst ist kein Eingriff in die Steuerung möglich. Diese Möglichkeit wird in einer späteren Version nachgereicht.
+Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
+Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
 ### Inhaltsverzeichnis
 
@@ -10,10 +14,14 @@ Beschreibung des Moduls.
 5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
 6. [WebFront](#6-webfront)
 7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
+8. [Versionen](#8-versionen)
 
 ### 1. Funktionsumfang
 
-*
+* Abfrage der Istwerte aus der Luxtronic, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
+* Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
+* Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
+* Ebenfalls werden je nach Wärmepumpe nicht alle Werte geliefert. Offensichtlich wird mit einer Software für die Lux alle Wärmepumentypen abgedeckt.
 
 ### 2. Voraussetzungen
 
@@ -21,8 +29,8 @@ Beschreibung des Moduls.
 
 ### 3. Software-Installation
 
-* Über den Module Store das 'WPLUX Symcon'-Modul installieren.
-* Alternativ über das Module Control folgende URL hinzufügen
+* Über den Module Store kann das Modul noch nicht installiert werden.
+* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/WPLUX-Symcon
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -33,8 +41,12 @@ __Konfigurationsseite__:
 
 Name     | Beschreibung
 -------- | ------------------
-         |
-         |
+IP-Adresse      |	IP-Adresse des Rechners auf dem der Libre Hardware Monitor läuft
+Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port muss in der Firewall geöffnet sein
+Intervall       |   Intervall für das Update der Werte
+Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
+
+![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/bf187e83-9d7a-4b39-aa7e-a6564d35abd5)
 
 ### 5. Statusvariablen und Profile
 
@@ -42,17 +54,24 @@ Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzeln
 
 #### Statusvariablen
 
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
+Es werden Variablen/Typen je nach Wahl der Werte erstellt. Pro ID wird eine Variable erstellt.
 
 #### Profile
 
 Name   | Typ
 ------ | -------
-       |
-       |
+WPLUX.Sec     |  Integer  
+WPLUX.Imp     |  Integer   
+WPLUX.Typ     |  Integer   
+WPLUX.Biv     |  Integer   
+WPLUX.BZ      |  Integer 
+WPLUX.Comf    |  Bool 
+WPLUX.Men1    |  Integer
+WPLUX.Men2    |  Integer
+WPLUX.Men3    |  Integer
+WPLUX.Akt     |  Bool
+WPLUX.Pres    |  Float
+WPLUX.Fan    |  Integer
 
 ### 6. WebFront
 
@@ -64,4 +83,10 @@ Die Funktionalität, die das Modul im WebFront bietet.
 Erklärung der Funktion.
 
 Beispiel:
-`WPLUX_BeispielFunktion(12345);`
+`WPLUX_Update(12345);`
+
+### 8. Versionen
+
+Version 1.0 (04.02.2024)
+
+- Initiale Version

@@ -4,11 +4,10 @@
     "type": 3,
     "vendor": "",
     "aliases": [
-        ""
+        "WPLUX Symcon"
     ],
     "parentRequirements": [],
     "childRequirements": [],
     "implemented": [],
-    "prefix": "WPLUX",
-    "url": ""
+    "prefix": "WPLUX"
 }

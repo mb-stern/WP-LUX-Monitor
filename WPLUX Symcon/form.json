@@ -1,5 +1,62 @@
 {
-    "elements": [],
-    "actions": [],
-    "status": []
+  "elements": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Info zum Modul",
+      "items": [
+        {
+          "type": "Label",
+          "label": "Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen."
+        },
+        {
+          "type": "Label",
+          "label": "Mit der aktuellen Varsion des Moduls ist kein Eingriff in die Steuerung möglich."
+        },
+        {
+          "type": "Label",
+          "label": "Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
+        },
+        {
+          "type": "Label",
+          "label": "Die Beschreibung und ID's der Variabalen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
+        }
+      ]
+    },
+    {
+      "name": "IPAddress",
+      "type": "ValidationTextBox",
+      "caption": "IP-Address"
+    },
+    {
+      "name": "Port",
+      "type": "NumberSpinner",
+      "caption": "Port (8888 oder 8889)"
+    },
+    {
+      "type": "IntervalBox",
+      "name": "UpdateInterval",
+      "caption": "Sekunden"
+    },
+    {
+      "type": "List",
+      "name": "IDListe",
+      "caption": "Überwachte ID's",
+      "rowCount": 5,
+      "add": true,
+      "delete": true,
+      "columns": 
+      [
+          {
+              "name": "id",
+              "caption": "ID des Wertes",
+              "width": "150",
+              "add": 0,
+              "edit": 
+              {
+                  "type": "NumberSpinner"
+              }
+          }
+      ]
+  }
+]
 }
