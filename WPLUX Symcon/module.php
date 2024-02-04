@@ -302,6 +302,9 @@ class WPLUXSymcon extends IPSModule
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
 
+            //Debug senden
+            $this->SendDebug("Variablen erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
+
             // Hier die Methode aufrufen, um das Profil zuzuweisen
             $this->AssignVariableProfilesAndType($varid, $id);
         } else {
@@ -319,7 +322,7 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetPosition($varid, $id);
 
                 //Debug senden
-                $this->SendDebug("Variable erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
+                $this->SendDebug("Variablen-Typ erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
 
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
