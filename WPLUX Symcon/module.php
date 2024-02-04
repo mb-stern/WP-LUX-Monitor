@@ -101,15 +101,15 @@ class WPLUXSymcon extends IPSModule
         $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
         // Debug senden
-        $this->SendDebug("Daten empfangen", "ID: ".$i."  Wert: ".$daten_raw[$i]."", 0);
-        $this->SendDebug("Daten umgerechnet", "ID: ".$i."  Wert: ".$value."", 0);
+        $this->SendDebug("Wert empfangen", "ID: ".$i."  Wert: ".$daten_raw[$i]."", 0);
+        $this->SendDebug("Wert umgerechnet", "ID: ".$i."  Wert: ".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = $java_dataset[$i];
         $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
         } else {
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists($java_dataset[$i]);
+        //$this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
     }
