@@ -313,7 +313,7 @@ class WPLUXSymcon extends IPSModule
             // Überprüfen, ob der Variablentyp stimmt
             if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
                 // Variablentyp stimmt nicht überein, also Variable neu erstellen
-                //IPS_DeleteVariable($varid);
+                IPS_DeleteVariable($varid);
                 $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
                 IPS_SetParent($varid, $this->InstanceID);
                 IPS_SetIdent($varid, $ident);
@@ -322,7 +322,7 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetPosition($varid, $id);
 
                 //Debug senden
-                $this->SendDebug("Variable erneut erstellt wegen geändertem Variablentyp", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+                $this->SendDebug("Variable gelöscht und erneut erstellt wegen geändertem Variablentyp", "ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
@@ -338,7 +338,7 @@ class WPLUXSymcon extends IPSModule
     private function DeleteVariableIfExists($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) {
+        if ($variableID === false) {
         
         // Debug-Ausgabe
          $this->SendDebug("Variable gelöscht", "Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
