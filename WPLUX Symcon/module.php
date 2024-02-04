@@ -101,8 +101,8 @@ class WPLUXSymcon extends IPSModule
         $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
         // Debug senden
-        $this->SendDebug("ID : Wert nach Empfang", "".$i." : ".$daten_raw[$i]."", 0);
-        $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
+        $this->SendDebug("Daten empfangen", "ID: ".$i."  Wert: ".$daten_raw[$i]."", 0);
+        $this->SendDebug("Daten umgerechnet", "ID: ".$i."  Wert: ".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
         $ident = $java_dataset[$i];
@@ -319,14 +319,14 @@ class WPLUXSymcon extends IPSModule
                 IPS_SetPosition($varid, $id);
 
                 //Debug senden
-                $this->SendDebug("Variable neu erstellt", "".$id.":".$varid.":".$ident."", 0);
+                $this->SendDebug("Variable erstellt", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
 
             } else {
                 // Variablentyp stimmt überein, also nur Wert aktualisieren
                 SetValue($varid, $value);
 
                 //Debug senden
-                $this->SendDebug("Variable nur aktualisiert", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
+                $this->SendDebug("Variable aktualisiert", "ID: ".$id."  Variablen-ID: ".$varid."  Wert: ".$value."", 0);
             }
         }
         return $varid;
