@@ -348,5 +348,5 @@ class WPLUXSymcon extends IPSModule
             // Variable löschen
             IPS_DeleteVariable($variableID);
         }
-    }S
+    }
 }
