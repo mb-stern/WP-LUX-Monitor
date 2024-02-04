@@ -128,8 +128,9 @@ class WPLUXSymcon extends IPSModule
 
             $this->DeleteVariableIfExists($java_dataset[$i]);
         }
-        }
     }
+}
+}
                 
     private function AssignVariableProfilesAndType($varid, $id)
     {
