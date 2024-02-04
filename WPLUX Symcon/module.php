@@ -208,6 +208,12 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 2; // Float-Typ
 
+                case ($id == 173):
+                        if ($varid) {
+                        IPS_SetVariableCustomProfile($varid, 'WPLUX.lh');
+                        }
+                        return 1; // Integer
+
                 case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Temperature.Difference');

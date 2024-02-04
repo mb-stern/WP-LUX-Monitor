@@ -75,6 +75,7 @@ WPLUX.Men3    |  Integer
 WPLUX.Akt     |  Bool
 WPLUX.Pres    |  Float
 WPLUX.Fan    |  Integer
+WPLUX.lh	|  Integer
 
 ### 6. WebFront
 
@@ -89,6 +90,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 1.1 (04.02.2024)
+
+- Kleine Anpassungen an der Variabelzuweisung
 
 Version 1.0 (04.02.2024)
 
