@@ -87,6 +87,6 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 1.0 (04.2.2024)
+Version 1.0 (04.02.2024)
 
 - Initiale Version
