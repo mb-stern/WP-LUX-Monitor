@@ -232,7 +232,7 @@ class WPLUXSymcon extends IPSModule
                         }
                         return 1; // Integer
 
-                case ($id >= 187 && $id <= 188):
+                case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
                         if ($varid) {
                         IPS_SetVariableCustomProfile($varid, '~Electricity');
                         }
