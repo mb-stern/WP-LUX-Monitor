@@ -105,11 +105,11 @@ class WPLUXSymcon extends IPSModule
         $this->SendDebug("ID : Wert nach umrechnen", "".$i." : ".$value."", 0);
 
         // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-        $ident = 'WP_' . $java_dataset[$i];
+        $ident = $java_dataset[$i];
         $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
         } else {
         // Variable löschen, da sie nicht mehr in der ID-Liste ist
-        $this->DeleteVariableIfExists('WP_' . $java_dataset[$i]);
+        $this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
     }
