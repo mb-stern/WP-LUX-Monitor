@@ -279,7 +279,7 @@ class WPLUXSymcon extends IPSModule
         case ($id == 183):
                 return round($value * 0.01, 1);
 
-        case ($id >= 187 && $id <= 188):
+        case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
                 return round($value * 0.01, 1);
         
         default:
