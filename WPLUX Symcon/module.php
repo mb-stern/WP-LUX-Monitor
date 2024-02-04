@@ -326,7 +326,7 @@ class WPLUXSymcon extends IPSModule
                 SetValue($varid, $value);
 
                 //Debug senden
-                $this->SendDebug("Variable nur aktualisiert", "".$varid.":".$value."", 0);
+                $this->SendDebug("Variable nur aktualisiert", "".$id.":".$varid.":".$value."", 0);
             }
         }
         return $varid;
