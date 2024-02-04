@@ -1,5 +1,5 @@
 # WPLUX Symcon
-Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen.
+Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller abzufragen.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
 Vorerst ist kein Eingriff in die Steuerung möglich. Diese Möglichkeit wird in einer späteren Version nachgereicht.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
@@ -94,6 +94,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 1.2 (04.02.2024)
+
+- 
 
 Version 1.1 (04.02.2024)
 
