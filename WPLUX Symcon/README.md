@@ -95,7 +95,7 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 1.2 (04.02.2024)
+Version 1.2 (05.02.2024)
 
 - Muster IP-Adresse wird nicht mehr standardmässig geladen bei Installation des Moduls. Dies führte bei der Installation zu Fehlermeldungen.
 
