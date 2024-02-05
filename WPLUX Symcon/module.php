@@ -14,7 +14,7 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
