@@ -24,6 +24,10 @@ class WPLUXSymcon extends IPSModule
 
         //Variableprofile erstellen
         require_once __DIR__ . '/variable_profile.php';
+
+        // Füge ein Action-Element für die Konfigurationsbestätigung hinzu
+        $this->RegisterVariableBoolean('ConfigConfirmed', 'Konfiguration bestätigt', '~Switch');
+        $this->EnableAction('ConfigConfirmed');
     }
 
     public function ApplyChanges()
@@ -34,10 +38,31 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-        // Führe das Update nur aus, wenn die Konfiguration bestätigt wurde
-        if ($this->HasActiveParent()) 
+        // Führe das Update aus, wenn die Konfiguration bestätigt wurde oder der Timer ausgelöst wurde
+        if ($this->configConfirmed || $this->TimerFlag) 
         {
             $this->Update();
+            $this->configConfirmed = false; // Zurücksetzen für zukünftige Änderungen
+            $this->SetTimerFlag(false); // Timer-Flag zurücksetzen
+        }
+    }
+
+    public function RequestAction($ident, $value)
+    {
+        switch ($ident) {
+            case 'ConfigConfirmed':
+                // Setze den Status der Konfigurationsbestätigung
+                SetValue($this->GetIDForIdent($ident), $value);
+                $this->configConfirmed = $value;
+
+                // Wenn die Konfiguration bestätigt wurde, führe das Update aus
+                if ($this->configConfirmed) {
+                    $this->Update();
+                }
+                break;
+            default:
+                parent::RequestAction($ident, $value);
+                break;
         }
     }
 
