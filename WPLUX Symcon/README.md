@@ -1,5 +1,5 @@
 # WPLUX Symcon
-Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen.
+Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller abzufragen.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
 Vorerst ist kein Eingriff in die Steuerung möglich. Diese Möglichkeit wird in einer späteren Version nachgereicht.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
@@ -24,7 +24,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Abfrage der Istwerte aus der Luxtronic, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
 * Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
 * Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
-* Ebenfalls werden je nach Wärmepumpe nicht alle Werte geliefert. Offensichtlich wird mit einer Software für die Lux alle Wärmepumentypen abgedeckt.
+* Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
 
 ### 2. Voraussetzungen
 
@@ -94,6 +94,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 1.2 (04.02.2024)
+
+- 
 
 Version 1.1 (04.02.2024)
 
