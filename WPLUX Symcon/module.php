@@ -4,6 +4,7 @@ class WPLUXSymcon extends IPSModule
 {
     private $updateTimer;
     private $configConfirmed = false;
+    private $TimerFlag = false;
 
     protected function Log($Message)
     {
