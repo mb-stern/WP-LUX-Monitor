@@ -3,8 +3,6 @@
 class WPLUXSymcon extends IPSModule
 {
     private $updateTimer;
-    private $configConfirmed = false;
-    private $TimerFlag = false;
 
     protected function Log($Message)
     {
@@ -13,52 +11,31 @@ class WPLUXSymcon extends IPSModule
 
     public function Create()
     {
+        //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
+        // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
+        //Variableprofile erstellen
         require_once __DIR__ . '/variable_profile.php';
-
-        $this->RegisterVariableBoolean('ConfigConfirmed', 'Konfiguration bestätigt', '~Switch');
-        $this->EnableAction('ConfigConfirmed');
-
-        $this->configConfirmed = false;
     }
 
     public function ApplyChanges()
     {
+        //Never delete this line!
         parent::ApplyChanges();
 
+        // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-        if ($this->configConfirmed || $this->TimerFlag) 
-        {
-            $this->Update();
-            $this->configConfirmed = false;
-            $this->SetTimerFlag(false);
-        }
-    }
-
-    public function RequestAction($ident, $value)
-    {
-        switch ($ident) {
-            case 'ConfigConfirmed':
-                SetValue($this->GetIDForIdent($ident), $value);
-                $this->configConfirmed = $value;
-
-                if ($this->configConfirmed) {
-                    $this->Update();
-                }
-                break;
-            default:
-                parent::RequestAction($ident, $value);
-                break;
-        }
+        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+        $this->Update();
     }
 
     public function Update()
