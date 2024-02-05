@@ -34,8 +34,9 @@ class WPLUXSymcon extends IPSModule
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
 
-        if (!$this->HasActiveParent()) {
-            // Bei Erstinstallation keine Updatefunktion ausführen
+        // Führe das Update nur aus, wenn die Konfiguration bestätigt wurde
+        if ($this->HasActiveParent()) 
+        {
             $this->Update();
         }
     }
