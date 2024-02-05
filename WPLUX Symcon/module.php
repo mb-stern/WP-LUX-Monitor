@@ -24,6 +24,9 @@ class WPLUXSymcon extends IPSModule
 
         //Variableprofile erstellen
         require_once __DIR__ . '/variable_profile.php';
+
+        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+        $this->Update();
     }
 
     public function ApplyChanges()
@@ -33,9 +36,6 @@ class WPLUXSymcon extends IPSModule
 
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
-
-        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
-        //$this->Update();
     }
 
     public function Update()
