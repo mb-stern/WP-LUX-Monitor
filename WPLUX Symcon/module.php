@@ -30,13 +30,24 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-
-        // Timer für Aktualisierung aktualisieren
-        $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
-
-        // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
-        $this->Update();
+    
+        // Überprüfen, ob die erforderlichen Konfigurationsparameter gesetzt sind
+        $ipAddress = $this->ReadPropertyString('IPAddress');
+        $port = $this->ReadPropertyInteger('Port');
+        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
+    
+        if ($ipAddress && $port && !empty($idListe)) {
+            // Timer für Aktualisierung aktualisieren
+            $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
+    
+            // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+            $this->Update();
+        } else {
+            // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
+            $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
+        }
     }
+    
 
     public function Update()
     {
