@@ -14,11 +14,11 @@
         },
         {
           "type": "Label",
-          "label": "Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
+          "label": "Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
         },
         {
           "type": "Label",
-          "label": "Die Beschreibung und ID's der Variabalen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
+          "label": "Die Beschreibung und ID's der Variablen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
         }
       ]
     },
