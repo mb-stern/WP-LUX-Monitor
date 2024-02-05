@@ -14,7 +14,7 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -36,13 +36,16 @@ class WPLUXSymcon extends IPSModule
         $port = $this->ReadPropertyInteger('Port');
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
     
-        if ($ipAddress && $port && !empty($idListe)) {
+        if ($ipAddress && $port && !empty($idListe)) 
+        {
             // Timer für Aktualisierung aktualisieren
             $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
     
             // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
             $this->Update();
-        } else {
+        } 
+        else 
+        {
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
