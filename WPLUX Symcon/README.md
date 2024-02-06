@@ -98,6 +98,7 @@ Beispiel:
 Version 1.3 (06.02.2024)
 
 - Minustest für Aussentemperatur hinzugefügt, so dass plausible Minuswerte ausgegeben werden
+- Erhöhung der Java-ID's auf 267 wegen Fehlermeldungen gewisser Luxtronic
 
 Version 1.2 (05.02.2024)
 
