@@ -23,30 +23,27 @@
           ]
       },
       {
-          "type": "FlexLayout",
-          "direction": "row",
-          "items": [
-              {
-                  "type": "CheckBox",
-                  "name": "Warmwasser",
-                  "caption": "Warmwasser"
-              },
-              {
-                  "type": "CheckBox",
-                  "name": "Kuehlung",
-                  "caption": "Kühlung"
-              },
-              {
-                  "type": "CheckBox",
-                  "name": "Heizung",
-                  "caption": "Heizung"
-              }
-          ]
+          "type": "CheckBox",
+          "name": "Heizung",
+          "caption": "Heizung",
+          "style": "position: absolute; top: 10px; right: 10px;"
       },
       {
-          "name": "UpdateInterval",
-          "type": "IntervalBox",
-          "caption": "Sekunden"
+          "type": "CheckBox",
+          "name": "Kuehlung",
+          "caption": "Kühlung",
+          "style": "position: absolute; top: 40px; right: 10px;"
+      },
+      {
+          "type": "CheckBox",
+          "name": "Warmwasser",
+          "caption": "Warmwasser",
+          "style": "position: absolute; top: 70px; right: 10px;"
+      },
+      {
+          "name": "IPAddress",
+          "type": "ValidationTextBox",
+          "caption": "IP-Address"
       },
       {
           "name": "Port",
@@ -54,9 +51,9 @@
           "caption": "Port (8888 oder 8889)"
       },
       {
-          "name": "IPAddress",
-          "type": "ValidationTextBox",
-          "caption": "IP-Address"
+          "name": "UpdateInterval",
+          "type": "IntervalBox",
+          "caption": "Sekunden"
       },
       {
           "type": "List",
