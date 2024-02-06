@@ -57,11 +57,11 @@ class WPLUXSymcon extends IPSModule
         // Überprüfen Sie, ob sich der Wert der Heizungsvariable geändert hat
         $oldHeizungValue = $this->ReadPropertyInteger('Heizung');
         $newHeizungValue = $this->ReadPropertyInteger('Heizung');
-
+    
         if ($newHeizungValue !== $oldHeizungValue) 
         {
             // Der Wert hat sich geändert, rufen Sie die sendDataToSocketHeizung() Funktion auf
-            $this->sendDataToSocketHeizung($newHeizungValue);
+            $this->sendDataToSocketHeizung();
             $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
         }
     }
@@ -427,6 +427,9 @@ class WPLUXSymcon extends IPSModule
     // Funktion zum Senden von Daten an den Socket Heizung
     private function sendDataToSocketHeizung()
     {
+        // Wert der Heizungsvariable abrufen
+        $heizungValue = $this->ReadPropertyInteger('Heizung');
+
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
         $wwcJavaPort = $this->ReadPropertyInteger('Port');
@@ -446,7 +449,7 @@ class WPLUXSymcon extends IPSModule
         $this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
-        switch ($newHeizungValue)
+        switch ($heizungValue)
         {
             case 0:
                 $msg = pack('N*', 0); // Auto
