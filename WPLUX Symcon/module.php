@@ -319,7 +319,7 @@ class WPLUXSymcon extends IPSModule
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
             return round($value * 0.1, 1);
             
-            case ($id == 15):    
+            case ($id == 15):    //Aussentemperatur Minustest
             $minusTest = $value * 0.1;
             if ($minusTest > 429496000) 
             {
