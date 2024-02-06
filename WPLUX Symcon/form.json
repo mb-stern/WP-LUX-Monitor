@@ -23,61 +23,19 @@
           ]
       },
       {
-          "type": "GridLayout",
-          "columns": 2,
-          "items": [
-              {
-                  "type": "Label",
-                  "caption": "IP-Address"
-              },
-              {
-                  "name": "IPAddress",
-                  "type": "ValidationTextBox"
-              },
-              {
-                  "type": "Label",
-                  "caption": "Port (8888 oder 8889)"
-              },
-              {
-                  "name": "Port",
-                  "type": "NumberSpinner"
-              },
-              {
-                  "type": "Label",
-                  "caption": "Sekunden"
-              },
-              {
-                  "type": "IntervalBox",
-                  "name": "UpdateInterval"
-              },
-              {
-                  "type": "Label",
-                  "caption": "Heizung"
-              },
-              {
-                  "type": "CheckBox",
-                  "name": "Heizung",
-                  "caption": ""
-              },
-              {
-                  "type": "Label",
-                  "caption": "Kühlung"
-              },
-              {
-                  "type": "CheckBox",
-                  "name": "Kuehlung",
-                  "caption": ""
-              },
-              {
-                  "type": "Label",
-                  "caption": "Warmwasser"
-              },
-              {
-                  "type": "CheckBox",
-                  "name": "Warmwasser",
-                  "caption": ""
-              }
-          ]
+          "name": "IPAddress",
+          "type": "ValidationTextBox",
+          "caption": "IP-Address"
+      },
+      {
+          "name": "Port",
+          "type": "NumberSpinner",
+          "caption": "Port (8888 oder 8889)"
+      },
+      {
+          "type": "IntervalBox",
+          "name": "UpdateInterval",
+          "caption": "Sekunden"
       },
       {
           "type": "List",
@@ -101,6 +59,24 @@
                   }
               }
           ]
+      },
+      {
+          "type": "CheckBox",
+          "name": "Heizung",
+          "caption": "Heizung",
+          "captionRight": true
+      },
+      {
+          "type": "CheckBox",
+          "name": "Kuehlung",
+          "caption": "Kühlung",
+          "captionRight": true
+      },
+      {
+          "type": "CheckBox",
+          "name": "Warmwasser",
+          "caption": "Warmwasser",
+          "captionRight": true
       }
   ]
 }
