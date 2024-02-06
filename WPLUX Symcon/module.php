@@ -53,6 +53,16 @@ class WPLUXSymcon extends IPSModule
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
+
+        // Überprüfen Sie, ob sich der Wert der Heizungsvariable geändert hat
+        $oldHeizungValue = $this->ReadPropertyInteger('Heizung');
+        $newHeizungValue = $this->ReadPropertyInteger('Heizung');
+
+        if ($newHeizungValue !== $oldHeizungValue) 
+        {
+            // Der Wert hat sich geändert, rufen Sie die sendDataToSocket() Funktion auf
+            $this->sendDataToSocketHeizung($newHeizungValue);
+        }
     }
     
 
@@ -413,8 +423,8 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    // Funktion zum Senden von Daten an den Socket
-    private function sendDataToSocket($parameter)
+    // Funktion zum Senden von Daten an den Socket Heizung
+    private function sendDataToSocketHeizung()
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -425,7 +435,8 @@ class WPLUXSymcon extends IPSModule
         $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
         // Wenn die Verbindung fehlschlägt, brechen Sie ab
-        if (!$connect) {
+        if (!$connect) 
+        {
             $this->Log("socket_connect fehlgeschlagen");
             return;
         }
@@ -434,42 +445,40 @@ class WPLUXSymcon extends IPSModule
         $msg = pack('N*', 3002); // 3002 senden aktivieren
         $send = socket_write($socket, $msg, 4);
 
-        // SetParameter senden
-        $msg = pack('N*', $parameter); // Parameter für Heizung Betriebsart
-        $send = socket_write($socket, $msg, 4);
+        //SetParameter senden;
+        $msg = pack('N*',3); //Parameter: 3: Heizung Betriebsart
+        $send=socket_write($socket, $msg, 4);
 
-        switch($_IPS['VALUE']) 
+        // Auswahl senden
+        switch ($this->ReadPropertyInteger('Heizung', 0)) 
         {
- 
             case 0:
-            $msg = pack('N*',0); // Auto                    Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
-                    
-            break;
-         
+                $msg = pack('N*', 0); // Auto
+                break;
             case 1:
-            $msg = pack('N*',1); // Zus. Wärmeerzeugung     Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
-        
-            break;
-         
+                $msg = pack('N*', 1); // Zus. Wärmeerzeugung
+                break;
             case 2:
-            $msg = pack('N*',2); // Party                   Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
-        
-            break;
-         
+                $msg = pack('N*', 2); // Party
+                break;
             case 3:
-            $msg = pack('N*',3); // Ferien                  Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
-           
-            break;
-         
+                $msg = pack('N*', 3); // Ferien
+                break;
             case 4:
-            $msg = pack('N*',4); // Off                     Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+                $msg = pack('N*', 4); // Off
+                break;
+            default:
+                // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
+                $msg = pack('N*', 0); // Auto
+                break;
         }
-        
+
+        // Wert der Variable setzen
         SetValue($_IPS['VARIABLE'], $_IPS['VALUE']);
 
-        $send=socket_write($socket, $msg, 4);
-        
-        
+        // Daten senden
+        $send = socket_write($socket, $msg, 4);
+
         // Daten vom Socket empfangen und verarbeiten
         socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
         $test = unpack('N*', $test);
