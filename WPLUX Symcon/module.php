@@ -47,17 +47,15 @@ class WPLUXSymcon extends IPSModule
     
             // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
             $this->Update();
+
+            // Registrieren Sie ein Ereignis für Änderungen der Heizungsvariable
+            $this->RegisterVariableChange('Heizung', 'sendDataToSocketHeizung');
         } 
         else 
         {
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
-       
-        // rufen Sie die sendDataToSocketHeizung() Funktion auf
-        $this->sendDataToSocketHeizung();
-        $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
-        
     }
     
 
