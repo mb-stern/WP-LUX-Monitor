@@ -60,12 +60,12 @@ class WPLUXSymcon extends IPSModule
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         if ($Message == VM_UPDATE && $SenderID == $this->GetIDForIdent('Heizung')) 
-    {
-        // Die Heizungsvariable wurde aktualisiert, rufen Sie die sendDataToSocketHeizung() Funktion auf
-        $this->sendDataToSocketHeizung();
-        $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
-    }
-
+        {
+            // Die Heizungsvariable wurde aktualisiert, rufen Sie die sendDataToSocketHeizung() Funktion auf
+            $this->sendDataToSocketHeizung();
+            $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
+        }
+    }   
     public function Update()
     {
         //Verbindung zur Lux
