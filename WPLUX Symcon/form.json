@@ -39,18 +39,18 @@
       },
       {
         "type": "CheckBox",
-        "name": "Heizfunktion",
-        "caption": "Heizung"
+        "name": "Heizung",
+        "caption": "Heizfunktion"
     },
     {
         "type": "CheckBox",
-        "name": "Kühlfunktion",
-        "caption": "Kuehlung"
+        "name": "Kuehlung",
+        "caption": "Kühlfunktion"
     },
     {
         "type": "CheckBox",
         "name": "Warmwasser",
-        "caption": "Warmwasser"
+        "caption": "Warmwasser-Produktion"
     },
       {
           "type": "List",
