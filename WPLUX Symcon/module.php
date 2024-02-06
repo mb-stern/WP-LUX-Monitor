@@ -47,9 +47,6 @@ class WPLUXSymcon extends IPSModule
     
             // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
             $this->Update();
-
-            // Registrieren Sie ein Ereignis für Änderungen der Heizungsvariable
-            $this->RegisterMessage($this->GetIDForIdent('Heizung'), VM_UPDATE);
         } 
         else 
         {
@@ -57,15 +54,7 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
     }
-    public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
-    {
-        if ($Message == VM_UPDATE && $SenderID == $this->GetIDForIdent('Heizung')) 
-        {
-            // Die Heizungsvariable wurde aktualisiert, rufen Sie die sendDataToSocketHeizung() Funktion auf
-            $this->sendDataToSocketHeizung();
-            $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
-        }
-     }   
+    
     public function Update()
     {
         //Verbindung zur Lux
