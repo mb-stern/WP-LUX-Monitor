@@ -95,9 +95,9 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 1.2 (05.02.2024)
+Version 1.3 (06.02.2024)
 
--
+- Minustest für Aussentemperatur hinzugefügt, so dass plausible Minuswerte ausgegeben werden
 
 Version 1.2 (05.02.2024)
 
