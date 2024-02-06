@@ -320,16 +320,17 @@ class WPLUXSymcon extends IPSModule
             return round($value * 0.1, 1);
             
             case ($id == 15):    
-            if ($value > 429496000) 
+            $minusTest = $value * 0.1;
+            if ($minusTest > 429496000) 
                 {
                     $value -= 4294967296;
-                    return round($value * 0.1, 1);  
+                    $value *= 0.1; 
                 } 
                 else 
                 {
-                    return round($value * 0.1, 1); 
+                    $value *= 0.1; 
                 }
-                    
+            return round($value, 1); 
 
             case ($id == 147 || ($id >= 151 && $id <= 154) || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || $id == 183 || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
             return round($value * 0.01, 1);
