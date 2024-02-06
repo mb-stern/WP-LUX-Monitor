@@ -412,4 +412,72 @@ class WPLUXSymcon extends IPSModule
             IPS_DeleteVariable($variableID);
         }
     }
+
+    // Funktion zum Senden von Daten an den Socket
+    private function sendDataToSocket($parameter)
+    {
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+
+        // Wenn die Verbindung fehlschlägt, brechen Sie ab
+        if (!$connect) {
+            $this->Log("socket_connect fehlgeschlagen");
+            return;
+        }
+
+        // Daten senden
+        $msg = pack('N*', 3002); // 3002 senden aktivieren
+        $send = socket_write($socket, $msg, 4);
+
+        // SetParameter senden
+        $msg = pack('N*', $parameter); // Parameter für Heizung Betriebsart
+        $send = socket_write($socket, $msg, 4);
+
+        switch($_IPS['VALUE']) 
+        {
+ 
+            case 0:
+            $msg = pack('N*',0); // Auto                    Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+                    
+            break;
+         
+            case 1:
+            $msg = pack('N*',1); // Zus. Wärmeerzeugung     Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+        
+            break;
+         
+            case 2:
+            $msg = pack('N*',2); // Party                   Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+        
+            break;
+         
+            case 3:
+            $msg = pack('N*',3); // Ferien                  Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+           
+            break;
+         
+            case 4:
+            $msg = pack('N*',4); // Off                     Value: 0:Auto - 1: Zus. Wärmeerzeugung - 2:Party - 3:Ferien - 4:Off
+        }
+        
+        SetValue($_IPS['VARIABLE'], $_IPS['VALUE']);
+
+        $send=socket_write($socket, $msg, 4);
+        
+        
+        // Daten vom Socket empfangen und verarbeiten
+        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
+        $test = unpack('N*', $test);
+
+        socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
+        $test = unpack('N*', $test);
+
+        // Socket schließen
+        socket_close($socket);
+    }
 }
