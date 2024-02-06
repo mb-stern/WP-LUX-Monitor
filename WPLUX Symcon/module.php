@@ -60,7 +60,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($newHeizungValue !== $oldHeizungValue) 
         {
-            // Der Wert hat sich geändert, rufen Sie die sendDataToSocket() Funktion auf
+            // Der Wert hat sich geändert, rufen Sie die sendDataToSocketHeizung() Funktion auf
             $this->sendDataToSocketHeizung($newHeizungValue);
         }
     }
@@ -434,13 +434,6 @@ class WPLUXSymcon extends IPSModule
         $socket = socket_create(AF_INET, SOCK_STREAM, 0);
         $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-        // Wenn die Verbindung fehlschlägt, brechen Sie ab
-        if (!$connect) 
-        {
-            $this->Log("socket_connect fehlgeschlagen");
-            return;
-        }
-
         // Daten senden
         $msg = pack('N*', 3002); // 3002 senden aktivieren
         $send = socket_write($socket, $msg, 4);
@@ -448,6 +441,8 @@ class WPLUXSymcon extends IPSModule
         //SetParameter senden;
         $msg = pack('N*',3); //Parameter: 3: Heizung Betriebsart
         $send=socket_write($socket, $msg, 4);
+
+        $this->SendDebug("Sollwert für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
         switch ($newHeizungValue)
