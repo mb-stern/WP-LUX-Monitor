@@ -53,6 +53,10 @@ class WPLUXSymcon extends IPSModule
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
+
+        // sendDataToSocketHeizung() Funktion aufrufen
+        $this->sendDataToSocketHeizung();
+        $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
     }
     
     public function Update()
