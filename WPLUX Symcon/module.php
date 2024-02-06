@@ -65,7 +65,7 @@ class WPLUXSymcon extends IPSModule
             $this->sendDataToSocketHeizung();
             $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
         }
-    }   
+     }   
     public function Update()
     {
         //Verbindung zur Lux
