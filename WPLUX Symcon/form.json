@@ -45,11 +45,11 @@
     {
         "type": "CheckBox",
         "name": "Kühlfunktion",
-        "caption": "Kühlung"
+        "caption": "Kuehlung"
     },
     {
         "type": "CheckBox",
-        "name": "Warmwasser-Produktion",
+        "name": "Warmwasser",
         "caption": "Warmwasser"
     },
       {
