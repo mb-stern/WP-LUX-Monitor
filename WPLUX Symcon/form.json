@@ -23,21 +23,6 @@
           ]
       },
       {
-          "type": "CheckBox",
-          "name": "Heizung",
-          "caption": "Heizung"
-      },
-      {
-          "type": "CheckBox",
-          "name": "Kuehlung",
-          "caption": "Kühlung"
-      },
-      {
-          "type": "CheckBox",
-          "name": "Warmwasser",
-          "caption": "Warmwasser"
-      },
-      {
           "name": "IPAddress",
           "type": "ValidationTextBox",
           "caption": "IP-Address"
@@ -52,6 +37,21 @@
           "type": "IntervalBox",
           "caption": "Sekunden"
       },
+      {
+        "type": "CheckBox",
+        "name": "Heizung",
+        "caption": "Heizung"
+    },
+    {
+        "type": "CheckBox",
+        "name": "Kuehlung",
+        "caption": "Kühlung"
+    },
+    {
+        "type": "CheckBox",
+        "name": "Warmwasser",
+        "caption": "Warmwasser"
+    },
       {
           "type": "List",
           "name": "IDListe",
