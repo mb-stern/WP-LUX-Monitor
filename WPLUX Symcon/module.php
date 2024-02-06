@@ -450,7 +450,7 @@ class WPLUXSymcon extends IPSModule
         $send=socket_write($socket, $msg, 4);
 
         // Auswahl senden
-        switch ($this->ReadPropertyInteger('Heizung', 0)) 
+        switch ($newHeizungValue)
         {
             case 0:
                 $msg = pack('N*', 0); // Auto
