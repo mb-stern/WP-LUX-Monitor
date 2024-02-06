@@ -322,7 +322,7 @@ class WPLUXSymcon extends IPSModule
             case ($id == 15):    
             if ($value > 429496000) 
                 {
-                    $value[$i] -= 4294967296;
+                    $value -= 4294967296;
                     return round($value * 0.1, 1);  
                 } 
                 else 
