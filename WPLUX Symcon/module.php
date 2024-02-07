@@ -420,11 +420,10 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    // Funktion zum Senden von Daten an den Socket Heizung
     private function sendDataToSocketHeizung($heizungValue)
     {
         // Wert der Heizungsvariable abrufen
-        $heizungValue = $this->ReadPropertyInteger('Heizung');
+        //$heizungValue = $this->ReadPropertyInteger('Heizung');
 
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -467,9 +466,6 @@ class WPLUXSymcon extends IPSModule
                 $msg = pack('N*', 0); // Auto
                 break;
         }
-
-        // Wert der Variable setzen
-        //SetValue($_IPS['VARIABLE'], $_IPS['VALUE']);
 
         // Daten senden
         $send = socket_write($socket, $msg, 4);
