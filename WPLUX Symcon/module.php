@@ -56,7 +56,8 @@ class WPLUXSymcon extends IPSModule
 
          // Den Wert der Heizungseigenschaft lesen
         $heizungValue = $this->ReadPropertyInteger('Heizung');
-        
+        $this->SendDebug("Heizungswert", "".$heizungValue."", 0);
+
         // sendDataToSocketHeizung() Funktion aufrufen und den Wert übergeben
         $this->sendDataToSocketHeizung($heizungValue);
         $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
