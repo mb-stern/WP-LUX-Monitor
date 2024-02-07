@@ -442,7 +442,7 @@ class WPLUXSymcon extends IPSModule
         $msg = pack('N*',3); //Parameter: 3: Heizung Betriebsart
         $send=socket_write($socket, $msg, 4);
 
-        $this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
+        //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
         switch ($heizungValue)
