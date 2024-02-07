@@ -14,7 +14,7 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -50,8 +50,18 @@ class WPLUXSymcon extends IPSModule
 
             // Den Wert der Heizungsvariable lesen und an die Funktion senden
             $heizungValue = $this->ReadPropertyInteger('Heizung');
-            $this->SendDebug("Heizungswert", "".$heizungValue."", 0);
+            $this->SendDebug("Heizfunktion", "".$heizungValue."", 0);
             $this->sendDataToSocketHeizung($heizungValue);
+
+            // Den Wert der Warmwasservariable lesen und an die Funktion senden
+            $warmwasserValue = $this->ReadPropertyInteger('Warmwasser');
+            $this->SendDebug("Warmwasserfunktion", "".$warmwasserValue."", 0);
+            $this->sendDataToSocketHeizung($warmwasserValue);
+
+            // Den Wert der Kühlungsvariable lesen und an die Funktion senden
+            $kuehlungValue = $this->ReadPropertyInteger('Kuehlung');
+            $this->SendDebug("Kühlfunktion", "".$kuehlungValue."", 0);
+            $this->sendDataToSocketHeizung($kuehlungValue);
         } 
         else 
         {
@@ -454,6 +464,113 @@ class WPLUXSymcon extends IPSModule
                 break;
             case 4:
                 $msg = pack('N*', 4); // Off
+                break;
+            default:
+                // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
+                $msg = pack('N*', 0); // Auto
+                break;
+        }
+
+        // Daten senden
+        $send = socket_write($socket, $msg, 4);
+
+        // Daten vom Socket empfangen und verarbeiten
+        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
+        $test = unpack('N*', $test);
+
+        socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
+        $test = unpack('N*', $test);
+
+        // Socket schließen
+        socket_close($socket);
+    }
+
+    private function sendDataToSocketHeizung($warmwasserValue)
+    {
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+
+        // Daten senden
+        $msg = pack('N*', 3002); // 3002 senden aktivieren
+        $send = socket_write($socket, $msg, 4);
+
+        //SetParameter senden;
+        $msg = pack('N*',4); //Parameter: 3: Heizung Betriebsart
+        $send=socket_write($socket, $msg, 4);
+
+        //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
+
+        // Auswahl senden
+        switch ($warmwasserValue)
+        {
+            case 0:
+                $msg = pack('N*', 0); // Auto
+                break;
+            case 1:
+                $msg = pack('N*', 1); // Zus. Wärmeerzeugung
+                break;
+            case 2:
+                $msg = pack('N*', 2); // Party
+                break;
+            case 3:
+                $msg = pack('N*', 3); // Ferien
+                break;
+            case 4:
+                $msg = pack('N*', 4); // Off
+                break;
+            default:
+                // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
+                $msg = pack('N*', 0); // Auto
+                break;
+        }
+
+        // Daten senden
+        $send = socket_write($socket, $msg, 4);
+
+        // Daten vom Socket empfangen und verarbeiten
+        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
+        $test = unpack('N*', $test);
+
+        socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
+        $test = unpack('N*', $test);
+
+        // Socket schließen
+        socket_close($socket);
+    }
+
+    private function sendDataToSocketHeizung($kuehlungValue)
+    {
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+
+        // Daten senden
+        $msg = pack('N*', 3002); // 3002 senden aktivieren
+        $send = socket_write($socket, $msg, 4);
+
+        //SetParameter senden;
+        $msg = pack('N*',108); //Parameter: 3: Heizung Betriebsart
+        $send=socket_write($socket, $msg, 4);
+
+        //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
+
+        // Auswahl senden
+        switch ($kuehlungValue)
+        {
+            case 0:
+                $msg = pack('N*', 0); // Auto
+                break;
+            case 1:
+                $msg = pack('N*', 1); // Off
                 break;
             default:
                 // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
