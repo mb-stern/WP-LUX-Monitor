@@ -47,20 +47,17 @@ class WPLUXSymcon extends IPSModule
     
             // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
             $this->Update();
+
+            // Den Wert der Heizungsvariable lesen und an die Funktion senden
+            $heizungValue = $this->ReadPropertyInteger('Heizung');
+            $this->SendDebug("Heizungswert", "".$heizungValue."", 0);
+            $this->sendDataToSocketHeizung($heizungValue);
         } 
         else 
         {
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
-
-         // Den Wert der Heizungseigenschaft lesen
-        $heizungValue = $this->ReadPropertyInteger('Heizung');
-        $this->SendDebug("Heizungswert", "".$heizungValue."", 0);
-
-        // sendDataToSocketHeizung() Funktion aufrufen und den Wert übergeben
-        $this->sendDataToSocketHeizung($heizungValue);
-        $this->SendDebug("Heizungseinstellung", "Neue Heizungseinstellung der Funktion sendDataToSocketHeizung übergeben.", 0);
     }
     
     public function Update()
