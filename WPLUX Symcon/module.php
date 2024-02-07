@@ -567,10 +567,10 @@ class WPLUXSymcon extends IPSModule
         switch ($kuehlungValue)
         {
             case 0:
-                $msg = pack('N*', 0); // Auto
+                $msg = pack('N*', 0); // Off
                 break;
             case 1:
-                $msg = pack('N*', 1); // Off
+                $msg = pack('N*', 1); // Auto
                 break;
             default:
                 // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
