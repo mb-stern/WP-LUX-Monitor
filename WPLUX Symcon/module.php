@@ -23,6 +23,16 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyInteger('Kuehlung', 0);
         $this->RegisterPropertyInteger('Warmwasser', 0);
 
+        // Variablen erstellen und mit Initialwerten versehen
+        $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Intensity');
+        $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Intensity');
+        $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Intensity');
+
+        // Initialwerte setzen
+        $this->SetValue('HeizungVariable', $this->ReadPropertyInteger('Heizung'));
+        $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
+        $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
+
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
 
@@ -68,6 +78,10 @@ class WPLUXSymcon extends IPSModule
             // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
+
+            $this->SetValue('HeizungVariable', $this->ReadPropertyInteger('Heizung'));
+            $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
+            $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
     }
     
     public function Update()
