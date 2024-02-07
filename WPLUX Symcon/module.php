@@ -469,7 +469,7 @@ class WPLUXSymcon extends IPSModule
         }
 
         // Wert der Variable setzen
-        SetValue($_IPS['VARIABLE'], $_IPS['VALUE']);
+        //SetValue($_IPS['VARIABLE'], $_IPS['VALUE']);
 
         // Daten senden
         $send = socket_write($socket, $msg, 4);
