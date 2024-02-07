@@ -14,7 +14,7 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -422,9 +422,6 @@ class WPLUXSymcon extends IPSModule
 
     private function sendDataToSocketHeizung($heizungValue)
     {
-        // Wert der Heizungsvariable abrufen
-        //$heizungValue = $this->ReadPropertyInteger('Heizung');
-
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
         $wwcJavaPort = $this->ReadPropertyInteger('Port');
