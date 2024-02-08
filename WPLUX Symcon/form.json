@@ -25,17 +25,17 @@
         {
             "type": "CheckBox",
             "name": "HeizungVisible",
-            "caption": "Heizung Variable anzeigen"
+            "caption": "Einstellungen für Heizung aktivieren"
         },
         {
             "type": "CheckBox",
             "name": "KuehlungVisible",
-            "caption": "Kühlung Variable anzeigen"
+            "caption": "Einstellungen für Kühlung aktivieren"
         },
         {
             "type": "CheckBox",
             "name": "WarmwasserVisible",
-            "caption": "Warmwasser Variable anzeigen"
+            "caption": "Einstellungen für Warmwasser aktivieren"
         },
         {
             "name": "IPAddress",

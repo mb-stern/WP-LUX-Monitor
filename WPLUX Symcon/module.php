@@ -22,12 +22,6 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
         
-        /*
-        $this->RegisterPropertyInteger('Heizung', 0);
-        $this->RegisterPropertyInteger('Kuehlung', 0);
-        $this->RegisterPropertyInteger('Warmwasser', 0); 
-        */
-        
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
@@ -61,12 +55,12 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
 
-            // Überprüfen, ob die Checkboxen zum erstellen der Variablen aktiviert sind
+            // Überprüfen, ob die Checkboxen im Konfigurationsformuler zum erstellen der Variablen aktiviert sind
             $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
             $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
             $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
 
-            // Variablen erstellen und mit Initialwerten versehen
+            // Variablen erstellen und senden an die Funktionen einrichten
             if ($heizungVisible) {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
                 $heizungValue = $this->GetValue('HeizungVariable');
