@@ -17,7 +17,7 @@ class WPLUXSymcon extends IPSModule
         //Variableprofile erstellen
         require_once __DIR__ . '/variable_profile.php';
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.59');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -52,24 +52,6 @@ class WPLUXSymcon extends IPSModule
             // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
             $this->Update();
 
-            /*
-            // Den Wert der Heizungsvariable lesen und an die Funktion senden
-            $heizungValue = $this->ReadPropertyInteger('Heizung');
-            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
-            $this->sendDataToSocketHeizung($heizungValue);
-
-            
-            // Den Wert der Warmwasservariable lesen und an die Funktion senden
-            $warmwasserValue = $this->ReadPropertyInteger('Warmwasser');
-            $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$warmwasserValue."", 0);
-            $this->sendDataToSocketWarmwasser($warmwasserValue);
-
-            /*
-            // Den Wert der Kühlungsvariable lesen und an die Funktion senden
-            $kuehlungValue = $this->ReadPropertyInteger('Kuehlung');
-            $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
-            $this->sendDataToSocketKuehlung($kuehlungValue);
-            */
         } 
         else 
         {
