@@ -63,7 +63,7 @@ class WPLUXSymcon extends IPSModule
             $this->sendDataToSocketWarmwasser($warmwasserValue);
 
             // Den Wert der Kühlungsvariable lesen und an die Funktion senden
-            $kuehlungValue = $this->ReadVariableInteger('KuehlungVariable');
+            $kuehlungValue = $this->ReadPropertyInteger('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
             $this->sendDataToSocketKuehlung($kuehlungValue);
         } 
@@ -73,7 +73,7 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
 
-            // Überprüfen, ob die Checkboxen aktiviert sind
+            // Überprüfen, ob die Checkboxen zum erstellen der Variablen aktiviert sind
             $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
             $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
             $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
