@@ -79,15 +79,34 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
 
-            // Werte der Bool-Variablen aus dem form.json auslesen
+            // Überprüfen, ob die Checkboxen aktiviert sind
             $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
             $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
             $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
 
-            // Sichtbarkeit der Variablen anpassen
-            IPS_SetHidden($this->GetIDForIdent('HeizungVariable'), !$heizungVisible);
-            IPS_SetHidden($this->GetIDForIdent('KuehlungVariable'), !$kuehlungVisible);
-            IPS_SetHidden($this->GetIDForIdent('WarmwasserVariable'), !$warmwasserVisible);
+            // Variablen erstellen und mit Initialwerten versehen
+            if ($heizungVisible) {
+                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
+                $this->SetValue('HeizungVariable', $this->ReadPropertyInteger('Heizung'));
+            } else {
+                $this->UnregisterVariable('HeizungVariable');
+            }
+
+            if ($kuehlungVisible) {
+                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Valve');
+                $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
+            } else {
+                $this->UnregisterVariable('KuehlungVariable');
+            }
+
+            if ($warmwasserVisible) {
+                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Valve');
+                $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
+            } 
+            else 
+            {
+                $this->UnregisterVariable('WarmwasserVariable');
+            }
     }
     
     public function Update()
