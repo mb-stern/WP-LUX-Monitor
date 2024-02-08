@@ -90,7 +90,7 @@ class WPLUXSymcon extends IPSModule
 
             if ($kuehlungVisible) {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Valve');
-                $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
+                //$this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
                 $kuehlungValue = $this->GetValue('KuehlungVariable');
                 $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
                 $this->sendDataToSocketKuehlung($kuehlungValue);
