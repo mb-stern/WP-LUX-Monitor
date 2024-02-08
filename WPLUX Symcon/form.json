@@ -37,33 +37,6 @@
           "type": "IntervalBox",
           "caption": "Sekunden"
       },
-      {
-        "name": "Heizung",
-        "type": "Select",
-        "caption": "Heizung",
-        "options": [
-            {
-                "caption": "Automatik",
-                "value": 0
-            },
-            {
-                "caption": "Zusätzlicher Wärmeerzeuger",
-                "value": 1
-            },
-            {
-                "caption": "Party",
-                "value": 2
-            },
-            {
-                "caption": "Ferien",
-                "value": 3
-            },
-            {
-                "caption": "Aus",
-                "value": 4
-            }
-        ]
-    },
     {
         "elements": [
             {
