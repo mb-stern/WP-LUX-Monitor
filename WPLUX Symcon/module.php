@@ -14,6 +14,9 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
+        //Variableprofile erstellen
+        require_once __DIR__ . '/variable_profile.php';
+
         $this->RegisterPropertyString('IPAddress', '192.168.178.59');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
@@ -33,13 +36,36 @@ class WPLUXSymcon extends IPSModule
         $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
         $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
 
-        // Timer für Aktualisierung registrieren
-        $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');
+        // Ereignisse für Variablenänderungen erstellen
+        $this->RegisterMessage($this->GetIDForIdent('HeizungVariable'), VM_UPDATE);
+        $this->RegisterMessage($this->GetIDForIdent('KuehlungVariable'), VM_UPDATE);
+        $this->RegisterMessage($this->GetIDForIdent('WarmwasserVariable'), VM_UPDATE);
 
-        //Variableprofile erstellen
-        require_once __DIR__ . '/variable_profile.php';
+        // Timer für Aktualisierung registrieren
+        $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
     }
 
+    public function MessageSink($timestamp, $senderID, $message, $data)
+{
+    if ($message == VM_UPDATE) 
+    {
+        // Überprüfen, welcher Wert sich geändert hat und die entsprechende Eigenschaft aktualisieren
+        switch ($senderID) 
+        {
+            case $this->GetIDForIdent('HeizungVariable'):
+                $this->WriteAttributeInteger('Heizung', GetValue($senderID));
+                break;
+            case $this->GetIDForIdent('KuehlungVariable'):
+                $this->WriteAttributeInteger('Kuehlung', GetValue($senderID));
+                break;
+            case $this->GetIDForIdent('WarmwasserVariable'):
+                $this->WriteAttributeInteger('Warmwasser', GetValue($senderID));
+                break;
+            default:
+                break;
+        }
+    }
+}
     public function ApplyChanges()
     {
         //Never delete this line!
