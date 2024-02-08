@@ -36,36 +36,10 @@ class WPLUXSymcon extends IPSModule
         $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
         $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
 
-        // Ereignisse für Variablenänderungen erstellen
-        $this->RegisterMessage($this->GetIDForIdent('HeizungVariable'), VM_UPDATE);
-        $this->RegisterMessage($this->GetIDForIdent('KuehlungVariable'), VM_UPDATE);
-        $this->RegisterMessage($this->GetIDForIdent('WarmwasserVariable'), VM_UPDATE);
-
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
     }
 
-    public function MessageSink($timestamp, $senderID, $message, $data)
-{
-    if ($message == VM_UPDATE) 
-    {
-        // Überprüfen, welcher Wert sich geändert hat und die entsprechende Eigenschaft aktualisieren
-        switch ($senderID) 
-        {
-            case $this->GetIDForIdent('HeizungVariable'):
-                $this->WriteAttributeInteger('Heizung', GetValue($senderID));
-                break;
-            case $this->GetIDForIdent('KuehlungVariable'):
-                $this->WriteAttributeInteger('Kuehlung', GetValue($senderID));
-                break;
-            case $this->GetIDForIdent('WarmwasserVariable'):
-                $this->WriteAttributeInteger('Warmwasser', GetValue($senderID));
-                break;
-            default:
-                break;
-        }
-    }
-}
     public function ApplyChanges()
     {
         //Never delete this line!
@@ -105,9 +79,15 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
         }
 
-            $this->SetValue('HeizungVariable', $this->ReadPropertyInteger('Heizung'));
-            $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
-            $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
+            // Werte der Bool-Variablen aus dem form.json auslesen
+            $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
+            $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
+            $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
+
+            // Sichtbarkeit der Variablen anpassen
+            IPS_SetHidden($this->GetIDForIdent('HeizungVariable'), !$heizungVisible);
+            IPS_SetHidden($this->GetIDForIdent('KuehlungVariable'), !$kuehlungVisible);
+            IPS_SetHidden($this->GetIDForIdent('WarmwasserVariable'), !$warmwasserVisible);
     }
     
     public function Update()
