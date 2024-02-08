@@ -40,6 +40,24 @@ class WPLUXSymcon extends IPSModule
         require_once __DIR__ . '/variable_profile.php';
     }
 
+    public function PropertyUpdated($property, $value)
+{
+    switch ($property) {
+        case 'Heizung':
+            $this->SetValue('HeizungVariable', $value);
+            break;
+        case 'Kuehlung':
+            $this->SetValue('KuehlungVariable', $value);
+            break;
+        case 'Warmwasser':
+            $this->SetValue('WarmwasserVariable', $value);
+            break;
+        default:
+            // handle unknown property
+            break;
+    }
+}
+
     public function ApplyChanges()
     {
         //Never delete this line!
