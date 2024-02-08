@@ -24,12 +24,7 @@ class WPLUXSymcon extends IPSModule
 
         $this->RegisterPropertyInteger('Heizung', 0);
         $this->RegisterPropertyInteger('Kuehlung', 0);
-        $this->RegisterPropertyInteger('Warmwasser', 0);
-
-        // Variablen erstellen und mit Initialwerten versehen
-        $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
-        $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Valve');
-        $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Valve');
+        $this->RegisterPropertyInteger('Warmwasser', 0); 
 
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
