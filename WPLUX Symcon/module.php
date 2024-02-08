@@ -22,19 +22,16 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
+        /*
         $this->RegisterPropertyInteger('Heizung', 0);
         $this->RegisterPropertyInteger('Kuehlung', 0);
         $this->RegisterPropertyInteger('Warmwasser', 0);
+        */
 
         // Variablen erstellen und mit Initialwerten versehen
         $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
         $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Valve');
         $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Valve');
-
-        // Initialwerte setzen
-        $this->SetValue('HeizungVariable', $this->ReadPropertyInteger('Heizung'));
-        $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
-        $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
 
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
@@ -63,17 +60,17 @@ class WPLUXSymcon extends IPSModule
             $this->Update();
 
             // Den Wert der Heizungsvariable lesen und an die Funktion senden
-            $heizungValue = $this->ReadPropertyInteger('Heizung');
+            $heizungValue =  $this->RegisterVariableInteger('HeizungVariable');
             $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
             $this->sendDataToSocketHeizung($heizungValue);
 
             // Den Wert der Warmwasservariable lesen und an die Funktion senden
-            $warmwasserValue = $this->ReadPropertyInteger('Warmwasser');
+            $warmwasserValue = $this->RegisterVariableInteger('WarmwasserVariable');
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$warmwasserValue."", 0);
             $this->sendDataToSocketWarmwasser($warmwasserValue);
 
             // Den Wert der Kühlungsvariable lesen und an die Funktion senden
-            $kuehlungValue = $this->ReadPropertyInteger('Kuehlung');
+            $kuehlungValue = $this->RegisterVariableInteger('KuehlungVariable');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
             $this->sendDataToSocketKuehlung($kuehlungValue);
         } 
