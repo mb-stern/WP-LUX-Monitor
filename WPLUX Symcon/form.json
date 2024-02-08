@@ -23,21 +23,6 @@
             ]
         },
         {
-            "type": "CheckBox",
-            "name": "HeizungVisible",
-            "caption": "Einstellungen für Heizung aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "KuehlungVisible",
-            "caption": "Einstellungen für Kühlung aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "WarmwasserVisible",
-            "caption": "Einstellungen für Warmwasser aktivieren"
-        },
-        {
             "name": "IPAddress",
             "type": "ValidationTextBox",
             "caption": "IP-Address"
@@ -51,6 +36,21 @@
             "name": "UpdateInterval",
             "type": "IntervalBox",
             "caption": "Sekunden"
+        },
+        {
+            "type": "CheckBox",
+            "name": "HeizungVisible",
+            "caption": "Einstellungen für Heizung aktivieren"
+        },
+        {
+            "type": "CheckBox",
+            "name": "KuehlungVisible",
+            "caption": "Einstellungen für Kühlung aktivieren"
+        },
+        {
+            "type": "CheckBox",
+            "name": "WarmwasserVisible",
+            "caption": "Einstellungen für Warmwasser aktivieren"
         },
         {
             "type": "List",
