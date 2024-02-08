@@ -63,7 +63,7 @@ class WPLUXSymcon extends IPSModule
             $this->sendDataToSocketWarmwasser($warmwasserValue);
 
             // Den Wert der Kühlungsvariable lesen und an die Funktion senden
-            $kuehlungValue = $this->ReadPropertyInteger('Kuehlung');
+            $kuehlungValue = $this->GetValue('KuehlungVariable');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
             $this->sendDataToSocketKuehlung($kuehlungValue);
         } 
