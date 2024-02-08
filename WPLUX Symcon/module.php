@@ -85,7 +85,7 @@ class WPLUXSymcon extends IPSModule
             // Variablen erstellen und mit Initialwerten versehen
             if ($heizungVisible) {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
-                $heizungValue = $this->ReadPropertyInteger('HeizungVariable');
+                $heizungValue = $this->GetValue('HeizungVariable');
                 $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
                 $this->sendDataToSocketHeizung($heizungValue);
 
@@ -104,7 +104,7 @@ class WPLUXSymcon extends IPSModule
 
             if ($warmwasserVisible) {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Valve');
-                $warmwasserValue = $this->ReadPropertyInteger('WarmwasserVariable');
+                $warmwasserValue = $this->GetValue('WarmwasserVariable');
                 $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$warmwasserValue."", 0);
                 $this->sendDataToSocketWarmwasser($warmwasserValue);
             } 
