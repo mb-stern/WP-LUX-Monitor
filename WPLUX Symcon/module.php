@@ -106,6 +106,10 @@ class WPLUXSymcon extends IPSModule
             {
                 $this->UnregisterVariable('WarmwasserVariable');
             }
+
+            $kuehlungValue = $this->GetValue('KuehlungVariable');
+            $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
+            $this->sendDataToSocketKuehlung($kuehlungValue);
     }
     
     public function Update()
