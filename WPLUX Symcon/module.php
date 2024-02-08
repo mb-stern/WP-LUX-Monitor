@@ -22,9 +22,11 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
 
+        /*
         $this->RegisterPropertyInteger('Heizung', 0);
         $this->RegisterPropertyInteger('Kuehlung', 0);
         $this->RegisterPropertyInteger('Warmwasser', 0); 
+        */
 
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
