@@ -36,10 +36,6 @@ class WPLUXSymcon extends IPSModule
         $this->SetValue('KuehlungVariable', $this->ReadPropertyInteger('Kuehlung'));
         $this->SetValue('WarmwasserVariable', $this->ReadPropertyInteger('Warmwasser'));
 
-        $this->RegisterPropertyBoolean('HeizungVisible');
-        $this->RegisterPropertyBoolean('KuehlungVisible');
-        $this->RegisterPropertyBoolean('WarmwasserVisible');
-
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
     }
