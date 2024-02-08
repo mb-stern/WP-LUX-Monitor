@@ -65,44 +65,21 @@
         ]
     },
     {
-        "name": "Kuehlung",
-        "type": "Select",
-        "caption": "Kühlung",
-        "options": [
+        "elements": [
             {
-                "caption": "Automatik",
-                "value": 1
+                "type": "CheckBox",
+                "name": "ShowHeizungVariable",
+                "caption": "Heizung anzeigen"
             },
             {
-                "caption": "Aus",
-                "value": 0
-            }
-        ]
-    },
-    {
-        "name": "Warmwasser",
-        "type": "Select",
-        "caption": "Warmwasser",
-        "options": [
-            {
-                "caption": "Automatik",
-                "value": 0
+                "type": "CheckBox",
+                "name": "ShowKuehlungVariable",
+                "caption": "Kühlung anzeigen"
             },
             {
-                "caption": "Zusätzlicher Wärmeerzeuger",
-                "value": 1
-            },
-            {
-                "caption": "Party",
-                "value": 2
-            },
-            {
-                "caption": "Ferien",
-                "value": 3
-            },
-            {
-                "caption": "Aus",
-                "value": 4
+                "type": "CheckBox",
+                "name": "ShowWarmwasserVariable",
+                "caption": "Warmwasser anzeigen"
             }
         ]
     },
