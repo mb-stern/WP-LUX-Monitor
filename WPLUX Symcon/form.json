@@ -37,22 +37,72 @@
           "type": "IntervalBox",
           "caption": "Sekunden"
       },
+      {
+        "name": "Heizung",
+        "type": "Select",
+        "caption": "Heizung",
+        "options": [
+            {
+                "caption": "Automatik",
+                "value": 0
+            },
+            {
+                "caption": "Zusätzlicher Wärmeerzeuger",
+                "value": 1
+            },
+            {
+                "caption": "Party",
+                "value": 2
+            },
+            {
+                "caption": "Ferien",
+                "value": 3
+            },
+            {
+                "caption": "Aus",
+                "value": 4
+            }
+        ]
+    },
     {
-        "elements": [
+        "name": "Kuehlung",
+        "type": "Select",
+        "caption": "Kühlung",
+        "options": [
             {
-                "type": "CheckBox",
-                "name": "ShowHeizungVariable",
-                "caption": "Heizung anzeigen"
+                "caption": "Automatik",
+                "value": 1
             },
             {
-                "type": "CheckBox",
-                "name": "ShowKuehlungVariable",
-                "caption": "Kühlung anzeigen"
+                "caption": "Aus",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "name": "Warmwasser",
+        "type": "Select",
+        "caption": "Warmwasser",
+        "options": [
+            {
+                "caption": "Automatik",
+                "value": 0
             },
             {
-                "type": "CheckBox",
-                "name": "ShowWarmwasserVariable",
-                "caption": "Warmwasser anzeigen"
+                "caption": "Zusätzlicher Wärmeerzeuger",
+                "value": 1
+            },
+            {
+                "caption": "Party",
+                "value": 2
+            },
+            {
+                "caption": "Ferien",
+                "value": 3
+            },
+            {
+                "caption": "Aus",
+                "value": 4
             }
         ]
     },
