@@ -24,7 +24,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
 * Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
-* Es können nun Steuervariablen für Heizung, Warmwasser und Kühlung im Konfigurationsformuler aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Die aktuellen Zustände werden von der Lux geholt
+* Es können nun Steuervariablen für Heizung, Warmwasser und Kühlung im Konfigurationsformuler aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Die aktuellen Zustände werden von der Lux geholt. Mit jeder Änderung im Konfigurationsformuler werden diese Werte erneut von der Lux synchronisiert.
 
 ### 2. Voraussetzungen
 
