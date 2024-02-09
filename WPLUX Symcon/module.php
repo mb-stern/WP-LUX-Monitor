@@ -64,6 +64,7 @@ class WPLUXSymcon extends IPSModule
             if ($heizungVisible) 
             {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
+                $this->getParameter();
                 $Value = $this->GetValue('HeizungVariable');
                 $this->EnableAction('HeizungVariable');
 
@@ -75,6 +76,7 @@ class WPLUXSymcon extends IPSModule
             if ($kuehlungVisible) 
             {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
+                $this->getParameter();
                 $Value = $this->GetValue('KuehlungVariable');   
                 $this->EnableAction('KuehlungVariable');;
             } else 
@@ -683,27 +685,21 @@ class WPLUXSymcon extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 
         {
-            /*
             if ($i == 3) // Betriebsart Heizung
                 {($daten_raw[$i] = $daten_raw[$i]);
-                  $varid = CreateVariableByName($parentID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
-                  setValue($varid,$daten_raw[$i]);
+                $this->SetValue('HeizungVariable',$daten_raw[$i]);
                 }
-            */
             
             
             if ($i == 4) // Betriebsart Warmwasser
                 {($daten_raw[$i] = $daten_raw[$i]);
-                  $this->SetValue('WarmwasserVariable',$daten_raw[$i]);
+                $this->SetValue('WarmwasserVariable',$daten_raw[$i]);
                 }
             
-            /*
             if ($i == 108) // Betriebsart Kühlung
                 {($daten_raw[$i] = $daten_raw[$i]);
-                  $varid = CreateVariableByName($parentID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
-                  setValue($varid,$daten_raw[$i]);
+                $this->SetValue('KuelungVariable',$daten_raw[$i]);
                 }
-            */
          }
     }
 }
