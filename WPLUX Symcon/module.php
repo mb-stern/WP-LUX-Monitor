@@ -63,40 +63,64 @@ class WPLUXSymcon extends IPSModule
             // Variablen erstellen und senden an RequestAction
             if ($heizungVisible) 
             {
-                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-                
-                $Value = $this->GetValue('HeizungVariable');
-                $this->EnableAction('HeizungVariable');
-
+                if (IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
+                    // Die Variable existiert bereits, also rufe getParameter() auf
+                    $this->getParameter();
+                } else {
+                    // Die Variable existiert noch nicht, registriere sie
+                    $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
+                    // Rufe getParameter() auf, nachdem die Variable registriert wurde
+                    $this->getParameter();
+                    // Du kannst hier auch andere Aktionen durchführen, z.B. den Wert setzen und die Aktion aktivieren
+                    $Value = $this->GetValue('HeizungVariable');
+                    $this->EnableAction('HeizungVariable');
+                }
             } else 
             {
                 $this->UnregisterVariable('HeizungVariable');
             }
-
+            
             if ($kuehlungVisible) 
             {
-                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-                
-                $Value = $this->GetValue('KuehlungVariable');   
-                $this->EnableAction('KuehlungVariable');;
+                if (IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
+                    // Die Variable existiert bereits, also rufe getParameter() auf
+                    $this->getParameter();
+                } else {
+                    // Die Variable existiert noch nicht, registriere sie
+                    $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
+                    // Rufe getParameter() auf, nachdem die Variable registriert wurde
+                    $this->getParameter();
+                    // Du kannst hier auch andere Aktionen durchführen, z.B. den Wert setzen und die Aktion aktivieren
+                    $Value = $this->GetValue('KuehlungVariable');
+                    $this->EnableAction('KuehlungVariable');
+                }
             } else 
             {
                 $this->UnregisterVariable('KuehlungVariable');
             }
-
+            
             if ($warmwasserVisible) 
             {
-                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                
-                $Value = $this->GetValue('WarmwasserVariable');
-                $this->EnableAction('WarmwasserVariable');
+                if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
+                    // Die Variable existiert bereits, also rufe getParameter() auf
+                    $this->getParameter();
+                } else {
+                    // Die Variable existiert noch nicht, registriere sie
+                    $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
+                    // Rufe getParameter() auf, nachdem die Variable registriert wurde
+                    $this->getParameter();
+                    // Du kannst hier auch andere Aktionen durchführen, z.B. den Wert setzen und die Aktion aktivieren
+                    $Value = $this->GetValue('WarmwasserVariable');
+                    $this->EnableAction('WarmwasserVariable');
+                }
             } 
             else 
             {
                 $this->UnregisterVariable('WarmwasserVariable');
             }
+            
 
-            $this->getParameter();
+
     }
 
     public function RequestAction($Ident, $Value) 
