@@ -93,7 +93,7 @@ class WPLUXSymcon extends IPSModule
 
     }
 
-    public function RequestAction($Ident, $heizungValue) {
+    public function RequestAction($Ident, $heizungValue, $kuehlungValue, $warmwasserValue) {
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'HeizungVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
