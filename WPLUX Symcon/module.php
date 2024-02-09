@@ -702,7 +702,7 @@ class WPLUXSymcon extends IPSModule
             if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
                 $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
             } else {
-                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+                IPS_Sleep(1000); // Wartezeit von 100 Millisekunden
                 $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
             }
         }
