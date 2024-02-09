@@ -689,22 +689,16 @@ class WPLUXSymcon extends IPSModule
         // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 
-        {
-            if ($i == 3) // Betriebsart Heizung
-            {
-                $this->SetValue('HeizungVariable', $daten_raw[$i]);
-            }
-
-            if ($i == 4) // Betriebsart Warmwasser
-            {
-                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-            }
-
-            if ($i == 108) // Betriebsart Kühlung
-            {
-                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-            }
-
-         }
+        if ($i == 3 && IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
+            $this->SetValue('HeizungVariable', $daten_raw[$i]);
+        }
+        
+        if ($i == 4 && IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
+            $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+        }
+        
+        if ($i == 108 && IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
+            $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+        }
     }
 }
