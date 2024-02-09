@@ -686,19 +686,35 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schliessen
         socket_close($socket);
         
-        // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        // Werte holen
+        for ($i = 0; $i < $JavaWerte; ++$i)
 
-        if ($i == 3 && IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
-            $this->SetValue('HeizungVariable', $daten_raw[$i]);
+        if ($i == 3) { // Betriebsart Heizung
+            if (IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
+                $this->SetValue('HeizungVariable', $daten_raw[$i]);
+            } else {
+                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+                $this->SetValue('HeizungVariable', $daten_raw[$i]);
+            }
         }
         
-        if ($i == 4 && IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
-            $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+        if ($i == 4) { // Betriebsart Warmwasser
+            if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
+                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+            } else {
+                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+            }
         }
         
-        if ($i == 108 && IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
-            $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+        if ($i == 108) { // Betriebsart Kühlung
+            if (IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
+                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+            } else {
+                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+            }
         }
+        
     }
 }
