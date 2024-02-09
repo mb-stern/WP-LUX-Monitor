@@ -34,6 +34,8 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+
+        $this->getParameter();
     
         // Überprüfen, ob die erforderlichen Konfigurationsparameter gesetzt sind
         $ipAddress = $this->ReadPropertyString('IPAddress');
@@ -87,7 +89,7 @@ class WPLUXSymcon extends IPSModule
             if ($warmwasserVisible) 
             {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                $this->getParameter();
+                
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
             } 
@@ -648,8 +650,6 @@ class WPLUXSymcon extends IPSModule
 
     private function getParameter()
     {
-        // Namen der Variablen laden (3003 Parameter lesen)
-        //require_once __DIR__ . '/java_3003.php';
 
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
