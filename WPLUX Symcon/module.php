@@ -709,10 +709,8 @@ class WPLUXSymcon extends IPSModule
             if ($i == 108) // Betriebsart Kühlung
             {
                 // Überprüfen, ob die Variable 'KuehlungVariable' vorhanden ist
-                if ($this->GetIDForIdent('KuehlungVariable') !== false) {
                     $daten_raw[$i] = $daten_raw[$i];
                     $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-                }
             }
 
          }
