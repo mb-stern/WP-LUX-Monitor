@@ -64,7 +64,7 @@ class WPLUXSymcon extends IPSModule
             if ($heizungVisible) 
             {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-                $this->getParameter();
+                
                 $Value = $this->GetValue('HeizungVariable');
                 $this->EnableAction('HeizungVariable');
 
@@ -76,7 +76,7 @@ class WPLUXSymcon extends IPSModule
             if ($kuehlungVisible) 
             {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-                $this->getParameter();
+                
                 $Value = $this->GetValue('KuehlungVariable');   
                 $this->EnableAction('KuehlungVariable');;
             } else 
@@ -87,7 +87,7 @@ class WPLUXSymcon extends IPSModule
             if ($warmwasserVisible) 
             {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                $this->getParameter();
+                
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
             } 
@@ -101,6 +101,9 @@ class WPLUXSymcon extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
+
+        $this->getParameter();
+        
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'HeizungVariable') 
         {
@@ -691,17 +694,17 @@ class WPLUXSymcon extends IPSModule
         {
             if ($i == 3) // Betriebsart Heizung
             {
-                    $this->SetValue('HeizungVariable', $daten_raw[$i]);
+                $this->SetValue('HeizungVariable', $daten_raw[$i]);
             }
 
             if ($i == 4) // Betriebsart Warmwasser
             {
-                    $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
             }
 
             if ($i == 108) // Betriebsart Kühlung
             {
-                    $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
             }
 
          }
