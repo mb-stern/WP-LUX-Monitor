@@ -98,10 +98,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 1.3 (06.02.2024)
+Version 1.3 (09.02.2024)
 
 - Minustest für Aussentemperatur hinzugefügt, so dass plausible Minuswerte ausgegeben werden
 - Erhöhung der Java-ID's auf 267 wegen Fehlermeldungen gewisser Luxtronic
+- Es können Variabeln zur Steuerung der Heizung, Warmwasser und Kühlung aktiviert und somit die Modis geschalten werden
 
 Version 1.2 (05.02.2024)
 

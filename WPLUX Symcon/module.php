@@ -85,6 +85,7 @@ class WPLUXSymcon extends IPSModule
             if ($warmwasserVisible) 
             {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
+                private function getParameter()
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
             } 
@@ -132,8 +133,8 @@ class WPLUXSymcon extends IPSModule
         //Debug senden
         $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
-        // Namen der Variablen laden
-        require_once __DIR__ . '/java_daten.php';
+        // Namen der Variablen laden (3004 Berechnungen lesen)
+        require_once __DIR__ . '/java_3004.php';
 
         // Lese die ID-Liste
         $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
@@ -555,8 +556,6 @@ class WPLUXSymcon extends IPSModule
         $msg = pack('N*',4); //Parameter: 3: Heizung Betriebsart
         $send=socket_write($socket, $msg, 4);
 
-        //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
-
         // Auswahl senden
         switch ($Value)
         {
@@ -613,8 +612,6 @@ class WPLUXSymcon extends IPSModule
         $msg = pack('N*',108); //Parameter: 3: Heizung Betriebsart
         $send=socket_write($socket, $msg, 4);
 
-        //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
-
         // Auswahl senden
         switch ($Value)
         {
@@ -642,5 +639,71 @@ class WPLUXSymcon extends IPSModule
 
         // Socket schließen
         socket_close($socket);
+    }
+
+    private function getParameter()
+    {
+        // Namen der Variablen laden (3003 Parameter lesen)
+        require_once __DIR__ . '/java_3003.php';
+
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+
+        // Daten holen
+        $msg = pack('N*', 3003); // 3003 Daten holen
+        $send = socket_write($socket, $msg, 4); //3003 senden
+
+        $msg = pack('N*',0);
+        $send=socket_write($socket, $msg, 4); //0 senden
+
+        socket_recv($socket,$Test,4,MSG_WAITALL);  // Lesen, sollte 3003 zurückkommen
+        $Test = unpack('N*',$Test);
+        //printf('read:%s <br>',implode($Test));
+        
+        
+        socket_recv($socket,$Test,4,MSG_WAITALL); // Länge der nachfolgenden Werte
+        $Test = unpack('N*',$Test);
+        
+        $JavaWerte = implode($Test);
+
+        /for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        {
+        socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+        $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
+        }
+        //socket wieder schliessen
+        socket_close($socket);
+        
+        // Werte anzeigen
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+
+        {
+            /*
+            if ($i == 3) // Betriebsart Heizung
+                {($daten_raw[$i] = $daten_raw[$i]);
+                  $varid = CreateVariableByName($parentID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
+                  setValue($varid,$daten_raw[$i]);
+                }
+            */
+            
+            
+            if ($i == 4) // Betriebsart Warmwasser
+                {($daten_raw[$i] = $daten_raw[$i]);
+                  $this->SetValue('WarmwasserVariable',$daten_raw[$i]);
+                }
+            
+            /*
+            if ($i == 108) // Betriebsart Kühlung
+                {($daten_raw[$i] = $daten_raw[$i]);
+                  $varid = CreateVariableByName($parentID, $java_dataset[$i], 2, 'WP_'.$java_dataset[$i], "", $i);//float
+                  setValue($varid,$daten_raw[$i]);
+                }
+            */
+         }
     }
 }
