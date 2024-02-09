@@ -85,7 +85,7 @@ class WPLUXSymcon extends IPSModule
             if ($warmwasserVisible) 
             {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                $this->getParameter();
+                //$this->getParameter();
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
             } 
