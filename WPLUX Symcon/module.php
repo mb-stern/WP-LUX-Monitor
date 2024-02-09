@@ -65,7 +65,7 @@ class WPLUXSymcon extends IPSModule
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
                 $heizungValue = $this->GetValue('HeizungVariable');
                 $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
-                $this->sendDataToSocketHeizung($heizungValue);
+                $this->EnableAction('HeizungVariable');
 
             } else {
                 $this->UnregisterVariable('HeizungVariable');
@@ -91,6 +91,14 @@ class WPLUXSymcon extends IPSModule
                 $this->UnregisterVariable('WarmwasserVariable');
             }
 
+    }
+
+    public function RequestAction($Ident, $heizungValue) {
+        // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
+        if ($Ident == 'HeizungVariable') {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->sendDataToSocketHeizung($heizungValue);
+        }
     }
     
     public function Update()
