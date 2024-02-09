@@ -34,8 +34,6 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-
-        $this->getParameter();
     
         // Überprüfen, ob die erforderlichen Konfigurationsparameter gesetzt sind
         $ipAddress = $this->ReadPropertyString('IPAddress');
@@ -66,7 +64,7 @@ class WPLUXSymcon extends IPSModule
             if ($heizungVisible) 
             {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-                
+                $this->getParameter('Heizung');
                 $Value = $this->GetValue('HeizungVariable');
                 $this->EnableAction('HeizungVariable');
 
@@ -78,7 +76,7 @@ class WPLUXSymcon extends IPSModule
             if ($kuehlungVisible) 
             {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-                
+                $this->getParameter('Kuehlung');
                 $Value = $this->GetValue('KuehlungVariable');   
                 $this->EnableAction('KuehlungVariable');;
             } else 
@@ -89,7 +87,7 @@ class WPLUXSymcon extends IPSModule
             if ($warmwasserVisible) 
             {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                
+                $this->getParameter('Warmwasser');
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
             } 
@@ -684,29 +682,25 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schliessen
         socket_close($socket);
         
-        // Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
-
+        //// Werte anzeigen
+    for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+    {
+        if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
         {
-            if ($i == 3) // Betriebsart Heizung
-            {
-                $this->SetValue('HeizungVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
-            }
-
-            if ($i == 4) // Betriebsart Warmwasser
-            {
-                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
-            }
-
-            if ($i == 108) // Betriebsart Kühlung
-            {
-                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
-            }
-
-         }
+            $this->SetValue('HeizungVariable', $daten_raw[$i]);
+            $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
+        }
+        elseif ($mode == 'Warmwasser' && $i == 4) // Betriebsart Warmwasser
+        {
+            $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+            $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
+        }
+        elseif ($mode == 'Kuehlung' && $i == 108) // Betriebsart Kühlung
+        {
+            $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+            $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
+        }
+    }
         
     }
 }
