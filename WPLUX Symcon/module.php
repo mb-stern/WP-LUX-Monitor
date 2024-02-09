@@ -691,17 +691,19 @@ class WPLUXSymcon extends IPSModule
             if ($i == 3) // Betriebsart Heizung
             {
                 $this->SetValue('HeizungVariable', $daten_raw[$i]);
+                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
             }
 
             if ($i == 4) // Betriebsart Warmwasser
             {
                 $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                $this->SendDebug("Einstellung", "Einstellung Warmwasser geholt", 0);
+                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
             }
 
             if ($i == 108) // Betriebsart Kühlung
             {
                 $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
             }
 
          }
