@@ -62,7 +62,7 @@ class WPLUXSymcon extends IPSModule
 
             // Variablen erstellen und senden an die Funktionen einrichten
             if ($heizungVisible) {
-                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', '~Valve');
+                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
                 $heizungValue = $this->GetValue('HeizungVariable');
                 $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
                 $this->sendDataToSocketHeizung($heizungValue);
@@ -72,7 +72,7 @@ class WPLUXSymcon extends IPSModule
             }
 
             if ($kuehlungVisible) {
-                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', '~Valve');
+                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
                 $kuehlungValue = $this->GetValue('KuehlungVariable');
                 $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
                 $this->sendDataToSocketKuehlung($kuehlungValue);
@@ -81,7 +81,7 @@ class WPLUXSymcon extends IPSModule
             }
 
             if ($warmwasserVisible) {
-                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', '~Valve');
+                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
                 $warmwasserValue = $this->GetValue('WarmwasserVariable');
                 $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$warmwasserValue."", 0);
                 $this->sendDataToSocketWarmwasser($warmwasserValue);

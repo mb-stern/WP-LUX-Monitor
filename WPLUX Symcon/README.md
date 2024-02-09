@@ -80,6 +80,9 @@ WPLUX.Akt     |  Bool
 WPLUX.Pres    |  Float
 WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
+WPLUX.Wwhe	|  Integer
+WPLUX.Kue	|  Integer
+
 
 ### 6. WebFront
 
