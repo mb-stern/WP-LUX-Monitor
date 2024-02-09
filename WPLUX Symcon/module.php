@@ -510,9 +510,6 @@ class WPLUXSymcon extends IPSModule
                 break;
         }
 
-        //Debug senden
-        $this->SendDebug("Socketverbindung", "Dieser Wert wurde an den Socket gesendet: ".$parameter."", 0);
-        
         // SetParameter senden
         $msg = pack('N*', $parameter);
         $send = socket_write($socket, $msg, 4);
@@ -527,6 +524,9 @@ class WPLUXSymcon extends IPSModule
                 $value = ($value >= 0 && $value <= 4) ? $value : 0;
                 break;
         }
+
+                //Debug senden
+                $this->SendDebug("Socketverbindung", "Parameter: ".$parameter." Wert: ".$value."", 0);
 
         $msg = pack('N*', $value); // Wert packen
         $send = socket_write($socket, $msg, 4); // Daten senden
