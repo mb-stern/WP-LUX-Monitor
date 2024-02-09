@@ -487,62 +487,6 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    private function sendDataToSocketHeizung($Value)
-    {
-        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
-        $ipWwc = $this->ReadPropertyString('IPAddress');
-        $wwcJavaPort = $this->ReadPropertyInteger('Port');
-
-        // Verbindung zum Socket herstellen
-        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
-
-        // Daten senden
-        $msg = pack('N*', 3002); // 3002 senden aktivieren
-        $send = socket_write($socket, $msg, 4);
-
-        //SetParameter senden;
-        $msg = pack('N*',3); //Parameter: 3: Heizung Betriebsart
-        $send=socket_write($socket, $msg, 4);
-
-        // Auswahl senden
-        switch ($Value)
-        {
-            case 0:
-                $msg = pack('N*', 0); // Auto
-                break;
-            case 1:
-                $msg = pack('N*', 1); // Zus. Wärmeerzeugung
-                break;
-            case 2:
-                $msg = pack('N*', 2); // Party
-                break;
-            case 3:
-                $msg = pack('N*', 3); // Ferien
-                break;
-            case 4:
-                $msg = pack('N*', 4); // Off
-                break;
-            default:
-                // Fallback auf einen Standardwert, falls der Wert außerhalb des erwarteten Bereichs liegt
-                $msg = pack('N*', 0); // Auto
-                break;
-        }
-
-        // Daten senden
-        $send = socket_write($socket, $msg, 4);
-
-        // Daten vom Socket empfangen und verarbeiten
-        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
-        $test = unpack('N*', $test);
-
-        socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
-        $test = unpack('N*', $test);
-
-        // Socket schließen
-        socket_close($socket);
-    }
-
     private function sendDataToSocket($type, $value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
