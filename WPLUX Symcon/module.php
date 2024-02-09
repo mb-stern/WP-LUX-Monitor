@@ -43,7 +43,7 @@ class WPLUXSymcon extends IPSModule
         if ($ipAddress == '192.168.178.0') 
         {
             $this->SetStatus(201); // Status 201 für ungültige Konfiguration setzen
-            $this->SendDebug('Bitte konfigurieren Sie die IP-Adresse in den Geräteeinstellungen.'); // Benachrichtigung anzeigen
+            $this->SendDebug("Konfiguration", "Bitte konfigurieren Sie die IP-Adresse in den Geräteeinstellungen.", 0);   
         } 
         else 
         {
