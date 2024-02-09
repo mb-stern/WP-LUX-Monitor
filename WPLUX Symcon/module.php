@@ -62,50 +62,41 @@ class WPLUXSymcon extends IPSModule
 
             // Variablen erstellen und senden an RequestAction
             if ($heizungVisible) 
-{
-    $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-    // getParameter() nur aufrufen, wenn die Variable erfolgreich registriert wurde
-    if (IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
-        $this->getParameter();
-        $Value = $this->GetValue('HeizungVariable');
-        $this->EnableAction('HeizungVariable');
-    }
-    // Wenn die Variable nicht vorhanden ist, wird sie nicht genutzt und bleibt unverändert
-} else 
-{
-    $this->UnregisterVariable('HeizungVariable');
-}
+            {
+                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
+                            $this->getParameter();
+                $Value = $this->GetValue('HeizungVariable');
+                $this->EnableAction('HeizungVariable');
 
-if ($kuehlungVisible) 
-{
-    $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-    // getParameter() nur aufrufen, wenn die Variable erfolgreich registriert wurde
-    if (IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
-        $this->getParameter();
-        $Value = $this->GetValue('KuehlungVariable');
-        $this->EnableAction('KuehlungVariable');
-    }
-    // Wenn die Variable nicht vorhanden ist, wird sie nicht genutzt und bleibt unverändert
-} else 
-{
-    $this->UnregisterVariable('KuehlungVariable');
-}
+            } else 
+            {
+                $this->UnregisterVariable('HeizungVariable');
+            }
 
-if ($warmwasserVisible) 
-{
-    $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-    // getParameter() nur aufrufen, wenn die Variable erfolgreich registriert wurde
-    if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
-        $this->getParameter();
-        $Value = $this->GetValue('WarmwasserVariable');
-        $this->EnableAction('WarmwasserVariable');
-    }
-    // Wenn die Variable nicht vorhanden ist, wird sie nicht genutzt und bleibt unverändert
-} 
-else 
-{
-    $this->UnregisterVariable('WarmwasserVariable');
-} 
+            if ($kuehlungVisible) 
+            {
+                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
+                $this->getParameter();
+                $Value = $this->GetValue('KuehlungVariable');   
+                $this->EnableAction('KuehlungVariable');;
+            } else 
+            {
+                $this->UnregisterVariable('KuehlungVariable');
+            }
+
+            if ($warmwasserVisible) 
+            {
+                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
+                $this->getParameter();
+                $Value = $this->GetValue('WarmwasserVariable');
+                $this->EnableAction('WarmwasserVariable');
+            } 
+            else 
+            {
+                $this->UnregisterVariable('WarmwasserVariable');
+            }
+
+
     }
 
     public function RequestAction($Ident, $Value) 
