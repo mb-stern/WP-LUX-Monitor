@@ -690,25 +690,18 @@ class WPLUXSymcon extends IPSModule
         {
             if ($i == 3) // Betriebsart Heizung
             {
-                // Überprüfen, ob die Variable 'HeizungVariable' vorhanden ist
-                if ($this->GetIDForIdent('HeizungVariable') !== false) {
                     $daten_raw[$i] = $daten_raw[$i];
                     $this->SetValue('HeizungVariable', $daten_raw[$i]);
-                }
             }
 
             if ($i == 4) // Betriebsart Warmwasser
             {
-                // Überprüfen, ob die Variable 'WarmwasserVariable' vorhanden ist
-                if ($this->GetIDForIdent('WarmwasserVariable') !== false) {
                     $daten_raw[$i] = $daten_raw[$i];
                     $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                }
             }
 
             if ($i == 108) // Betriebsart Kühlung
             {
-                // Überprüfen, ob die Variable 'KuehlungVariable' vorhanden ist
                     $daten_raw[$i] = $daten_raw[$i];
                     $this->SetValue('KuehlungVariable', $daten_raw[$i]);
             }
