@@ -40,17 +40,17 @@
         {
             "type": "CheckBox",
             "name": "HeizungVisible",
-            "caption": "Einstellungen für Heizung aktivieren"
+            "caption": "Steuervariable für Heizungs-Modus aktivieren"
         },
         {
             "type": "CheckBox",
             "name": "KuehlungVisible",
-            "caption": "Einstellungen für Kühlung aktivieren"
+            "caption": "Steuervariable für Kühlungs-Modus aktivieren"
         },
         {
             "type": "CheckBox",
             "name": "WarmwasserVisible",
-            "caption": "Einstellungen für Warmwasser aktivieren"
+            "caption": "Steuervariable für Warmwasser-Modus aktivieren"
         },
         {
             "type": "List",
