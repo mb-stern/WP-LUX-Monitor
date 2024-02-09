@@ -63,8 +63,8 @@ class WPLUXSymcon extends IPSModule
             // Variablen erstellen und senden an RequestAction
             if ($heizungVisible) {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-                $heizungValue = $this->GetValue('HeizungVariable');
-                $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$heizungValue."", 0);
+                $Value = $this->GetValue('HeizungVariable');
+                $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
                 $this->EnableAction('HeizungVariable');
 
             } else {
@@ -73,8 +73,8 @@ class WPLUXSymcon extends IPSModule
 
             if ($kuehlungVisible) {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-                $kuehlungValue = $this->GetValue('KuehlungVariable');
-                $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$kuehlungValue."", 0);
+                $Value = $this->GetValue('KuehlungVariable');
+                $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
                 $this->EnableAction('KuehlungVariable');;
             } else {
                 $this->UnregisterVariable('KuehlungVariable');
@@ -82,8 +82,8 @@ class WPLUXSymcon extends IPSModule
 
             if ($warmwasserVisible) {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                $warmwasserValue = $this->GetValue('WarmwasserVariable');
-                $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$warmwasserValue."", 0);
+                $Value = $this->GetValue('WarmwasserVariable');
+                $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
                 $this->EnableAction('WarmwasserVariable');
             } 
             else 
@@ -93,28 +93,23 @@ class WPLUXSymcon extends IPSModule
 
     }
 
-    public function RequestAction($Ident, $heizungValue, $kuehlungValue, $warmwasserValue) 
-    {
+    public function RequestAction($Ident, $Value) {
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'HeizungVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocketHeizung($heizungValue);
+            $this->sendDataToSocketHeizung($Value);
         }
     
-       
-  
-    // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
+        // Überprüfe, ob die Aktion von der 'KuehlungVariable' ausgelöst wurde
         if ($Ident == 'KuehlungVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocketKuehlung($kuehlungValue);
+            $this->sendDataToSocketKuehlung($Value);
         }
-   
- 
     
-        // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
+        // Überprüfe, ob die Aktion von der 'WarmwasserVariable' ausgelöst wurde
         if ($Ident == 'WarmwasserVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocketWarmwasser($warmwasserValue);
+            $this->sendDataToSocketWarmwasser($Value);
         }
     }
     
@@ -475,7 +470,7 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    private function sendDataToSocketHeizung($heizungValue)
+    private function sendDataToSocketHeizung($Value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -496,7 +491,7 @@ class WPLUXSymcon extends IPSModule
         //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
-        switch ($heizungValue)
+        switch ($Value)
         {
             case 0:
                 $msg = pack('N*', 0); // Auto
@@ -533,7 +528,7 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
     }
 
-    private function sendDataToSocketWarmwasser($warmwasserValue)
+    private function sendDataToSocketWarmwasser($Value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -554,7 +549,7 @@ class WPLUXSymcon extends IPSModule
         //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
-        switch ($warmwasserValue)
+        switch ($Value)
         {
             case 0:
                 $msg = pack('N*', 0); // Auto
@@ -591,7 +586,7 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
     }
 
-    private function sendDataToSocketKuehlung($kuehlungValue)
+    private function sendDataToSocketKuehlung($Value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -612,7 +607,7 @@ class WPLUXSymcon extends IPSModule
         //$this->SendDebug("Parameter für Heizfunktion", "".$socket.":".$msg."", 0);
 
         // Auswahl senden
-        switch ($kuehlungValue)
+        switch ($Value)
         {
             case 0:
                 $msg = pack('N*', 0); // Off
