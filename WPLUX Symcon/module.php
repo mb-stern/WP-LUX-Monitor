@@ -544,63 +544,63 @@ class WPLUXSymcon extends IPSModule
     }
 
     private function sendDataToSocket($type, $value)
-{
-    // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
-    $ipWwc = $this->ReadPropertyString('IPAddress');
-    $wwcJavaPort = $this->ReadPropertyInteger('Port');
+    {
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
 
-    // Verbindung zum Socket herstellen
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-    $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-    // Daten senden
-    $msg = pack('N*', 3002); // 3002 senden aktivieren
-    $send = socket_write($socket, $msg, 4);
+        // Daten senden
+        $msg = pack('N*', 3002); // 3002 senden aktivieren
+        $send = socket_write($socket, $msg, 4);
 
-    // Parameter je nach Typ festlegen
-    switch ($type) {
-        case 'Heizung':
-            $parameter = 3;
-            break;
-        case 'Warmwasser':
-            $parameter = 4;
-            break;
-        case 'Kuehlung':
-            $parameter = 108;
-            break;
-        default:
-            $parameter = 0;
-            break;
+        // Parameter je nach Typ festlegen
+        switch ($type) {
+            case 'Heizung':
+                $parameter = 3;
+                break;
+            case 'Warmwasser':
+                $parameter = 4;
+                break;
+            case 'Kuehlung':
+                $parameter = 108;
+                break;
+            default:
+                $parameter = 0;
+                break;
+        }
+
+        // SetParameter senden
+        $msg = pack('N*', $parameter);
+        $send = socket_write($socket, $msg, 4);
+
+        // Auswahl senden
+        switch ($type) {
+            case 'Kuehlung':
+                $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
+                break;
+            default:
+                // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
+                $value = ($value >= 0 && $value <= 4) ? $value : 0;
+                break;
+        }
+
+        $msg = pack('N*', $value); // Wert packen
+        $send = socket_write($socket, $msg, 4); // Daten senden
+
+        // Daten vom Socket empfangen und verarbeiten
+        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
+        $test = unpack('N*', $test);
+
+        socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
+        $test = unpack('N*', $test);
+
+        // Socket schließen
+        socket_close($socket);
     }
-
-    // SetParameter senden
-    $msg = pack('N*', $parameter);
-    $send = socket_write($socket, $msg, 4);
-
-    // Auswahl senden
-    switch ($type) {
-        case 'Kuehlung':
-            $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
-            break;
-        default:
-            // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
-            $value = ($value >= 0 && $value <= 4) ? $value : 0;
-            break;
-    }
-
-    $msg = pack('N*', $value); // Wert packen
-    $send = socket_write($socket, $msg, 4); // Daten senden
-
-    // Daten vom Socket empfangen und verarbeiten
-    socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
-    $test = unpack('N*', $test);
-
-    socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
-    $test = unpack('N*', $test);
-
-    // Socket schließen
-    socket_close($socket);
-}
 
     private function getParameter($mode)
     {
