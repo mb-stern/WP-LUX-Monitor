@@ -599,6 +599,6 @@ class WPLUXSymcon extends IPSModule
     }
         
     //Debug senden
-    $this->SendDebug("Socketverbindung", "Empfangen der Parameter: ".$mode." und der Wert: ".$daten_raw[$i]." wurde vom Socket abgefragt", 0);
+    $this->SendDebug("Socketverbindung", "Empfangen der Parameter: ".$mode." und der Wert: ".$i." wurde vom Socket abgefragt", 0);
     }
 }
