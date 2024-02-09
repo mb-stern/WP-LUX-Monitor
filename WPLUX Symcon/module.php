@@ -17,7 +17,7 @@ class WPLUXSymcon extends IPSModule
         //Variableprofile erstellen
         require_once __DIR__ . '/variable_profile.php';
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.58');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -35,68 +35,63 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
     
-        // Überprüfen, ob die erforderlichen Konfigurationsparameter gesetzt sind
+        // Hole die IP-Adresse und andere Konfigurationseinstellungen
         $ipAddress = $this->ReadPropertyString('IPAddress');
         $port = $this->ReadPropertyInteger('Port');
-        $idListe = json_decode($this->ReadPropertyString('IDListe'), true);
-    
-        if ($ipAddress && $port && !empty($idListe)) 
+
+        // Überprüfe, ob die IP-Adresse nicht die Muster-IP ist
+        if ($ipAddress == '192.168.178.0') 
         {
-            // Timer für Aktualisierung aktualisieren
-            $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
-    
-            // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
-            $this->Update();
+            $this->SetStatus(201); // Status 201 für ungültige Konfiguration setzen
+            $this->SendDebug('Bitte konfigurieren Sie die IP-Adresse in den Geräteeinstellungen.'); // Benachrichtigung anzeigen
+        } 
+        else 
+        {
+            // Verbindung herstellen oder andere erforderliche Initialisierungen durchführen
+        }
+
+        // Überprüfen, ob die Checkboxen im Konfigurationsformuler zum erstellen der Variablen aktiviert sind
+        $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
+        $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
+        $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
+
+        // Variablen erstellen und senden an RequestAction
+        if ($heizungVisible) 
+        {
+            $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
+            $this->getParameter('Heizung');
+            $Value = $this->GetValue('HeizungVariable');
+            $this->EnableAction('HeizungVariable');
 
         } 
         else 
         {
-            // Erforderliche Konfigurationsparameter fehlen, hier kannst du ggf. eine Warnung ausgeben
-            $this->SendDebug("Konfigurationsfehler", "Erforderliche Konfigurationsparameter fehlen.", 0);
+            $this->UnregisterVariable('HeizungVariable');
         }
 
-            // Überprüfen, ob die Checkboxen im Konfigurationsformuler zum erstellen der Variablen aktiviert sind
-            $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
-            $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
-            $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
+        if ($kuehlungVisible) 
+        {
+            $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
+            $this->getParameter('Kuehlung');
+            $Value = $this->GetValue('KuehlungVariable');   
+            $this->EnableAction('KuehlungVariable');;
+        } 
+        else 
+        {
+            $this->UnregisterVariable('KuehlungVariable');
+        }
 
-            // Variablen erstellen und senden an RequestAction
-            if ($heizungVisible) 
-            {
-                $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
-                $this->getParameter('Heizung');
-                $Value = $this->GetValue('HeizungVariable');
-                $this->EnableAction('HeizungVariable');
-
-            } else 
-            {
-                $this->UnregisterVariable('HeizungVariable');
-            }
-
-            if ($kuehlungVisible) 
-            {
-                $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
-                $this->getParameter('Kuehlung');
-                $Value = $this->GetValue('KuehlungVariable');   
-                $this->EnableAction('KuehlungVariable');;
-            } else 
-            {
-                $this->UnregisterVariable('KuehlungVariable');
-            }
-
-            if ($warmwasserVisible) 
-            {
-                $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
-                $this->getParameter('Warmwasser');
-                $Value = $this->GetValue('WarmwasserVariable');
-                $this->EnableAction('WarmwasserVariable');
-            } 
-            else 
-            {
-                $this->UnregisterVariable('WarmwasserVariable');
-            }
-
-
+        if ($warmwasserVisible) 
+        {
+            $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
+            $this->getParameter('Warmwasser');
+            $Value = $this->GetValue('WarmwasserVariable');
+            $this->EnableAction('WarmwasserVariable');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('WarmwasserVariable');
+        }
     }
 
     public function RequestAction($Ident, $Value) 
