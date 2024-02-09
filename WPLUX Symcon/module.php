@@ -684,38 +684,27 @@ class WPLUXSymcon extends IPSModule
         //socket wieder schliessen
         socket_close($socket);
         
-        // Werte holen
-        for ($i = 0; $i < $JavaWerte; ++$i)
+        // Werte anzeigen
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 
-        if ($i == 3) { // Betriebsart Heizung
-            if (IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
-                $this->SetValue('HeizungVariable', $daten_raw[$i]);
-            } else {
-                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+        {
+            if ($i == 3) // Betriebsart Heizung
+            {
                 $this->SetValue('HeizungVariable', $daten_raw[$i]);
             }
-        }
-        
-        if ($i == 4) { // Betriebsart Warmwasser
-            if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
+
+            if ($i == 4) // Betriebsart Warmwasser
+            {
                 $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                // Debug-Ausgabe
-                $this->SendDebug("Variable erstellt", "Variable Warmwasser erstellt weniger als 1sec", 0);
-            } else {
-                IPS_Sleep(1000); // Wartezeit von 100 Millisekunden
-                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                $this->SendDebug("Variable nicht erstellt", "Variable Warmwasser nicht erstellt oder mehr als 1sec", 0);
+                $this->SendDebug("Einstellung", "Einstellung Warmwasser geholt", 0);
             }
-        }
-        
-        if ($i == 108) { // Betriebsart Kühlung
-            if (IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
-                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-            } else {
-                IPS_Sleep(100); // Wartezeit von 100 Millisekunden
+
+            if ($i == 108) // Betriebsart Kühlung
+            {
                 $this->SetValue('KuehlungVariable', $daten_raw[$i]);
             }
-        }
+
+         }
         
     }
 }
