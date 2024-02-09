@@ -671,7 +671,7 @@ class WPLUXSymcon extends IPSModule
         
         $JavaWerte = implode($Test);
 
-        /for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
         socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
         $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
