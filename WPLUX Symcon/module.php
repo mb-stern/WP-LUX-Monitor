@@ -526,7 +526,7 @@ class WPLUXSymcon extends IPSModule
         }
 
         //Debug senden
-        $this->SendDebug("Socketverbindung", "Moduswahl, der Parameter: ".$parameter." und der Wert: ".$value." wurde an den Socket gesendet", 0);
+        $this->SendDebug("Socketverbindung", "Senden der Parameter: ".$parameter." und der Wert: ".$value." wurde an den Socket gesendet", 0);
 
         $msg = pack('N*', $value); // Wert packen
         $send = socket_write($socket, $msg, 4); // Daten senden
@@ -579,7 +579,7 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
         
         //// Werte anzeigen
-    for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
     {
         if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
         {
@@ -598,5 +598,7 @@ class WPLUXSymcon extends IPSModule
         }
     }
         
+    //Debug senden
+    $this->SendDebug("Socketverbindung", "Empfangen der Parameter: ".$mode." und der Wert: ".$daten_raw[$i]." wurde vom Socket abgefragt", 0);
     }
 }
