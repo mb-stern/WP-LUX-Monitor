@@ -646,7 +646,7 @@ class WPLUXSymcon extends IPSModule
         socket_close($socket);
     }
 
-    private function getParameter()
+    private function getParameter($mode)
     {
 
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
