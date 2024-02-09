@@ -47,7 +47,8 @@ class WPLUXSymcon extends IPSModule
         } 
         else 
         {
-            // Verbindung herstellen oder andere erforderliche Initialisierungen durchführen
+            // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+            $this->Update();
         }
 
         // Überprüfen, ob die Checkboxen im Konfigurationsformuler zum erstellen der Variablen aktiviert sind
