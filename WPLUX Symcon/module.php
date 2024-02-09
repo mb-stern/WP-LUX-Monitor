@@ -61,24 +61,29 @@ class WPLUXSymcon extends IPSModule
             $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
 
             // Variablen erstellen und senden an RequestAction
-            if ($heizungVisible) {
+            if ($heizungVisible) 
+            {
                 $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
                 $Value = $this->GetValue('HeizungVariable');
                 $this->EnableAction('HeizungVariable');
 
-            } else {
+            } else 
+            {
                 $this->UnregisterVariable('HeizungVariable');
             }
 
-            if ($kuehlungVisible) {
+            if ($kuehlungVisible) 
+            {
                 $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
                 $Value = $this->GetValue('KuehlungVariable');   
                 $this->EnableAction('KuehlungVariable');;
-            } else {
+            } else 
+            {
                 $this->UnregisterVariable('KuehlungVariable');
             }
 
-            if ($warmwasserVisible) {
+            if ($warmwasserVisible) 
+            {
                 $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
                 $Value = $this->GetValue('WarmwasserVariable');
                 $this->EnableAction('WarmwasserVariable');
@@ -90,23 +95,27 @@ class WPLUXSymcon extends IPSModule
 
     }
 
-    public function RequestAction($Ident, $Value) {
+    public function RequestAction($Ident, $Value) 
+    {
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
-        if ($Ident == 'HeizungVariable') {
+        if ($Ident == 'HeizungVariable') 
+        {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocketHeizung($Value);
             $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
         }
     
         // Überprüfe, ob die Aktion von der 'KuehlungVariable' ausgelöst wurde
-        if ($Ident == 'KuehlungVariable') {
+        if ($Ident == 'KuehlungVariable') 
+        {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocketKuehlung($Value);
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
         }
     
         // Überprüfe, ob die Aktion von der 'WarmwasserVariable' ausgelöst wurde
-        if ($Ident == 'WarmwasserVariable') {
+        if ($Ident == 'WarmwasserVariable') 
+        {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocketWarmwasser($Value);
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion gesendet: ".$Value."", 0);
