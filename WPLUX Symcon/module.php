@@ -93,19 +93,26 @@ class WPLUXSymcon extends IPSModule
 
     }
 
-    public function RequestAction($Ident, $heizungValue, $kuehlungValue, $warmwasserValue) {
+    public function RequestAction($Ident, $heizungValue) 
+    {
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'HeizungVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocketHeizung($heizungValue);
         }
-
-        // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
+    }
+       
+    public function RequestAction($Ident, $kuehlungValue) 
+    {
+    // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'KuehlungVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocketKuehlung($kuehlungValue);
         }
+    }
 
+        public function RequestAction($Ident, $warmwasserValuee) 
+    {
         // Überprüfe, ob die Aktion von der 'HeizungVariable' ausgelöst wurde
         if ($Ident == 'WarmwasserVariable') {
             // Rufe die Funktion auf und übergebe den neuen Wert
