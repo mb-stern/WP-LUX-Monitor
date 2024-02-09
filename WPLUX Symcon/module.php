@@ -34,6 +34,9 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+
+        // Timer für Aktualisierung aktualisieren
+        $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
     
         // Hole die IP-Adresse und andere Konfigurationseinstellungen
         $ipAddress = $this->ReadPropertyString('IPAddress');
