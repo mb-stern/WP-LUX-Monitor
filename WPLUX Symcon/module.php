@@ -685,22 +685,33 @@ class WPLUXSymcon extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
 
         {
-            if (IPS_VariableExists($this->GetIDForIdent('HeizungVariable'))) {
-                // Setze den Wert der Heizungsvariable nur, wenn sie vorhanden ist
-                $this->SetValue('HeizungVariable', $daten_raw[3]);
+            if ($i == 3) // Betriebsart Heizung
+            {
+                // Überprüfen, ob die Variable 'HeizungVariable' vorhanden ist
+                if ($this->GetIDForIdent('HeizungVariable') !== false) {
+                    $daten_raw[$i] = $daten_raw[$i];
+                    $this->SetValue('HeizungVariable', $daten_raw[$i]);
+                }
             }
-            
-            if (IPS_VariableExists($this->GetIDForIdent('WarmwasserVariable'))) {
-                // Setze den Wert der Warmwasservariable nur, wenn sie vorhanden ist
-                $this->SetValue('WarmwasserVariable', $daten_raw[4]);
-            }
-            
-            if (IPS_VariableExists($this->GetIDForIdent('KuehlungVariable'))) {
-                // Setze den Wert der Kühlungsvariable nur, wenn sie vorhanden ist
-                $this->SetValue('KuehlungVariable', $daten_raw[108]);
-            }
-            
 
-        }
+            if ($i == 4) // Betriebsart Warmwasser
+            {
+                // Überprüfen, ob die Variable 'WarmwasserVariable' vorhanden ist
+                if ($this->GetIDForIdent('WarmwasserVariable') !== false) {
+                    $daten_raw[$i] = $daten_raw[$i];
+                    $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+                }
+            }
+
+            if ($i == 108) // Betriebsart Kühlung
+            {
+                // Überprüfen, ob die Variable 'KuehlungVariable' vorhanden ist
+                if ($this->GetIDForIdent('KuehlungVariable') !== false) {
+                    $daten_raw[$i] = $daten_raw[$i];
+                    $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+                }
+            }
+
+         }
     }
 }
