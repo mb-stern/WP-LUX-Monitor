@@ -105,7 +105,7 @@ if ($warmwasserVisible)
 else 
 {
     $this->UnregisterVariable('WarmwasserVariable');
-}
+} 
     }
 
     public function RequestAction($Ident, $Value) 
