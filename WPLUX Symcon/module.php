@@ -61,7 +61,7 @@ class WPLUXSymcon extends IPSModule
         // Variablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
-            $this->RegisterVariableInteger('HeizungVariable', 'Heizung', 'WPLUX.Wwhe');
+            $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe');
             $this->getParameter('Heizung');
             $Value = $this->GetValue('HeizungVariable');
             $this->EnableAction('HeizungVariable');
@@ -73,7 +73,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($kuehlungVisible) 
         {
-            $this->RegisterVariableInteger('KuehlungVariable', 'Kühlung', 'WPLUX.Kue');
+            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue');
             $this->getParameter('Kuehlung');
             $Value = $this->GetValue('KuehlungVariable');   
             $this->EnableAction('KuehlungVariable');;
@@ -85,7 +85,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($warmwasserVisible) 
         {
-            $this->RegisterVariableInteger('WarmwasserVariable', 'Warmwasser', 'WPLUX.Wwhe');
+            $this->RegisterVariableInteger('WarmwasserVariable', 'Modus Warmwasser', 'WPLUX.Wwhe');
             $this->getParameter('Warmwasser');
             $Value = $this->GetValue('WarmwasserVariable');
             $this->EnableAction('WarmwasserVariable');
