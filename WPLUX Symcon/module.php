@@ -223,7 +223,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66) || ($id >= 68 && $id <= 72) || ($id >= 74 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
@@ -236,6 +236,13 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                 }
                 return 1; // Integer
+
+            case ($id == 67 || $id == 73):
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '');
+                }
+                return 3; // String
 
             case ($id == 78):
                 if ($varid) 
@@ -349,7 +356,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 1; // Integer
 
-            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)  || $id == 257):
+            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, '~Electricity');
@@ -369,6 +376,13 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, '~Hertz');
                 }
                 return 2; // Float
+
+            case ($id == 257):
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Power');
+                }
+                return 2; // Float-Typ
  
             default:
                 // Standardprofil, falls keine spezifische Zuordnung gefunden wird
@@ -388,7 +402,7 @@ class WPLUXSymcon extends IPSModule
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
                 return round($value * 0.1, 1);
             
-            case ($id == 15):    //Aussentemperatur Minustest
+            case ($id == 15): //Aussentemperatur Minustest
                 $minusTest = $value * 0.1;
                 if ($minusTest > 429496000) 
                 {
@@ -400,6 +414,15 @@ class WPLUXSymcon extends IPSModule
                     $value *= 0.1; 
                 }
                 return round($value, 1); 
+
+            case ($id == 67 || $id == 73): //Korrektur Wärmepume Laufzeit und umrechnen in Stunden und Minuten
+                $time = $value - 1;
+                $hours = floor($time / (60 * 60));
+                $time -= $hours * (60 * 60);
+                $minutes = floor($time / 60);
+                $time -= $minutes * 60;
+                $value = "{$hours}h {$minutes}m";
+                return ($value); 
 
             case ($id == 147 || ($id >= 151 && $id <= 154) || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
                 return round($value * 0.01, 1);
