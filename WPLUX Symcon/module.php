@@ -422,7 +422,7 @@ class WPLUXSymcon extends IPSModule
                 $minutes = floor($time / 60);
                 $time -= $minutes * 60;
                 $value = "{$hours}h {$minutes}m";
-                return ($value, 1); 
+                return ($value); 
 
             case ($id == 147 || ($id >= 151 && $id <= 154) || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
                 return round($value * 0.01, 1);
