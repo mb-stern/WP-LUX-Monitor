@@ -98,11 +98,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 1.3 (09.02.2024)
+Version 2.0 (10.02.2024)
 
+- Es können Steuervariablen für Heizung, Warmwasser und Kühlung aktiviert werden.
 - Minustest für Aussentemperatur hinzugefügt, so dass plausible Minuswerte ausgegeben werden
 - Erhöhung der Java-ID's auf 267 sollte Fehlermeldungen gewisser Luxtronic vermeiden.
-- Es können nun Steuervariablen für Heizung, Warmwasser und Kühlung aktiviert werden.
 
 Version 1.2 (05.02.2024)
 

@@ -18,6 +18,10 @@
                 },
                 {
                     "type": "Label",
+                    "label": "Es können Steuervariablen für den Mosdus Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP."
+                },
+                {
+                    "type": "Label",
                     "label": "Die Beschreibung und ID's der Variablen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
                 }
             ]
