@@ -102,7 +102,7 @@ Beispiel:
 
 Version 2.2 (10.02.2024)
 
-- Berechnung für Wert 67 (Waermepumpe_laeuft_seit) korrigiert, zeigte immer 1 sec wenn WP nicht läuft
+- Berechnung für Wert 67 (Waermepumpe_laeuft_seit) und Wert 73 (Verdichter_Standzeit) nun in Stunden und Minuten
 - Variablenprofil für Wert 257 angepasst, zeigte kWh statt kW
 
 Version 2.1 (10.02.2024)
