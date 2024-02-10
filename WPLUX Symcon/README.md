@@ -1,7 +1,6 @@
 # WPLUX Symcon
 Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller abzufragen.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
-Vorerst ist kein Eingriff in die Steuerung möglich. Diese Möglichkeit wird in einer späteren Version nachgereicht.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
 Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
@@ -25,6 +24,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
 * Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
+* Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden., je nach Funktionsumfang der Wärmepumpe. Die aktuellen Zustände werden von der Lux geholt. Mit jeder Änderung im Konfigurationsformuler werden diese Werte erneut von der Lux synchronisiert.
 
 ### 2. Voraussetzungen
 
@@ -49,10 +49,12 @@ Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port mu
 Intervall       |   Intervall für das Update der Werte
 Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
-![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/09640084-332b-41dc-9cba-0d13e3f7c273)
+![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/31dcbfc6-ad4c-450d-b088-a35b079e13d5)
 
 
-![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/ebd3b43d-d9aa-4e85-ad48-8721822e8764)
+
+![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/6c0ac90c-4524-4ad3-80ef-12eb0e133b37)
+
 
 
 ### 5. Statusvariablen und Profile
@@ -80,6 +82,9 @@ WPLUX.Akt     |  Bool
 WPLUX.Pres    |  Float
 WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
+WPLUX.Wwhe	|  Integer
+WPLUX.Kue	|  Integer
+
 
 ### 6. WebFront
 
@@ -94,6 +99,12 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 2.0 (10.02.2024)
+
+- Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden.
+- Minustest für Aussentemperatur hinzugefügt, so dass plausible Minuswerte ausgegeben werden
+- Erhöhung der Java-ID's auf 267 sollte Fehlermeldungen gewisser Luxtronic vermeiden.
 
 Version 1.2 (05.02.2024)
 

@@ -154,3 +154,22 @@ if (!IPS_VariableProfileExists("WPLUX.lh")) {
     IPS_SetVariableProfileDigits("WPLUX.lh", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.lh", "", " l/h"); //Präfix, Suffix
 }
+if (!IPS_VariableProfileExists("WPLUX.Wwhe")) {
+    IPS_CreateVariableProfile("WPLUX.Wwhe", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Wwhe", 0, 4, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Wwhe", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Wwhe", "", ""); //Präfix, Suffix
+    IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 0, "Automatik", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 1, "Zus. Wärmeerzeugun", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 2, "Party", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 3, "Ferien", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 4, "Aus", "", -1);
+}
+if (!IPS_VariableProfileExists("WPLUX.Kue")) {
+    IPS_CreateVariableProfile("WPLUX.Kue", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Kue", 0, 1, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Kue", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Kue", "", ""); //Präfix, Suffix
+    IPS_SetVariableProfileAssociation("WPLUX.Kue", 0, "Aus", "", -1);
+    IPS_SetVariableProfileAssociation("WPLUX.Kue", 1, "Automatik", "", -1);
+}
