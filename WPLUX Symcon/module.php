@@ -61,7 +61,7 @@ class WPLUXSymcon extends IPSModule
         // Variablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
-            $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe');
+            $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe', 0);
             $this->getParameter('Heizung');
             $Value = $this->GetValue('HeizungVariable');
             $this->EnableAction('HeizungVariable');
@@ -71,21 +71,9 @@ class WPLUXSymcon extends IPSModule
             $this->UnregisterVariable('HeizungVariable');
         }
 
-        if ($kuehlungVisible) 
-        {
-            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue');
-            $this->getParameter('Kuehlung');
-            $Value = $this->GetValue('KuehlungVariable');   
-            $this->EnableAction('KuehlungVariable');;
-        } 
-        else 
-        {
-            $this->UnregisterVariable('KuehlungVariable');
-        }
-
         if ($warmwasserVisible) 
         {
-            $this->RegisterVariableInteger('WarmwasserVariable', 'Modus Warmwasser', 'WPLUX.Wwhe');
+            $this->RegisterVariableInteger('WarmwasserVariable', 'Modus Warmwasser', 'WPLUX.Wwhe', 1);
             $this->getParameter('Warmwasser');
             $Value = $this->GetValue('WarmwasserVariable');
             $this->EnableAction('WarmwasserVariable');
@@ -93,6 +81,18 @@ class WPLUXSymcon extends IPSModule
         else 
         {
             $this->UnregisterVariable('WarmwasserVariable');
+        }
+
+        if ($kuehlungVisible) 
+        {
+            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
+            $this->getParameter('Kuehlung');
+            $Value = $this->GetValue('KuehlungVariable');   
+            $this->EnableAction('KuehlungVariable');;
+        } 
+        else 
+        {
+            $this->UnregisterVariable('KuehlungVariable');
         }
     }
 
