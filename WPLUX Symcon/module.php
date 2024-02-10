@@ -179,10 +179,8 @@ class WPLUXSymcon extends IPSModule
             $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
 
-        //socket wieder schließen
         socket_close($socket);
 
-        // Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             if (in_array($i, array_column($idListe, 'id'))) 
@@ -563,24 +561,21 @@ class WPLUXSymcon extends IPSModule
 
         socket_recv($socket,$Test,4,MSG_WAITALL);  // Lesen, sollte 3003 zurückkommen
         $Test = unpack('N*',$Test);
-        //printf('read:%s <br>',implode($Test));
-        
         
         socket_recv($socket,$Test,4,MSG_WAITALL); // Länge der nachfolgenden Werte
         $Test = unpack('N*',$Test);
         
         $JavaWerte = implode($Test);
 
-        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        for ($i = 0; $i < $JavaWerte; ++$i)
         {
-            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);
             $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
-        //socket wieder schliessen
+        
         socket_close($socket);
         
-        //// Werte anzeigen
-        for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
+        for ($i = 0; $i < $JavaWerte; ++$i)
         {
             if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
             {
