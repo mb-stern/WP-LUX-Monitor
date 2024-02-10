@@ -49,10 +49,12 @@ Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port mu
 Intervall       |   Intervall für das Update der Werte
 Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
-![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/09640084-332b-41dc-9cba-0d13e3f7c273)
+![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/31dcbfc6-ad4c-450d-b088-a35b079e13d5)
 
 
-![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/ebd3b43d-d9aa-4e85-ad48-8721822e8764)
+
+![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/6c0ac90c-4524-4ad3-80ef-12eb0e133b37)
+
 
 
 ### 5. Statusvariablen und Profile
