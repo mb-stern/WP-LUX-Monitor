@@ -100,7 +100,7 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 2.2 beta (10.02.2024)
+Version 2.2 (10.02.2024)
 
 - Berechnung für Wert 67 (Waermepumpe_laeuft_seit) und Wert 73 (Verdichter_Standzeit) nun in Stunden und Minuten
 - Variablenprofil für Wert 257 angepasst, zeigte kWh statt kW
