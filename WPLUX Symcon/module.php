@@ -198,7 +198,8 @@ class WPLUXSymcon extends IPSModule
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-            }   else 
+            }   
+            else 
             {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
                 $this->DeleteVariableIfExists($java_dataset[$i]);
@@ -212,173 +213,173 @@ class WPLUXSymcon extends IPSModule
         switch (true) 
         {
             case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Temperature');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Temperature');
+                }
+                return 2; // Float-Typ
                 
             case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Switch');
-            }
-            return 0; // Boolean-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Switch');
+                }
+                return 0; // Boolean-Typ
 
             case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
+                }
+                return 1; // Integer
                 
             case ($id == 57 || $id == 59):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
+                }
+                return 1; // Integer
 
             case ($id == 78):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Typ');
+                }
+                return 1; // Integer
 
             case ($id == 79):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Biv');
+                }
+                return 1; // Integer
 
             case ($id == 80):
-            if ($varid > 0) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
-            }
-            return 1; // Integer
+                if ($varid > 0) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.BZ');
+                }
+                return 1; // Integer
 
             case (($id >= 95 && $id <= 99) || ($id >= 111 && $id <= 115) || $id == 134) || ($id >= 222 && $id <= 226):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~UnixTimestamp');
+                }
+                return 1; // Integer
 
             case (($id >= 106 && $id <= 110) || ($id >= 217 && $id <= 221)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Off');
+                }
+                return 1; // Integer
 
             case ($id == 116 || $id == 172 || $id == 174):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Comf');
-            }
-            return 0; // Boolean-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Comf');
+                }
+                return 0; // Boolean-Typ
 
             case ($id == 117):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Men1');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Men1');
+                }
+                return 1; // Integer
                         
             case ($id == 118):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Men2');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Men2');
+                }
+                return 1; // Integer
 
             case ($id == 119):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Men3');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Men3');
+                }
+                return 1; // Integer
 
             case ($id == 124):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Akt');
-            }
-            return 0; // Boolean-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Akt');
+                }
+                return 0; // Boolean-Typ
 
             case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Volt');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Volt');
+                }
+                return 2; // Float-Typ
 
             case ($id == 173):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.lh');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.lh');
+                }
+                return 1; // Integer
 
             case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Temperature.Difference');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Temperature.Difference');
+                }
+                return 2; // Float-Typ
 
             case (($id >= 180 && $id <= 181) || ($id >= 210 && $id <= 211)):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Pres');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Pres');
+                }
+                return 2; // Float-Typ
 
             case ($id == 183):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Valve.F');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Valve.F');
+                }
+                return 2; // Float-Typ
 
             case ($id == 184 || $id == 193  || $id == 231):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Fan');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Fan');
+                }
+                return 1; // Integer
 
             case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)  || $id == 257):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Electricity');
-            }
-            return 2; // Float-Typ
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Electricity');
+                }
+                return 2; // Float-Typ
 
             case ($id == 191):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, 'WPLUX.Bet');
-            }
-            return 1; // Integer
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Bet');
+                }
+                return 1; // Integer
 
             case ($id == 231):
-            if ($varid) 
-            {
-                IPS_SetVariableCustomProfile($varid, '~Hertz');
-            }
-            return 2; // Float
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Hertz');
+                }
+                return 2; // Float
  
             default:
-            // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-            if ($varid > 0) 
-            {
-                IPS_SetVariableCustomProfile($varid, '');
-            }
-            return 1; // Standardmäßig Integer-Typ
+                // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                if ($varid > 0) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '');
+                }
+                return 1; // Standardmäßig Integer-Typ
         }
     }
     
@@ -388,29 +389,29 @@ class WPLUXSymcon extends IPSModule
         switch ($id) 
         {
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
-            return round($value * 0.1, 1);
+                return round($value * 0.1, 1);
             
             case ($id == 15):    //Aussentemperatur Minustest
-            $minusTest = $value * 0.1;
-            if ($minusTest > 429496000) 
-            {
-                $value -= 4294967296;
-                $value *= 0.1; 
-            } 
-            else 
-            {
-                $value *= 0.1; 
-            }
-            return round($value, 1); 
+                $minusTest = $value * 0.1;
+                if ($minusTest > 429496000) 
+                {
+                    $value -= 4294967296;
+                    $value *= 0.1; 
+                } 
+                else 
+                {
+                    $value *= 0.1; 
+                }
+                return round($value, 1); 
 
             case ($id == 147 || ($id >= 151 && $id <= 154) || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || $id == 183 || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
-            return round($value * 0.01, 1);
+                return round($value * 0.01, 1);
 
             case ($id == 257):
-            return round($value * 0.001, 1);
+                return round($value * 0.001, 1);
             
             default:
-            return round($value * 1, 1); // Standardmäßig Konvertierung
+                return round($value * 1, 1); // Standardmäßig Konvertierung
         }
     }
             
@@ -515,7 +516,8 @@ class WPLUXSymcon extends IPSModule
         $send = socket_write($socket, $msg, 4);
 
         // Auswahl senden
-        switch ($type) {
+        switch ($type) 
+        {
             case 'Kuehlung':
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
@@ -572,33 +574,30 @@ class WPLUXSymcon extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
         {
-        socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
-        $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
+            socket_recv($socket,$InBuff[$i],4,MSG_WAITALL);  // Lesen, sollte 3004 zurückkommen
+            $daten_raw[$i] = implode(unpack('N*',$InBuff[$i]));
         }
         //socket wieder schliessen
         socket_close($socket);
         
         //// Werte anzeigen
         for ($i = 0; $i < $JavaWerte; ++$i)//vorwärts
-    {
-        if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
         {
-            $this->SetValue('HeizungVariable', $daten_raw[$i]);
-            $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
+            if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
+            {
+                $this->SetValue('HeizungVariable', $daten_raw[$i]);
+                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == 'Warmwasser' && $i == 4) // Betriebsart Warmwasser
+            {
+                $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
+                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == 'Kuehlung' && $i == 108) // Betriebsart Kühlung
+            {
+                $this->SetValue('KuehlungVariable', $daten_raw[$i]);
+                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
+            }
         }
-        elseif ($mode == 'Warmwasser' && $i == 4) // Betriebsart Warmwasser
-        {
-            $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-            $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
-        }
-        elseif ($mode == 'Kuehlung' && $i == 108) // Betriebsart Kühlung
-        {
-            $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-            $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
-        }
-    }
-        
-    //Debug senden
-    $this->SendDebug("Socketverbindung", "Empfangen der Parameter: ".$mode." und der Wert: ".$i." wurde vom Socket abgefragt", 0);
     }
 }
