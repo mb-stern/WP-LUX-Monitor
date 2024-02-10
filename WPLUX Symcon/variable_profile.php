@@ -173,13 +173,3 @@ if (!IPS_VariableProfileExists("WPLUX.Kue")) {
     IPS_SetVariableProfileAssociation("WPLUX.Kue", 0, "Aus", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Kue", 1, "Automatik", "", -1);
 }
-if (!IPS_VariableProfileExists("WPLUX.SToT")) {
-    IPS_CreateVariableProfile("WPLUX.SToT", 1); // 1 für Integer
-    IPS_SetVariableProfileText("WPLUX.SToT", "", " h m"); // Präfix, Suffix
-
-    for ($i = 0; $i <= 86400; $i += 60) { // Schleife für jeden Wert in einer 24-Stunden-Periode
-        $hours = floor($i / 3600); // Stunden berechnen
-        $minutes = floor(($i % 3600) / 60); // Minuten berechnen
-        IPS_SetVariableProfileAssociation("WPLUX.SToT", $i, sprintf("%02d:%02d", $hours, $minutes), "", -1); // Assoziation hinzufügen
-    }
-}
