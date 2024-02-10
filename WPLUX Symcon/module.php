@@ -223,7 +223,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66) || ($id >= 68 && $id <= 72) || ($id >= 74 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
@@ -236,6 +236,13 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                 }
                 return 1; // Integer
+
+            case ($id == 67 || $id == 73):
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '');
+                }
+                return 3; // String
 
             case ($id == 78):
                 if ($varid) 
