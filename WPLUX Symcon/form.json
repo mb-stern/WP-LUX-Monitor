@@ -6,11 +6,7 @@
             "items": [
                 {
                     "type": "Label",
-                    "label": "Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen."
-                },
-                {
-                    "type": "Label",
-                    "label": "Mit der aktuellen Version des Moduls ist kein Eingriff in die Steuerung möglich."
+                    "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller."
                 },
                 {
                     "type": "Label",
