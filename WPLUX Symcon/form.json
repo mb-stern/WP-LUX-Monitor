@@ -14,7 +14,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es können Steuervariablen für den Modus Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP."
+                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP."
                 },
                 {
                     "type": "Label",
