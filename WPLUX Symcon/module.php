@@ -349,7 +349,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 1; // Integer
 
-            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)  || $id == 257):
+            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, '~Electricity');
@@ -369,6 +369,13 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, '~Hertz');
                 }
                 return 2; // Float
+
+            case ($id == 257):
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Power');
+                }
+                return 2; // Float-Typ
  
             default:
                 // Standardprofil, falls keine spezifische Zuordnung gefunden wird
