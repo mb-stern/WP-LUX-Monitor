@@ -100,6 +100,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 2.1 (10.02.2024)
+
+- Umrechnung für Wert 183 (Steuersignal_Umwaelzpumpe) korrigiert.
+
 Version 2.0 (10.02.2024)
 
 - Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden.
