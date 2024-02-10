@@ -100,9 +100,13 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 2.2 (10.02.2024)
+
+- Berechnung für Wert 67 (Waermepumpe_laeuft_seit) korrigiert, zeigte immer 1 sec wenn WP nicht läuft
+
 Version 2.1 (10.02.2024)
 
-- Umrechnung für Wert 183 (Steuersignal_Umwaelzpumpe) korrigiert.
+- Berechnung für Wert 183 (Steuersignal_Umwaelzpumpe) korrigiert, wurde um Faktor 10 zu gering berechnet
 
 Version 2.0 (10.02.2024)
 
