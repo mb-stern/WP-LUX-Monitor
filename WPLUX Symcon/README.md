@@ -99,6 +99,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 2.4 (11.02.2024)
+
+- Variablenprofil WPLUX.Fan wird der Wert 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen
+
 Version 2.3 (11.02.2024)
 
 - Alle Werte in Sekunden werden nun in Std und Min angezeigt (Wert 56, 58, 60-77, 120, 123, 158, 161)
