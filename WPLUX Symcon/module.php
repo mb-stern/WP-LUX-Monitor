@@ -223,12 +223,12 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66) || ($id >= 68 && $id <= 72) || ($id >= 74 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
                 if ($varid) 
                 {
-                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
+                    IPS_SetVariableCustomProfile($varid, '');
                 }
-                return 1; // Integer
+                return 3; // String
                 
             case ($id == 57 || $id == 59):
                 if ($varid) 
@@ -236,13 +236,6 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, 'WPLUX.Imp');
                 }
                 return 1; // Integer
-
-            case ($id == 67 || $id == 73):
-                if ($varid) 
-                {
-                    IPS_SetVariableCustomProfile($varid, '');
-                }
-                return 3; // String
 
             case ($id == 78):
                 if ($varid) 
@@ -415,7 +408,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return round($value, 1); 
 
-            case ($id == 67 || $id == 73): //Korrektur Wärmepume Laufzeit und umrechnen in Stunden und Minuten
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
                 $time = $value - 1;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);

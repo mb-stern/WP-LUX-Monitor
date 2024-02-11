@@ -68,8 +68,7 @@ Es werden Variablen/Typen je nach Wahl der Werte erstellt. Pro ID wird eine Vari
 #### Profile
 
 Name   | Typ
------- | -------
-WPLUX.Sec     |  Integer  
+------ | ------- 
 WPLUX.Imp     |  Integer   
 WPLUX.Typ     |  Integer   
 WPLUX.Biv     |  Integer   
@@ -99,6 +98,11 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 2.3 (11.02.2024)
+
+- Alle Werte in Sekunden werden nun in Std und Min angezeigt (Wert 56, 58, 60-77, 120, 123, 158, 161)
+- Das Integer-Variablenprofil WPLUX.Sec wird bei der Installation nicht mehr erstellt da die Zeitangaben nun als String ausgegeben werden
 
 Version 2.2 (10.02.2024)
 

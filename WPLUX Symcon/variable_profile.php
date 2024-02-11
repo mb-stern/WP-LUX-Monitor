@@ -1,12 +1,6 @@
 <?php
 
 // Benötigte Variabelprofile erstellen
-if (!IPS_VariableProfileExists("WPLUX.Sec")) {
-    IPS_CreateVariableProfile("WPLUX.Sec", 1); //1 für Integer
-    IPS_SetVariableProfileValues("WPLUX.Sec", 0, 0, 1); //Min, Max, Schritt
-    IPS_SetVariableProfileDigits("WPLUX.Sec", 0); //Nachkommastellen
-    IPS_SetVariableProfileText("WPLUX.Sec", "", " sec"); //Präfix, Suffix
-}
 if (!IPS_VariableProfileExists("WPLUX.Imp")) {
     IPS_CreateVariableProfile("WPLUX.Imp", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Imp", 0, 0, 1); //Min, Max, Schritt
