@@ -653,7 +653,7 @@ class WPLUXSymcon extends IPSModule
                     $daten_raw[$i] *= 0.1; 
                 }
                 $this->SetValue('TempsetVariable', $daten_raw[$i]);
-                $this->SendDebug("Temperaturanpasung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
