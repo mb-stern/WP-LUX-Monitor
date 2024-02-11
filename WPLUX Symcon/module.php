@@ -555,7 +555,9 @@ class WPLUXSymcon extends IPSModule
             case 'Kuehlung':
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
-            
+            case 'Tempset':
+                $value = ($value >= -5 && $value <= 5) ? $value : 0; // Wert für Temperaturkorrektur
+                break;
             default:
                 // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
                 $value = ($value >= 0 && $value <= 4) ? $value : 0;
@@ -563,7 +565,7 @@ class WPLUXSymcon extends IPSModule
         }
 
         //Debug senden
-        $this->SendDebug("Socketverbindung", "Senden der Parameter: ".$parameter." und der Wert: ".$value." wurde an den Socket gesendet", 0);
+        $this->SendDebug("Socketverbindung", "Der Parameter: ".$parameter." und der Wert: ".$value." wurde an den Socket gesendet", 0);
 
         $msg = pack('N*', $value); // Wert packen
         $send = socket_write($socket, $msg, 4); // Daten senden
