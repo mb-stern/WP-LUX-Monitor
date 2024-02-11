@@ -155,8 +155,8 @@ if (!IPS_VariableProfileExists("WPLUX.Bet")) {
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 10, "Manuell ", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 11, "Simulation Start", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 12, "EVU Sperre", "", -1);
-}
-$this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Bet erstellt", 0);   
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Bet erstellt", 0); 
+}  
 if (!IPS_VariableProfileExists("WPLUX.lh")) {
     IPS_CreateVariableProfile("WPLUX.lh", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.lh", 0, 0, 1); //Min, Max, Schritt
