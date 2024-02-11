@@ -223,7 +223,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 123 || $id == 141|| $id == 158 || $id == 161):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, '');
@@ -408,7 +408,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return round($value, 1); 
 
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
                 $time = $value - 1;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);

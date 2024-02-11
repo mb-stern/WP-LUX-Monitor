@@ -101,7 +101,7 @@ Beispiel:
 
 Version 2.3 (11.02.2024)
 
-- Alle Werte in Sekunden werden nun in Std und Min angezeigt (Wert 56, 58, 60-77, 120, 123, 158, 161)
+- Alle Werte in Sekunden werden nun in Std und Min angezeigt (Wert 56, 58, 60-77, 123, 158, 161)
 - Das Integer-Variablenprofil WPLUX.Sec wird bei der Installation nicht mehr erstellt da die Zeitangaben nun als String ausgegeben werden
 
 Version 2.2 (10.02.2024)
