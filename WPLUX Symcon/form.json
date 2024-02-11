@@ -18,7 +18,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es kann nun eine Variable für die Temperaturkorrektur eingeblendet werden. Dieser Wert hebt die Rücklauf-Solltemperatur entsprechend an"
+                    "label": "Es kann nun eine Variable für die Temperaturkorrektur eingeblendet werden. Dieser Wert hebt oder senkt die Rücklauf-Solltemperatur entsprechend an"
                 },
                 {
                     "type": "Label",
@@ -59,7 +59,7 @@
         {
             "type": "CheckBox",
             "name": "TempsetVisible",
-            "caption": "Steuervariable für Temperatkorrektur aktivieren"
+            "caption": "Steuervariable für Temperaturkorrektur aktivieren"
         },
         {
             "type": "List",
