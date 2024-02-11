@@ -186,7 +186,7 @@ if (!IPS_VariableProfileExists("WPLUX.Kue")) {
 if (!IPS_VariableProfileExists("WPLUX.Tset")) {
     IPS_CreateVariableProfile("WPLUX.Tset", 1); //2 für Integer
     IPS_SetVariableProfileValues("WPLUX.Tset", -50, 50, 5); //Min, Max, Schritt
-    IPS_SetVariableProfileDigits("WPLUX.Tset", 1); //Nachkommastellen
+    IPS_SetVariableProfileDigits("WPLUX.Tset", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Tset", "", " °C"); //Präfix, Suffix
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Tset erstellt", 0);   
 }
