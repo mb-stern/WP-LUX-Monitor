@@ -53,6 +53,11 @@
             "caption": "Steuervariable für Kühlungs-Modus aktivieren"
         },
         {
+            "type": "CheckBox",
+            "name": "TempsetVisible",
+            "caption": "Steuervariable für Temperaturanpassung aktivieren"
+        },
+        {
             "type": "List",
             "name": "IDListe",
             "caption": "Überwachte ID's",
