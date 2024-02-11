@@ -87,7 +87,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($kuehlungVisible) 
         {
-            $this->RegisterVariableFloat('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
+            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
             $this->getParameter('Kuehlung');
             $Value = $this->GetValue('KuehlungVariable');   
             $this->EnableAction('KuehlungVariable');;

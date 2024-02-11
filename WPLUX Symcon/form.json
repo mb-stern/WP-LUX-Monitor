@@ -55,7 +55,7 @@
         {
             "type": "CheckBox",
             "name": "TempsetVisible",
-            "caption": "Steuervariable für Temperaturanpassung aktivieren"
+            "caption": "Steuervariable für Temperatkorrektur aktivieren"
         },
         {
             "type": "List",
