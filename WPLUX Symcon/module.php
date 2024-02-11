@@ -58,7 +58,7 @@ class WPLUXSymcon extends IPSModule
         $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
         $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
-        $tempsetVisible = $this->RegisterPropertyBoolean('TempsetVisible');
+        $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
 
         // Variablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
