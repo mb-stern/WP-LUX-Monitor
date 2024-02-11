@@ -87,7 +87,7 @@ class WPLUXSymcon extends IPSModule
 
         if ($kuehlungVisible) 
         {
-            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
+            $this->RegisterVariableFloat('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
             $this->getParameter('Kuehlung');
             $Value = $this->GetValue('KuehlungVariable');   
             $this->EnableAction('KuehlungVariable');;
@@ -557,7 +557,8 @@ class WPLUXSymcon extends IPSModule
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
             case 'Tempset':
-                $value = ($value >= -50 && $value <= 50) ? $value : 0; // Wert für Temperaturkorrektur
+                $value = $returnTemperatureSetBack
+                $value = 10 * ($returnTemperatureSetBack + 0.5); // Wert für Temperaturkorrektur
                 break;
             default:
                 // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
