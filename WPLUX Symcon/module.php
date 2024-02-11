@@ -14,9 +14,6 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        //Variableprofile erstellen wenn nicht vorhanden
-        require_once __DIR__ . '/variable_profile.php';
-
         $this->RegisterPropertyString('IPAddress', '192.168.178.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
