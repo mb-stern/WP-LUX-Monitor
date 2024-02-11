@@ -90,7 +90,7 @@ class WPLUXSymcon extends IPSModule
             $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
             $this->getParameter('Kuehlung');
             $Value = $this->GetValue('KuehlungVariable');   
-            $this->EnableAction('KuehlungVariable');;
+            $this->EnableAction('KuehlungVariable');
         } 
         else 
         {
@@ -101,7 +101,7 @@ class WPLUXSymcon extends IPSModule
             $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
             $this->getParameter('Tempset'); 
             $Value = $this->GetValue('TempsetVariable'); 
-            //$this->EnableAction('TempsetVariable');;
+            $this->EnableAction('TempsetVariable');
         } 
         else 
         {
