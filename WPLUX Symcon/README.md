@@ -1,5 +1,6 @@
 # WPLUX Symcon
-Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller abzufragen.
+Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
+Der integrierte RJ45 Netzwerkanschluss kann mit dem heimschen Netzwerk verbunden werden.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
 Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
@@ -68,8 +69,7 @@ Es werden Variablen/Typen je nach Wahl der Werte erstellt. Pro ID wird eine Vari
 #### Profile
 
 Name   | Typ
------- | -------
-WPLUX.Sec     |  Integer  
+------ | ------- 
 WPLUX.Imp     |  Integer   
 WPLUX.Typ     |  Integer   
 WPLUX.Biv     |  Integer   
@@ -84,6 +84,7 @@ WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
 WPLUX.Wwhe	|  Integer
 WPLUX.Kue	|  Integer
+WPLUX.Tset	|  Integer
 
 
 ### 6. WebFront
@@ -100,9 +101,25 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 2.4 (11.02.2024)
+
+- Erstellung der Variablenprofile von Create() in ApplyChanges() verschoben, damit die Profile bei jeder Änderung auf Vorhandensein geprüft und ggf. erstellt werden.
+- Im Integer-Variablenprofil WPLUX.Fan wird die Einheit 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht wird, muss das Variablenprofil manuell gelöscht werden. Es wird bei einer Konfigurationsänderung neu erstellt.
+- Es kann nun eine Variable zur Anpassung der Temperatur eingeblendet werden. Dieser Wert hebt die Rücklauftemperatur entsprechend an und ermöglicht eine Temperaturanpassung, ohne die Heizkurve zu verändern.
+
+Version 2.3 (11.02.2024)
+
+- Alle Werte in Sekunden werden nun in Std und Min angezeigt (Wert 56, 58, 60-77, 120, 123, 158, 161)
+- Das Integer-Variablenprofil WPLUX.Sec wird bei der Installation nicht mehr erstellt da die Zeitangaben nun als String ausgegeben werden
+
+Version 2.2 (10.02.2024)
+
+- Berechnung für Wert 67 (Waermepumpe_laeuft_seit) und Wert 73 (Verdichter_Standzeit) nun in Stunden und Minuten
+- Variablenprofil für Wert 257 angepasst, zeigte kWh statt kW
+
 Version 2.1 (10.02.2024)
 
-- Umrechnung für Wert 183 (Steuersignal_Umwaelzpumpe) korrigiert.
+- Berechnung für Wert 183 (Steuersignal_Umwaelzpumpe) korrigiert, wurde um Faktor 10 zu gering berechnet
 
 Version 2.0 (10.02.2024)
 

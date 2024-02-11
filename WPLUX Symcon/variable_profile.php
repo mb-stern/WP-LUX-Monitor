@@ -1,23 +1,19 @@
 <?php
 
 // Benötigte Variabelprofile erstellen
-if (!IPS_VariableProfileExists("WPLUX.Sec")) {
-    IPS_CreateVariableProfile("WPLUX.Sec", 1); //1 für Integer
-    IPS_SetVariableProfileValues("WPLUX.Sec", 0, 0, 1); //Min, Max, Schritt
-    IPS_SetVariableProfileDigits("WPLUX.Sec", 0); //Nachkommastellen
-    IPS_SetVariableProfileText("WPLUX.Sec", "", " sec"); //Präfix, Suffix
-}
 if (!IPS_VariableProfileExists("WPLUX.Imp")) {
     IPS_CreateVariableProfile("WPLUX.Imp", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Imp", 0, 0, 1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.Imp", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Imp", "", " impulse"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Imp erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Typ")) {
     IPS_CreateVariableProfile("WPLUX.Typ", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Typ", 0, 0, 1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.Typ", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Typ", "", ""); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Typ erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Biv")) {
     IPS_CreateVariableProfile("WPLUX.Biv", 1); //1 für Integer
@@ -27,6 +23,7 @@ if (!IPS_VariableProfileExists("WPLUX.Biv")) {
     IPS_SetVariableProfileAssociation("WPLUX.Biv", 1, "ein Verdichter darf laufen", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Biv", 2, "zwei Verdichter dürfen laufen", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Biv", 3, "zusätzlicher Wärmeerzeuger darf mitlaufen", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Biv erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.BZ")) {
     IPS_CreateVariableProfile("WPLUX.BZ", 1); //1 für Integer
@@ -41,6 +38,7 @@ if (!IPS_VariableProfileExists("WPLUX.BZ")) {
     IPS_SetVariableProfileAssociation("WPLUX.BZ", 5, "Keine Anforderung", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.BZ", 6, "Heizen ext. Energiequelle", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.BZ", 7, "Kühlbetrieb ", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.BZ erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Off")) {
     IPS_CreateVariableProfile("WPLUX.Off", 1); //1 für Integer
@@ -56,6 +54,7 @@ if (!IPS_VariableProfileExists("WPLUX.Off")) {
     IPS_SetVariableProfileAssociation("WPLUX.Off", 7, "Temperatur Einsatzgrenze minimal", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Off", 8, "Untere Einsatzgrenze", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Off", 9, "Keine Anforderung ", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Off erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Comf")) {
     IPS_CreateVariableProfile("WPLUX.Comf", 0); //0 für Bool
@@ -64,6 +63,7 @@ if (!IPS_VariableProfileExists("WPLUX.Comf")) {
     IPS_SetVariableProfileText("WPLUX.Comf", "", ""); //Präfix, Suffix
     IPS_SetVariableProfileAssociation("WPLUX.Comf", 0, "nicht verbaut", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Comf", 1, "verbaut", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Comf erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Men1")) {
     IPS_CreateVariableProfile("WPLUX.Men1", 1); //1 für Integer
@@ -78,6 +78,7 @@ if (!IPS_VariableProfileExists("WPLUX.Men1")) {
     IPS_SetVariableProfileAssociation("WPLUX.Men1", 5, "Warte auf LIN-Verbindung", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Men1", 6, "Verdichter heizt auf", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Men1", 7, "Pumpenvorlauf ", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Men1 erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Men2")) {
     IPS_CreateVariableProfile("WPLUX.Men2", 1); //1 für Integer
@@ -86,6 +87,7 @@ if (!IPS_VariableProfileExists("WPLUX.Men2")) {
     IPS_SetVariableProfileText("WPLUX.Men2", "", ""); //Präfix, Suffix
     IPS_SetVariableProfileAssociation("WPLUX.Men2", 0, "seit :", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Men2", 1, "in : ", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Men2 erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Men3")) {
     IPS_CreateVariableProfile("WPLUX.Men3", 1); //1 für Integer
@@ -108,6 +110,7 @@ if (!IPS_VariableProfileExists("WPLUX.Men3")) {
     IPS_SetVariableProfileAssociation("WPLUX.Men3", 14, "Brauchwasser ext. Energiequelle", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Men3", 16, "Durchflussüberachung", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Men3", 17, "Zweiter Wärmeerzeuger 1 Betrieb ", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Men3 erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Akt")) {
     IPS_CreateVariableProfile("WPLUX.Akt", 0); //0 für Bool
@@ -116,18 +119,21 @@ if (!IPS_VariableProfileExists("WPLUX.Akt")) {
     IPS_SetVariableProfileText("WPLUX.Akt", "", ""); //Präfix, Suffix
     IPS_SetVariableProfileAssociation("WPLUX.Akt", 0, "inaktiv", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Akt", 1, "aktiv", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Akt erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Pres")) {
     IPS_CreateVariableProfile("WPLUX.Pres", 2); //2 für Float
     IPS_SetVariableProfileValues("WPLUX.Pres", 0, 0, 0.1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.Pres", 1); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Pres", "", " bar"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Pres erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Fan")) {
     IPS_CreateVariableProfile("WPLUX.Fan", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Fan", 0, 0, 1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.Fan", 0); //Nachkommastellen
-    IPS_SetVariableProfileText("WPLUX.Fan", "", " RPM"); //Präfix, Suffix
+    IPS_SetVariableProfileText("WPLUX.Fan", "", " rpm"); //Präfix, Suffix  
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Fan erstellt", 0);
 }
 if (!IPS_VariableProfileExists("WPLUX.Bet")) {
     IPS_CreateVariableProfile("WPLUX.Bet", 1); //1 für Integer
@@ -147,12 +153,14 @@ if (!IPS_VariableProfileExists("WPLUX.Bet")) {
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 10, "Manuell ", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 11, "Simulation Start", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Bet", 12, "EVU Sperre", "", -1);
-}
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Bet erstellt", 0); 
+}  
 if (!IPS_VariableProfileExists("WPLUX.lh")) {
     IPS_CreateVariableProfile("WPLUX.lh", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.lh", 0, 0, 1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.lh", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.lh", "", " l/h"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.lh erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Wwhe")) {
     IPS_CreateVariableProfile("WPLUX.Wwhe", 1); //1 für Integer
@@ -164,6 +172,7 @@ if (!IPS_VariableProfileExists("WPLUX.Wwhe")) {
     IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 2, "Party", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 3, "Ferien", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Wwhe", 4, "Aus", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Wwhe erstellt", 0);   
 }
 if (!IPS_VariableProfileExists("WPLUX.Kue")) {
     IPS_CreateVariableProfile("WPLUX.Kue", 1); //1 für Integer
@@ -172,4 +181,12 @@ if (!IPS_VariableProfileExists("WPLUX.Kue")) {
     IPS_SetVariableProfileText("WPLUX.Kue", "", ""); //Präfix, Suffix
     IPS_SetVariableProfileAssociation("WPLUX.Kue", 0, "Aus", "", -1);
     IPS_SetVariableProfileAssociation("WPLUX.Kue", 1, "Automatik", "", -1);
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Kue erstellt", 0);   
+}
+if (!IPS_VariableProfileExists("WPLUX.Tset")) {
+    IPS_CreateVariableProfile("WPLUX.Tset", 2); //2 für Float
+    IPS_SetVariableProfileValues("WPLUX.Tset", -5, 5, 0.5); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Tset", 1); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Tset", "", " °C"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Tset erstellt", 0);   
 }

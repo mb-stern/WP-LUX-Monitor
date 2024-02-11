@@ -14,9 +14,6 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        //Variableprofile erstellen
-        require_once __DIR__ . '/variable_profile.php';
-
         $this->RegisterPropertyString('IPAddress', '192.168.178.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
@@ -25,6 +22,7 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
+        $this->RegisterPropertyBoolean('TempsetVisible', false);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -34,6 +32,9 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+
+        //Variableprofile erstellen wenn nicht vorhanden
+        require_once __DIR__ . '/variable_profile.php';
 
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
@@ -57,6 +58,7 @@ class WPLUXSymcon extends IPSModule
         $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
         $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
+        $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
 
         // Variablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -88,11 +90,22 @@ class WPLUXSymcon extends IPSModule
             $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
             $this->getParameter('Kuehlung');
             $Value = $this->GetValue('KuehlungVariable');   
-            $this->EnableAction('KuehlungVariable');;
+            $this->EnableAction('KuehlungVariable');
         } 
         else 
         {
             $this->UnregisterVariable('KuehlungVariable');
+        }
+        if ($tempsetVisible) 
+        {
+            $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
+            $this->getParameter('Tempset'); 
+            $Value = $this->GetValue('TempsetVariable'); 
+            $this->EnableAction('TempsetVariable');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('TempsetVariable');
         }
     }
 
@@ -104,6 +117,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Heizung', $Value);
+            $this->getParameter('Warmwasser');
             $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
         }
     
@@ -112,6 +126,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Kuehlung', $Value);
+            $this->getParameter('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0); 
         }
     
@@ -120,7 +135,15 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Warmwasser', $Value);
+            $this->getParameter('Warmwasser');
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);  
+        }
+        if ($Ident == 'TempsetVariable') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->sendDataToSocket('Tempset', $Value);
+            $this->getParameter('Tempset');
+            $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
         }
     }
     
@@ -223,12 +246,12 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 0; // Boolean-Typ
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141):
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
                 if ($varid) 
                 {
-                    IPS_SetVariableCustomProfile($varid, 'WPLUX.Sec');
+                    IPS_SetVariableCustomProfile($varid, '');
                 }
-                return 1; // Integer
+                return 3; // String
                 
             case ($id == 57 || $id == 59):
                 if ($varid) 
@@ -349,7 +372,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return 1; // Integer
 
-            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)  || $id == 257):
+            case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, '~Electricity');
@@ -369,6 +392,13 @@ class WPLUXSymcon extends IPSModule
                     IPS_SetVariableCustomProfile($varid, '~Hertz');
                 }
                 return 2; // Float
+
+            case ($id == 257):
+                if ($varid) 
+                {
+                    IPS_SetVariableCustomProfile($varid, '~Power');
+                }
+                return 2; // Float-Typ
  
             default:
                 // Standardprofil, falls keine spezifische Zuordnung gefunden wird
@@ -388,7 +418,7 @@ class WPLUXSymcon extends IPSModule
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
                 return round($value * 0.1, 1);
             
-            case ($id == 15):    //Aussentemperatur Minustest
+            case ($id == 15): //Aussentemperatur Minustest
                 $minusTest = $value * 0.1;
                 if ($minusTest > 429496000) 
                 {
@@ -400,6 +430,15 @@ class WPLUXSymcon extends IPSModule
                     $value *= 0.1; 
                 }
                 return round($value, 1); 
+
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
+                $time = $value - 1;
+                $hours = floor($time / (60 * 60));
+                $time -= $hours * (60 * 60);
+                $minutes = floor($time / 60);
+                $time -= $minutes * 60;
+                $value = "{$hours}h {$minutes}m";
+                return ($value); 
 
             case ($id == 147 || ($id >= 151 && $id <= 154) || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
                 return round($value * 0.01, 1);
@@ -494,6 +533,9 @@ class WPLUXSymcon extends IPSModule
 
         // Parameter je nach Typ festlegen
         switch ($type) {
+            case 'Tempset':
+                $parameter = 1;
+                break;
             case 'Heizung':
                 $parameter = 3;
                 break;
@@ -518,6 +560,12 @@ class WPLUXSymcon extends IPSModule
             case 'Kuehlung':
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
+            case 'Tempset':
+                if ($value >= -5 && $value <= 5) // Wert für Temperaturkorrektur
+                {
+                    $value *= 10; 
+                }
+                break;
             default:
                 // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
                 $value = ($value >= 0 && $value <= 4) ? $value : 0;
@@ -525,7 +573,7 @@ class WPLUXSymcon extends IPSModule
         }
 
         //Debug senden
-        $this->SendDebug("Socketverbindung", "Senden der Parameter: ".$parameter." und der Wert: ".$value." wurde an den Socket gesendet", 0);
+        $this->SendDebug("Socketverbindung", "Der Parameter: ".$parameter." mit dem Wert: ".$value." wurde an den Socket gesendet", 0);
 
         $msg = pack('N*', $value); // Wert packen
         $send = socket_write($socket, $msg, 4); // Daten senden
@@ -591,6 +639,21 @@ class WPLUXSymcon extends IPSModule
             {
                 $this->SetValue('KuehlungVariable', $daten_raw[$i]);
                 $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == 'Tempset' && $i == 1) // Temperaturanpassung
+            {
+                $minusTest = $daten_raw[$i] * 0.1;
+                if ($minusTest > 429496000) 
+                {
+                    $daten_raw[$i] -= 4294967296;
+                    $daten_raw[$i] *= 0.1; 
+                } 
+                else 
+                {
+                    $daten_raw[$i] *= 0.1; 
+                }
+                $this->SetValue('TempsetVariable', $daten_raw[$i]);
+                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }

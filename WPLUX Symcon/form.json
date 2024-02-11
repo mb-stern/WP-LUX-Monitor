@@ -18,6 +18,10 @@
                 },
                 {
                     "type": "Label",
+                    "label": "Es kann nun eine Variable für die Temperaturkorrektur eingeblendet werden. Dieser Wert hebt die Rücklauf-Solltemperatur entsprechend an"
+                },
+                {
+                    "type": "Label",
                     "label": "Die Beschreibung und ID's der Variablen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
                 }
             ]
@@ -51,6 +55,11 @@
             "type": "CheckBox",
             "name": "KuehlungVisible",
             "caption": "Steuervariable für Kühlungs-Modus aktivieren"
+        },
+        {
+            "type": "CheckBox",
+            "name": "TempsetVisible",
+            "caption": "Steuervariable für Temperatkorrektur aktivieren"
         },
         {
             "type": "List",
