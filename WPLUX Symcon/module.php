@@ -104,7 +104,7 @@ class WPLUXSymcon extends IPSModule
         } 
         else 
         {
-            $this->UnregisterVariable('KuehlungVariable');
+            $this->UnregisterVariable('TempsetVariable');
         }
     }
 
