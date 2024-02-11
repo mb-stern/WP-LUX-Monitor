@@ -99,12 +99,10 @@ class WPLUXSymcon extends IPSModule
         if ($tempsetVisible) 
         {
             $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
-            
-            $Value = $this->GetValue('TempsetVariable');
-            
-            $this->getParameter('Tempset'); 
-             
-            $this->EnableAction('TempsetVariable');;
+            $Value = $this->getParameter('Tempset'); // Wert des Parameters 'Tempset' abrufen
+            $this->SetValue('TempsetVariable', $Value); // Wert in die Variable 'TempsetVariable' schreiben
+            $this->EnableAction('TempsetVariable'); // Aktivieren Sie die Aktion für die Variable 'TempsetVariable'
+
         } 
         else 
         {
