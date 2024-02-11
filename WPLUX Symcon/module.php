@@ -418,18 +418,17 @@ class WPLUXSymcon extends IPSModule
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
                 return round($value * 0.1, 1);
             
-            case ($id == 15): //Aussentemperatur Minustest
-                $minusTest = $value * 0.1;
-                if ($minusTest > 429496000) 
+            case ($id == 15): // Aussentemperatur Minustest
+                $value *= 0.1; // Wert umrechnen
+            
+                if ($value > 429496000) // Wenn der Wert größer als 429496000 ist
                 {
-                    $value -= 4294967296;
-                    $value *= 0.1; 
-                } 
-                else 
-                {
-                    $value *= 0.1; 
+                    $value -= 4294967296; // Korrektur für Überlauf
                 }
-                return round($value, 1); 
+            
+                $value *= 0.1; // Wert wieder anpassen
+            
+                return round($value, 1); // Gerundeten Wert zurückgeben 
 
                 case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
                 $time = $value - 1;
