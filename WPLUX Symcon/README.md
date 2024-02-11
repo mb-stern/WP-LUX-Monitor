@@ -83,6 +83,7 @@ WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
 WPLUX.Wwhe	|  Integer
 WPLUX.Kue	|  Integer
+WPLUX.Tset	|  Integer
 
 
 ### 6. WebFront
