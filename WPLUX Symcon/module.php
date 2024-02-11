@@ -635,7 +635,7 @@ class WPLUXSymcon extends IPSModule
             }
             elseif ($mode == 'Tempset' && $i == 1) // Temperaturanpassung
             {
-                $this->SetValue('KuehlungVariable', $daten_raw[$i]*0.1);
+                $this->SetValue('TempsetVariable', $daten_raw[$i]*0.1);
                 $this->SendDebug("Temperaturanpasung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
             }
         }
