@@ -117,6 +117,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Heizung', $Value);
+            $this->getParameter('Warmwasser');
             $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
         }
     
@@ -125,6 +126,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Kuehlung', $Value);
+            $this->getParameter('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0); 
         }
     
@@ -133,6 +135,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Warmwasser', $Value);
+            $this->getParameter('Warmwasser');
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);  
         }
         if ($Ident == 'TempsetVariable') 
