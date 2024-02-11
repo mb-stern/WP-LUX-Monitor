@@ -99,7 +99,7 @@ class WPLUXSymcon extends IPSModule
         if ($tempsetVisible) 
         {
             $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
-            //$this->getParameter('Tempset'); 
+            $this->getParameter('Tempset'); 
             $Value = $this->GetValue('TempsetVariable'); 
             $this->EnableAction('TempsetVariable');
         } 
@@ -139,6 +139,7 @@ class WPLUXSymcon extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->sendDataToSocket('Tempset', $Value);
+            $this->getParameter('Tempset');
             $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
         }
     }
