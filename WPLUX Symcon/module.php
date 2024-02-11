@@ -555,9 +555,7 @@ class WPLUXSymcon extends IPSModule
             case 'Kuehlung':
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
-            case 'Tempset':
-                $value
-                break;
+            
             default:
                 // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
                 $value = ($value >= 0 && $value <= 4) ? $value : 0;
