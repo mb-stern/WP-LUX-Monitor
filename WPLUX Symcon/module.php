@@ -14,7 +14,7 @@ class WPLUXSymcon extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        //Variableprofile erstellen
+        //Variableprofile erstellen wenn nicht vorhanden
         require_once __DIR__ . '/variable_profile.php';
 
         $this->RegisterPropertyString('IPAddress', '192.168.178.0');
@@ -34,6 +34,9 @@ class WPLUXSymcon extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+
+        //Variableprofile erstellen wenn nicht vorhanden
+        require_once __DIR__ . '/variable_profile.php';
 
         // Timer für Aktualisierung aktualisieren
         $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);

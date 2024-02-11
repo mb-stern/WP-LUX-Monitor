@@ -101,7 +101,7 @@ Beispiel:
 
 Version 2.4 (11.02.2024)
 
-- Im Integer-Variablenprofil WPLUX.Fan wird der Wert 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht muss das Profil manuell gelöscht werden, es wird danach neu erstellt.
+- Im Integer-Variablenprofil WPLUX.Fan wird die Einheit 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht wird, muss das Variablenprofil manuell gelöscht werden.
 
 Version 2.3 (11.02.2024)
 
