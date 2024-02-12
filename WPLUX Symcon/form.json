@@ -6,19 +6,11 @@
             "items": [
                 {
                     "type": "Label",
-                    "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller."
+                    "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller. Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
                 },
                 {
                     "type": "Label",
-                    "label": "Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
-                },
-                {
-                    "type": "Label",
-                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP."
-                },
-                {
-                    "type": "Label",
-                    "label": "Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
+                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
                 },
                 {
                     "type": "Label",
