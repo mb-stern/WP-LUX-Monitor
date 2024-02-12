@@ -1,64 +1,47 @@
 {
     "elements": [
-        {
-            "type": "ExpansionPanel",
-            "caption": "Info zum Modul",
-            "items": [
-                {
-                    "type": "Label",
-                    "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller. Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
-                },
-                {
-                    "type": "Label",
-                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
-                },
-                {
-                    "type": "Label",
-                    "label": "Die Beschreibung und ID's der Variablen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
-                }
-            ]
-        },
-        {
+      {
+        "type": "ExpansionPanel",
+        "caption": "Info zum Modul",
+        "items": [
+          {
+            "type": "Label",
+            "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller. Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
+          },
+          {
+            "type": "Label",
+            "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
+          },
+          {
+            "type": "Label",
+            "label": "Die Beschreibung und ID's der Variablen ist hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface"
+          }
+        ]
+      },
+      {
+        "type": "HorizontalLayout",
+        "elements": [
+          {
             "name": "IPAddress",
             "type": "ValidationTextBox",
             "caption": "IP-Address"
-        },
-        {
+          },
+          {
             "name": "Port",
             "type": "NumberSpinner",
             "caption": "Port (8888 oder 8889)"
-        },
-        {
+          },
+          {
             "name": "UpdateInterval",
             "type": "IntervalBox",
             "caption": "Sekunden"
-        },
-        {
-            "type": "CheckBox",
-            "name": "HeizungVisible",
-            "caption": "Steuervariable für Heizungs-Modus aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "WarmwasserVisible",
-            "caption": "Steuervariable für Warmwasser-Modus aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "KuehlungVisible",
-            "caption": "Steuervariable für Kühlungs-Modus aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "TempsetVisible",
-            "caption": "Steuervariable für Temperaturkorrektur aktivieren"
-        },
-        {
-            "type": "CheckBox",
-            "name": "WWsetVisible",
-            "caption": "Steuervariable für Warmwasser Soll aktivieren"
-        },
-        {
+          }
+        ]
+      },
+      {
+        "type": "HorizontalLayout",
+        "elements": [
+          {
             "type": "List",
             "name": "IDListe",
             "caption": "Überwachte ID's",
@@ -66,21 +49,53 @@
             "add": true,
             "delete": true,
             "sort": {
-                "column": "id",
-                "direction": "ascending"
+              "column": "id",
+              "direction": "ascending"
             },
             "columns": [
-                {
-                    "name": "id",
-                    "caption": "ID des Wertes",
-                    "width": "150",
-                    "add": 0,
-                    "edit": {
-                        "type": "NumberSpinner"
-                    }
+              {
+                "name": "id",
+                "caption": "ID des Wertes",
+                "width": "150",
+                "add": 0,
+                "edit": {
+                  "type": "NumberSpinner"
                 }
+              }
             ]
-        }
+          },
+          {
+            "type": "VerticalLayout",
+            "elements": [
+              {
+                "type": "CheckBox",
+                "name": "HeizungVisible",
+                "caption": "Steuervariable für Heizungs-Modus aktivieren"
+              },
+              {
+                "type": "CheckBox",
+                "name": "WarmwasserVisible",
+                "caption": "Steuervariable für Warmwasser-Modus aktivieren"
+              },
+              {
+                "type": "CheckBox",
+                "name": "KuehlungVisible",
+                "caption": "Steuervariable für Kühlungs-Modus aktivieren"
+              },
+              {
+                "type": "CheckBox",
+                "name": "TempsetVisible", 
+                "caption": "Steuervariable für Temperaturkorrektur aktivieren"
+              },
+              {
+                "type": "CheckBox",
+                "name": "WWsetVisible",
+                "caption": "Steuervariable für Warmwasser Soll aktivieren"
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
   
