@@ -451,7 +451,7 @@ class WPLUXSymcon extends IPSModule
                 }
                 return round($value, 1); 
 
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
                 $time = $value - 1;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
@@ -687,7 +687,7 @@ class WPLUXSymcon extends IPSModule
             elseif ($mode == 'Wset' && $i == 2) // Warmwasseranpassung
             {
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
-                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
