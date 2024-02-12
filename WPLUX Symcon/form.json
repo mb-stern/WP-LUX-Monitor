@@ -19,53 +19,30 @@
         ]
       },
       {
-        "type": "HorizontalLayout",
+        "type": "HorizontalBox",
         "elements": [
           {
-            "name": "IPAddress",
-            "type": "ValidationTextBox",
-            "caption": "IP-Address"
-          },
-          {
-            "name": "Port",
-            "type": "NumberSpinner",
-            "caption": "Port (8888 oder 8889)"
-          },
-          {
-            "name": "UpdateInterval",
-            "type": "IntervalBox",
-            "caption": "Sekunden"
-          }
-        ]
-      },
-      {
-        "type": "HorizontalLayout",
-        "elements": [
-          {
-            "type": "List",
-            "name": "IDListe",
-            "caption": "Überwachte ID's",
-            "rowCount": 13,
-            "add": true,
-            "delete": true,
-            "sort": {
-              "column": "id",
-              "direction": "ascending"
-            },
-            "columns": [
+            "type": "VerticalBox",
+            "elements": [
               {
-                "name": "id",
-                "caption": "ID des Wertes",
-                "width": "150",
-                "add": 0,
-                "edit": {
-                  "type": "NumberSpinner"
-                }
+                "name": "IPAddress",
+                "type": "ValidationTextBox",
+                "caption": "IP-Address"
+              },
+              {
+                "name": "Port",
+                "type": "NumberSpinner",
+                "caption": "Port (8888 oder 8889)"
+              },
+              {
+                "name": "UpdateInterval",
+                "type": "IntervalBox",
+                "caption": "Sekunden"
               }
             ]
           },
           {
-            "type": "VerticalLayout",
+            "type": "VerticalBox",
             "elements": [
               {
                 "type": "CheckBox",
@@ -93,6 +70,29 @@
                 "caption": "Steuervariable für Warmwasser Soll aktivieren"
               }
             ]
+          }
+        ]
+      },
+      {
+        "type": "List",
+        "name": "IDListe",
+        "caption": "Überwachte ID's",
+        "rowCount": 13,
+        "add": true,
+        "delete": true,
+        "sort": {
+          "column": "id",
+          "direction": "ascending"
+        },
+        "columns": [
+          {
+            "name": "id",
+            "caption": "ID des Wertes",
+            "width": "150",
+            "add": 0,
+            "edit": {
+              "type": "NumberSpinner"
+            }
           }
         ]
       }
