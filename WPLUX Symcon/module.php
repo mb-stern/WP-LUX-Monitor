@@ -657,17 +657,17 @@ class WPLUXSymcon extends IPSModule
             if ($mode == 'Heizung' && $i == 3) // Betriebsart Heizung
             {
                 $this->SetValue('HeizungVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == 'Warmwasser' && $i == 4) // Betriebsart Warmwasser
             {
                 $this->SetValue('WarmwasserVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == 'Kuehlung' && $i == 108) // Betriebsart Kühlung
             {
                 $this->SetValue('KuehlungVariable', $daten_raw[$i]);
-                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == 'Tempset' && $i == 1) // Temperaturanpassung
             {
@@ -682,12 +682,12 @@ class WPLUXSymcon extends IPSModule
                     $daten_raw[$i] *= 0.1; 
                 }
                 $this->SetValue('TempsetVariable', $daten_raw[$i]);
-                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == 'Wset' && $i == 2) // Warmwasseranpassung
             {
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
-                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
