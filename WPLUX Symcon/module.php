@@ -111,7 +111,7 @@ class WPLUXSymcon extends IPSModule
         }
         if ($wwsetVisible) 
         {
-            $this->RegisterVariableFloat('WWsetVariable', 'Warmwasserkorrektur', 'WPLUX.Wset', 3);
+            $this->RegisterVariableFloat('WWsetVariable', 'Warmwasserkorrektur', 'WPLUX.Wset', 4);
             $this->getParameter('WWset'); 
             $Value = $this->GetValue('WWsetVariable'); 
             $this->EnableAction('WWsetVariable');
@@ -683,6 +683,11 @@ class WPLUXSymcon extends IPSModule
                 }
                 $this->SetValue('TempsetVariable', $daten_raw[$i]);
                 $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == 'Wset' && $i == 2) // Warmwasseranpassung
+            {
+                $this->SetValue('WWsetVariable', $daten_raw[$i]) * 0.1;
+                $this->SendDebug("Warmwasseranpassung", "Wert der Warmwassseranpassung von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
