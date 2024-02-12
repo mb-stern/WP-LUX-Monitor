@@ -84,7 +84,8 @@ WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
 WPLUX.Wwhe	|  Integer
 WPLUX.Kue	|  Integer
-WPLUX.Tset	|  Integer
+WPLUX.Tset	|  Float
+WPLUX.Wset	|  Float
 
 
 ### 6. WebFront
@@ -100,6 +101,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 2.5 (12.02.2024)
+
+- Es kann eine Variable zur Anpassung der Warmwassertemperatur eingeblendet werden
 
 Version 2.4 (11.02.2024)
 

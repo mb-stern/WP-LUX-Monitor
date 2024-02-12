@@ -23,6 +23,7 @@ class WPLUXSymcon extends IPSModule
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
+        $this->RegisterPropertyBoolean('WWsetVisible', false);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -59,6 +60,7 @@ class WPLUXSymcon extends IPSModule
         $kuehlungVisible = $this->ReadPropertyBoolean('KuehlungVisible');
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
+        $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
 
         // Variablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -107,6 +109,17 @@ class WPLUXSymcon extends IPSModule
         {
             $this->UnregisterVariable('TempsetVariable');
         }
+        if ($wwsetVisible) 
+        {
+            $this->RegisterVariableFloat('WWsetVariable', 'Warmwasserkorrektur', 'WPLUX.Wset', 3);
+            $this->getParameter('WWset'); 
+            $Value = $this->GetValue('WWsetVariable'); 
+            $this->EnableAction('WWsetVariable');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('WWsetVariable');
+        }
     }
 
     public function RequestAction($Ident, $Value) 
@@ -137,6 +150,13 @@ class WPLUXSymcon extends IPSModule
             $this->sendDataToSocket('Warmwasser', $Value);
             $this->getParameter('Warmwasser');
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);  
+        }
+        if ($Ident == 'WWsetVariable') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->sendDataToSocket('Wset', $Value);
+            $this->getParameter('Wset');
+            $this->SendDebug("Warmwasseranpassung", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
         }
         if ($Ident == 'TempsetVariable') 
         {
@@ -536,6 +556,9 @@ class WPLUXSymcon extends IPSModule
             case 'Tempset':
                 $parameter = 1;
                 break;
+            case 'Wset':
+                $parameter = 2;
+                break;
             case 'Heizung':
                 $parameter = 3;
                 break;
@@ -562,6 +585,12 @@ class WPLUXSymcon extends IPSModule
                 break;
             case 'Tempset':
                 if ($value >= -5 && $value <= 5) // Wert für Temperaturkorrektur
+                {
+                    $value *= 10; 
+                }
+                break;
+            case 'Wset':
+                if ($value >= 30 && $value <= 65) // Wert für Warmwasserkorrektur
                 {
                     $value *= 10; 
                 }

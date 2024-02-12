@@ -190,3 +190,10 @@ if (!IPS_VariableProfileExists("WPLUX.Tset")) {
     IPS_SetVariableProfileText("WPLUX.Tset", "", " °C"); //Präfix, Suffix
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Tset erstellt", 0);   
 }
+if (!IPS_VariableProfileExists("WPLUX.Wset")) {
+    IPS_CreateVariableProfile("WPLUX.Wset", 2); //2 für Float
+    IPS_SetVariableProfileValues("WPLUX.Wset", 30, 65, 0.5); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Wset", 1); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Wset", "", " °C"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Wset erstellt", 0);   
+}
