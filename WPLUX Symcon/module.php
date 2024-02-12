@@ -686,7 +686,7 @@ class WPLUXSymcon extends IPSModule
             }
             elseif ($mode == 'Wset' && $i == 2) // Warmwasseranpassung
             {
-                $this->SetValue('WWsetVariable', $daten_raw[$i]) * 0.1;
+                $this->SetValue('WWsetVariable', $daten_raw[$i]) * 0.01;
                 $this->SendDebug("Warmwasseranpassung", "Wert der Warmwassseranpassung von der Lux geholt und in Variable gespeichert", 0);
             }
         }
