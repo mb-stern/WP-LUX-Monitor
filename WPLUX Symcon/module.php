@@ -112,7 +112,7 @@ class WPLUXSymcon extends IPSModule
         if ($wwsetVisible) 
         {
             $this->RegisterVariableFloat('WWsetVariable', 'Warmwasser Soll', 'WPLUX.Wset', 4);
-            $this->getParameter('WWset'); 
+            $this->getParameter('Wset'); 
             $Value = $this->GetValue('WWsetVariable'); 
             $this->EnableAction('WWsetVariable');
         } 
