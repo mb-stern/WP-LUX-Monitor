@@ -18,7 +18,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es kann nun eine Variable für die Temperaturkorrektur eingeblendet werden. Dieser Wert hebt oder senkt die Rücklauf-Solltemperatur entsprechend an"
+                    "label": "Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
                 },
                 {
                     "type": "Label",
@@ -64,7 +64,7 @@
         {
             "type": "CheckBox",
             "name": "WWsetVisible",
-            "caption": "Steuervariable für Warmwasserkorrektur aktivieren"
+            "caption": "Steuervariable für Warmwasser Soll aktivieren"
         },
         {
             "type": "List",

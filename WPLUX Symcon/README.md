@@ -104,7 +104,7 @@ Beispiel:
 
 Version 2.5 (12.02.2024)
 
-- Es kann eine Variable zur Anpassung der Warmwassertemperatur eingeblendet werden
+- Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden.
 
 Version 2.4 (11.02.2024)
 
