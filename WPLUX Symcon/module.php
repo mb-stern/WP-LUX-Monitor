@@ -475,12 +475,8 @@ class WPLUXSymcon extends IPSModule
     {
         // Überprüfen, ob die Variable bereits existiert
         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        // Variable existiert nicht, also erstellen
-        $varid = $this->RegisterVariableFloat($ident, $ident, ($this->AssignVariableProfilesAndType(null, $id)), $id);
-        SetValue($varid, $value);
+
         
-        
-        /*
         if ($existingVarID === false) 
         {
              // Variable existiert nicht, also erstellen
@@ -491,6 +487,7 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             
+            /*
             // Variable existiert nicht, also erstellen
             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
             IPS_SetParent($varid, $this->InstanceID);
@@ -504,7 +501,7 @@ class WPLUXSymcon extends IPSModule
 
             // Hier die Methode aufrufen, um das Profil zuzuweisen
             $this->AssignVariableProfilesAndType($varid, $id);
-           
+            */
         } 
         else 
         {
@@ -534,7 +531,6 @@ class WPLUXSymcon extends IPSModule
                 $this->SendDebug("Variable aktualisiert", "Variablentyp stimmt überein, daher wird nur der Wert aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
             }
         }
-         */
         return $varid;
     }
 
