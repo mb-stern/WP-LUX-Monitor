@@ -482,7 +482,7 @@ class WPLUXSymcon extends IPSModule
             $varid = $this->RegisterVariableFloat($ident, $this->AssignVariableProfilesAndType(null, $id));
             SetValue($varid, $value);
             
-            Debug senden
+            //Debug senden
             $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             
