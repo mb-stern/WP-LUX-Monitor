@@ -478,6 +478,12 @@ class WPLUXSymcon extends IPSModule
 
         if ($existingVarID === false) 
         {
+             // Variable existiert nicht, also erstellen
+            $varid = $this->RegisterVariableFloat($ident, $ident, $this->AssignVariableProfilesAndType(null, $id), $id);
+            SetValue($varid, $value);
+            
+            
+            /*
             // Variable existiert nicht, also erstellen
             $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
             IPS_SetParent($varid, $this->InstanceID);
@@ -491,6 +497,7 @@ class WPLUXSymcon extends IPSModule
 
             // Hier die Methode aufrufen, um das Profil zuzuweisen
             $this->AssignVariableProfilesAndType($varid, $id);
+            */
         } 
         else 
         {
