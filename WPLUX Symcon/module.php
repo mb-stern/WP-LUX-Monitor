@@ -482,7 +482,20 @@ class WPLUXSymcon extends IPSModule
     if ($existingVarID === false) 
     {
         // Variable existiert nicht, also erstellen
-        $varid = $this->RegisterVariable($ident, $ident, $variableTypeAndProfile, $id);
+        switch ($variableTypeAndProfile) {
+            case 0:
+                $varid = $this->RegisterVariableBoolean($ident, $ident, "", $id);
+                break;
+            case 1:
+                $varid = $this->RegisterVariableInteger($ident, $ident, "", $id);
+                break;
+            case 2:
+                $varid = $this->RegisterVariableFloat($ident, $ident, "", $id);
+                break;
+            case 3:
+            default:
+                $varid = $this->RegisterVariableString($ident, $ident, "", $id);
+        }
         SetValue($varid, $value);
 
         // Debug senden
@@ -495,8 +508,21 @@ class WPLUXSymcon extends IPSModule
         // Überprüfen, ob der Variablentyp stimmt
         if (IPS_GetVariable($varid)['VariableType'] != $variableTypeAndProfile) {
             // Variablentyp stimmt nicht überein, also Variable neu erstellen
-            $this->UnregisterVariable($varid); // Variable entfernen
-            $varid = $this->RegisterVariable($ident, $ident, $variableTypeAndProfile, $id);
+            IPS_DeleteVariable($varid);
+            switch ($variableTypeAndProfile) {
+                case 0:
+                    $varid = $this->RegisterVariableBoolean($ident, $ident, "", $id);
+                    break;
+                case 1:
+                    $varid = $this->RegisterVariableInteger($ident, $ident, "", $id);
+                    break;
+                case 2:
+                    $varid = $this->RegisterVariableFloat($ident, $ident, "", $id);
+                    break;
+                case 3:
+                default:
+                    $varid = $this->RegisterVariableString($ident, $ident, "", $id);
+            }
             SetValue($varid, $value);
 
             // Debug senden
@@ -513,6 +539,7 @@ class WPLUXSymcon extends IPSModule
     }
     return $varid;
 }
+
 
 
 private function DeleteVariableIfExists($ident)
