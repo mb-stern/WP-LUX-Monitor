@@ -476,13 +476,16 @@ class WPLUXSymcon extends IPSModule
     // Überprüfen, ob die Variable bereits existiert
     $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
+    // Variablentyp und Profil zuweisen
+    $variableTypeAndProfile = $this->AssignVariableProfilesAndType(null, $id);
+
     if ($existingVarID === false) 
     {
         // Variable existiert nicht, also erstellen
-        $varid = $this->RegisterVariable($ident, $ident, $this->AssignVariableProfilesAndType(null, $id), $id);
+        $varid = $this->RegisterVariable($ident, $ident, $variableTypeAndProfile, $id);
         SetValue($varid, $value);
 
-        //Debug senden
+        // Debug senden
         $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
     } 
     else 
@@ -490,13 +493,13 @@ class WPLUXSymcon extends IPSModule
         // Variable existiert, also aktualisieren
         $varid = $existingVarID;
         // Überprüfen, ob der Variablentyp stimmt
-        if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
+        if (IPS_GetVariable($varid)['VariableType'] != $variableTypeAndProfile) {
             // Variablentyp stimmt nicht überein, also Variable neu erstellen
             $this->UnregisterVariable($varid); // Variable entfernen
-            $varid = $this->RegisterVariable($ident, $ident, $this->AssignVariableProfilesAndType(null, $id), $id);
+            $varid = $this->RegisterVariable($ident, $ident, $variableTypeAndProfile, $id);
             SetValue($varid, $value);
 
-            //Debug senden
+            // Debug senden
             $this->SendDebug("Variable erneut erstellt", "Variabletyp stimmt nicht überein, daher Variable gelöscht und erneut erstellt - ID: ".$id.", Variablen-ID: ".$varid.", Name: ".$ident.", Wert: ".$value."", 0);
         } 
         else 
@@ -504,12 +507,13 @@ class WPLUXSymcon extends IPSModule
             // Variablentyp stimmt überein, also nur Wert aktualisieren
             SetValue($varid, $value);
 
-            //Debug senden
+            // Debug senden
             $this->SendDebug("Variable aktualisiert", "Variablentyp stimmt überein, daher wird nur der Wert aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
         }
     }
     return $varid;
 }
+
 
 private function DeleteVariableIfExists($ident)
 {
