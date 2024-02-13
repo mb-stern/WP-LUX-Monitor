@@ -492,7 +492,7 @@ class WPLUXSymcon extends IPSModule
             SetValue($varid, $value);
             IPS_SetPosition($varid, $id);
 
-            //Debug senden
+            Debug senden
             $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
             // Hier die Methode aufrufen, um das Profil zuzuweisen
