@@ -533,7 +533,7 @@ class WPLUXSymcon extends IPSModule
             $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
                 
             // Variable löschen
-            $this->UnregisterVariable ($variableID);
+            $this->UnregisterVariable($variableID);
         }
     }
 
