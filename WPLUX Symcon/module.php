@@ -479,7 +479,7 @@ class WPLUXSymcon extends IPSModule
         if ($existingVarID === false) 
         {
              // Variable existiert nicht, also erstellen
-            $varid = $this->RegisterVariableFloat($ident, $this->AssignVariableProfilesAndType(null, $id));
+            $varid = $this->RegisterVariableFloat($ident, $this->AssignVariableProfilesAndType, $id);
             SetValue($varid, $value);
             
             //Debug senden
