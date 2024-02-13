@@ -535,7 +535,7 @@ class WPLUXSymcon extends IPSModule
 
     private function DeleteVariableIfExists($ident)
     {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        $variableID = @IPS_GetObjectIDByIdent($ident, $id);
         if ($variableID !== false) 
         {
         
