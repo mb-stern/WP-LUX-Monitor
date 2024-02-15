@@ -560,7 +560,7 @@ class WPLUXSymcon extends IPSModule
             }
         }
 
-        */
+        
 
 
 
@@ -580,6 +580,8 @@ class WPLUXSymcon extends IPSModule
             IPS_DeleteVariable($variableID);
         }
     }
+
+    */
 
     private function sendDataToSocket($type, $value)
     {
