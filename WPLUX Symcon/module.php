@@ -477,100 +477,116 @@ class WPLUXSymcon extends IPSModule
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         
-        // Falls die Variable mit falschem Typ existiert, dann lösche sie
-        //$variableID = @$this->GetIDForIdent($ident);
-        //if ($variableID && IPS_VariableExists($variableID) && (IPS_GetVariable($variableID)['VariableType'] != $type)) 
-        //{
-        //    $this->UnregisterVariable($ident);
-        //}
-
-        // Variable erstellen bzw. Profil aktualisieren
+        // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-            /*
-            case VARIABLETYPE_BOOLEAN:
-                $this->RegisterVariableBoolean($ident, $ident, $varid, $id);
-                break;
-            
-            */
             
                 case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
-                $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
-                break;
-             
-                /*
-            case VARIABLETYPE_INTEGER:
-                $this->RegisterVariableInteger($ident, $ident, $varid, $id);
-                break;
+                    $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
+                    break;
 
-            case VARIABLETYPE_STRING:
-                $this->RegisterVariableString($ident, $ident, $varid, $id);
-                break;
-                */
+                case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
+                    $this->RegisterVariableBoolean($ident, $ident, '~Switch', $id);
+                    break;    
+    
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
+                    $this->RegisterVariableString($ident, $ident, '', $id);
+                    break;
+                    
+                case ($id == 57 || $id == 59):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Imp', $id);
+                    break;
+    
+                case ($id == 78):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Typ', $id);
+                    break;
+    
+                case ($id == 79):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Biv', $id);
+                    break;
+    
+                case ($id == 80):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.BZ', $id);
+                    break;
+    
+                case (($id >= 95 && $id <= 99) || ($id >= 111 && $id <= 115) || $id == 134) || ($id >= 222 && $id <= 226):
+                    $this->RegisterVariableInteger($ident, $ident, '~UnixTimestamp', $id);
+                    break;
+    
+                case (($id >= 106 && $id <= 110) || ($id >= 217 && $id <= 221)):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Off', $id);
+                    break;
+    
+                case ($id == 116 || $id == 172 || $id == 174):
+                    $this->RegisterVariableBoolean($ident, $ident, 'WPLUX.Comf', $id);
+                    break;
+
+                case ($id == 117):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Men1', $id);
+                    break;
+                            
+                case ($id == 118):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Men2', $id);
+                    break;
+
+                case ($id == 119):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Men3', $id);
+                    break;
+
+                case ($id == 124):
+                    $this->RegisterVariableBoolean($ident, $ident, 'WPLUX.Akt', $id);
+                    break;
+
+                case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169)):
+                    $this->RegisterVariableFloat($ident, $ident, '~Volt', $id);
+                    break;
+
+                case ($id == 173):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.lh', $id);
+                    break;
+    
+                case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
+                    $this->RegisterVariableFloat($ident, $ident, '~Temperature.Difference', $id);
+                    break;
+    
+                case (($id >= 180 && $id <= 181) || ($id >= 210 && $id <= 211)):
+                    $this->RegisterVariableFloat($ident, $ident, 'WPLUX.Pres', $id);
+                    break;
+    
+                case ($id == 183):
+                    $this->RegisterVariableFloat($ident, $ident, '~Valve.F', $id);
+                    break;
+    
+                case ($id == 184 || $id == 193  || $id == 231):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Fan', $id);
+                    break;
+    
+                case (($id >= 151 && $id <= 154)|| ($id >= 187 && $id <= 188)):
+                    $this->RegisterVariableFloat($ident, $ident, '~Electricity', $id);
+                    break;
+    
+                case ($id == 191):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Bet', $id);
+                    break;
+    
+                case ($id == 231):
+                    $this->RegisterVariableFloat($ident, $ident, '~Hertz', $id);
+                    break;
+    
+                case ($id == 257):
+                    $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
+                    break;
+
+                default:
+                    // Standardprofil, falls keine spezifische Zuordnung gefunden wird
+                    $this->RegisterVariableInteger($ident, $ident, '', $id);
+                    break;
+             
         }
 
         $this->SetValue($ident, $value);
-        
-        //Debug senden
-        //$this->SendDebug("Variable erstellt", "Variable wurde erstellt oder aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
-
-        //return $varid;
     }
-
-
-        /*
-
-        // Überprüfen, ob die Variable bereits existiert
-        $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-
-        if ($existingVarID === false) 
-        {
-            // Variable existiert nicht, also erstellen
-            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-            IPS_SetParent($varid, $this->InstanceID);
-            IPS_SetIdent($varid, $ident);
-            IPS_SetName($varid, $ident);
-            SetValue($varid, $value);
-            IPS_SetPosition($varid, $id);
-
-            //Debug senden
-            $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
-
-            // Hier die Methode aufrufen, um das Profil zuzuweisen
-            $this->AssignVariableProfilesAndType($varid, $id);
-        } 
-        else 
-        {
-            // Variable existiert, also aktualisieren
-            $varid = $existingVarID;
-            // Überprüfen, ob der Variablentyp stimmt
-            if (IPS_GetVariable($varid)['VariableType'] != $this->AssignVariableProfilesAndType($varid, $id)) {
-            // Variablentyp stimmt nicht überein, also Variable neu erstellen
-            IPS_DeleteVariable($varid);
-            $varid = IPS_CreateVariable($this->AssignVariableProfilesAndType(null, $id));
-            IPS_SetParent($varid, $this->InstanceID);
-            IPS_SetIdent($varid, $ident);
-            IPS_SetName($varid, $ident);
-            SetValue($varid, $value);
-            IPS_SetPosition($varid, $id);
-
-            //Debug senden
-            $this->SendDebug("Variable erneut erstellt", "Variabletyp stimmt nicht überein, daher Variable gelöscht und erneut erstellt - ID: ".$id.", Variablen-ID: ".$varid.", Name: ".$ident.", Wert: ".$value."", 0);
-
-            } 
-            else 
-            {
-                // Variablentyp stimmt überein, also nur Wert aktualisieren
-                SetValue($varid, $value);
-
-                //Debug senden
-                $this->SendDebug("Variable aktualisiert", "Variablentyp stimmt überein, daher wird nur der Wert aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
-            }
-        }
-
-        
-*/
     
     private function DeleteVariableIfExists($ident)
     {
