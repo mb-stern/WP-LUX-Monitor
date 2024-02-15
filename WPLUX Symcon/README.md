@@ -102,7 +102,7 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 2.5 - Beta (16.02.2024)
+Version 2.5 - Beta (16.02.2024) 
 
 - Modul von WPLUX Symcon in Luxtronic umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte
 - Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden. Sinnvoll für PVA Besitzer, welche überschüssige Energie in den Warmwasserspeicher verschieben möchten. Temperaturbereich 30-65 Grad.
