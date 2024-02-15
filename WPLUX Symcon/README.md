@@ -1,4 +1,4 @@
-# WPLUX Symcon
+# Luxtronic
 Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
 Der integrierte RJ45 Netzwerkanschluss kann mit dem heimschen Netzwerk verbunden werden.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
@@ -84,7 +84,8 @@ WPLUX.Fan    |  Integer
 WPLUX.lh	|  Integer
 WPLUX.Wwhe	|  Integer
 WPLUX.Kue	|  Integer
-WPLUX.Tset	|  Integer
+WPLUX.Tset	|  Float
+WPLUX.Wset	|  Float
 
 
 ### 6. WebFront
@@ -101,11 +102,21 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 2.4 (11.02.2024)
+Version 3.0 - Beta (16.02.2024)
+
+- Modul von WPLUX Symcon in Luxtronic umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.
+- Code massiv umgebaut um die Shop-Kompatibilität zu ereichen
+- Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden. Sinnvoll für PVA Besitzer, welche überschüssige Energie in den Warmwasserspeicher verschieben möchten. Temperaturbereich 30-65 Grad.
+- Umgestaltung des Konfigurationsformulars, die aktivierbaren Variablen zur Steuerung der Luxtronic werden nun in einem ExpansionPanel dargestellt.
+- Variable 95 - 115 umbenannt da der lange Name zu Fehler führte (Variablen müssen manuell im Baum gelöscht werden wenn sie bereits vorhanden sind)
+- Variable 20 umbenannt wegen ungültigem Sonderzeichen (Variablen müssen manuell im Baum gelöscht werden wenn sie bereits vorhanden sind)
+ 
+
+Version 2.4 - Beta (11.02.2024)
 
 - Erstellung der Variablenprofile von Create() in ApplyChanges() verschoben, damit die Profile bei jeder Änderung auf Vorhandensein geprüft und ggf. erstellt werden.
 - Im Integer-Variablenprofil WPLUX.Fan wird die Einheit 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht wird, muss das Variablenprofil manuell gelöscht werden. Es wird bei einer Konfigurationsänderung neu erstellt.
-- Es kann nun eine Variable zur Anpassung der Temperatur eingeblendet werden. Dieser Wert hebt die Rücklauftemperatur entsprechend an und ermöglicht eine Temperaturanpassung, ohne die Heizkurve zu verändern.
+- Es kann nun eine Variable zur Anpassung der Temperatur eingeblendet werden. Dieser Wert hebt die Rücklauftemperatur entsprechend an und ermöglicht eine Temperaturanpassung, ohne die Heizkurve zu verändern. Verstellbereich -5 bis +5 Grad.
 
 Version 2.3 (11.02.2024)
 

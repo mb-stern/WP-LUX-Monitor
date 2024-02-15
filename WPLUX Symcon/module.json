@@ -1,10 +1,10 @@
 {
     "id": "{3884C1C3-F4FF-9A56-B982-B986E934A5E7}",
-    "name": "WPLUX Symcon",
+    "name": "WPLUX",
     "type": 3,
     "vendor": "",
     "aliases": [
-        "WPLUX Symcon"
+        "Luxtronic"
     ],
     "parentRequirements": [],
     "childRequirements": [],
