@@ -1,4 +1,4 @@
-# WPLUX Symcon
+# Luxtronic
 Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
 Der integrierte RJ45 Netzwerkanschluss kann mit dem heimschen Netzwerk verbunden werden.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
@@ -102,15 +102,16 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 2.5 (13.02.2024)
+Version 2.5 - Beta (16.02.2024)
 
+- Modul von WPLUX Symcon in Luxtronic umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte
 - Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden. Sinnvoll für PVA Besitzer, welche überschüssige Energie in den Warmwasserspeicher verschieben möchten. Temperaturbereich 30-65 Grad.
 - Umgestaltung des Konfigurationsformulars, die aktivierbaren Variablen zur Steuerung der Luxtronic werden nun in einem ExpansionPanel dargestellt.
 - Variable 95 - 115 umbenannt da der lange Name zu Fehler führte (Variablen müssen manuell im Baum gelöscht werden wenn sie bereits vorhanden sind)
 - Variable 20 umbenannt wegen ungültigem Sonderzeichen (Variablen müssen manuell im Baum gelöscht werden wenn sie bereits vorhanden sind)
  
 
-Version 2.4 (11.02.2024)
+Version 2.4 - Beta (11.02.2024)
 
 - Erstellung der Variablenprofile von Create() in ApplyChanges() verschoben, damit die Profile bei jeder Änderung auf Vorhandensein geprüft und ggf. erstellt werden.
 - Im Integer-Variablenprofil WPLUX.Fan wird die Einheit 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht wird, muss das Variablenprofil manuell gelöscht werden. Es wird bei einer Konfigurationsänderung neu erstellt.
