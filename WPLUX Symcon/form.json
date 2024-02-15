@@ -19,6 +19,37 @@
             ]
         },
         {
+            "type": "ExpansionPanel",
+            "caption": "Variablen zur Steuerung der Luxtronic aktivieren/deaktivieren",
+            "items": [
+                {
+                    "type": "CheckBox",
+                    "name": "HeizungVisible",
+                    "caption": "Steuervariable für Heizungs-Modus aktivieren"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "WarmwasserVisible",
+                    "caption": "Steuervariable für Warmwasser-Modus aktivieren"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "KuehlungVisible",
+                    "caption": "Steuervariable für Kühlungs-Modus aktivieren"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "TempsetVisible",
+                    "caption": "Steuervariable für Temperaturkorrektur aktivieren"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "WWsetVisible",
+                        "caption": "Steuervariable für Warmwasser Soll aktivieren"
+                }
+                ]
+        },
+        {
             "name": "IPAddress",
             "type": "ValidationTextBox",
             "caption": "IP-Address"
@@ -33,37 +64,6 @@
             "type": "IntervalBox",
             "caption": "Sekunden"
         },
-            {
-                "type": "ExpansionPanel",
-                "caption": "Variablen zur Steuerung der Luxtronic aktivieren/deaktivieren",
-                "items": [
-                    {
-                        "type": "CheckBox",
-                        "name": "HeizungVisible",
-                        "caption": "Steuervariable für Heizungs-Modus aktivieren"
-                    },
-                    {
-                        "type": "CheckBox",
-                        "name": "WarmwasserVisible",
-                        "caption": "Steuervariable für Warmwasser-Modus aktivieren"
-                    },
-                    {
-                        "type": "CheckBox",
-                        "name": "KuehlungVisible",
-                        "caption": "Steuervariable für Kühlungs-Modus aktivieren"
-                    },
-                    {
-                        "type": "CheckBox",
-                        "name": "TempsetVisible",
-                        "caption": "Steuervariable für Temperaturkorrektur aktivieren"
-                    },
-                    {
-                        "type": "CheckBox",
-                        "name": "WWsetVisible",
-                        "caption": "Steuervariable für Warmwasser Soll aktivieren"
-                    }
-                ]
-            },
         {
             "type": "List",
             "name": "IDListe",
