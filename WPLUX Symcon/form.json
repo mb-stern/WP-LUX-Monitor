@@ -20,7 +20,7 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Variablen zur Steuerung der Luxtronic aktivieren/deaktivieren",
+            "caption": "Zusätzlich Variablen zur Steuerung der Luxtronic aktivieren/deaktivieren",
             "items": [
                 {
                     "type": "CheckBox",
