@@ -102,7 +102,7 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.0 - Beta (16.02.2024)
+Version 3.0 - Beta (15.02.2024)
 
 - Modul von WPLUX Symcon in Luxtronic umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.
 - Code massiv umgebaut um die Shop-Kompatibilität zu ereichen
