@@ -504,10 +504,11 @@ class WPLUXSymcon extends IPSModule
         $this->SetValue($ident, $value);
         
         //Debug senden
-        $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+        $this->SendDebug("Variable erstellt", "Variable wurde erstellt oder aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
 
 
-
+        return $varid;
+    }
 
 
         /*
@@ -562,11 +563,6 @@ class WPLUXSymcon extends IPSModule
 
         
 */
-
-
-        return $varid;
-    }
-
     
     private function DeleteVariableIfExists($ident)
     {
