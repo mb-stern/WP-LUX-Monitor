@@ -252,12 +252,15 @@ class WPLUXSymcon extends IPSModule
         // Hier erfolgt die Zuordnung des Variablenprofils und -typs basierend auf der 'id'
         switch (true) 
         {
+            
+            /*
             case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
                 if ($varid) 
                 {
                     IPS_SetVariableCustomProfile($varid, '~Temperature');
                 }
                 return 2; // Float-Typ
+                */
                 
             case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
                 if ($varid) 
@@ -474,8 +477,6 @@ class WPLUXSymcon extends IPSModule
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         
-        $varid = $this->AssignVariableProfilesAndType(null, $id);
-        
         // Falls die Variable mit falschem Typ existiert, dann lösche sie
         $variableID = @$this->GetIDForIdent($ident);
         if ($variableID && IPS_VariableExists($variableID) && (IPS_GetVariable($variableID)['VariableType'] != $type)) 
@@ -484,16 +485,20 @@ class WPLUXSymcon extends IPSModule
         }
 
         // Variable erstellen bzw. Profil aktualisieren
-        switch ($type) 
+        switch ($id) 
         {
+            /*
             case VARIABLETYPE_BOOLEAN:
                 $this->RegisterVariableBoolean($ident, $ident, $varid, $id);
                 break;
             
-            case VARIABLETYPE_FLOAT:
-                $this->RegisterVariableFloat($ident, $ident, $varid, $id);
+            */
+            
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
+                $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                 break;
-                
+             
+                /*
             case VARIABLETYPE_INTEGER:
                 $this->RegisterVariableInteger($ident, $ident, $varid, $id);
                 break;
@@ -501,6 +506,7 @@ class WPLUXSymcon extends IPSModule
             case VARIABLETYPE_STRING:
                 $this->RegisterVariableString($ident, $ident, $varid, $id);
                 break;
+                */
         }
 
         $this->SetValue($ident, $value);
