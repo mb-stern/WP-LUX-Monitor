@@ -473,6 +473,45 @@ class WPLUXSymcon extends IPSModule
             
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
+        
+        // Falls die Variable mit falschem Typ existiert, dann lösche sie
+        $variableID = @$this->GetIDForIdent($ident);
+        if ($variableID && IPS_VariableExists($variableID) && (IPS_GetVariable($variableID)['VariableType'] != $type)) 
+        {
+            $this->UnregisterVariable($ident);
+        }
+
+        // Variable erstellen bzw. Profil aktualisieren
+        switch ($type) 
+        {
+            case VARIABLETYPE_BOOLEAN:
+                $this->RegisterVariableBoolean($ident, $ident, $varid, $id);
+                break;
+            
+            case VARIABLETYPE_FLOAT:
+                $this->RegisterVariableFloat($ident, $ident, $varid, $id);
+                break;
+                
+            case VARIABLETYPE_INTEGER:
+                $this->RegisterVariableInteger($ident, $ident, $varid, $id);
+                break;
+
+            case VARIABLETYPE_STRING:
+                $this->RegisterVariableString($ident, $ident, $varid, $id);
+                break;
+        }
+
+        $this->SetValue($ident, $value);
+        
+        //Debug senden
+        $this->SendDebug("Variable erstellt", "Variable wurde erstellt da sie noch nicht existiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
+
+
+
+
+
+        /*
+
         // Überprüfen, ob die Variable bereits existiert
         $existingVarID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
 
@@ -520,6 +559,11 @@ class WPLUXSymcon extends IPSModule
                 $this->SendDebug("Variable aktualisiert", "Variablentyp stimmt überein, daher wird nur der Wert aktualisiert - ID: ".$id."  Variablen-ID: ".$varid."  Name: ".$ident."  Wert: ".$value."", 0);
             }
         }
+
+        */
+
+
+
         return $varid;
     }
 
