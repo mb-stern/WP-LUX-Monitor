@@ -1,6 +1,6 @@
 <?php
 
-class WPLUXSymcon extends IPSModule
+class WPLUX extends IPSModule
 {
     private $updateTimer;
 
