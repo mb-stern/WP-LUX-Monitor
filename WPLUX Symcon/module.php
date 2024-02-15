@@ -567,6 +567,7 @@ class WPLUXSymcon extends IPSModule
         return $varid;
     }
 
+    /*
     private function DeleteVariableIfExists($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
@@ -581,7 +582,7 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    
+    */
 
     private function sendDataToSocket($type, $value)
     {
