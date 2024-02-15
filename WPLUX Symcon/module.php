@@ -561,7 +561,7 @@ class WPLUXSymcon extends IPSModule
         }
 
         
-
+*/
 
 
         return $varid;
@@ -581,7 +581,7 @@ class WPLUXSymcon extends IPSModule
         }
     }
 
-    */
+    
 
     private function sendDataToSocket($type, $value)
     {
