@@ -474,6 +474,8 @@ class WPLUXSymcon extends IPSModule
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
         
+        $varid = $this->AssignVariableProfilesAndType(null, $id);
+        
         // Falls die Variable mit falschem Typ existiert, dann lösche sie
         $variableID = @$this->GetIDForIdent($ident);
         if ($variableID && IPS_VariableExists($variableID) && (IPS_GetVariable($variableID)['VariableType'] != $type)) 
