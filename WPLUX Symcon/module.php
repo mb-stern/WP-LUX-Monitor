@@ -188,11 +188,11 @@ class WPLUX extends IPSModule
         if (!$connect) 
         {
             $error_code = socket_last_error();
-            $this->SendDebug("Verbindung zum Socket fehlgeschlagen. Error:", "$error_code", 0);
+            $this->SendDebug("Socketverbindung", "Verbindung zum Socket fehlerhaft, ".$error_code."", 0);
         } 
         else 
         {
-            $this->SendDebug("Verbindung zum Socket erfolgreich", "".$IpWwc.":".$WwcJavaPort."", 0);
+            $this->SendDebug("Socketverbindung", "Verbindung zum Socket erfolgreich, ".$IpWwc.":".$WwcJavaPort."", 0);
         }
 
         // Daten holen
