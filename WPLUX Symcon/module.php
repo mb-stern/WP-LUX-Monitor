@@ -396,7 +396,7 @@ class WPLUX extends IPSModule
         }
 
         $this->SetValue($ident, $value);
-        $this->SendDebug("Variablenaktualisierung", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Wert: ".$ident."", 0);
+        $this->SendDebug("Variablenaktualisierung", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
 
     }
     
