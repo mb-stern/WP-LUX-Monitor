@@ -291,7 +291,6 @@ class WPLUX extends IPSModule
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-            
                 case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                     break;
@@ -392,12 +391,10 @@ class WPLUX extends IPSModule
                     // Standardprofil, falls keine spezifische Zuordnung gefunden wird
                     $this->RegisterVariableInteger($ident, $ident, '', $id);
                     break;
-             
         }
 
         $this->SetValue($ident, $value);
         $this->SendDebug("Variablenaktualisierung", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
-
     }
     
     private function DeleteVariableIfExists($ident)
@@ -405,15 +402,13 @@ class WPLUX extends IPSModule
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID !== false) 
         {
-        
-            // Debug-Ausgabe
-            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
-                
             // Variable löschen
             $this->UnregisterVariable($ident);
+            
+            // Debug-Ausgabe
+            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);       
         }
     }
-
 
     private function sendDataToSocket($type, $value)
     {
