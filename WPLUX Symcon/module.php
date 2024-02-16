@@ -62,7 +62,7 @@ class WPLUX extends IPSModule
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
 
-        // Variablen erstellen und senden an die Funktion RequestAction
+        // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
             $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe', 0);
@@ -125,7 +125,7 @@ class WPLUX extends IPSModule
     public function RequestAction($Ident, $Value) 
     {
 
-        // Überprüfe, ob der Wert der 'HeizungVariable' geändert hat und senden an die Funktion sendDataToSocket
+        // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion sendDataToSocket
         if ($Ident == 'HeizungVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
@@ -173,9 +173,6 @@ class WPLUX extends IPSModule
         $IpWwc = "{$this->ReadPropertyString('IPAddress')}";
         $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
         $SiteTitle = "WÄRMEPUMPE";
-
-        //Debug senden
-        $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
 
         // Namen der Variablen laden (3004 Berechnungen lesen)
         require_once __DIR__ . '/java_3004.php';
@@ -249,7 +246,7 @@ class WPLUX extends IPSModule
     
     private function convertValueBasedOnID($value, $id)
     {
-        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
+        // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
@@ -297,6 +294,7 @@ class WPLUX extends IPSModule
             
                 case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
+                    $this->SendDebug("Variable", "Variable erstellt/aktulaisiert und Profil zugeordnet".$id.":".$ident."", 0);
                     break;
 
                 case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
