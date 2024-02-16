@@ -294,7 +294,7 @@ class WPLUX extends IPSModule
             
                 case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
-                    $this->SendDebug("Variable", "Variable erstellt/aktulaisiert und Profil zugeordnet".$id.":".$ident."", 0);
+                    $this->SendDebug("Variablenaktualisierung", "Variable erstellt/aktulaisiert und Profil zugeordnet, ID: ".$id.", Wert: ".$ident."", 0);
                     break;
 
                 case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
