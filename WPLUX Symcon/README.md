@@ -1,5 +1,6 @@
+
 # Luxtronik
-Dieses Modul ermöglicht, Daten der Luxtronic verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
+Dieses Modul ermöglicht, Daten der Luxtronik verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
 Der integrierte RJ45 Netzwerkanschluss kann mit dem heimschen Netzwerk verbunden werden.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
@@ -34,7 +35,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 ### 3. Software-Installation
 
 * Über den Module Store kann das Modul noch nicht installiert werden.
-* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/WPLUX-Symcon
+* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/Luxtronik
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -102,7 +103,7 @@ Beispiel:
 
 Version 3.0 - Beta (15.02.2024)
 
-- Modul von WPLUX Symcon in Luxtronic umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.
+- Modul von WPLUX Symcon in Luxtronik umbenannt um die Shop-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.
 - Code massiv umgebaut um die Shop-Kompatibilität zu ereichen
 - Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden. Sinnvoll für PVA Besitzer, welche überschüssige Energie in den Warmwasserspeicher verschieben möchten. Temperaturbereich 30-65 Grad.
 - Umgestaltung des Konfigurationsformulars, die aktivierbaren Variablen zur Steuerung der Luxtronic werden nun in einem ExpansionPanel dargestellt.
