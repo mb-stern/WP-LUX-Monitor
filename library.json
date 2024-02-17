@@ -1,12 +1,12 @@
 {
     "id": "{1417C9A5-D22D-D9AD-EFEC-BB55C51A2867}",
-    "name": "WPLUX Symcon",
+    "name": "WPLUX",
     "author": "Stefan Künzli",
     "url": "https://github.com/mb-stern/WPLUX-Symcon",
     "compatibility": {
         "version": "7.0"
     },
-    "version": "2.3",
+    "version": "3.1",
     "build": 0,
     "date": 0
 }
