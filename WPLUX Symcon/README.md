@@ -101,6 +101,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.1 - Beta (17.02.2024)
+
+- Anpassen der Debug-Ausgabe und verhindern einer Anmeldung mit der Muster-IP Adresse
+
 Version 3.0 - Beta (15.02.2024)
 
 - Modul von WPLUX Symcon in Luxtronik umbenannt um die Store-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.

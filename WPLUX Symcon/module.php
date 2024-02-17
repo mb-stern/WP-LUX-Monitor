@@ -14,7 +14,7 @@ class WPLUX extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.0');
+        $this->RegisterPropertyString('IPAddress', '');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
