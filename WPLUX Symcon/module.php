@@ -48,7 +48,7 @@ class WPLUX extends IPSModule
         if ($ipAddress == '192.168.178.0') 
         {
             $this->SendDebug("Konfiguration", "Bitte konfigurieren Sie die IP-Adresse.", 0);   
-            $this->LogMessage(__CLASS__, "Fehler: Bitte konfigurieren Sie eine gültige IP-Adresse.", KL_ERROR);   
+            $this->Log($Message)
         } 
         else 
         {
