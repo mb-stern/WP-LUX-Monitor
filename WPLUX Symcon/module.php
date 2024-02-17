@@ -4,17 +4,12 @@ class WPLUX extends IPSModule
 {
     private $updateTimer;
 
-    protected function Log($Message)
-    {
-        $this->LogMessage(__CLASS__, $Message);
-    }
-
     public function Create()
     {
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '192.168.178.0');
+        $this->RegisterPropertyString('IPAddress', '0.0.0.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -45,9 +40,10 @@ class WPLUX extends IPSModule
         $port = $this->ReadPropertyInteger('Port');
 
         // Überprüfe, ob die IP-Adresse nicht die Muster-IP ist
-        if ($ipAddress == '192.168.178.0') 
+        if ($ipAddress == '0.0.0.0') 
         {
-            $this->SendDebug("Konfiguration", "Bitte konfigurieren Sie die IP-Adresse.", 0);   
+            $this->SendDebug("Konfiguration", "IP-Adresse ist nicht konfiguriert", 0);   
+            $this->LogMessage("IP-Adresse ist nicht konfiguriert", KL_ERROR);
         } 
         else 
         {
@@ -62,7 +58,7 @@ class WPLUX extends IPSModule
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
 
-        // Variablen erstellen und senden an die Funktion RequestAction
+        // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
             $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe', 0);
@@ -125,7 +121,7 @@ class WPLUX extends IPSModule
     public function RequestAction($Ident, $Value) 
     {
 
-        // Überprüfe, ob der Wert der 'HeizungVariable' geändert hat und senden an die Funktion sendDataToSocket
+        // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion sendDataToSocket
         if ($Ident == 'HeizungVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
@@ -174,9 +170,6 @@ class WPLUX extends IPSModule
         $WwcJavaPort = "{$this->ReadPropertyInteger('Port')}";
         $SiteTitle = "WÄRMEPUMPE";
 
-        //Debug senden
-        $this->SendDebug("Verbindungseinstellung im Config", "".$IpWwc.":".$WwcJavaPort."", 0);
-
         // Namen der Variablen laden (3004 Berechnungen lesen)
         require_once __DIR__ . '/java_3004.php';
 
@@ -191,11 +184,12 @@ class WPLUX extends IPSModule
         if (!$connect) 
         {
             $error_code = socket_last_error();
-            $this->SendDebug("Verbindung zum Socket fehlgeschlagen. Error:", "$error_code", 0);
+            $this->SendDebug("Socketverbindung", "Verbindung zum Socket fehlerhaft: ".$IpWwc.":".$WwcJavaPort." Fehler: ".$error_code."", 0);
+            $this->LogMessage("Verbindung zum Socket fehlerhaft: ".$IpWwc.":".$WwcJavaPort." Fehler: ".$error_code."", KL_ERROR);
         } 
         else 
         {
-            $this->SendDebug("Verbindung zum Socket erfolgreich", "".$IpWwc.":".$WwcJavaPort."", 0);
+            $this->SendDebug("Socketverbindung", "Verbindung zum Socket erfolgreich: ".$IpWwc.":".$WwcJavaPort."", 0);
         }
 
         // Daten holen
@@ -233,7 +227,7 @@ class WPLUX extends IPSModule
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
                 // Debug senden
-                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in eine Variable ausgegeben", 0);
+                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
 
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = $java_dataset[$i];
@@ -249,7 +243,7 @@ class WPLUX extends IPSModule
     
     private function convertValueBasedOnID($value, $id)
     {
-        // Hier erfolgt die Konvertierung des Werts basierend auf der 'id'
+        // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
             case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
@@ -294,7 +288,6 @@ class WPLUX extends IPSModule
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-            
                 case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                     break;
@@ -393,13 +386,12 @@ class WPLUX extends IPSModule
 
                 default:
                     // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                    $this->RegisterVariableInteger($ident, $ident, '', $id);
+                    $this->RegisterVariableString($ident, $ident, '', $id);
                     break;
-             
         }
 
         $this->SetValue($ident, $value);
-
+        $this->SendDebug("Variable aktualisiert", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
     }
     
     private function DeleteVariableIfExists($ident)
@@ -407,15 +399,13 @@ class WPLUX extends IPSModule
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID !== false) 
         {
-        
-            // Debug-Ausgabe
-            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);
-                
             // Variable löschen
             $this->UnregisterVariable($ident);
+            
+            // Debug-Ausgabe
+            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);       
         }
     }
-
 
     private function sendDataToSocket($type, $value)
     {
