@@ -14,7 +14,7 @@ class WPLUX extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '');
+        $this->RegisterPropertyString('IPAddress', '192.168.178.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -48,6 +48,7 @@ class WPLUX extends IPSModule
         if ($ipAddress == '192.168.178.0') 
         {
             $this->SendDebug("Konfiguration", "Bitte konfigurieren Sie die IP-Adresse.", 0);   
+            $this->LogMessage("Konfiguration", "Fehler: Bitte konfigurieren Sie eine gültige IP-Adresse.", KL_ERROR);
         } 
         else 
         {
