@@ -386,7 +386,7 @@ class WPLUX extends IPSModule
 
                 default:
                     // Standardprofil, falls keine spezifische Zuordnung gefunden wird
-                    $this->RegisterVariableInteger($ident, $ident, '', $id);
+                    $this->RegisterVariableString($ident, $ident, '', $id);
                     break;
         }
 

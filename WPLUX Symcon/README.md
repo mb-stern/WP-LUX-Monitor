@@ -103,7 +103,7 @@ Beispiel:
 
 Version 3.1 - Beta (17.02.2024)
 
-- Anpassen der Debug-Ausgabe und verhindern einer Anmeldung mit der Muster-IP Adresse
+- Anpassen der Debug- und der Fehler-Ausgabe
 
 Version 3.0 - Beta (15.02.2024)
 
