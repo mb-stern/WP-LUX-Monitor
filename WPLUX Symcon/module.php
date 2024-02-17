@@ -4,11 +4,6 @@ class WPLUX extends IPSModule
 {
     private $updateTimer;
 
-    protected function Log($Message)
-    {
-        $this->LogMessage(__CLASS__, $Message, KL_ERROR);
-    }
-
     public function Create()
     {
         //Never delete this line!
@@ -47,8 +42,8 @@ class WPLUX extends IPSModule
         // Überprüfe, ob die IP-Adresse nicht die Muster-IP ist
         if ($ipAddress == '192.168.178.0') 
         {
-            $this->SendDebug("Konfiguration", "Bitte konfigurieren Sie die IP-Adresse.", 0);   
-            $this->Log($message = "This is a warning");
+            $this->SendDebug("Konfiguration", "IP-Adresse ist nicht konfiguriert", 0);   
+            $this->LogMessage("IP-Adresse ist nicht konfiguriert", KL_ERROR);
         } 
         else 
         {
