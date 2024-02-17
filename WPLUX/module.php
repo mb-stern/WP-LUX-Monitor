@@ -573,7 +573,7 @@ class WPLUX extends IPSModule
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
             }
-            elseif ($mode == 'cop' && $i == 34) // COP-Faktor
+            elseif ($mode == 'cop' && $i == 50) // COP-Faktor
             {
                 $this->SetValue('copfaktor', $daten_raw[$i] / $this->ReadPropertyFloat('Powerkw'));
                 $this->SendDebug("Copfaktor", "Copfaktor: ".$daten_raw[$i] / $this->ReadPropertyFloat('Powerkw')." berechnet und in Variable gespeichert", 0);
