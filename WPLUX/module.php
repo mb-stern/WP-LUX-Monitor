@@ -19,7 +19,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
-        $this->RegisterPropertyFloat('Powerkwh', 0);
+        $this->RegisterPropertyFloat('Powerkw', 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -58,6 +58,7 @@ class WPLUX extends IPSModule
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
+        $copVisible = $this->ReadPropertyFloat('Powerkw');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -116,6 +117,17 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('WWsetVariable');
+        }
+
+        if ($copVisible) 
+        {
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
+            $this->getParameter('cop'); 
+            $Value = $this->GetValue('copfaktor'); 
+        } 
+        else 
+        {
+            $this->UnregisterVariable('copfaktor');
         }
     }
 
@@ -408,19 +420,6 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function CalculateCOP($ident)
-    {
-        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
-        if ($variableID !== false) 
-        {
-            // Variable löschen
-            $this->UnregisterVariable($ident);
-            
-            // Debug-Ausgabe
-            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);       
-        }
-    }
-
     private function sendDataToSocket($type, $value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
@@ -572,6 +571,11 @@ class WPLUX extends IPSModule
             {
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == 'cop' && $i == 34) // COP-Faktor
+            {
+                $this->SetValue('copfaktor', $daten_raw[$i] / $this->ReadPropertyFloat('Powerkw'));
+                $this->SendDebug("Copfaktor", "Copfaktor: ".$daten_raw[$i] * 0.1." berechnet und in Variable gespeichert", 0);
             }
         }
     }
