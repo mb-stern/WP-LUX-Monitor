@@ -121,7 +121,7 @@ class WPLUX extends IPSModule
 
         if ($copVisible) 
         {
-            $this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
+            //$this->SetTimerInterval('UpdateTimer', $this->ReadPropertyInteger('UpdateInterval') * 1000);
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
             $this->getParameter('cop'); 
             $Value = $this->GetValue('copfaktor'); 
