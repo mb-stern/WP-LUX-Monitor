@@ -79,12 +79,13 @@ WPLUX.Men2    |  Integer
 WPLUX.Men3    |  Integer
 WPLUX.Akt     |  Bool
 WPLUX.Pres    |  Float
-WPLUX.Fan     |  Integer
-WPLUX.lh	  |  Integer
-WPLUX.Wwhe	  |  Integer
-WPLUX.Kue	  |  Integer
-WPLUX.Tset	  |  Float
-WPLUX.Wset	  |  Float
+WPLUX.Fan    |  Integer
+WPLUX.lh	|  Integer
+WPLUX.Wwhe	|  Integer
+WPLUX.Kue	|  Integer
+WPLUX.Tset	|  Float
+WPLUX.Wset	|  Float
+
 
 
 ### 6. WebFront
