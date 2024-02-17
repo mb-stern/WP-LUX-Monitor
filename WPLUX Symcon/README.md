@@ -1,8 +1,9 @@
 
 # Modul für Wärmepumpen mit Luxtronik für IP-Symcon
 Dieses Modul ermöglicht, Daten der Luxtronik verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
-Der integrierte RJ45 Netzwerkanschluss kann mit dem heimschen Netzwerk verbunden werden.
-Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
+Ausserdem ist es geeignet für Besitzer einer PV-Analge, um die überschüssgige Energie gemäss eigenen Vorstellungen der Wärmepumpe zuzuführen. Dies ist möglich durch Anpasen von Warmwasser- und Rücklauf-Solltemperatur.
+Um das Modul zu nutzen, muss der in der Luxtronik integrierte RJ45 Netzwerkanschluss mit dem heimschen Netzwerk verbunden werden.
+Danach muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.
 Dieses Modul funktioniert über Java-Abfrage, ab einem gewissen FW-Stand der LUX findet die Abfrage über Websocket statt. Java sollte aber weiterhin funktionieren.
 Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
@@ -22,11 +23,11 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 ### 1. Funktionsumfang
 
-* Abfrage der Istwerte aus der Luxtronik, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
+* Abfrage der Istwerte und Steurung der Luxtronik, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
 * Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
 * Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
-* Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden., je nach Funktionsumfang der Wärmepumpe. Die aktuellen Zustände werden von der Lux geholt. Mit jeder Änderung im Konfigurationsformuler werden diese Werte erneut von der Lux synchronisiert.
+* Es können Variablen für die Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Diese Variablen zur Steuerung werden nicht live synchronisiert, sondern immer erst dann, wenn Änderungen am Konfigurationsformular vorgenommen wurden.
 
 ### 2. Voraussetzungen
 
@@ -89,7 +90,7 @@ WPLUX.Wset	|  Float
 
 ### 6. WebFront
 
-Die Funktionalität, die das Modul im WebFront bietet.
+Die Variablen zur Steuerung der Luxtronik können aus der Visualisierung heraus gesteuert werden.
 
 ### 7. PHP-Befehlsreferenz
 
@@ -103,11 +104,11 @@ Beispiel:
 
 Version 3.1 - Beta (17.02.2024)
 
-- Anpassen der Debug- und der Fehler-Ausgabe
+- Anpassen der Debug- und der Fehler-Ausgabe.
 
 Version 3.0 - Beta (15.02.2024)
 
-- Modul von WPLUX Symcon in Luxtronik umbenannt um die Store-Kompatibilität zu erreichen. Dies erfordert leider eine neuinstallation des Moduls und das transferieren der Varaiblen-Werte.
+- Modul von WPLUX Symcon in Luxtronik umbenannt um die Store-Kompatibilität zu erreichen. Dies erfordert leider eine Neuinstallation des Moduls und das Transferieren der Variablen-Werte durch den Anwender.
 - Code massiv umgebaut um die Store-Kompatibilität zu ereichen
 - Es kann eine Variable zur Anpassung der Warmwasser Solltemperatur eingeblendet werden. Sinnvoll für PVA Besitzer, welche überschüssige Energie in den Warmwasserspeicher verschieben möchten. Temperaturbereich 30-65 Grad.
 - Umgestaltung des Konfigurationsformulars, die aktivierbaren Variablen zur Steuerung der Luxtronic werden nun in einem ExpansionPanel dargestellt.
