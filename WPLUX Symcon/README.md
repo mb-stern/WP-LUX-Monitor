@@ -1,4 +1,3 @@
-
 # Modul für Wärmepumpen mit Luxtronik für IP-Symcon
 Dieses Modul ermöglicht, Daten der Luxtronik verschiedener Wärmepumpen-Hersteller (zB Alpha InnoTec, Buderus (Logamatic HMC20, HMC20 Z), CTA All-In-One (Aeroplus), Elco, Nibe (AP-AW10), Roth (ThermoAura, ThermoTerra), Novelan (WPR NET) and Wolf Heiztechnik (BWL/BWS)) abzufragen.
 Ausserdem ist es geeignet für Besitzer einer PV-Analge, um die überschüssgige Energie gemäss eigenen Vorstellungen der Wärmepumpe zuzuführen. Dies ist möglich durch Anpasen von Warmwasser- und Rücklauf-Solltemperatur.
@@ -52,8 +51,8 @@ Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port mu
 Intervall       |   Intervall für das Update der Werte
 Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
-![image](https://github.com/mb-stern/Luxtronik/assets/95777848/888a824f-f4d2-41cb-9369-929b114f8fcf)
 
+![image](https://github.com/mb-stern/Luxtronik/assets/95777848/888a824f-f4d2-41cb-9369-929b114f8fcf)
 
 ![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/6c0ac90c-4524-4ad3-80ef-12eb0e133b37)
 
