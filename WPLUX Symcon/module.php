@@ -9,7 +9,7 @@ class WPLUX extends IPSModule
         //Never delete this line!
         parent::Create();
 
-        $this->RegisterPropertyString('IPAddress', '');
+        $this->RegisterPropertyString('IPAddress', '0.0.0.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
         $this->RegisterPropertyInteger('UpdateInterval', 0);
@@ -40,7 +40,7 @@ class WPLUX extends IPSModule
         $port = $this->ReadPropertyInteger('Port');
 
         // Überprüfe, ob die IP-Adresse nicht die Muster-IP ist
-        if ($ipAddress == '192.168.178.0') 
+        if ($ipAddress == '0.0.0.0') 
         {
             $this->SendDebug("Konfiguration", "IP-Adresse ist nicht konfiguriert", 0);   
             $this->LogMessage("IP-Adresse ist nicht konfiguriert", KL_ERROR);
