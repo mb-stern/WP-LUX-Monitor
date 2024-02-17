@@ -19,6 +19,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
+        $this->RegisterPropertyFloat('Powerkwh', '');
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -395,6 +396,19 @@ class WPLUX extends IPSModule
     }
     
     private function DeleteVariableIfExists($ident)
+    {
+        $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
+        if ($variableID !== false) 
+        {
+            // Variable löschen
+            $this->UnregisterVariable($ident);
+            
+            // Debug-Ausgabe
+            $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);       
+        }
+    }
+
+    private function CalculateCOP($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
         if ($variableID !== false) 

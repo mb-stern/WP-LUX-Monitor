@@ -45,7 +45,12 @@
                 {
                     "type": "CheckBox",
                     "name": "WWsetVisible",
-                        "caption": "Steuervariable für Warmwasser Soll aktivieren"
+                    "caption": "Steuervariable für Warmwasser Soll aktivieren"
+                },
+                {
+                    "type": "SelectVariable",
+                    "name": "Powerkwh",
+                    "caption": "Variable für Eingangsleistung zur Berechnung des COP"
                 }
                 ]
         },
