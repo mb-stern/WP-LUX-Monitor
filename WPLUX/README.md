@@ -87,6 +87,7 @@ WPLUX.Tset	|  Float
 WPLUX.Wset	|  Float
 
 
+
 ### 6. WebFront
 
 Die Variablen zur Steuerung der Luxtronik können aus der Visualisierung heraus gesteuert werden.
