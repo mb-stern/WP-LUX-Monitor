@@ -6,7 +6,7 @@ class WPLUX extends IPSModule
 
     protected function Log($Message)
     {
-        $this->LogMessage(__CLASS__, $Message);
+        $this->LogMessage(__CLASS__, $Message, KL_ERROR);
     }
 
     public function Create()
