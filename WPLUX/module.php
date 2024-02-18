@@ -408,7 +408,7 @@ class WPLUX extends IPSModule
         
         //Wert an Property Variablen senden zur Berechnung des COP ohne ausgewählte ID 257
         
-        if $i == 257
+        if ($i == 257)
         $this->SendDebug("Test", "Wärmeleistung erfasst für: ".$i."", 0);
         {
             $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);
