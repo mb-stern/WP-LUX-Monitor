@@ -579,7 +579,7 @@ class WPLUX extends IPSModule
     {
         if ($mode == 'cop') // COP-Faktor
             {
-                $kw_in = GetValue($this->GetIDForIdent('Powerkw'));
+                $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
                 //$cop = 130 / $kw_in;
                 $cop = $value / $kw_in;
                 $this->SetValue('copfaktor', $cop);
