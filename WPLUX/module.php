@@ -251,7 +251,7 @@ class WPLUX extends IPSModule
                 $value = $this->ReadPropertyFloat('kwout');
 
                 //Debug senden
-                $this->SendDebug("Test", "Variable i erfasst: " . $i . "", 0);
+                $this->SendDebug("Test", "Variable i erfasst: " . $i . " und ". $value ." gesendet", 0);
             }  
 
             else 
