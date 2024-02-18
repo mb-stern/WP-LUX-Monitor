@@ -50,7 +50,7 @@
                 {
                     "type": "SelectVariable",
                     "name": "Powerkw",
-                    "caption": "Variable für Eingangsleistung zur Berechnung des COP"
+                    "caption": "Hier die externe Variable für Eingangsleistung zur Berechnung des COP auswählen. Dazu muss ID 257 (Waermeleistung) ebenfalls aktiviert werden"
                 }
                 ]
         },
