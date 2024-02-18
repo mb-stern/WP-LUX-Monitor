@@ -294,7 +294,7 @@ class WPLUX extends IPSModule
         }
     }
             
-    private function CreateOrUpdateVariable($ident, $value, $id)
+    private function CreateOrUpdateVariable($ident, $value, $id, $i)
     {
         if ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
             {
