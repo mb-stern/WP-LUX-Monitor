@@ -402,7 +402,6 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
-                    $this->calcextvalues('cop', $value);
                     break;
 
                 default:
