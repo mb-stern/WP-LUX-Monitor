@@ -45,7 +45,7 @@
                 {
                     "type": "CheckBox",
                     "name": "WWsetVisible",
-                    "caption": "Steuervariable für Warmwasser Soll aktivieren"
+                    "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 {
                     "type": "SelectVariable",
