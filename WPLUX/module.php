@@ -252,7 +252,7 @@ class WPLUX extends IPSModule
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
-                $this->SendDebug("COP", "Für die COP-Berungung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+                $this->SendDebug("Wert 257", "Für die COP-Berungung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
             }  
 
             else 
