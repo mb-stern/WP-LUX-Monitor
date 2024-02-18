@@ -20,7 +20,7 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzlich Variablen zur Steuerung der Luxtronik aktivieren/deaktivieren",
+            "caption": "Zusätzliche Funktionen",
             "items": [
                 {
                     "type": "CheckBox",
