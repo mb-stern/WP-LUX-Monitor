@@ -244,6 +244,14 @@ class WPLUX extends IPSModule
                 $ident = $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
+            
+            elseif ($i == 257) 
+            {
+                $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);  
+
+                $this->SendDebug("Test", "Variable i erfasst: " . $i . "", 0);
+            }  
+
             else 
             {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
