@@ -122,7 +122,7 @@ class WPLUX extends IPSModule
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
-            $this->calcextvalues('cop', $copVisible);
+            $this->sendDataToSocket('Heizung', $Value);
             $Value = $this->GetValue('copfaktor'); 
         } 
         else 
@@ -576,9 +576,10 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calcextvalues($mode, $value, $copVisible)
+    private function calcextvalues($mode, $value)
     {
-        if ($mode == 'cop' && $copVisible !== 0)
+        $copVisible = $this->ReadPropertyFloat('Powerkw');
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
             {
                 $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
                 $cop = $value / $kw_in;
