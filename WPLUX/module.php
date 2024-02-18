@@ -245,7 +245,7 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
             
-            elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
+            elseif ($i == 257) ///Den Wert 257 (Waermeleistung) an die Funktion 'calcextvalues' senden wenn der Benutzer den Wert nicht ausgewählt hat
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calcextvalues('cop', $value); 
@@ -403,6 +403,7 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
+                    $this->calcextvalues('cop', $value); //Den Wert 257 (Waermeleistung) an die Funktion 'calcextvalues' senden wenn der Benutzer den Wert ausgewählt hat
                     break;
 
                 default:
