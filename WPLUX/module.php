@@ -577,7 +577,7 @@ class WPLUX extends IPSModule
 
     private function calcextvalues($mode, $value)
     {
-        if ($mode == 'cop' && IPS_VariableExists($copVisible))
+        if ($mode == 'cop' && $this->RegisterVariableFloat('copfaktor'))
             {
                 $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
                 $cop = $value / $kw_in;
