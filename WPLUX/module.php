@@ -20,7 +20,6 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
-        $this->RegisterPropertyFloat('kwout', 0.0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -248,11 +247,11 @@ class WPLUX extends IPSModule
             
             elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
             {
-                $value = $this->ReadPropertyFloat('kwout');
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
-                $this->SendDebug("Wert 257", "Für die COP-Berungung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
             }  
 
             else 
