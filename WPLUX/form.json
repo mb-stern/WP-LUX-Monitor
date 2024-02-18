@@ -50,7 +50,7 @@
                 {
                     "type": "SelectVariable",
                     "name": "Powerkw",
-                    "caption": "Externe Variable für Eingangsleistung zur Berechnung des COP auswählen."
+                    "caption": "Externe Variable zur Berechnung des COP auswählen."
                 }
                 ]
         },
