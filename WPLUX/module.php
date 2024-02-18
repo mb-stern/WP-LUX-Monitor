@@ -407,7 +407,7 @@ class WPLUX extends IPSModule
         $this->SendDebug("Variable aktualisiert", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
 
         
-        //Hier Property Variablen erstellen zur AUswertung ohne ausgewählte ID's
+        //Wert an Property Variablen senden zur Berechnung des COP ohne ausgewählte ID 257
         if ($id == 257)
         {
             $this->SetValue('kw-out', $value);
