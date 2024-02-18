@@ -19,7 +19,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
-        $this->RegisterPropertyFloat('Powerkw', 0);
+        $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwout', 0.0);
 
         // Timer für Aktualisierung registrieren
@@ -59,7 +59,7 @@ class WPLUX extends IPSModule
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
-        $copVisible = $this->ReadPropertyFloat('Powerkw');
+        $copVisible = $this->ReadPropertyFloat('kwin');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -586,10 +586,10 @@ class WPLUX extends IPSModule
 
     private function calcextvalues($mode, $value)
     {
-        $copVisible = $this->ReadPropertyFloat('Powerkw');
+        $copVisible = $this->ReadPropertyFloat('kwin');
         if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
             {
-                $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
+                $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
                 $cop = $value / $kw_in;
                 $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
                 if ($copfaktorVariableID !== false) 
