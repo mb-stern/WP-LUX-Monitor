@@ -247,7 +247,7 @@ class WPLUX extends IPSModule
             
             elseif ($i == 257) 
             {
-                $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);  
+                $this->RegisterVariableFloat('kwout', 'kwout', '', 0);  
 
                 $this->SendDebug("Test", "Variable i erfasst: " . $i . "", 0);
             }  
