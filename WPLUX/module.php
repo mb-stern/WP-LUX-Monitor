@@ -119,13 +119,12 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('WWsetVariable');
         }
 
-        if ($copVisible) 
+        if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
             $this->getParameter('cop'); 
             $Value = $this->GetValue('copfaktor'); 
-        } 
-        else 
+        } else 
         {
             $this->UnregisterVariable('copfaktor');
         }
@@ -575,11 +574,11 @@ class WPLUX extends IPSModule
             elseif ($mode == 'cop' && $i == 50) // COP-Faktor
             {
                 //$this->SetValue('copfaktor', $daten_raw[$i] / $this->ReadPropertyFloat('Powerkw'));
-                $kwin = $this->ReadPropertyFloat('Powerkw');
-                $cop = 65 / $kwin;
-                //$cop = $daten_raw[$i] / $kwin;
+                $kw_in = $this->ReadPropertyFloat('Powerkw');
+                $cop = 65 / $kw_in;
+                //$cop = $daten_raw[$i] / $kw_in;
                 $this->SetValue('copfaktor', $cop);
-                $this->SendDebug("Copfaktor", "Copfaktor: ".$cop." berechnet und in Variable gespeichert", 0);
+                $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet und in Variable gespeichert", 0);
 
             }
         }
