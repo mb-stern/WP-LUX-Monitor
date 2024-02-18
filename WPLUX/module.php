@@ -576,8 +576,8 @@ class WPLUX extends IPSModule
             {
                 //$this->SetValue('copfaktor', $daten_raw[$i] / $this->ReadPropertyFloat('Powerkw'));
                 $kwin = $this->ReadPropertyFloat('Powerkw');
-                $daten_raw[$i] = $daten_raw[$i] / $kwin;
-                $this->SetValue('copfaktor', $daten_raw[$i]);
+                $cop = $daten_raw[$i] / $kwin;
+                $this->SetValue('copfaktor', $cop);
                 //$this->SendDebug("Copfaktor", "Copfaktor: ".$daten_raw[$i] / $this->ReadPropertyFloat('Powerkw')." berechnet und in Variable gespeichert", 0);
 
             }
