@@ -577,13 +577,16 @@ class WPLUX extends IPSModule
     private function calcextvalues($mode, $value)
     {
         $copVisible = $this->ReadPropertyFloat('Powerkw');
-        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && IPS_VariableExists($this->GetIDForIdent('copfaktor')))
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
             {
                 $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
                 $cop = $value / $kw_in;
-                $this->SetValue('copfaktor', $cop);
-                $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet aus Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." in Variable gespeichert", 0);
-
+                $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
+                if ($copfaktorVariableID !== false) 
+                {
+                    $this->SetValue('copfaktor', $cop);
+                    $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet aus Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." in Variable gespeichert", 0);
+                }
             }
     }
 }
