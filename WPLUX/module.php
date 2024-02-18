@@ -246,10 +246,10 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
             
-            elseif ($i == 257) //Hier die unsichtbare Variable 257 (Wärmeleistung) für COP Berechnung befüllen
+            elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
             {
                 $value = $this->ReadPropertyFloat('kwout');
-                $this->calcextvalues('cop', $value); //an Funktion senden zum berechnen des COP-Faktors 
+                $this->calcextvalues('cop', $value); 
 
                 //Debug senden
                 $this->SendDebug("COP", "Für die COP-Berungung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
