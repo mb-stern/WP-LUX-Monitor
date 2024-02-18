@@ -580,7 +580,7 @@ class WPLUX extends IPSModule
         if ($mode == 'cop') // Berechnung COP-Faktor
         {
             // Überprüfen, ob die Variable 'Powerkw' existiert
-            $powerkwVariableID = $this->ReadPropertyInteger('Powerkw');
+            $powerkwVariableID = $this->ReadPropertyFloat('Powerkw');
             if (IPS_VariableExists($powerkwVariableID)) {
                 // Wert der Eingangsleistung abrufen
                 $kw_in = GetValue($powerkwVariableID);
