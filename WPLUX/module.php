@@ -232,7 +232,7 @@ class WPLUX extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             
-            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl des Benutzers zur Berechnung an die Funktion gesandt werden
+            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl eine ID zur Berechnung an die Funktion gesandt werden
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
@@ -242,7 +242,7 @@ class WPLUX extends IPSModule
                 $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." an die Funktion gesendet", 0);
             }  
             
-            //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen
+            //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwander
             if (in_array($i, array_column($idListe, 'id'))) 
             {
         
