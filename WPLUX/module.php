@@ -300,7 +300,7 @@ class WPLUX extends IPSModule
                 return round($value * 0.01, 1);
 
             case ($id == 257):
-                return round($value * 0.001, 1);
+                return round($value * 0.001, 2);
             
             default:
                 return round($value * 1, 1); // Standardmäßig Konvertierung
