@@ -413,7 +413,7 @@ class WPLUX extends IPSModule
         {
             $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);
             $this->SetValue('kw-out', $value);
-            $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst für: ".($daten_$raw[$i], $i).", Wert: ".$value."", 0);
+            $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst für: ".$i.", Wert: ".$value."", 0);
         }   
     }
     
