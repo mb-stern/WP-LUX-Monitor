@@ -20,7 +20,7 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzliche Funktionen",
+            "caption": "Zusätzliche Funktionen aktivieren/deaktivieren",
             "items": [
                 {
                     "type": "CheckBox",
