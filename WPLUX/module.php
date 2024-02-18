@@ -232,7 +232,6 @@ class WPLUX extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             if (in_array($i, array_column($idListe, 'id'))) 
-            $value_257 = $daten_raw[257];
             {
         
                 // Werte umrechnen wenn nötig
@@ -246,9 +245,9 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
             
-            elseif ($value_257 == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
+            elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
             {
-                $value = $this->convertValueBasedOnID($value_257, 257);
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
