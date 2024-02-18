@@ -231,37 +231,37 @@ class WPLUX extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
-            if (in_array($i, array_column($idListe, 'id'))) 
-            {
-        
-                // Werte umrechnen wenn nötig
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-
-                // Debug senden
-                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
-
-                // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-                $ident = $java_dataset[$i];
-                $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-            }   
+            if ($i == 257) {
+                // Überprüfen, ob der Benutzer den Wert ausgewählt hat
+                if (in_array($i, array_column($idListe, 'id'))) {
+                    // Wert wurde ausgewählt, also verarbeiten Sie ihn normal
+                    $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                    $this->calcextvalues('cop', $value); 
             
-            /*
-            elseif ($i == 257) ///Den Wert 257 (Waermeleistung) an die Funktion 'calcextvalues' senden wenn der Benutzer den Wert nicht ausgewählt hat
-            {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calcextvalues('cop', $value); 
-
-                //Debug senden
-                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
-            }  
-            */
-
-            else 
-            {
-                // Variable löschen, da sie nicht mehr in der ID-Liste ist
-                $this->DeleteVariableIfExists($java_dataset[$i]);
+                    // Debug senden
+                    $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+                } else {
+                    // Wert wurde nicht ausgewählt, verarbeiten Sie ihn nicht weiter
+                    // Optional: Hier können Sie eine Meldung oder Aktion hinzufügen, wenn der Wert nicht ausgewählt wurde
+                }
+            } else {
+                // Normaler Verarbeitungszweig für andere IDs
+                if (in_array($i, array_column($idListe, 'id'))) {
+                    // Werte umrechnen wenn nötig
+                    $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+            
+                    // Debug senden
+                    $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
+            
+                    // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
+                    $ident = $java_dataset[$i];
+                    $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+                } else {
+                    // Variable löschen, da sie nicht mehr in der ID-Liste ist
+                    $this->DeleteVariableIfExists($java_dataset[$i]);
+                }
             }
-        }
+            
     }
     
     private function convertValueBasedOnID($value, $id)
