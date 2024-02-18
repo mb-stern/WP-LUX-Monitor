@@ -261,7 +261,7 @@ class WPLUX extends IPSModule
                     $this->DeleteVariableIfExists($java_dataset[$i]);
                 }
             }
-            
+        }    
     }
     
     private function convertValueBasedOnID($value, $id)
