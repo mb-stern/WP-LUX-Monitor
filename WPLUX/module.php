@@ -245,7 +245,7 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
             
-            elseif ($i == 257) 
+            elseif ($i = 257) 
             {
                 $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);  
 
