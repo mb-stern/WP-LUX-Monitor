@@ -298,7 +298,6 @@ class WPLUX extends IPSModule
     {
         if ($id == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
             {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
