@@ -410,7 +410,7 @@ class WPLUX extends IPSModule
         if ($id == 257)
         {
             $this->RegisterPropertyFloat('kw-in', 0);
-            $this->SetValue("kw-in", $value);
+            $this->SetValue('kw-in', $value);
             $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst: ".$value."", 0);
         }   
     }
