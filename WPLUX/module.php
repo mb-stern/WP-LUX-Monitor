@@ -232,7 +232,7 @@ class WPLUX extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             
-            //Hier startet der Ablauf um Daten abzugreifen, welche zur Berchnung ohne AUswahl des Benutzers an die Funktion gesnadt werden
+            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl des Benutzers zur Berechnung an die Funktion gesandt werden
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
