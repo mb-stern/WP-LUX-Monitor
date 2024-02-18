@@ -301,7 +301,7 @@ class WPLUX extends IPSModule
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
-                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $id . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
             }  
 
 
