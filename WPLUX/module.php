@@ -122,7 +122,7 @@ class WPLUX extends IPSModule
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
-            $this->getParameter('cop'); 
+            $this->setextValues('cop'); 
             $Value = $this->GetValue('copfaktor'); 
         } else 
         {
@@ -394,6 +394,7 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
+                    $this->calcextvalues('cop', $ident);
                     break;
 
                 default:
@@ -571,16 +572,22 @@ class WPLUX extends IPSModule
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
             }
-            elseif ($mode == 'cop' && $i == 50) // COP-Faktor
+        }
+    }
+
+    private function calcextvalues($mode)
+    {
+        if ($mode == 'cop') // COP-Faktor
             {
-                //$this->SetValue('copfaktor', $daten_raw[$i] / $this->ReadPropertyFloat('Powerkw'));
                 $kw_in = $this->ReadPropertyFloat('Powerkw');
-                $cop = 130 / $kw_in;
-                //$cop = $daten_raw[$i] / $kw_in;
+                //$cop = 130 / $kw_in;
+                $cop = $ident / $kw_in;
                 $this->SetValue('copfaktor', $cop);
                 $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet aus: ".$kw_in." und in Variable gespeichert", 0);
 
             }
-        }
+
+
+
     }
 }
