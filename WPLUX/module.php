@@ -122,7 +122,6 @@ class WPLUX extends IPSModule
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
-            $this->sendDataToSocket('Heizung', $Value);
             $Value = $this->GetValue('copfaktor'); 
         } 
         else 
