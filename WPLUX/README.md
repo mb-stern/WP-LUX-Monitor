@@ -101,6 +101,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.2 (19.02.2024)
+
+- Berechnung des COP jetzt durch auswählen einer externen Variable für die EIngangsleistung in kW möglich.
+
 Version 3.1 (17.02.2024)
 
 - Anpassen der Debug- und der Fehler-Ausgabe.
