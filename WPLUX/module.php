@@ -122,7 +122,7 @@ class WPLUX extends IPSModule
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
             $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
-            $this->setextValues('cop'); 
+            $this->calcextvalues('cop'); 
             $Value = $this->GetValue('copfaktor'); 
         } else 
         {
