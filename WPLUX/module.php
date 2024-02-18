@@ -410,7 +410,7 @@ class WPLUX extends IPSModule
         //Hier Property Variablen erstellen zur AUswertung ohne ausgewählte ID's
         if ($id == 257)
         {
-            SetValue($this->RegisterPropertyFloat('kw-out'), $value);
+            $this->SetValue('kw-out', $value);
             $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst: ".$value."", 0);
         }   
     }
