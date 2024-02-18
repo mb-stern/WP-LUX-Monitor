@@ -404,17 +404,6 @@ class WPLUX extends IPSModule
 
         $this->SetValue($ident, $value);
         $this->SendDebug("Variable aktualisiert", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
-
-        
-        //Wert an Property Variablen senden zur Berechnung des COP ohne ausgewählte ID 257
-        
-        if ($i == 257)
-        $this->SendDebug("Test", "Wärmeleistung erfasst für: ".$i."", 0);
-        {
-            $this->RegisterVariableFloat('kw-out', 'kw-out', '', 0);
-            $this->SetValue('kw-out', $value);
-            $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst für: ".$i.", Wert: ".$value."", 0);
-        }   
     }
     
     private function DeleteVariableIfExists($ident)
