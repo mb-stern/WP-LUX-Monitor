@@ -59,7 +59,6 @@ class WPLUX extends IPSModule
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('Powerkw');
-        $this->SendDebug("kwh Konfig", "Wert gesendet: ".$copVisible."", 0);
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -580,7 +579,7 @@ class WPLUX extends IPSModule
     {
         if ($mode == 'cop') // COP-Faktor
             {
-                $kw_in = $this->ReadPropertyFloat('Powerkw');
+                $kw_in = GetValue($this->GetIDForIdent('Powerkw'));
                 //$cop = 130 / $kw_in;
                 $cop = $value / $kw_in;
                 $this->SetValue('copfaktor', $cop);
