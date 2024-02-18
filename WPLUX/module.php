@@ -245,15 +245,6 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
             }   
             
-            elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
-            {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calcextvalues('cop', $value); 
-
-                //Debug senden
-                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
-            }  
-
             else 
             {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
@@ -264,6 +255,16 @@ class WPLUX extends IPSModule
     
     private function convertValueBasedOnID($value, $id)
     {
+        if ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
+            {
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $this->calcextvalues('cop', $value); 
+
+                //Debug senden
+                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+            }  
+
+        
         // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
