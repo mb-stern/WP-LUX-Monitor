@@ -394,8 +394,7 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
-                    $mode = 'cop';
-                    $this->calcextvalues($mode, $ident);
+                    $this->calcextvalues('cop', $value);
                     break;
 
                 default:
@@ -576,16 +575,19 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calcextvalues($mode, $ident)
+    private function calcextvalues($mode)
     {
         if ($mode == 'cop') // COP-Faktor
             {
                 $kw_in = $this->ReadPropertyFloat('Powerkw');
                 //$cop = 130 / $kw_in;
-                $cop = $ident / $kw_in;
+                //$cop = $mode / $kw_in;
                 $this->SetValue('copfaktor', $cop);
-                $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet aus Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$ident."in Variable gespeichert", 0);
+                $this->SendDebug("COP-Faktor", "COP-Faktor: ".$cop." berechnet aus Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$mode."in Variable gespeichert", 0);
 
             }
+
+
+
     }
 }
