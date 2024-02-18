@@ -230,36 +230,30 @@ class WPLUX extends IPSModule
         socket_close($socket);
 
         for ($i = 0; $i < $JavaWerte; ++$i) 
-        if ($i == 257) {
-            // Wert ist 257
-            // Werte umrechnen wenn nötig
-            $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-        
-            // Debug senden
-            $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
-        
-            // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
-            $ident = $java_dataset[$i];
-            $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-        
-            // Zusätzliche Aktion für den Wert 257
-            $this->calcextvalues('cop', $value); 
-        } 
-        else 
         {
-            // Normaler Verarbeitungszweig für andere IDs
             if (in_array($i, array_column($idListe, 'id'))) 
             {
+        
                 // Werte umrechnen wenn nötig
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-        
+
                 // Debug senden
                 $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
-        
+
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
-            } 
+            }   
+            
+            elseif ($i == 257) //Hier Wert 257 (Wärmeleistung) erfassen, Variable für COP Berechnung befüllen und an die Funktion senden 
+            {
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $this->calcextvalues('cop', $value); 
+
+                //Debug senden
+                $this->SendDebug("Wert 257", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." gesendet", 0);
+            }  
+
             else 
             {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
