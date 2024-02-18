@@ -580,11 +580,8 @@ class WPLUX extends IPSModule
         if ($mode == 'cop') // Berechnung COP-Faktor
         {
             // Überprüfen, ob die Variable 'Powerkw' existiert
-            $powerkwVariableID = $this->ReadPropertyFloat('Powerkw');
-            if (IPS_VariableExists($powerkwVariableID)) {
-                // Wert der Eingangsleistung abrufen
-                $kw_in = GetValue($powerkwVariableID);
-                
+            $kw_in = GetValue($this->ReadPropertyFloat('Powerkw'));
+            if ($kw_in !== false) {
                 // COP-Faktor berechnen und setzen
                 if ($kw_in != 0) {
                     $cop = $value / $kw_in;
@@ -594,7 +591,7 @@ class WPLUX extends IPSModule
                     $this->SendDebug("COP-Faktor", "Eingangsleistung ist 0, daher kann der COP-Faktor nicht berechnet werden.", 0);
                 }
             } else {
-                $this->SendDebug("COP-Faktor", "Die Variable 'Powerkw' existiert nicht.", 0);
+                $this->SendDebug("COP-Faktor", "Die Variable 'Powerkw' existiert nicht oder hat keinen gültigen Wert.", 0);
             }
         }
     }
