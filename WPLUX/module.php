@@ -20,6 +20,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('Powerkw', 0);
+        $this->RegisterPropertyFloat('kw-out', 0); //kommt von Wert 257 (Wärmemenge)
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -409,8 +410,7 @@ class WPLUX extends IPSModule
         //Hier Property Variablen erstellen zur AUswertung ohne ausgewählte ID's
         if ($id == 257)
         {
-            $this->RegisterPropertyFloat('kw-in', 0);
-            $this->SetValue('kw-in', $value);
+            $this->SetValue('kw-out', $value);
             $this->SendDebug("Wärmeleistung", "Wärmeleistung erfasst: ".$value."", 0);
         }   
     }
