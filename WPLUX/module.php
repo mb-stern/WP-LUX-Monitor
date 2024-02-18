@@ -394,7 +394,11 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
-                    $this->calcextvalues('cop', $value); //an Funktion senden zum berechnen des COP-Faktors
+                    $copVisible = $this->ReadPropertyFloat('Powerkw');
+                    if ($copVisible !== 0 && IPS_VariableExists($copVisible))
+            {
+                    $this->calcextvalues('cop', $value); //an Funktion senden zum berechnen des COP-Faktors 
+            }
                     break;
 
                 default:
