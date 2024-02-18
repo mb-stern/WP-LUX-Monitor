@@ -403,7 +403,6 @@ class WPLUX extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
-                    //$this->calcextvalues('cop', $value); //Den Wert 257 (Waermeleistung) an die Funktion 'calcextvalues' senden wenn der Benutzer den Wert ausgewählt hat
                     break;
 
                 default:
