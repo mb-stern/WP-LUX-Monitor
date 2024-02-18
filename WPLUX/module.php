@@ -576,7 +576,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calcextvalues($mode)
+    private function calcextvalues($mode, $ident)
     {
         if ($mode == 'cop') // COP-Faktor
             {
