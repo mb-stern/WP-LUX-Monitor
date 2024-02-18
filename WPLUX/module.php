@@ -239,22 +239,23 @@ class WPLUX extends IPSModule
                 $this->calcextvalues('cop', $value); 
 
                 //Debug senden
-                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " abgegeriffen und der Wert: ". $value ." an die Funktion gesendet", 0);
+                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calcextvalues' gesendet", 0);
             }  
             
-            //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwander
+            //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
             {
         
                 // Werte umrechnen wenn nötig
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
-                // Debug senden
-                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
-
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+
+                // Debug senden
+                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
+
             }   
             
             else 
@@ -587,6 +588,7 @@ class WPLUX extends IPSModule
 
     private function calcextvalues($mode, $value)
     {
+        //Berechnung des COP-Faktors
         $copVisible = $this->ReadPropertyFloat('kwin');
         if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
             {
