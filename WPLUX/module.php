@@ -254,7 +254,7 @@ class WPLUX extends IPSModule
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
 
                 // Debug senden
-                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
+                $this->SendDebug("Wert gesendet", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde erfasst, umgerechnet in: ".$value." und an die Funktion 'CreateOrUpdateVariable' gesandt", 0);
 
             }   
             
@@ -598,7 +598,7 @@ class WPLUX extends IPSModule
                 if ($copfaktorVariableID !== false) 
                 {
                     $this->SetValue('copfaktor', $cop);
-                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
+                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calcextvalues' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
                 }
             }
     }
