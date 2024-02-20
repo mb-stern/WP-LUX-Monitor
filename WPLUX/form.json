@@ -20,7 +20,7 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzlich Variablen zur Steuerung der Luxtronic aktivieren/deaktivieren",
+            "caption": "Zusätzliche Funktionen aktivieren/deaktivieren",
             "items": [
                 {
                     "type": "CheckBox",
@@ -45,7 +45,12 @@
                 {
                     "type": "CheckBox",
                     "name": "WWsetVisible",
-                        "caption": "Steuervariable für Warmwasser Soll aktivieren"
+                    "caption": "Steuervariable für Warmwasser-Soll aktivieren"
+                },
+                {
+                    "type": "SelectVariable",
+                    "name": "kwin",
+                    "caption": "Externe Variable zur Berechnung des COP auswählen."
                 }
                 ]
         },

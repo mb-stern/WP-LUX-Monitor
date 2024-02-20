@@ -1,7 +1,7 @@
 # Modul für Wärmepumpen mit Luxtronik für IP-Symcon
 
 Folgende Module beinhaltet das WPLUX Symcon Repository:
-- __Luxtronik__ ([Dokumentation](WPLUX%20Symcon))  
+- __Luxtronik__ ([Dokumentation](WPLUX))  
 
 Dieses Modul ermöglicht, Daten der Luxtronic von verschiedener Wärmepumpen-Hersteller abzufragen.
 Dazu muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist.

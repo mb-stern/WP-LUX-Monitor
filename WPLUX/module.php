@@ -19,6 +19,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
+        $this->RegisterPropertyFloat('kwin', 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -57,6 +58,7 @@ class WPLUX extends IPSModule
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
+        $copVisible = $this->ReadPropertyFloat('kwin');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -115,6 +117,15 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('WWsetVariable');
+        }
+
+        if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
+        {
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
+        } 
+        else 
+        {
+            $this->UnregisterVariable('copfaktor');
         }
     }
 
@@ -220,19 +231,33 @@ class WPLUX extends IPSModule
 
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
+            
+            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl eine ID zur Berechnung an die Funktion gesandt werden
+            if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
+            {
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $this->calcextvalues('cop', $value); 
+
+                //Debug senden
+                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calcextvalues' gesendet", 0);
+            }  
+            
+            //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
             {
         
                 // Werte umrechnen wenn nötig
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
 
-                // Debug senden
-                $this->SendDebug("Wert empfangen", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde von der WP empfangen, umgerechnet in: ".$value." und in die Variable ausgegeben", 0);
-
                 // Direkte Erstellung oder Aktualisierung der Variable mit Ident und Positionsnummer
                 $ident = $java_dataset[$i];
                 $varid = $this->CreateOrUpdateVariable($ident, $value, $i);
+
+                // Debug senden
+                $this->SendDebug("Wert gesendet", "Der Wert: ".$daten_raw[$i]." der ID: ".$i." wurde erfasst, umgerechnet in: ".$value." und an die Funktion 'CreateOrUpdateVariable' gesandt", 0);
+
             }   
+            
             else 
             {
                 // Variable löschen, da sie nicht mehr in der ID-Liste ist
@@ -263,7 +288,7 @@ class WPLUX extends IPSModule
                 return round($value, 1); 
 
             case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
-                $time = $value - 1;
+                $time = $value;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
                 $minutes = floor($time / 60);
@@ -275,7 +300,7 @@ class WPLUX extends IPSModule
                 return round($value * 0.01, 1);
 
             case ($id == 257):
-                return round($value * 0.001, 1);
+                return round($value * 0.001, 2);
             
             default:
                 return round($value * 1, 1); // Standardmäßig Konvertierung
@@ -284,7 +309,6 @@ class WPLUX extends IPSModule
             
     private function CreateOrUpdateVariable($ident, $value, $id)
     {
-        
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
@@ -560,5 +584,22 @@ class WPLUX extends IPSModule
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
+    }
+
+    private function calcextvalues($mode, $value)
+    {
+        //Berechnung des COP-Faktors
+        $copVisible = $this->ReadPropertyFloat('kwin');
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
+            {
+                $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
+                $cop = $value / $kw_in;
+                $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
+                if ($copfaktorVariableID !== false) 
+                {
+                    $this->SetValue('copfaktor', $cop);
+                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calcextvalues' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
+                }
+            }
     }
 }
