@@ -27,7 +27,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name manuell einzutragen.
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
 * Es können Variablen für die Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Diese Variablen zur Steuerung werden nicht live synchronisiert, sondern immer erst dann, wenn Änderungen am Konfigurationsformular vorgenommen wurden.
-* Die Anzeige des COP-Faktor ist nun unter zuhilfenahme einer externen Leistungsmessung möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden. Es wird ein Wert in kW vorausgesetzt.
+* Die Anzeige des COP-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kW) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden.
 
 ### 2. Voraussetzungen
 
@@ -35,13 +35,13 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 ### 3. Software-Installation
 
-* Über den Module Store kann das Modul noch nicht installiert werden.
+* Über den Module Store kann das Modul unter dem Namen Luxtronik gefunden und installiert werden.
 * Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/Luxtronik
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
- Unter 'Instanz hinzufügen' kann das 'WPLUX Symcon'-Modul mithilfe des Schnellfilters gefunden werden.  
-	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
+- Unter 'Instanz hinzufügen' kann das 'Luxtronik'-Modul mithilfe des Schnellfilters gefunden werden.  
+- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
 
 __Konfigurationsseite__:
 
@@ -102,10 +102,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.2 (19.02.2024)
+Version 3.2 - Beta (20.02.2024)
 
 - Berechnung des COP jetzt durch auswählen einer externen Variable für die Eingangsleistung in kW möglich.
-- Anpassen der Debug- und der Fehler-Ausgabe.
+- Weitere Anpassen der Debug- und der Fehler-Ausgabe.
+- Problem behoben, dass unter gewissen Umständen wurde eine falsche Laufzeit von -1h59m berechnet wurde.
 
 Version 3.1 (17.02.2024)
 
