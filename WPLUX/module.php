@@ -236,10 +236,10 @@ class WPLUX extends IPSModule
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calcextvalues('cop', $value); 
+                $this->calc_cop('cop', $value); 
 
                 //Debug senden
-                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calcextvalues' gesendet", 0);
+                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_cop' gesendet", 0);
             }  
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
@@ -586,7 +586,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calcextvalues($mode, $value)
+    private function calc_cop($mode, $value)
     {
         //Berechnung des COP-Faktors
         $copVisible = $this->ReadPropertyFloat('kwin');
@@ -598,7 +598,7 @@ class WPLUX extends IPSModule
                 if ($copfaktorVariableID !== false) 
                 {
                     $this->SetValue('copfaktor', $cop);
-                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calcextvalues' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
+                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calc_cop' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
                 }
             }
     }
