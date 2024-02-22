@@ -259,7 +259,7 @@ class WPLUX extends IPSModule
                 $this->calc_jaz('jaz', $value_out); 
 
                 //Debug senden
-                $this->SendDebug("Energiemenge", "Für die JAZ-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_jaz' gesendet", 0);
+                $this->SendDebug("Energiemenge", "Für die JAZ-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value_out ." an die Funktion 'calc_jaz' gesendet", 0);
             }
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
