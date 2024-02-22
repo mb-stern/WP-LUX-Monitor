@@ -59,8 +59,8 @@
                 },
                 {
                     "type": "Button",
-                    "caption": "JAZ zurück setzen",
-                    "onClick": "IPS_RequestAction($resetVariableID, 'resetJAZ', true);"
+                    "caption": "Reset auslösen",
+                    "onClick": "SetValueBoolean('resetVariableID', true);"
                 }
                 ]
         },
