@@ -20,6 +20,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
+        $this->RegisterPropertyFloat('kwhin', 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -59,6 +60,7 @@ class WPLUX extends IPSModule
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
+        $jazVisible = $this->ReadPropertyFloat('kwhin');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -126,6 +128,15 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('copfaktor');
+        }
+        
+        if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
+        {
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 5);
+        } 
+        else 
+        {
+            $this->UnregisterVariable('jazfaktor');
         }
     }
 
@@ -241,6 +252,15 @@ class WPLUX extends IPSModule
                 //Debug senden
                 $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_cop' gesendet", 0);
             }  
+
+            if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des COP
+            {
+                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $this->calc_jaz('jaz', $value); 
+
+                //Debug senden
+                $this->SendDebug("Energiemenge", "Für die JAZ-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_jaz' gesendet", 0);
+            }
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
@@ -601,5 +621,41 @@ class WPLUX extends IPSModule
                     $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calc_cop' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
                 }
             }
+    }
+
+    function calc_jaz($mode, $value)
+    {
+        //Berechnung des JAZ-Faktors
+        $jazVisible = $this->ReadPropertyFloat('kwhin');
+        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
+        
+        {
+            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+            
+            static $startValue1 = 0;
+            static $startValue2 = 0;
+    
+            $value1Change = $kwh_in - $startValue1;
+            $value2Change = $value - $startValue2;
+
+            $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+                if ($jazfaktorVariableID !== false) 
+                
+                $result = null;
+                if ($value2Change != 0) 
+                {
+                    $result = $value1Change / $value2Change;
+                }
+            
+            
+                {
+                $this->SetValue('jazfaktor', $jaz);
+                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$cop." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kw_in." und Ausgangs-Energie: ".$value." und in die Variable ausgegeben", 0);
+                }
+
+        // Startwerte aktualisieren
+        $startValue1 = $value1;
+        $startValue2 = $value2;
+    
     }
 }
