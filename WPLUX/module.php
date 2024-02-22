@@ -256,7 +256,7 @@ class WPLUX extends IPSModule
             if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calc_jaz('jaz', $value); 
+                $this->calc_jaz('jaz', $value_out); 
 
                 //Debug senden
                 $this->SendDebug("Energiemenge", "Für die JAZ-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_jaz' gesendet", 0);
@@ -623,7 +623,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz($mode, $value)
+    function calc_jaz($mode, $value_out)
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
@@ -635,12 +635,12 @@ class WPLUX extends IPSModule
             static $startValue2 = 0;
     
             $value1Change = $kwh_in - $startValue1;
-            $value2Change = $value - $startValue2;
+            $value2Change = $value_out - $startValue2;
 
             $result = null;
             if ($value2Change != 0) 
             {
-                $jaz = $value1Change / $value2Change;
+                $jaz = $value2Change / $value1Change;
             }
 
             $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
@@ -651,8 +651,8 @@ class WPLUX extends IPSModule
             }
 
             // Startwerte aktualisieren
-            $startValue1 = $value1;
-            $startValue2 = $value2;
+            $startValue1 = $kwh_in;
+            $startValue2 = $value_out;
         }
     }
 }
