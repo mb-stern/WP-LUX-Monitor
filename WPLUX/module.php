@@ -631,8 +631,10 @@ class WPLUX extends IPSModule
     {
         $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-        static $startValue1 = 0;
-        static $startValue2 = 0;
+        //static $startValue1 = 0;
+        //static $startValue2 = 0;
+        $startValue1 = 0;
+        $startValue2 = 0;
 
         $value1Change = $kwh_in - $startValue1;
         $value2Change = $value_out - $startValue2;
