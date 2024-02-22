@@ -58,9 +58,9 @@
                     "caption": "Externe Variable zur Berechnung des JAZ auswählen (kWh)."
                 },
                 {
-                    "type": "Button",
-                    "caption": "Reset auslösen",
-                    "onClick": "SetValueBoolean('resetVariableID', true);"
+                    "type": "SelectVariable",
+                    "name": "resetJAZ",
+                    "caption": "JAZ zurücksetzen"
                 }
                 ]
         },
