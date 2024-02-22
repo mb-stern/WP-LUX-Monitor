@@ -21,8 +21,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyInteger('resetJAZ', 0);
-
+        $this->RegisterPropertyBoolean('resetJAZ', false);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -627,13 +626,13 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz(string $mode, float $value_out)
+    function calc_jaz($mode, $value_out)
 {
     static $startValue1 = 0;
     static $startValue2 = 0;
 
     // Lesen der Reset-Variable
-    $resetVariableID = GetValue($this->ReadPropertyInteger('resetJAZ'));
+    $resetVariableID = GetValue($this->ReadPropertyBoolean('resetJAZ'));
     
     // Debug senden
     $this->SendDebug("Reset-Eigenschaft", "Wert der Reset-Eigenschaft: ".$this->ReadPropertyBoolean('resetJAZ'), 0);
