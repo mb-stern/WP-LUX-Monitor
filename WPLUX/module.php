@@ -630,7 +630,7 @@ class WPLUX extends IPSModule
     static $startValue2 = 0;
 
     // Lesen der Reset-Variable
-    $resetVariableID = $this->RegisterPropertyBoolean('resetJAZ');
+    $resetVariableID = $this->ReadPropertyBoolean('resetJAZ');
     $this->SendDebug("Reset-Variable", "Reset-Variale ist".$resetVariableID."", 0);
     $resetValue = GetValueBoolean($resetVariableID);
 
