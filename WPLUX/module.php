@@ -644,12 +644,9 @@ class WPLUX extends IPSModule
                 if ($value2Change != 0) 
                 {
                     $jaz = $value1Change / $value2Change;
-                }
-            
-            
-                {
-                $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$cop." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kw_in." und Ausgangs-Energie: ".$value." und in die Variable ausgegeben", 0);
+               
+                    $this->SetValue('jazfaktor', $jaz);
+                    $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$cop." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kw_in." und Ausgangs-Energie: ".$value." und in die Variable ausgegeben", 0);
                 }
 
             // Startwerte aktualisieren
