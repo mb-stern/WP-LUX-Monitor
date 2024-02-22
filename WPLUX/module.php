@@ -626,7 +626,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz($mode, $value_out)
+    function calc_jaz()
 {
     static $startValue1 = 0;
     static $startValue2 = 0;
