@@ -60,7 +60,7 @@
                 {
                     "type": "Button",
                     "caption": "Reset auslösen",
-                    "onClick": "SetValueInteger('resetVariableID', 1);"
+                    "onClick": "SetValueBoolean('resetVariableID', true);"
                 }
                 ]
         },
