@@ -255,7 +255,7 @@ class WPLUX extends IPSModule
 
             if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
-                $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calc_jaz('jaz', $value_out); 
 
                 //Debug senden
