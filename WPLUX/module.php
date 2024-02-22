@@ -624,35 +624,37 @@ class WPLUX extends IPSModule
     }
 
     function calc_jaz($mode, $value_out)
+{
+    //Berechnung des JAZ-Faktors
+    $jazVisible = $this->ReadPropertyFloat('kwhin');
+    if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
     {
-        //Berechnung des JAZ-Faktors
-        $jazVisible = $this->ReadPropertyFloat('kwhin');
-        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
+        $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+
+        static $startValue1 = 0;
+        static $startValue2 = 0;
+
+        $value1Change = $kwh_in - $startValue1;
+        $value2Change = $value_out - $startValue2;
+
+        $result = null;
+        if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
         {
-            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-            
-            static $startValue1 = 0;
-            static $startValue2 = 0;
-    
-            $value1Change = $kwh_in - $startValue1;
-            $value2Change = $value_out - $startValue2;
+            $jaz = $value2Change / $value1Change;
 
-            $result = null;
-            if ($value2Change != 0) 
-            {
-                $jaz = $value2Change / $value1Change;
-            }
-
+            // JAZ-Faktor in die Variable setzen
             $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
             if ($jazfaktorVariableID !== false)
             {
-                    $this->SetValue('jazfaktor', $jaz);
-                    $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
+                $this->SetValue('jazfaktor', $jaz);
+                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
             }
-
-            // Startwerte aktualisieren
-            $startValue1 = $kwh_in;
-            $startValue2 = $value_out;
         }
+
+        // Startwerte aktualisieren
+        $startValue1 = $kwh_in;
+        $startValue2 = $value_out;
     }
+}
+
 }
