@@ -619,6 +619,8 @@ class WPLUX extends IPSModule
                 if ($copfaktorVariableID !== false) 
                 {
                     $this->SetValue('copfaktor', $cop);
+
+                    // Debug senden
                     $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calc_cop' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
                 }
             }
@@ -631,11 +633,12 @@ class WPLUX extends IPSModule
 
     // Lesen der Reset-Variable
     $resetVariableID = GetValue($this->ReadPropertyBoolean('resetJAZ'));
+    
+    // Debug senden
     $this->SendDebug("Reset-Variable", "Reset-Variable ist".$resetVariableID."", 0);
-    $resetValue = GetValueBoolean($resetVariableID);
 
     // Reset-Funktion basierend auf der Reset-Variable
-    if ($resetValue === true) 
+    if ($resetVariableID === true) 
     {
         $startValue1 = 0;
         $startValue2 = 0;
