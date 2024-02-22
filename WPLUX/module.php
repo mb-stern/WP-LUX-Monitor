@@ -628,8 +628,8 @@ class WPLUX extends IPSModule
 
     function calc_jaz(string $mode, float $value_out)
 {
-    //static $startValue1 = 0;
-    //static $startValue2 = 0;
+    static $startValue1 = 0;
+    static $startValue2 = 0;
 
     // Lesen der Reset-Variable
     $resetVariableID = GetValue($this->ReadPropertyBoolean('resetJAZ'));
