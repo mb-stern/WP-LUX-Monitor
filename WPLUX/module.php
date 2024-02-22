@@ -23,6 +23,8 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyFloat('kwhin', 0);
         $this->RegisterPropertyBoolean('resetJAZ', false);
 
+        $this->SendDebug("Reset-Eigenschaft", "Wert der Reset-Eigenschaft: ".$this->ReadPropertyBoolean('resetJAZ'), 0);
+
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
     }
