@@ -632,9 +632,6 @@ class WPLUX extends IPSModule
         // Zurücksetzen der Startwerte
         $startValue1 = 0;
         $startValue2 = 0;
-
-        // Zurücksetzen der Reset-Variable
-        SetValueBoolean('resetVariableID', true);
     }
 
     // Funktion zur Berechnung des JAZ-Faktors
@@ -642,24 +639,6 @@ class WPLUX extends IPSModule
     {
         static $startValue1 = 0;
         static $startValue2 = 0;
-
-        // Lesen der Reset-Variable
-        $resetVariableID = GetValueBoolean('resetVariableID');
-        
-        // Debug senden
-        IPS_LogMessage("Reset-Eigenschaft", "Wert der Reset-Eigenschaft: ".$resetVariableID);
-
-        // Reset-Funktion basierend auf der Reset-Variable
-        if ($resetVariableID === true) 
-        {
-            $startValue1 = 0;
-            $startValue2 = 0;
-
-            // Zurücksetzen der Reset-Variable
-            SetValueBoolean('resetVariableID', false);
-
-            return;
-        }
 
         // Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
