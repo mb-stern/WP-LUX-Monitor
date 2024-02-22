@@ -60,7 +60,7 @@
                 {
                     "type": "Button",
                     "caption": "JAZ zurück setzen",
-                    "onClick": "IPS_RequestAction($startValue1, 0;);IPS_RequestAction($startValue2, 0;);"
+                    "onClick": "IPS_RequestAction'resetJAZ', true)"
                 }
                 ]
         },
