@@ -643,7 +643,7 @@ class WPLUX extends IPSModule
                 $result = null;
                 if ($value2Change != 0) 
                 {
-                    $result = $value1Change / $value2Change;
+                    $jaz = $value1Change / $value2Change;
                 }
             
             
