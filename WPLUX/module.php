@@ -623,7 +623,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz(string $mode, float $value_out)
+    function calc_jaz(string $mode, float $value_out, $startValue1, $startValue2)
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
