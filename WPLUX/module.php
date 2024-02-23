@@ -133,6 +133,7 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+            this->Update();
         } 
         else 
         {
@@ -637,7 +638,6 @@ class WPLUX extends IPSModule
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
 
-            $jaz = null;
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $value2Change / $value1Change;
