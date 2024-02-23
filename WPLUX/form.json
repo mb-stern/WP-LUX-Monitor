@@ -60,7 +60,7 @@
                 {
                     "type": "Button",
                     "label": "JAZ zurücksetzen",
-                    "onClick": "WPLUX_calc_jaz($startValue1, 0);WPLUX_calc_jaz($startValue2, 0);"
+                    "onClick": "WPLUX_calc_jaz();"
                 }
                 ]
         },
