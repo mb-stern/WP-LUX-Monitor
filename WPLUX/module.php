@@ -624,47 +624,49 @@ class WPLUX extends IPSModule
     }
 
     function calc_jaz(string $mode, float $value_out)
-{
-    // Berechnung des JAZ-Faktors
-    $jazVisible = $this->ReadPropertyFloat('kwhin');
-    
-    if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
     {
-        $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-
+        // Berechnung des JAZ-Faktors
+        $jazVisible = $this->ReadPropertyFloat('kwhin');
+        
+        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
-            static $startKwhIn = null;
-            static $startValueOut = null;
-        
-            if ($modus === 'reset') {
-                $startKwhIn = null;
-                $startValueOut = null;
-                return;
-            }
-        
-            if ($startKwhIn === null || $startValueOut === null) {
-                $startKwhIn = $kwh_in;
-                $startValueOut = $value_out;
-                return;
-            }
-        
-            $kwhInDiff = $kwh_in - $startKwhIn;
-            $valueOutDiff = $value_out - $startValueOut;
-        
-            if ($valueOutDiff != 0) {
-                $jaz = $kwhInDiff / $valueOutDiff;
-                $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
-            if ($jazfaktorVariableID !== false)
-            {
-                $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
-            }
-                return $jaz;
-            }
-            
-            return null;
-        }
-            
+            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
+            {
+                static $startKwhIn = null;
+                static $startValueOut = null;
+            
+                if ($modus === 'reset') 
+                {
+                    $startKwhIn = null;
+                    $startValueOut = null;
+                    return;
+                }
+            
+                if ($startKwhIn === null || $startValueOut === null) 
+                {
+                    $startKwhIn = $kwh_in;
+                    $startValueOut = $value_out;
+                    return;
+                }
+            
+                $kwhInDiff = $kwh_in - $startKwhIn;
+                $valueOutDiff = $value_out - $startValueOut;
+            
+                if ($valueOutDiff != 0) 
+                {
+                    $jaz = $kwhInDiff / $valueOutDiff;
+                    $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+                if ($jazfaktorVariableID !== false)
+                {
+                    $this->SetValue('jazfaktor', $jaz);
+                    $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
+                }
+                    return $jaz;
+                }
+                
+                return null;
+            }
+        }
     }
 }
