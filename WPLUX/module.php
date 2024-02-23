@@ -644,17 +644,13 @@ class WPLUX extends IPSModule
     
             if ($startValue1 == 0 || $startValue2 == 0)
             {
-                $startValue1 = $kwh_in;
-                $startValue2 = $value_out;
-                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (solle nur einmalig passieren)", 0);
-                
                 if (!is_float($startValue1)) {
                     $startValue1 = (float)$kwh_in;
                 }
                 if (!is_float($startValue2)) {
                     $startValue2 = (float)$value_out;
                 }
-
+                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (solle nur einmalig passieren)", 0);
             }
 
 
