@@ -629,6 +629,9 @@ class WPLUX extends IPSModule
         static $startValue1 = null;
         static $startValue2 = null;
 
+        $startValue1 = (float)$kwh_in;
+        $startValue2 = (float)$value_out;
+
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
     
