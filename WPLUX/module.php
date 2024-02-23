@@ -640,12 +640,9 @@ class WPLUX extends IPSModule
     
             if ($startValue1 === null || $startValue2 === null)
             {
-                if (!is_float($startValue1)) {
-                    $startValue1 = (float)$kwh_in;
-                }
-                if (!is_float($startValue2)) {
-                    $startValue2 = (float)$value_out;
-                }
+                $startValue1 = (float)$kwh_in;
+                $startValue2 = (float)$value_out;
+               
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
             }
     
