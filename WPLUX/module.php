@@ -632,18 +632,14 @@ class WPLUX extends IPSModule
     {
         $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-        static $startValue1 = null;
-        static $startValue2 = null;
-
-        if ($startValue1 === null || $startValue2 === null) {
+        // Überprüfen, ob die Startwerte initialisiert wurden
+        if (!isset($startValue1) || !isset($startValue2)) {
             // Wenn es sich um den ersten Aufruf der Funktion handelt, speichern Sie die aktuellen Werte
             $startValue1 = $kwh_in;
             $startValue2 = $value_out;
             $this->SendDebug("Berechnung JAZ", "Startwert 1: ".$startValue1." Startwert 2: ".$startValue2."", 0);
             return;
         }
-
-        
 
         // Berechnen Sie die Differenz zwischen den aktuellen Werten und den gespeicherten Werten
         $value1Change = $kwh_in - $startValue1;
@@ -668,5 +664,4 @@ class WPLUX extends IPSModule
         $startValue2 = $value_out;
     }
 }
-
 }
