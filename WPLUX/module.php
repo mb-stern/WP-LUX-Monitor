@@ -642,6 +642,8 @@ class WPLUX extends IPSModule
             return;
         }
 
+        $this->SendDebug("Berechnung JAZ", "Startwert 1: ".$startValue1." Startwert 2: ".$startValue2."", 0);
+
         // Berechnen Sie die Differenz zwischen den aktuellen Werten und den gespeicherten Werten
         $value1Change = $kwh_in - $startValue1;
         $value2Change = $value_out - $startValue2;
