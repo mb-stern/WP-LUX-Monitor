@@ -632,36 +632,39 @@ class WPLUX extends IPSModule
     {
         $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-        // Überprüfen, ob die Startwerte initialisiert wurden
-        if (!isset($startValue1) || !isset($startValue2)) {
-            // Wenn es sich um den ersten Aufruf der Funktion handelt, speichern Sie die aktuellen Werte
-            $startValue1 = $kwh_in;
-            $startValue2 = $value_out;
-            $this->SendDebug("Berechnung JAZ", "Startwert 1: ".$startValue1." Startwert 2: ".$startValue2."", 0);
-            return;
-        }
-
-        // Berechnen Sie die Differenz zwischen den aktuellen Werten und den gespeicherten Werten
-        $value1Change = $kwh_in - $startValue1;
-        $value2Change = $value_out - $startValue2;
-
-        // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
-        if ($value1Change != 0) {
-            // Berechnung des JAZ-Faktors
-            $jaz = $value2Change / $value1Change;
-
-            // JAZ-Faktor in die Variable setzen
-            $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+        {
+            static $startKwhIn = null;
+            static $startValueOut = null;
+        
+            if ($modus === 'reset') {
+                $startKwhIn = null;
+                $startValueOut = null;
+                return;
+            }
+        
+            if ($startKwhIn === null || $startValueOut === null) {
+                $startKwhIn = $kwh_in;
+                $startValueOut = $value_out;
+                return;
+            }
+        
+            $kwhInDiff = $kwh_in - $startKwhIn;
+            $valueOutDiff = $value_out - $startValueOut;
+        
+            if ($valueOutDiff != 0) {
+                $jaz = $kwhInDiff / $valueOutDiff;
+                $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
             if ($jazfaktorVariableID !== false)
             {
                 $this->SetValue('jazfaktor', $jaz);
                 $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
             }
+                return $jaz;
+            }
+            
+            return null;
         }
+            
 
-        // Aktualisieren Sie die gespeicherten Werte für den nächsten Aufruf der Funktion
-        $startValue1 = $kwh_in;
-        $startValue2 = $value_out;
     }
-}
 }
