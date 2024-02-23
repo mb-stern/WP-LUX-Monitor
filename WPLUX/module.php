@@ -646,6 +646,7 @@ class WPLUX extends IPSModule
 
             $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
             
+            /*
             if ($startValue1 == 0 || $startValue2 == 0)
             {
                 $startValue1 = $kwh_in;
@@ -653,6 +654,7 @@ class WPLUX extends IPSModule
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (solle nur einmalig passieren)", 0);
 
             }
+            */
 
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
