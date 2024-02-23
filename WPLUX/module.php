@@ -629,8 +629,8 @@ class WPLUX extends IPSModule
         $jazVisible = $this->ReadPropertyFloat('kwhin');
 
         //Variablen zur Differenzrechnung erstellen und als float zuweisen
-        static $startValue1 === null;
-        static $startValue2 === null;
+        static $startValue1 === null
+        static $startValue2 === null
 
         
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
