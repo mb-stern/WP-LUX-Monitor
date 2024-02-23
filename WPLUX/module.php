@@ -636,7 +636,7 @@ class WPLUX extends IPSModule
 
             $this->SendDebug("Test", "StartValue1: ".$startValue1." StartValue2: ".$startValue2."", 0);
             
-            if ($startValue1 === null || $startValue2 === null)
+            if ($startValue1 === 0 || $startValue2 === 0)
             {
                 $startValue1 = $kwh_in;
                 $startValue2 = $value_out;
