@@ -638,8 +638,9 @@ class WPLUX extends IPSModule
             
             if ($startValue1 == 0 || $startValue2 == 0)
             {
-                $startValue1 = SetValue($kwh_in);
-                $startValue2 = SetValue($value_out);
+                $startValue1 = $kwh_in;
+                $startValue2 = $value_out;
+
             }
 
             $value1Change = $kwh_in - $startValue1;
