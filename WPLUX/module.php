@@ -636,13 +636,6 @@ class WPLUX extends IPSModule
                 static $startKwhIn = null;
                 static $startValueOut = null;
             
-                if ($modus === 'reset') 
-                {
-                    $startKwhIn = null;
-                    $startValueOut = null;
-                    return;
-                }
-            
                 if ($startKwhIn === null || $startValueOut === null) 
                 {
                     $startKwhIn = $kwh_in;
