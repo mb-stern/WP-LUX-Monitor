@@ -56,11 +56,6 @@
                     "type": "SelectVariable",
                     "name": "kwhin",
                     "caption": "Externe Variable zur Berechnung des JAZ auswählen (kWh)."
-                },
-                {
-                    "type": "Button",
-                    "label": "JAZ zurücksetzen",
-                    "onClick": "WPLUX_calc_jaz($startValue1, 0);WPLUX_calc_jaz($startValue2, 0);"
                 }
                 ]
         },
