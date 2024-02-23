@@ -625,23 +625,20 @@ class WPLUX extends IPSModule
 
     function calc_jaz(string $mode, float $value_out)
     {
+        
+        static $startValue1;
+        static $startValue2;
+
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-
-        //Variablen zur Differenzrechnung erstellen und als float zuweisen
-        static $startValue1 === 0;
-        static $startValue2 === 0;
-
-        
+    
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-
-
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
-            
     
-            if ($startValue1 === 0 || $startValue2 === 0)
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+    
+            if ($startValue1 === null || $startValue2 === null)
             {
                 if (!is_float($startValue1)) {
                     $startValue1 = (float)$kwh_in;
@@ -649,17 +646,16 @@ class WPLUX extends IPSModule
                 if (!is_float($startValue2)) {
                     $startValue2 = (float)$value_out;
                 }
-                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (solle nur einmalig passieren)", 0);
+                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
             }
-
-
+    
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
-
+    
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $value2Change / $value1Change;
-
+    
                 // JAZ-Faktor in die Variable setzen
                 $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
                 if ($jazfaktorVariableID !== false)
@@ -670,5 +666,4 @@ class WPLUX extends IPSModule
             }
         }
     }
-
 }
