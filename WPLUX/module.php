@@ -623,7 +623,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz(string $mode, float $value_out, $startValue1, $startValue2)
+    function calc_jaz(string $mode, float $value_out)
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
@@ -637,7 +637,7 @@ class WPLUX extends IPSModule
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
 
-            $result = null;
+            $jaz = null;
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $value2Change / $value1Change;
