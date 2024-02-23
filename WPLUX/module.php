@@ -631,8 +631,14 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-            static $startValue1 = 0;
-            static $startValue2 = 0;
+            static $startValue1 = null;
+            static $startValue2 = null;
+            
+            if ($startValue1 === null || $startValue2 === null)
+            {
+                $startValue1 = $kwh_in;
+                $startValue2 = $value_out;
+            }
 
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
@@ -650,10 +656,6 @@ class WPLUX extends IPSModule
                     $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
                 }
             }
-
-            // Startwerte aktualisieren
-            $startValue1 = $kwh_in;
-            $startValue2 = $value_out;
         }
     }
 
