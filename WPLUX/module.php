@@ -21,8 +21,6 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyFloat('startKwhIn', 0);
-        $this->RegisterPropertyFloat('startValueOut', 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -633,15 +631,15 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-            $startValue1 = $this->ReadPropertyFloat('startKwhIn');
-            $startValue2 = $this->ReadPropertyFloat('startValueOut');
+            $startValue1 = 0;
+            $startValue2 = 0;
 
             $this->SendDebug("Test", "StartValue1: ".$startValue1." StartValue2: ".$startValue2."", 0);
             
             if ($startValue1 == 0 || $startValue2 == 0)
             {
-                $this->SetValue('startKwhIn', $kwh_in);
-                $this->SetValue('startValueOut', $value_out);
+                $startValue1 = $kwh_in;
+                $startValue2 = $value_out;
             }
 
             $value1Change = $kwh_in - $startValue1;
