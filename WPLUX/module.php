@@ -629,8 +629,8 @@ class WPLUX extends IPSModule
         $jazVisible = $this->ReadPropertyFloat('kwhin');
 
         //Variablen zur Differenzrechnung erstellen und als float zuweisen
-        static $startValue1 === null
-        static $startValue2 === null
+        static $startValue1 === 0;
+        static $startValue2 === 0;
 
         
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
@@ -641,7 +641,7 @@ class WPLUX extends IPSModule
             $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
             
     
-            if ($startValue1 === null || $startValue2 === null)
+            if ($startValue1 === 0 || $startValue2 === 0)
             {
                 if (!is_float($startValue1)) {
                     $startValue1 = (float)$kwh_in;
