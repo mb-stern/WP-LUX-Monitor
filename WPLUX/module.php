@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    public $startValue1;
-    public $startValue2;
+    private $startValue1;
+    private $startValue2;
 
     public function Create()
     {
@@ -625,7 +625,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    function calc_jaz(string $mode, float $value_out)
+    public calc_jaz(string $mode, float $value_out)
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
