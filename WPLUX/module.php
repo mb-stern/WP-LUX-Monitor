@@ -627,9 +627,6 @@ class WPLUX extends IPSModule
 
     function calc_jaz(string $mode, float $value_out)
     {
-        
-        
-
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
@@ -639,7 +636,7 @@ class WPLUX extends IPSModule
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
     
-            $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe ein: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
             
             if ($this->startValue1 === null || $this->startValue2 === null)
