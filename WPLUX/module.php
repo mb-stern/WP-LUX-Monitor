@@ -648,6 +648,8 @@ class WPLUX extends IPSModule
             $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren): StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
         }
 
+        $this->SendDebug("JAZ", "Die Variablen sollten nun einen Wert haben: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+
             $value1Change = $kwh_in - $this->startValue1;
             $value2Change = $value_out - $this->startValue2;
     
