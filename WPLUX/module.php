@@ -630,26 +630,29 @@ class WPLUX extends IPSModule
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
 
-        $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+        $startValue1 = $this->GetValue('startValue1'); -
+        $startValue2 = $this->GetValue('startValue2');
+        
+        $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
             
-            $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe ein: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe ein: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
             if ($this->startValue1 === null || $this->startValue2 === null)
         {
             $this->startValue1 = (float)$kwh_in;
             $this->startValue2 = (float)$value_out;
         
-            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (nur erstmalig): StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (nur erstmalig): StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
         }
 
-        $this->SendDebug("JAZ", "Die Variablen sollten nun einen Wert haben: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+        $this->SendDebug("JAZ", "Die Variablen sollten nun einen Wert haben: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
 
-            $value1Change = $kwh_in - $this->startValue1;
-            $value2Change = $value_out - $this->startValue2;
+            $value1Change = $kwh_in - $startValue1;
+            $value2Change = $value_out - $startValue2;
     
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
