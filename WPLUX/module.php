@@ -3,8 +3,6 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $startValue1;
-    private $startValue2;
 
     public function Create()
     {
@@ -625,31 +623,36 @@ class WPLUX extends IPSModule
             }
     }
 
-    private function calc_jaz(string $mode, float $value_out)
+    function calc_jaz(string $mode, float $value_out)
     {
+        
+        
+
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-
-        $startValue1 = $this->startValue1;
-        $startValue2 = $this->startValue2;
-        
-        $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-            
-            $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe ein: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
-    
-            if ($this->$startValue1 === null || $this->$startValue2 === null)
-        {
-            $this->startValue1 = (float)$kwh_in;
-            $this->startValue2 = (float)$value_out;
-        
-            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (nur erstmalig): StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
-        }
 
-        $this->SendDebug("JAZ", "Die Variablen sollten nun einen Wert haben: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
+            static $startValue1 = null;
+            static $startValue2 = null;
+
+            $startValue1 = (float)$kwh_in;
+            $startValue2 = (float)$value_out;
+    
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+    
+            /*
+            
+            if ($startValue1 === null || $startValue2 === null)
+        {
+            $startValue1 = (float)$kwh_in;
+            $startValue2 = (float)$value_out;
+        
+            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
+        }
+    */
 
             $value1Change = $kwh_in - $startValue1;
             $value2Change = $value_out - $startValue2;
@@ -667,7 +670,5 @@ class WPLUX extends IPSModule
                 }
             }
         }
-        $this->SendDebug("JAZ", "Am Ende der Funktion sollten die Variablen immern noch  einen Wert haben: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
-
     }
 }
