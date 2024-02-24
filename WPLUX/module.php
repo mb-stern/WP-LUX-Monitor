@@ -637,7 +637,7 @@ class WPLUX extends IPSModule
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
     
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
             
             if ($this->startValue1 === null || $this->startValue2 === null)
@@ -645,7 +645,7 @@ class WPLUX extends IPSModule
             $this->startValue1 = (float)$kwh_in;
             $this->startValue2 = (float)$value_out;
         
-            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren): StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+            $this->SendDebug("JAZ", "Variablen wurden abgeglichen (nur erstmalig): StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
         }
 
         $this->SendDebug("JAZ", "Die Variablen sollten nun einen Wert haben: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
@@ -666,5 +666,7 @@ class WPLUX extends IPSModule
                 }
             }
         }
+        $this->SendDebug("JAZ", "Am Ende der Funktion sollten die Variablen immern noch einen Wert haben: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+
     }
 }
