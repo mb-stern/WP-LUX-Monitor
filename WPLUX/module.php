@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $startValue1;
-    private $startValue2;
+    public $startValue1;
+    public $startValue2;
 
     public function Create()
     {
@@ -641,8 +641,6 @@ class WPLUX extends IPSModule
             
             if ($this->startValue1 === null || $this->startValue2 === null)
         {
-            $this->startValue1 = null;
-            $this->startValue2 = null;
             $this->startValue1 = (float)$kwh_in;
             $this->startValue2 = (float)$value_out;
         
