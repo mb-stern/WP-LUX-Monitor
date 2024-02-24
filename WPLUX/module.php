@@ -6,8 +6,6 @@ class WPLUX extends IPSModule
     private $startValue1;
     private $startValue2;
 
-    $this->SendDebug("JAZ", "Die Variablen am Anfang der Klasse: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
-
     public function Create()
     {
         //Never delete this line!
