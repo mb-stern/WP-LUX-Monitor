@@ -3,6 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
+    private $startValue1;
+    private $startValue2;
 
     public function Create()
     {
@@ -634,8 +636,8 @@ class WPLUX extends IPSModule
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
-            //static $startValue1 = null;
-            //static $startValue2 = null;
+            $startValue1 = this->$startValue1;
+            $startValue2 = this->$startValue1;
     
             $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
