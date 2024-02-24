@@ -631,15 +631,13 @@ class WPLUX extends IPSModule
         $jazVisible = $this->ReadPropertyFloat('kwhin');
 
         $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1 ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
-
-        $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
         {
-    
+            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+            
             $this->SendDebug("JAZ", "Variablen treffen in der if Schlaufe ein: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
-            
             if ($this->startValue1 === null || $this->startValue2 === null)
         {
             $this->startValue1 = (float)$kwh_in;
