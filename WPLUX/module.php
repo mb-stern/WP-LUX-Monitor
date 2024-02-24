@@ -630,7 +630,7 @@ class WPLUX extends IPSModule
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
 
-        $startValue1 = $this->GetValue('startValue1'); -
+        $startValue1 = $this->GetValue('startValue1');
         $startValue2 = $this->GetValue('startValue2');
         
         $this->SendDebug("JAZ", "Variablen treffen in der Funktion ein: StartValue 1 ".$startValue1." StartValue 2: ".$startValue2."", 0);
