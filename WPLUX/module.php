@@ -665,7 +665,7 @@ class WPLUX extends IPSModule
     {
         static $start_kwh_in = null;
         static $start_value_out = null;
-        return array($start_kwh_in, $start_value_out);
+        //return array($start_kwh_in, $start_value_out);
         $this->SendDebug("JAZ", "Die JAZ-Startvariablen wurden erstellt und zurückgesetzt: kwh_in: ".$start_kwh_in." value_out: ".$start_value_out."", 0);
     }
 }
