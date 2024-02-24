@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    static $startValue1 = null;
-    static $startValue2 = null;
+    private $startValue1 = null;
+    private $startValue2 = null;
 
     public function Create()
     {
