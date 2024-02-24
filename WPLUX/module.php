@@ -26,8 +26,6 @@ class WPLUX extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
-        $this->RegisterAttributeFloat("startValue1", 0);
-        $this->RegisterAttributeFloat("startValue2", 0);
     }
 
     public function ApplyChanges()
@@ -643,6 +641,8 @@ class WPLUX extends IPSModule
             
             if ($this->startValue1 === null || $this->startValue2 === null)
         {
+            $this->startValue1 = null;
+            $this->startValue2 = null;
             $this->startValue1 = (float)$kwh_in;
             $this->startValue2 = (float)$value_out;
         
