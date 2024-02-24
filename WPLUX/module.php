@@ -21,8 +21,6 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        static $startValue1 = null;
-        static $startValue2 = null;
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -135,6 +133,7 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+            $this->set_jazvar();
         } 
         else 
         {
@@ -627,9 +626,6 @@ class WPLUX extends IPSModule
 
     function calc_jaz(string $mode, float $value_out)
     {
-        
-        
-
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
     
@@ -637,18 +633,18 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$start_kwh_in." StartValue 2: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
-            if ($startValue1 === null || $startValue2 === null)
+            if ($start_kwh_in === null || $start_value_out === null)
         {
-            $startValue1 = (float)$kwh_in;
-            $startValue2 = (float)$value_out;
+            $start_kwh_in = (float)$kwh_in;
+            $start_value_out = (float)$value_out;
         
-            $this->SendDebug("JAZ", "Variablen wurden erstmalig initialisiert: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2."", 0);
+            $this->SendDebug("JAZ", "Variablen wurden erstmalig initialisiert: StartValue 1: ".$start_kwh_in." StartValue 2: ".$start_value_out."", 0);
         }
 
-            $value1Change = $kwh_in - $startValue1;
-            $value2Change = $value_out - $startValue2;
+            $value1Change = $kwh_in - $start_kwh_in;
+            $value2Change = $value_out - $start_value_out;
     
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
@@ -663,5 +659,13 @@ class WPLUX extends IPSModule
                 }
             }
         }
+    }
+
+    function set_jazvar()
+    //Startvariablen für JAZ-Berechnung erstellen oder zurücksetzen
+    {
+        static $start_kwh_in = null;
+        static $start_value_out = null;
+        $this->SendDebug("JAZ", "Die JAZ-Startvariablen wurden erstellt kwh_in: ".$start_kwh_in." value_out: ".$start_value_out."", 0);
     }
 }
