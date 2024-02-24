@@ -648,7 +648,7 @@ class WPLUX extends IPSModule
             $in = $kwh_in - $start_kwh_in;
             $out = $value_out - $start_value_out;
     
-            if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
+            if ($in != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $out / $in;
                 $this->SetValue('jazfaktor', $jaz);
