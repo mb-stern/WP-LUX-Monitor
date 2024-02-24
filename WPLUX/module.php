@@ -637,7 +637,7 @@ class WPLUX extends IPSModule
 
             $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$start_kwh_in." StartValue 2: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
-            if ($start_kwh_in === null || $start_value_out === null)
+            if ($this->start_kwh_in === null || $this->start_value_out === null)
         {
             $start_kwh_in = (float)$kwh_in;
             $start_value_out = (float)$value_out;
