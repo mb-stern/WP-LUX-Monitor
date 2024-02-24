@@ -3,6 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
+    private $start_kwh_in;
+    private $start_value_out;
 
     public function Create()
     {
@@ -660,8 +662,6 @@ class WPLUX extends IPSModule
     private function set_jazvar()
     //Startvariablen für JAZ-Berechnung erstellen oder zurücksetzen
     {
-        private $start_kwh_in;
-        private $start_value_out;
         $this->start_kwh_in = null;
         $this->start_value_out = null;
         $this->SendDebug("JAZ", "Die JAZ-Startvariablen wurden erstellt und zurückgesetzt: kwh_in: ".$start_kwh_in." value_out: ".$start_value_out."", 0);
