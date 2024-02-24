@@ -26,6 +26,8 @@ class WPLUX extends IPSModule
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
+        $this->RegisterAttributeFloat("startValue1", 0);
+        $this->RegisterAttributeFloat("startValue2", 0);
     }
 
     public function ApplyChanges()
