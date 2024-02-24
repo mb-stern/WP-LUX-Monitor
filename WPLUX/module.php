@@ -635,14 +635,6 @@ class WPLUX extends IPSModule
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
             $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
-    
-            if ($this->start_kwh_in === null || $this->start_value_out === null)
-        {
-            $this->start_kwh_in = (float)$kwh_in;
-            $this->start_value_out = (float)$value_out;
-        
-            $this->SendDebug("JAZ", "Variablen wurden erstmalig initialisiert: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out."", 0);
-        }
 
             $in = $kwh_in - $this->start_kwh_in;
             $out = $value_out - $this->start_value_out;
@@ -656,4 +648,11 @@ class WPLUX extends IPSModule
             }
         }
     }
+    
+    private function reset_jaz()
+    {
+        $this->start_kwh_in = (float)$kwh_in;
+        $this->start_value_out = (float)$value_out;
+        $this->SendDebug("JAZ", "Variablen wurden zurückgesetzt: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out."", 0);
+    }    
 }
