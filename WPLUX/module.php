@@ -3,6 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
+    static $startValue1 = null;
+    static $startValue2 = null;
 
     public function Create()
     {
@@ -631,8 +633,6 @@ class WPLUX extends IPSModule
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
 
-        static $startValue1 = null;
-        static $startValue2 = null;
         $this->SendDebug("JAZ", "Variablen nach Statisch Null: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2."", 0);
     
 
