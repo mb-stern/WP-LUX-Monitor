@@ -3,8 +3,11 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
+    
     private $start_kwh_in;
     private $start_value_out;
+    private $kwh_in;
+    private $value_out;
 
     public function Create()
     {
@@ -635,10 +638,10 @@ class WPLUX extends IPSModule
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out." kWh_in: ".$this->$kwh_in." value_out: ".$this->$value_out."", 0);
 
-            $in = $kwh_in - $this->start_kwh_in;
-            $out = $value_out - $this->start_value_out;
+            $in = $this->$kwh_in - $this->start_kwh_in;
+            $out = $this->$value_out - $this->start_value_out;
     
             if ($in != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
@@ -652,8 +655,8 @@ class WPLUX extends IPSModule
     
     private function reset_jaz()
     {
-        $this->start_kwh_in = (float)$kwh_in;
-        $this->start_value_out = (float)$value_out;
+        $this->start_kwh_in = $this->$kwh_in;
+        $this->start_value_out = $this->$value_out;
         $this->SendDebug("JAZ", "Variablen wurden zurückgesetzt: StartValue 1: ".$this->start_kwh_in." StartValue 2: ".$this->start_value_out."", 0);
     }    
 }
