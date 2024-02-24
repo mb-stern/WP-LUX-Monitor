@@ -134,8 +134,7 @@ class WPLUX extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
-            $this->set_jazvar();
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);;
         } 
         else 
         {
@@ -657,13 +656,5 @@ class WPLUX extends IPSModule
                 
             }
         }
-    }
-
-    private function set_jazvar()
-    //Startvariablen für JAZ-Berechnung erstellen oder zurücksetzen
-    {
-        $this->start_kwh_in = null;
-        $this->start_value_out = null;
-        $this->SendDebug("JAZ", "Die JAZ-Startvariablen wurden erstellt und zurückgesetzt: kwh_in: ".$start_kwh_in." value_out: ".$start_value_out."", 0);
     }
 }
