@@ -135,7 +135,7 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
-            $this->reset_jaz()
+            $this->reset_jaz();
         } 
         else 
         {
