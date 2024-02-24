@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $startValue1;
-    private $startValue2;
+    static $startValue1 = null;
+    static $startValue2 = null;
 
     public function Create()
     {
@@ -629,7 +629,7 @@ class WPLUX extends IPSModule
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-        $this->SendDebug("JAZ", "Variablen beim Eintritt in die Funktion: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2."", 0);
+        $this->SendDebug("JAZ", "Variablen beim Eintritt in die Funktion: StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible))
 
