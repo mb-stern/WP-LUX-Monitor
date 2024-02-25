@@ -50,7 +50,17 @@
                 {
                     "type": "SelectVariable",
                     "name": "kwin",
-                    "caption": "Externe Variable zur Berechnung des COP auswählen."
+                    "caption": "Externe Variable zur Berechnung des COP auswählen (kW)."
+                },
+                {
+                    "type": "SelectVariable",
+                    "name": "kwhin",
+                    "caption": "Externe Variable zur Berechnung des JAZ auswählen (kWh)."
+                },
+                {
+                    "type": "Button",
+                    "label": "JAZ-Berechnung zurücksetzen",
+                    "onClick": "WPLUX_reset_jaz($id);"
                 }
                 ]
         },

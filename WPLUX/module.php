@@ -20,6 +20,10 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
+        $this->RegisterPropertyFloat('kwhin', 0);
+
+        $this->RegisterAttributeFloat("start_value_out", 0);
+        $this->RegisterAttributeFloat("start_kwh_in", 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -59,6 +63,7 @@ class WPLUX extends IPSModule
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
+        $jazVisible = $this->ReadPropertyFloat('kwhin');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -126,6 +131,15 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('copfaktor');
+        }
+        
+        if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
+        {
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+        } 
+        else 
+        {
+            $this->UnregisterVariable('jazfaktor');
         }
     }
 
@@ -236,11 +250,14 @@ class WPLUX extends IPSModule
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calcextvalues('cop', $value); 
-
-                //Debug senden
-                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calcextvalues' gesendet", 0);
+                $this->calc_cop('cop', $value);
             }  
+
+            if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des COP
+            {
+                $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
+                $this->calc_jaz('jaz', $value_out);
+            }
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
@@ -586,20 +603,62 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calcextvalues($mode, $value)
+    private function calc_cop($mode, $value)
     {
         //Berechnung des COP-Faktors
+        $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
         $copVisible = $this->ReadPropertyFloat('kwin');
-        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible))
+        
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false)
             {
                 $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
                 $cop = $value / $kw_in;
-                $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
-                if ($copfaktorVariableID !== false) 
-                {
-                    $this->SetValue('copfaktor', $cop);
-                    $this->SendDebug("COP-Faktor", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calcextvalues' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
-                }
+                $this->SetValue('copfaktor', $cop);
+                
+                $this->SendDebug("COP", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
             }
+    }
+
+    private function calc_jaz(string $mode, float $value_out)
+    {
+        //Berechnung des JAZ-Faktors
+        $jazVisible = $this->ReadPropertyFloat('kwhin');
+        $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+    
+        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
+        {
+            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+    
+            $this->SendDebug("JAZ", "Verbrauchs (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Produktion (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Verbrauchs (gesamt): ".$kwh_in." kWh, Produktion (gesamt): ".$value_out." kWh", 0);
+            
+            if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0)
+            {
+                $this->WriteAttributeFloat('start_kwh_in', $kwh_in);
+                $this->WriteAttributeFloat('start_value_out', $value_out);
+            
+                $this->SendDebug("JAZ", "Die Start und Ist-Variabeln wurden synchronisiert (sollte nur einmalig nach dem Reset passieren)", 0);
+            }
+
+            $kwh_in_Change = $kwh_in - $this->ReadAttributeFloat('start_kwh_in');
+            $value_out_Change = $value_out - $this->ReadAttributeFloat('start_value_out');
+    
+            if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
+            {
+                $jaz = $value_out_Change / $kwh_in_Change;
+                $this->SetValue('jazfaktor', $jaz);
+                $this->SendDebug("JAZ", "Faktor: ".$jaz." wurde berechnet anhand des Energieverbrauchs (seit Reset): ".$kwh_in_Change." kWh und der Energieproduktion (seit Reset): ".$value_out_Change." kWh", 0);
+            }
+            else 
+            {
+                $this->SetValue('jazfaktor', 0);
+                $this->SendDebug("JAZ", "JAZ-Faktor konnte noch nicht berechnet werden da sich der Wert der Energieversorgung noch nicht geändert hat seit dem Reset", 0);
+            } 
+        }
+    }
+    public function reset_jaz()
+    {
+        $this->WriteAttributeFloat('start_kwh_in', 0);
+        $this->WriteAttributeFloat('start_value_out', 0);
+        $this->SendDebug("JAZ", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
 }
