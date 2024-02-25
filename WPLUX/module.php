@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $start_kwh_in = 0;
-    private $start_value_out = 0;
+    private $start_kwh_in;
+    private $start_value_out;
 
     public function Create()
     {
@@ -23,6 +23,8 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
+        $this->RegisterPropertyFloat('start_kwh_in', 0);
+        $this->RegisterPropertyFloat('start_value_out', 0);
 
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
@@ -647,7 +649,6 @@ class WPLUX extends IPSModule
                 // Initialisierung der Instanzvariablen
                 $this->start_kwh_in = $kwh_in;
                 $this->start_value_out = $value_out;
-                $this->SaveData();
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) Eingang: ".$this->start_kwh_in." Ausgang: ".$this->start_value_out."", 0);
             }
 
