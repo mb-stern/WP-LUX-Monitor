@@ -637,7 +637,7 @@ class WPLUX extends IPSModule
             $start_value_out = $this->ReadAttributeFloat('start_value_out');
 
     
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$start_kwh_in." start_value_out: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung des JAZ: start_kwh_in: ".$start_kwh_in." start_value_out: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
     
             
             if ($start_kwh_in == 0 || $start_value_out == 0)
@@ -648,19 +648,19 @@ class WPLUX extends IPSModule
                 $this->SendDebug("JAZ", "Die Start und Ist-Variabeln wurden synchronisiert (sollte nur einmalig nach dem Reset passieren)", 0);
             }
 
-            $kwh_in_Change = $kwh_in - $start_kwh_in;
-            $value_out_Change = $value_out - $start_value_out;
+            $kwh_in_Change = $kwh_in - $this->ReadAttributeFloat('start_kwh_in');
+            $value_out_Change = $value_out - $this->ReadAttributeFloat('start_value_out');
     
             if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ", "JAZ-Faktor seit Reset: Der ".$jaz." wurde berechnet anhand der Energieversorgung: ".$kwh_in_Change." und Heiz-Energie: ".$value_out_Change."", 0);
+                $this->SendDebug("JAZ", "".$jaz." wurde berechnet anhand der Energieversorgung: ".$kwh_in_Change." und Heiz-Energie: ".$value_out_Change."", 0);
             }
             else 
             {
                 $this->SetValue('jazfaktor', 0);
-                $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da sich der Wert der Energieversorgung noch nicht geändert hat seit dem Reset", 0);
+                $this->SendDebug("JAZ", "JAZ-Faktor konnte noch nicht berechnet werden da sich der Wert der Energieversorgung noch nicht geändert hat seit dem Reset", 0);
             } 
         }
     }
