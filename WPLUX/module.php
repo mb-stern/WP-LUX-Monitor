@@ -629,7 +629,7 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
     
-            $this->SendDebug("JAZ", "Energieverbrauchs (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Energieproduktion (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Energieverbrauchs (gesamt): ".$kwh_in." kWh, Energieproduktion (gesamt): ".$value_out." kWh", 0);
+            $this->SendDebug("JAZ", "Verbrauchs (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Produktion (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Verbrauchs (gesamt): ".$kwh_in." kWh, Produktion (gesamt): ".$value_out." kWh", 0);
             
             if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0)
             {
