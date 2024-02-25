@@ -614,13 +614,14 @@ class WPLUX extends IPSModule
         //Berechnung des COP-Faktors
         $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
         $copVisible = $this->ReadPropertyFloat('kwin');
+        
         if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false)
             {
                 $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
                 $cop = $value / $kw_in;
                 $this->SetValue('copfaktor', $cop);
                 
-                $this->SendDebug("COP", "Der COP-Faktor: ".$cop." wurde durch die Funktion 'calc_cop' berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value." und in die Variable ausgegeben", 0);
+                $this->SendDebug("COP", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
             }
     }
 
@@ -634,7 +635,7 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
     
-            $this->SendDebug("JAZ", "Variablen zur Berechnung des JAZ: start_kwh_in: ".$this->ReadAttributeFloat('start_kwh_in')." start_value_out: ".$this->ReadAttributeFloat('start_value_out')." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung des JAZ: Energieverbrauchs (seit Reset): ".$this->ReadAttributeFloat('start_kwh_in')." Energieproduktion (seit Reset): ".$this->ReadAttributeFloat('start_value_out')." Energieverbrauchs (gesamt): ".$kwh_in." Energieproduktion (gesamt): ".$value_out."", 0);
             
             if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0)
             {
@@ -651,7 +652,7 @@ class WPLUX extends IPSModule
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ", "Faktor: ".$jaz." wurde berechnet anhand der Energieversorgung: ".$kwh_in_Change." und Heiz-Energie: ".$value_out_Change."", 0);
+                $this->SendDebug("JAZ", "Faktor: ".$jaz." wurde berechnet anhand des Energieverbrauchs: ".$kwh_in_Change." kWh und der Energieproduktion: ".$value_out_Change." kWh", 0);
             }
             else 
             {
