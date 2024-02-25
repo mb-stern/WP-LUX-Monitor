@@ -648,6 +648,8 @@ class WPLUX extends IPSModule
                 $this->start_kwh_in = $kwh_in;
                 $this->start_value_out = $value_out;
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) ".$this->start_kwh_in." ".$this->start_value_out."", 0);
+                return $this->start_kwh_in;
+                return $this->start_value_out;
             }
 
             $kwh_in_Change = $kwh_in - $this->start_kwh_in;
