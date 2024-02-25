@@ -663,7 +663,7 @@ class WPLUX extends IPSModule
             else 
             {
                 $this->SetValue('jazfaktor', 0);
-                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde auf Null zurückgesetzt", 0);
+                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor wurde auf Null zurückgesetzt", 0);
             } 
         }
     }
