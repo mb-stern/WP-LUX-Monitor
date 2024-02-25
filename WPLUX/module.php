@@ -3,8 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $start_kwh_in;
-    private $start_value_out;
+    public $start_kwh_in;
+    public $start_value_out;
 
     public function Create()
     {
