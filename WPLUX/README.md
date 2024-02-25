@@ -28,6 +28,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
 * Es können Variablen für die Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Diese Variablen zur Steuerung werden nicht live synchronisiert, sondern immer erst dann, wenn Änderungen am Konfigurationsformular vorgenommen wurden.
 * Die Anzeige des COP-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kW) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden.
+* Die Anzeige des JAZ-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kWh) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt und die Berechnung bei Bedarf zurückgesetzt werden.
 
 ### 2. Voraussetzungen
 
@@ -101,6 +102,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 3.3 - Beta (25.02.2024)
+
+- Berechnung des JAZ jetzt durch auswählen einer externen Variable für die Eingangsleistung in kWh möglich. Ebenfalls besteht die Möglichkeit, den JAZ-Faktor zu reseten, um zum Beispiel bei Jahresende oder bei Bedarf die Berechnung neu zu starten.
 
 Version 3.2 - Beta (20.02.2024)
 
