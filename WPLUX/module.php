@@ -22,6 +22,9 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
 
+        $this->RegisterAttributeFloat("start_value_out", 0);
+        $this->RegisterAttributeFloat("start_kwh_in", 0);
+
         // Timer für Aktualisierung registrieren
         $this->RegisterTimer('UpdateTimer', 0, 'WPLUX_Update(' . $this->InstanceID . ');');  
     }
@@ -137,8 +140,6 @@ class WPLUX extends IPSModule
             //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
             //IPS_SetHidden($this->GetIDForIdent('start_value_out'), true);
             //IPS_SetHidden($this->GetIDForIdent('start_kwh_in'), true);
-            $this->RegisterAttributeFloat("start_value_out", 0);
-            $this->RegisterAttributeFloat("start_kwh_in", 0);
         } 
         else 
         {
