@@ -629,7 +629,7 @@ class WPLUX extends IPSModule
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
     
-            $this->SendDebug("JAZ", "Energieverbrauchs (seit Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Energieproduktion (seit Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Energieverbrauchs (gesamt): ".$kwh_in." kWh, Energieproduktion (gesamt): ".$value_out." kWh", 0);
+            $this->SendDebug("JAZ", "Energieverbrauchs (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Energieproduktion (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Energieverbrauchs (gesamt): ".$kwh_in." kWh, Energieproduktion (gesamt): ".$value_out." kWh", 0);
             
             if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0)
             {
@@ -646,7 +646,7 @@ class WPLUX extends IPSModule
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ", "Faktor: ".$jaz." wurde berechnet anhand des Energieverbrauchs: ".$kwh_in_Change." kWh und der Energieproduktion: ".$value_out_Change." kWh", 0);
+                $this->SendDebug("JAZ", "Faktor: ".$jaz." wurde berechnet anhand des Energieverbrauchs (seit Reset): ".$kwh_in_Change." kWh und der Energieproduktion (seit Reset): ".$value_out_Change." kWh", 0);
             }
             else 
             {
