@@ -3,6 +3,8 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
+    private $start_kwh_in;
+    private $start_value_out;
 
     public function Create()
     {
@@ -133,14 +135,14 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
-            $this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
-            $this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie Out', '', 6);
+            //$this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
+            //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
         } 
         else 
         {
             $this->UnregisterVariable('jazfaktor');
-            $this->UnregisterVariable('start_value_out');
-            $this->UnregisterVariable('start_kwh_in');
+            //$this->UnregisterVariable('start_value_out');
+            //$this->UnregisterVariable('start_kwh_in');
         }
     }
 
