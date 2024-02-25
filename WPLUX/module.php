@@ -250,19 +250,13 @@ class WPLUX extends IPSModule
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calc_cop('cop', $value); 
-
-                //Debug senden
-                $this->SendDebug("Wärmemenge", "Für die COP-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value ." an die Funktion 'calc_cop' gesendet", 0);
+                $this->calc_cop('cop', $value);
             }  
 
             if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calc_jaz('jaz', $value_out); 
-
-                //Debug senden
-                $this->SendDebug("Energiemenge", "Für die JAZ-Berechnung wurde ID: " . $i . " erfasst und der Wert: ". $value_out ." an die Funktion 'calc_jaz' gesendet", 0);
+                $this->calc_jaz('jaz', $value_out);
             }
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
