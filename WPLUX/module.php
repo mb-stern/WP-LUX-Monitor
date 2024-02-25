@@ -139,6 +139,8 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('jazfaktor');
+            $this->UnregisterVariable('start_value_out');
+            $this->UnregisterVariable('start_kwh_in');
         }
     }
 
