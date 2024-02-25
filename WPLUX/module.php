@@ -642,7 +642,7 @@ class WPLUX extends IPSModule
             $this->kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
             $this->value_out = $value_out;
 
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$this->kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$this->kwh_in." value_out: ".$this->value_out."", 0);
             
             // Überprüfen, ob die Instanzvariablen bereits initialisiert wurden
             if ($this->start_kwh_in === null || $this->start_value_out === null)
