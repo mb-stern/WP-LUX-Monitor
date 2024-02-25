@@ -640,19 +640,19 @@ class WPLUX extends IPSModule
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
     
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".$this->startValue1." StartValue 2: ".$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: StartValue 1: ".WPLUX::$startValue1." StartValue 2: ".WPLUX::$startValue2." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
             
-            if ($this->startValue1 === null || $this->startValue2 === null)
+            if (WPLUX::$startValue1 === null || WPLUX::$startValue2 === null)
         {
-            $this->startValue1 = (float)$kwh_in;
-            $this->startValue2 = (float)$value_out;
+            WPLUX::$startValue1 = (float)$kwh_in;
+            WPLUX::$startValue2 = (float)$value_out;
         
-            $this->SendDebug("JAZ", "Variablen nach Synchronisierung (einmalig): StartValue 1: ".$this->startValue1." StartValue 2: ".$this->startValue2."", 0);
+            $this->SendDebug("JAZ", "Variablen nach Synchronisierung (einmalig): StartValue 1: ".WPLUX::$startValue1." StartValue 2: ".WPLUX::$startValue2."", 0);
     
         }
 
-            $value1Change = $kwh_in - $this->startValue1;
-            $value2Change = $value_out - $this->startValue2;
+            $value1Change = $kwh_in - WPLUX::$startValue1;
+            $value2Change = $value_out - WPLUX::$startValue2;
     
             if ($value1Change != 0) // Überprüfen, ob der Wert von $value1Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
