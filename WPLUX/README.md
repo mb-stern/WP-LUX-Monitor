@@ -103,11 +103,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.3 - Beta (25.02.2024)
+Version 3.3 (25.02.2024)
 
 - Berechnung des JAZ jetzt durch auswählen einer externen Variable für die Eingangsleistung in kWh möglich. Ebenfalls besteht die Möglichkeit, den JAZ-Faktor zu reseten, um zum Beispiel bei Jahresende oder bei Bedarf die Berechnung neu zu starten.
 
-Version 3.2 - Beta (20.02.2024)
+Version 3.2 (20.02.2024)
 
 - Berechnung des COP jetzt durch auswählen einer externen Variable für die Eingangsleistung in kW möglich.
 - Weitere Anpassen der Debug- und der Fehler-Ausgabe.
@@ -118,7 +118,7 @@ Version 3.1 (17.02.2024)
 - Anpassen der Debug- und der Fehler-Ausgabe.
 
 
-Version 3.0 - Beta (15.02.2024)
+Version 3.0 (15.02.2024)
 
 - Modul von WPLUX Symcon in Luxtronik umbenannt um die Store-Kompatibilität zu erreichen. Dies erfordert leider eine Neuinstallation des Moduls und das Transferieren der Variablen-Werte durch den Anwender.
 - Code massiv umgebaut um die Store-Kompatibilität zu ereichen
@@ -128,7 +128,7 @@ Version 3.0 - Beta (15.02.2024)
 - Variable 20 umbenannt wegen ungültigem Sonderzeichen (Variablen müssen manuell im Baum gelöscht werden wenn sie bereits vorhanden sind)
  
 
-Version 2.4 - Beta (11.02.2024)
+Version 2.4 (11.02.2024)
 
 - Erstellung der Variablenprofile von Create() in ApplyChanges() verschoben, damit die Profile bei jeder Änderung auf Vorhandensein geprüft und ggf. erstellt werden.
 - Im Integer-Variablenprofil WPLUX.Fan wird die Einheit 'rpm' nun klein geschrieben um ein einheitlicheres Gesamtbild der Werte zu erreichen. Wenn die Kosmetik gewünscht wird, muss das Variablenprofil manuell gelöscht werden. Es wird bei einer Konfigurationsänderung neu erstellt.
