@@ -6,17 +6,6 @@ class WPLUX extends IPSModule
     private $start_kwh_in;
     private $start_value_out;
 
-    public function __construct($InstanceID)
-    {
-        parent::__construct($InstanceID);
-
-        // Initialisieren der Variablen
-        $this->start_kwh_in = null;
-        $this->start_value_out = null;
-    }
-    
-    
-    
     public function Create()
     {
         //Never delete this line!
@@ -640,21 +629,18 @@ class WPLUX extends IPSModule
             }
     }
 
-    private function calc_jaz(string $mode, float $value_out)
-    {
+    private function calc_jaz(string $mode, float $value_out) {
         // Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
     
-        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
-        {
+        if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false) {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
             $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
             
             // Überprüfen, ob die Instanzvariablen bereits initialisiert wurden
-            if ($this->start_kwh_in === null || $this->start_value_out === null)
-            {
+            if ($this->start_kwh_in === null || $this->start_value_out === null) {
                 // Initialisierung der Instanzvariablen
                 $this->start_kwh_in = $kwh_in;
                 $this->start_value_out = $value_out;
@@ -664,17 +650,22 @@ class WPLUX extends IPSModule
             $kwh_in_Change = $kwh_in - $this->start_kwh_in;
             $value_out_Change = $value_out - $this->start_value_out;
 
-            if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
-            {
+            if ($kwh_in_Change != 0) { // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
                 $this->SendDebug("JAZ", "JAZ-Faktor: ".$jaz." wurde durch 'calc_jaz' berechnet (seit Reset)): Eingangsenergie: ".$kwh_in_Change." und Ausgangsenergie: ".$value_out_Change." und in die Variable ausgegeben", 0);
-            }
-            else 
-            {
+            } else {
                 $this->SetValue('jazfaktor', 0);
                 $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
             } 
         }
     }
+
+    // Konstruktor, der die Eigenschaften initialisiert
+    public function __construct($kwh_in, $value_out) {
+        $this->start_kwh_in = $kwh_in;
+        $this->start_value_out = $value_out;
+    }
+
+
 }
