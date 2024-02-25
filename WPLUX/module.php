@@ -3,8 +3,6 @@
 class WPLUX extends IPSModule
 {
     private $updateTimer;
-    private $start_kwh_in;
-    private $start_value_out;
 
     public function Create()
     {
@@ -135,16 +133,14 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
-            //$this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
-            //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
-            $this->start_kwh_in = null;
-            $this->start_value_out = null;
+            IPS_SetHidden($this->RegisterVariableFloat('start_value_out'), 0);
+            IPS_SetHidden($this->RegisterVariableFloat('start_kwh_in'), 0);
         } 
         else 
         {
             $this->UnregisterVariable('jazfaktor');
-            //$this->UnregisterVariable('start_value_out');
-            //$this->UnregisterVariable('start_kwh_in');
+            $this->UnregisterVariable('start_value_out');
+            $this->UnregisterVariable('start_kwh_in');
         }
     }
 
@@ -629,40 +625,43 @@ class WPLUX extends IPSModule
             }
     }
 
-    private function calc_jaz(string $mode, float $value_out)
+    function calc_jaz(string $mode, float $value_out)
     {
-        // Berechnung des JAZ-Faktors
+        //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+            $start_kwh_in = $this->GetValue('start_kwh_in');
+            $start_value_out = $this->GetValue('start_value_out');
 
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+    
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$start_kwh_in." start_value_out: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+    
             
-            // Überprüfen, ob die Instanzvariablen bereits initialisiert wurden
-            if ($this->start_kwh_in === null || $this->start_value_out === null)
+            if ($start_kwh_in == 0 || $start_value_out == 0)
             {
-                // Initialisierung der Instanzvariablen
-                $this->start_kwh_in = $kwh_in;
-                $this->start_value_out = $value_out;
-                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) Eingang: ".$this->start_kwh_in." Ausgang: ".$this->start_value_out."", 0);
+                $this->SetValue('start_kwh_in', $kwh_in);
+                $this->SetValue('start_value_out', $value_out);
+            
+                $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
             }
 
-            $kwh_in_Change = $kwh_in - $this->start_kwh_in;
-            $value_out_Change = $value_out - $this->start_value_out;
-
+            $kwh_in_Change = $kwh_in - $start_kwh_in;
+            $value_out_Change = $value_out - $start_value_out;
+    
             if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ", "JAZ-Faktor: ".$jaz." wurde durch 'calc_jaz' berechnet (seit Reset)): Eingangsenergie: ".$kwh_in_Change." und Ausgangsenergie: ".$value_out_Change." und in die Variable ausgegeben", 0);
+                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
             }
             else 
             {
                 $this->SetValue('jazfaktor', 0);
-                $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
+                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
             } 
         }
     }
