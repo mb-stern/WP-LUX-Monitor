@@ -5,6 +5,8 @@ class WPLUX extends IPSModule
     private $updateTimer;
     private $start_kwh_in;
     private $start_value_out;
+    private $kwh_in;
+    private $value_out;
 
     public function Create()
     {
@@ -637,7 +639,8 @@ class WPLUX extends IPSModule
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
-            $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+            $this->kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+            $this->value_out = $value_out;
 
             $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
             
@@ -645,8 +648,8 @@ class WPLUX extends IPSModule
             if ($this->start_kwh_in === null || $this->start_value_out === null)
             {
                 // Initialisierung der Instanzvariablen
-                $this->start_kwh_in = $kwh_in;
-                $this->start_value_out = $value_out;
+                $this->start_kwh_in = $this->kwh_in;
+                $this->start_value_out = $this->value_out;
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) Eingang: ".$this->start_kwh_in." Ausgang: ".$this->start_value_out."", 0);
             }
 
