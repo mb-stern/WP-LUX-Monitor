@@ -645,8 +645,10 @@ class WPLUX extends IPSModule
             if ($this->start_kwh_in == 0 || $this->start_value_out == 0)
             {
                 // Initialisierung der Instanzvariablen
-                $this->start_kwh_in = $kwh_in;
-                $this->start_value_out = $value_out;
+                //$this->start_kwh_in = $kwh_in;
+                //$this->start_value_out = $value_out;
+                $this->start_kwh_in = 5;
+                $this->start_value_out = 5;
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) ".$this->start_kwh_in." ".$this->start_value_out."", 0);
             }
 
