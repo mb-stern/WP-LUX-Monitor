@@ -667,7 +667,7 @@ class WPLUX extends IPSModule
                 }
             }
         }
-        $this->SendDebug("JAZ", "Variablen beim Austritt aus der Funktion: StartValue 1: ".$startValue1." StartValue 2: ".$startValue2."", 0);
+        $this->SendDebug("JAZ", "Variablen beim Austritt aus der Funktion: StartValue 1: ".WPLUX::$startValue1." StartValue 2: ".WPLUX::$startValue2."", 0);
     
     }
 }
