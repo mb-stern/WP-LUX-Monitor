@@ -645,7 +645,7 @@ class WPLUX extends IPSModule
                 $this->WriteAttributeFloat('start_kwh_in', $kwh_in);
                 $this->WriteAttributeFloat('start_value_out', $value_out);
             
-                $this->SendDebug("JAZ", "Die Start und Ist-Variabeln wurden synchronisiert (sollte nur einmalig passieren)", 0);
+                $this->SendDebug("JAZ", "Die Start und Ist-Variabeln wurden synchronisiert (sollte nur einmalig nach dem Reset passieren)", 0);
             }
 
             $kwh_in_Change = $kwh_in - $start_kwh_in;
@@ -655,12 +655,12 @@ class WPLUX extends IPSModule
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in_Change." und Ausgangs-Energie: ".$value_out_Change." und in die Variable ausgegeben", 0);
+                $this->SendDebug("JAZ", "JAZ-Faktor seit Reset: Der ".$jaz." wurde berechnet anhand der Energieversorgung: ".$kwh_in_Change." und Heiz-Energie: ".$value_out_Change."", 0);
             }
             else 
             {
                 $this->SetValue('jazfaktor', 0);
-                $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
+                $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da sich der Wert der Energieversorgung noch nicht geändert hat seit dem Reset", 0);
             } 
         }
     }
@@ -668,6 +668,6 @@ class WPLUX extends IPSModule
     {
         $this->WriteAttributeFloat('start_kwh_in', 0);
         $this->WriteAttributeFloat('start_value_out', 0);
-        $this->SendDebug("JAZ", "Die Start-Werte der JAZ-Berechnung wurden zurückgesetzt", 0);
+        $this->SendDebug("JAZ", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
 }
