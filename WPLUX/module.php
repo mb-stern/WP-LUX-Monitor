@@ -137,6 +137,8 @@ class WPLUX extends IPSModule
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
             //$this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
             //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
+            $this->start_kwh_in = null;
+            $this->start_value_out = null;
         } 
         else 
         {
@@ -627,59 +629,27 @@ class WPLUX extends IPSModule
             }
     }
 
-    
-    private function getStartKwhIn()
-    {
-        return $this->start_kwh_in;
-    }
-
-    private function setStartKwhIn($value)
-    {
-        $this->start_kwh_in = $value;
-    }
-
-    private function getStartValueOut()
-    {
-        return $this->start_value_out;
-    }
-
-    private function setStartValueOut($value)
-    {
-        $this->start_value_out = $value;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     private function calc_jaz(string $mode, float $value_out)
     {
-        //Berechnung des JAZ-Faktors
+        // Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-            $start_kwh_in = $this->getStartKwhIn();
-            $start_value_out = $this->getStartValueOut();
-
-            $this->SendDebug("JAZ", "Eingangsenergie bei Reset: ".$start_kwh_in." Ausgangsenergie bei Reset: ".$start_value_out." Eingangsenergie aktuell: ".$kwh_in." Ausgangsenergie aktuell: ".$value_out."", 0);
-    
-            if ($start_kwh_in == 0 || $start_value_out == 0)
-            {
-                $this->setStartKwhIn($kwh_in);
-                $this->setStartValueOut($value_out);
             
+            // Überprüfen, ob die Instanzvariablen bereits initialisiert wurden
+            if ($this->start_kwh_in === null || $this->start_value_out === null)
+            {
+                // Initialisierung der Instanzvariablen
+                $this->start_kwh_in = $kwh_in;
+                $this->start_value_out = $value_out;
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
             }
 
-            $kwh_in_Change = $kwh_in - $start_kwh_in;
-            $value_out_Change = $value_out - $start_value_out;
+            $kwh_in_Change = $kwh_in - $this->start_kwh_in;
+            $value_out_Change = $value_out - $this->start_value_out;
     
             if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
