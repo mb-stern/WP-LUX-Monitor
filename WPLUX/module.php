@@ -6,6 +6,17 @@ class WPLUX extends IPSModule
     private $start_kwh_in;
     private $start_value_out;
 
+    public function __construct($InstanceID)
+    {
+        parent::__construct($InstanceID);
+
+        // Initialisieren der Variablen
+        $this->start_kwh_in = null;
+        $this->start_value_out = null;
+    }
+    
+    
+    
     public function Create()
     {
         //Never delete this line!
