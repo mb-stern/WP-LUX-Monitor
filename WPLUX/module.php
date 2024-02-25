@@ -634,6 +634,9 @@ class WPLUX extends IPSModule
         // Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+
+        $this->start_kwh_in = $kwh_in;
+                $this->start_value_out = $value_out;
     
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
