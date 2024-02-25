@@ -140,6 +140,8 @@ class WPLUX extends IPSModule
             //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
             //IPS_SetHidden($this->GetIDForIdent('start_value_out'), true);
             //IPS_SetHidden($this->GetIDForIdent('start_kwh_in'), true);
+            $this->WriteAttributeFloat('start_kwh_in', 0);
+            $this->WriteAttributeFloat('start_value_out', 0);
         } 
         else 
         {
@@ -661,12 +663,12 @@ class WPLUX extends IPSModule
             {
                 $jaz = $value_out_Change / $kwh_in_Change;
                 $this->SetValue('jazfaktor', $jaz);
-                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
+                $this->SendDebug("JAZ", "Der JAZ-Faktor: ".$jaz." wurde durch die Funktion 'calc_jaz' berechnet anhand der Eingangs-Energie: ".$kwh_in." und Ausgangs-Energie: ".$value_out." und in die Variable ausgegeben", 0);
             }
             else 
             {
                 $this->SetValue('jazfaktor', 0);
-                $this->SendDebug("JAZ-Faktor", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
+                $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
             } 
         }
     }
