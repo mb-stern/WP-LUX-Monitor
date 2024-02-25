@@ -133,16 +133,18 @@ class WPLUX extends IPSModule
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
-            $this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
-            $this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
-            IPS_SetHidden($this->GetIDForIdent('start_value_out'), true);
-            IPS_SetHidden($this->GetIDForIdent('start_kwh_in'), true);
+            //$this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
+            //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
+            //IPS_SetHidden($this->GetIDForIdent('start_value_out'), true);
+            //IPS_SetHidden($this->GetIDForIdent('start_kwh_in'), true);
+            $this->RegisterAttributeFloat("start_value_out", 0);
+            $this->RegisterAttributeFloat("start_kwh_in", 0);
         } 
         else 
         {
             $this->UnregisterVariable('jazfaktor');
-            $this->UnregisterVariable('start_value_out');
-            $this->UnregisterVariable('start_kwh_in');
+            //$this->UnregisterVariable('start_value_out');
+            //$this->UnregisterVariable('start_kwh_in');
         }
     }
 
@@ -636,8 +638,8 @@ class WPLUX extends IPSModule
         if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false)
         {
             $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
-            $start_kwh_in = $this->GetValue('start_kwh_in');
-            $start_value_out = $this->GetValue('start_value_out');
+            $start_kwh_in = $this->ReadAttributeFloat('start_kwh_in');
+            $start_value_out = $this->ReadAttributeFloat('start_value_out');
 
     
             $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$start_kwh_in." start_value_out: ".$start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
