@@ -137,8 +137,8 @@ class WPLUX extends IPSModule
             $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
             //$this->RegisterVariableFloat('start_value_out', 'Startwert Energie Out', '', 6);
             //$this->RegisterVariableFloat('start_kwh_in', 'Startwert Energie In', '', 6);
-            $this->start_kwh_in = null;
-            $this->start_value_out = null;
+            WPLUX::$start_kwh_in = null;
+            WPLUX::$start_value_out = null;
         } 
         else 
         {
