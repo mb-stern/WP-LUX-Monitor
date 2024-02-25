@@ -642,7 +642,7 @@ class WPLUX extends IPSModule
             $this->kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
             $this->value_out = $value_out;
 
-            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$kwh_in." value_out: ".$value_out."", 0);
+            $this->SendDebug("JAZ", "Variablen zur Berechnung: start_kwh_in: ".$this->start_kwh_in." start_value_out: ".$this->start_value_out." kWh_in: ".$this->kwh_in." value_out: ".$value_out."", 0);
             
             // Überprüfen, ob die Instanzvariablen bereits initialisiert wurden
             if ($this->start_kwh_in === null || $this->start_value_out === null)
@@ -653,8 +653,8 @@ class WPLUX extends IPSModule
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) Eingang: ".$this->start_kwh_in." Ausgang: ".$this->start_value_out."", 0);
             }
 
-            $kwh_in_Change = $kwh_in - $this->start_kwh_in;
-            $value_out_Change = $value_out - $this->start_value_out;
+            $kwh_in_Change = $this->kwh_in - $this->start_kwh_in;
+            $value_out_Change = $this->value_out - $this->start_value_out;
 
             if ($kwh_in_Change != 0) // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
             {
