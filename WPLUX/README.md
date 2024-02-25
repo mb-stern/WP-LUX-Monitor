@@ -24,9 +24,10 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 * Abfrage der Istwerte und Steurung der Luxtronik, welche in verschiedenen Wärmepumpen als Steuerung verbaut ist.
 * Es werden automatisch die gewünschten Variablen angelegt und die benötigten Profile erstellt.
-* Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name der Varaible/Wert manuell einzutragen.
+* Es werden jedoch nicht restlos alle Werte in Variablen aufgeschlüsselt, bei Bedarf ist daher der Name manuell einzutragen.
 * Ebenfalls werden je nach Wärmepumpen-Typ nicht alle Werte geliefert. Offensichtlich werden mit einer Software alle Wärmepumentypen abgedeckt.
 * Es können Variablen für die Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Diese Variablen zur Steuerung werden nicht live synchronisiert, sondern immer erst dann, wenn Änderungen am Konfigurationsformular vorgenommen wurden.
+* Die Anzeige des COP-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kW) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden.
 
 ### 2. Voraussetzungen
 
@@ -34,13 +35,13 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 ### 3. Software-Installation
 
-* Über den Module Store kann das Modul noch nicht installiert werden.
+* Über den Module Store kann das Modul unter dem Namen Luxtronik gefunden und installiert werden.
 * Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/Luxtronik
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
- Unter 'Instanz hinzufügen' kann das 'WPLUX Symcon'-Modul mithilfe des Schnellfilters gefunden werden.  
-	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
+- Unter 'Instanz hinzufügen' kann das 'Luxtronik'-Modul mithilfe des Schnellfilters gefunden werden.  
+- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
 
 __Konfigurationsseite__:
 
@@ -51,10 +52,9 @@ Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port mu
 Intervall       |   Intervall für das Update der Werte
 Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
+![image](https://github.com/mb-stern/Luxtronik/assets/95777848/a29e9039-9026-49e1-af82-0dac7ca72536)
 
-![image](https://github.com/mb-stern/Luxtronik/assets/95777848/888a824f-f4d2-41cb-9369-929b114f8fcf)
-
-![image](https://github.com/mb-stern/WPLUX-Symcon/assets/95777848/6c0ac90c-4524-4ad3-80ef-12eb0e133b37)
+![image](https://github.com/mb-stern/Luxtronik/assets/95777848/70a03389-272b-49b2-8ef4-81dbeee2633b)
 
 
 ### 5. Statusvariablen und Profile
@@ -101,6 +101,12 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 3.2 - Beta (20.02.2024)
+
+- Berechnung des COP jetzt durch auswählen einer externen Variable für die Eingangsleistung in kW möglich.
+- Weitere Anpassen der Debug- und der Fehler-Ausgabe.
+- Problem behoben, dass unter gewissen Umständen wurde eine falsche Laufzeit von -1h59m berechnet wurde.
 
 Version 3.1 (17.02.2024)
 
