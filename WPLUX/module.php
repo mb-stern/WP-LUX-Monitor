@@ -648,8 +648,6 @@ class WPLUX extends IPSModule
                 $this->start_kwh_in = $kwh_in;
                 $this->start_value_out = $value_out;
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren) ".$this->start_kwh_in." ".$this->start_value_out."", 0);
-                return $this->start_kwh_in;
-                return $this->start_value_out;
             }
 
             $kwh_in_Change = $kwh_in - $this->start_kwh_in;
@@ -666,6 +664,7 @@ class WPLUX extends IPSModule
                 $this->SetValue('jazfaktor', 0);
                 $this->SendDebug("JAZ", "Der JAZ-Faktor konnte noch nicht berechnet werden da die Wertänderung noch nicht stattgefunden hat", 0);
             } 
+            return array($this->start_kwh_in, $this->start_value_out);
         }
     }
 }
