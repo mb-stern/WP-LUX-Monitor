@@ -647,8 +647,8 @@ class WPLUX extends IPSModule
             {
                 //$this->SetValue('start_kwh_in', $kwh_in);
                 //$this->SetValue('start_value_out', $value_out);
-                $this->SetValue($start_kwh_in, $kwh_in);
-                $this->SetValue($start_value_out, $value_out);
+                $this->start_kwh_in = $kwh_in;
+                $this->start_value_out = $value_out);
             
                 $this->SendDebug("JAZ", "Variablen wurden abgeglichen (sollte nur einmalig passieren)", 0);
             }
