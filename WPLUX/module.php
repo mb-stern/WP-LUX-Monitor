@@ -639,7 +639,7 @@ class WPLUX extends IPSModule
             //$start_kwh_in = $this->GetValue('start_kwh_in');
             //$start_value_out = $this->GetValue('start_value_out');
             $start_kwh_in = $this->start_kwh_in;
-            $start_value_out = $this->$start_value_out;
+            $start_value_out = $this->start_value_out;
 
             $this->SendDebug("JAZ", "Eingangsenergie bei Reset: ".$start_kwh_in." Ausgangsenergie bei Reset: ".$start_value_out." Eingangsenergie aktuell: ".$kwh_in." Ausgangsenergie aktuell: ".$value_out."", 0);
     
