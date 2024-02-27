@@ -614,7 +614,7 @@ class WPLUX extends IPSModule
                 $cop = $value / $kw_in;
                 $this->SetValue('copfaktor', $cop);
                 
-                $this->SendDebug("COP", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
+                $this->SendDebug("COP-Faktor", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
             }
     }
 
