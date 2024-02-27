@@ -50,12 +50,12 @@
                 {
                     "type": "SelectVariable",
                     "name": "kwin",
-                    "caption": "Externe Variable zur Berechnung des COP (kW)."
+                    "caption": "Externe Variable zur Berechnung des COP (kW)"
                 },
                 {
                     "type": "SelectVariable",
                     "name": "kwhin",
-                    "caption": "Externe Variable zur Berechnung des JAZ (kWh)."
+                    "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
                 },
                 {
                     "type": "Button",

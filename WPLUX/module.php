@@ -101,6 +101,7 @@ class WPLUX extends IPSModule
         {
             $this->UnregisterVariable('KuehlungVariable');
         }
+
         if ($tempsetVisible) 
         {
             $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
@@ -112,6 +113,7 @@ class WPLUX extends IPSModule
         {
             $this->UnregisterVariable('TempsetVariable');
         }
+
         if ($wwsetVisible) 
         {
             $this->RegisterVariableFloat('WWsetVariable', 'Warmwasser Soll', 'WPLUX.Wset', 4);
@@ -160,7 +162,6 @@ class WPLUX extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->setParameter('Kuehlung', $Value);
-            $this->Update();
             $this->getParameter('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
         }
@@ -305,7 +306,7 @@ class WPLUX extends IPSModule
                 }
                 return round($value, 1); 
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Korrektur Laufzeit und umrechnen in Stunden und Minuten
+            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Laufzeit umrechnen in Stunden und Minuten
                 $time = $value;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
