@@ -152,8 +152,7 @@ class WPLUX extends IPSModule
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->setParameter('Heizung', $Value);
             $this->getParameter('Warmwasser');
-            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
-            $this->Update();  
+            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
     
         // Überprüfe, ob die Aktion von der 'KuehlungVariable' ausgelöst wurde
@@ -163,7 +162,6 @@ class WPLUX extends IPSModule
             $this->setParameter('Kuehlung', $Value);
             $this->getParameter('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
-            $this->Update();
         }
     
         // Überprüfe, ob die Aktion von der 'WarmwasserVariable' ausgelöst wurde
@@ -173,7 +171,6 @@ class WPLUX extends IPSModule
             $this->setParameter('Warmwasser', $Value);
             $this->getParameter('Warmwasser');
             $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);  
-            $this->Update();
         }
         if ($Ident == 'WWsetVariable') 
         {
@@ -181,7 +178,6 @@ class WPLUX extends IPSModule
             $this->setParameter('Wset', $Value);
             $this->getParameter('Wset');
             $this->SendDebug("Warmwasseranpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-            $this->Update();
         }
         if ($Ident == 'TempsetVariable') 
         {
@@ -189,7 +185,6 @@ class WPLUX extends IPSModule
             $this->setParameter('Tempset', $Value);
             $this->getParameter('Tempset');
             $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-            $this->Update();
         }
     }
     
