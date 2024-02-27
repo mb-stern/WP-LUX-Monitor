@@ -160,6 +160,7 @@ class WPLUX extends IPSModule
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->setParameter('Kuehlung', $Value);
+            $this->Update();
             $this->getParameter('Kuehlung');
             $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
         }
