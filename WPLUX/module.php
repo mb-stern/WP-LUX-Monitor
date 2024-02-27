@@ -655,7 +655,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function reset_jaz()
+    public function reset_jaz()
     {
         $this->WriteAttributeFloat('start_kwh_in', 0);
         $this->WriteAttributeFloat('start_value_out', 0);
