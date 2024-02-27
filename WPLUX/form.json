@@ -10,7 +10,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
+                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden. Durch auswählen von externen Variabeln der Versorgung kann der COP und der JAZ berechnet werden."
                 },
                 {
                     "type": "Label",

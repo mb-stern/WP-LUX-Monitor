@@ -146,45 +146,45 @@ class WPLUX extends IPSModule
     public function RequestAction($Ident, $Value) 
     {
 
-        // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion sendDataToSocket
+        // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
         if ($Ident == 'HeizungVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocket('Heizung', $Value);
+            $this->setParameter('Heizung', $Value);
             $this->getParameter('Warmwasser');
-            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
+            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
     
         // Überprüfe, ob die Aktion von der 'KuehlungVariable' ausgelöst wurde
         if ($Ident == 'KuehlungVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocket('Kuehlung', $Value);
+            $this->setParameter('Kuehlung', $Value);
             $this->getParameter('Kuehlung');
-            $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0); 
+            $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
         }
     
         // Überprüfe, ob die Aktion von der 'WarmwasserVariable' ausgelöst wurde
         if ($Ident == 'WarmwasserVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocket('Warmwasser', $Value);
+            $this->setParameter('Warmwasser', $Value);
             $this->getParameter('Warmwasser');
-            $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);  
+            $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);  
         }
         if ($Ident == 'WWsetVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocket('Wset', $Value);
+            $this->setParameter('Wset', $Value);
             $this->getParameter('Wset');
-            $this->SendDebug("Warmwasseranpassung", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
+            $this->SendDebug("Warmwasseranpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
         if ($Ident == 'TempsetVariable') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->sendDataToSocket('Tempset', $Value);
+            $this->setParameter('Tempset', $Value);
             $this->getParameter('Tempset');
-            $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion sendDataToSocket gesendet: ".$Value."", 0);   
+            $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
     }
     
@@ -448,7 +448,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function sendDataToSocket($type, $value)
+    private function setParameter($type, $value)
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -531,7 +531,6 @@ class WPLUX extends IPSModule
 
     private function getParameter($mode)
     {
-
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
         $wwcJavaPort = $this->ReadPropertyInteger('Port');
@@ -655,6 +654,7 @@ class WPLUX extends IPSModule
             } 
         }
     }
+    
     public function reset_jaz()
     {
         $this->WriteAttributeFloat('start_kwh_in', 0);
