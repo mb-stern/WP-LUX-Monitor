@@ -131,6 +131,7 @@ class WPLUX extends IPSModule
         if ($timerVisible) 
         {
             $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
+            IPS_SetEventScheduleGroup( $WochenplanEventID, 0, 127 ); //127 = täglich
         } 
         else 
         {
