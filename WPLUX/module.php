@@ -450,7 +450,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function setParameter($type, $value)
+    private function setParameter($type, $value) //3002 Werte senden
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -531,7 +531,7 @@ class WPLUX extends IPSModule
         socket_close($socket);
     }
 
-    private function getParameter($mode)
+    private function getParameter($mode) //3003 Werte holen
     {
         // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
         $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -604,7 +604,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function calc_cop($mode, $value)
+    private function calc_cop($mode, $value) //COP berechnen
     {
         //Berechnung des COP-Faktors
         $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
@@ -620,7 +620,7 @@ class WPLUX extends IPSModule
             }
     }
 
-    private function calc_jaz(string $mode, float $value_out)
+    private function calc_jaz(string $mode, float $value_out) //JAZ berechnen
     {
         //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
@@ -632,7 +632,7 @@ class WPLUX extends IPSModule
     
             $this->SendDebug("JAZ-Berechnung", "Berechnungsgrundlagen eingegangen: Verbrauch (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_kwh_in')." kWh, Produktion (zum Zeitpunkt des Reset): ".$this->ReadAttributeFloat('start_value_out')." kWh, Verbrauchs (gesamt): ".$kwh_in." kWh, Produktion (gesamt): ".$value_out." kWh", 0);
             
-            if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0)
+            if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0) //Erstmalige Synchronisatiin bei Startwert 0
             {
                 $this->WriteAttributeFloat('start_kwh_in', $kwh_in);
                 $this->WriteAttributeFloat('start_value_out', $value_out);
@@ -657,10 +657,15 @@ class WPLUX extends IPSModule
         }
     }
 
-    public function reset_jaz()
+    public function reset_jaz() //Startwerte der JAZ-Berechnung zurücksetzen
     {
         $this->WriteAttributeFloat('start_kwh_in', 0);
         $this->WriteAttributeFloat('start_value_out', 0);
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
+    }
+
+    private function time_set() //Zeitschaltprogramm 
+    {
+        
     }
 }
