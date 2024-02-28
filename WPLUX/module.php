@@ -606,7 +606,6 @@ class WPLUX extends IPSModule
 
     private function calc_cop($mode, $value) //COP berechnen
     {
-        //Berechnung des COP-Faktors
         $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
         $copVisible = $this->ReadPropertyFloat('kwin');
         
@@ -622,7 +621,6 @@ class WPLUX extends IPSModule
 
     private function calc_jaz(string $mode, float $value_out) //JAZ berechnen
     {
-        //Berechnung des JAZ-Faktors
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
     
