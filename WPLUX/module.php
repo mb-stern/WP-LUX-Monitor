@@ -21,6 +21,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
+        $this->RegisterPropertyBoolean('TimerVisible', false);
 
         $this->RegisterAttributeFloat("start_value_out", 0);
         $this->RegisterAttributeFloat("start_kwh_in", 0);
@@ -64,6 +65,7 @@ class WPLUX extends IPSModule
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
+        $timerVisible = $this->ReadPropertyBoolean('TimerVisible');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -126,9 +128,18 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('WWsetVariable');
         }
 
+        if ($timerVisible) 
+        {
+            $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
+        } 
+        else 
+        {
+            $this->UnregisterVariable('TimerVisible');
+        }
+
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 6);
         } 
         else 
         {
@@ -137,7 +148,7 @@ class WPLUX extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 7);
         } 
         else 
         {

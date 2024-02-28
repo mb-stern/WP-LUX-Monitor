@@ -48,6 +48,11 @@
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 {
+                    "type": "CheckBox",
+                    "name": "TimerVisible",
+                    "caption": "Timerfunktion aktivieren"
+                },
+                {
                     "type": "SelectVariable",
                     "name": "kwin",
                     "caption": "Externe Variable zur Berechnung des COP (kW)"
