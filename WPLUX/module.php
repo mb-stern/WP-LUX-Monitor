@@ -661,9 +661,4 @@ class WPLUX extends IPSModule
         $this->WriteAttributeFloat('start_value_out', 0);
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
-
-    private function time_set() //Zeitschaltprogramm 
-    {
-        
-    }
 }
