@@ -131,7 +131,7 @@ class WPLUX extends IPSModule
         if ($timerVisible) 
         {
             $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
-            $this->configureWeeklySchedule()
+            $this->configureWeeklySchedule();
         } 
         else 
         {
