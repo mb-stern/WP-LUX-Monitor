@@ -131,7 +131,7 @@ class WPLUX extends IPSModule
         if ($timerVisible) 
         {
             $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
-            //$this->configureWeeklySchedule();
+            $this->configureWeeklySchedule();
         } 
         else 
         {
@@ -673,5 +673,15 @@ class WPLUX extends IPSModule
         $this->WriteAttributeFloat('start_kwh_in', 0);
         $this->WriteAttributeFloat('start_value_out', 0);
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
+    }
+
+    public function configureWeeklySchedule() //Wochenplaner
+    {
+       //Wochenplan Ereignis erstellen
+        $EreignisID = IPS_CreateEvent(2);
+
+        //Anlegen von Gruppen
+        IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+        IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
     }
 }
