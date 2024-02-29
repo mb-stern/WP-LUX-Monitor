@@ -682,7 +682,7 @@ class WPLUX extends IPSModule
         //Anlegen von Gruppen
         IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
         IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
-        IPS_SetEventScheduleGroupPoint($id, 0, 0, 8, 0, 0, 229); //Um 8:00 Aktion mit ID 0 (=Warm) aufrufen
-        IPS_SetEventScheduleGroupPoint($id, 0, 1, 22, 30, 0, 230); //Um 22:30 Aktion mit ID 2 (=Öko) aufrufen
+        IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 8, 0, 0, 229); //Um 8:00 Aktion mit ID 0 (=Warm) aufrufen
+        IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 22, 30, 0, 230); //Um 22:30 Aktion mit ID 2 (=Öko) aufrufen
     }
 }
