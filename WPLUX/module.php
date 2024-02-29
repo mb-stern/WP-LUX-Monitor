@@ -677,26 +677,61 @@ class WPLUX extends IPSModule
 
     private function configureWeeklySchedule()
 {
-    // Array mit den Start- und Endzeit-IDs für jeden Wochentag
-    $schedule = array(
-        0 => array("start" => 247, "end" => 248), // Montag
-        1 => array("start" => 249, "end" => 250), // Dienstag
-        2 => array("start" => 251, "end" => 252), // Mittwoch
-        3 => array("start" => 253, "end" => 254), // Donnerstag
-        4 => array("start" => 255, "end" => 256), // Freitag
-        5 => array("start" => 257, "end" => 258), // Samstag
-        6 => array("start" => 259, "end" => 260)  // Sonntag
-    );
+    // Wochentage und zugehörige IDs für Start- und Endzeiten
+    $schedule = [
+        1 => ['start' => 247, 'end' => 248], // Montag
+        2 => ['start' => 249, 'end' => 250], // Dienstag
+        3 => ['start' => 251, 'end' => 252], // Mittwoch
+        4 => ['start' => 253, 'end' => 254], // Donnerstag
+        5 => ['start' => 255, 'end' => 256], // Freitag
+        6 => ['start' => 257, 'end' => 258], // Samstag
+        0 => ['start' => 259, 'end' => 260]  // Sonntag
+    ];
 
-    // Schleife über die Wochentage
     foreach ($schedule as $day => $times) {
-        // Start- und Endzeit im Unix-Format aus den Variablen lesen
-        $startTime = GetValue($times["start"]);
-        $endTime = GetValue($times["end"]);
+        $startVariableID = $times['start'];
+        $endVariableID = $times['end'];
 
-        // Start- und Endzeiten an die Funktion senden
-        $this->setParameter($times["start"], $startTime);
-        $this->setParameter($times["end"], $endTime);
+        $startTime = GetValue($startVariableID);
+        $endTime = GetValue($endVariableID);
+
+        // Unix-Zeit für Start- und Endzeiten konvertieren
+        $startTimeUnix = strtotime($startTime);
+        $endTimeUnix = strtotime($endTime);
+
+        // Start- und Endzeiten an die Funktion setParameter() senden
+        $this->setParameter($startVariableID, $startTimeUnix);
+        $this->setParameter($endVariableID, $endTimeUnix);
+
+        // Ereignis für den Wochenplan erstellen
+        $eventID = $this->createWeeklyEvent($day, $startVariableID, $endVariableID);
     }
 }
+
+private function createWeeklyEvent($day, $startVariableID, $endVariableID)
+{
+    $eventName = "Wochenplan für Tag $day";
+    $eventID = IPS_CreateEvent(1); // Ereignis für den Zeitplan erstellen
+    IPS_SetName($eventID, $eventName); // Ereignisnamen setzen
+    IPS_SetEventScheduleGroup($eventID, $day, 127); // Wochentag (Montag = 1) und Aktivierung an allen Uhrzeiten
+    IPS_SetEventActive($eventID, true); // Ereignis aktivieren
+
+    // Aktionen für Start- und Endzeiten hinzufügen
+    $this->addEventAction($eventID, $startVariableID, true); // Startzeit
+    $this->addEventAction($eventID, $endVariableID, false); // Endzeit
+
+    return $eventID;
+}
+
+private function addEventAction($eventID, $variableID, $isStart)
+{
+    $timestamp = IPS_GetEvent($eventID)['NextRun']; // Nächste Ausführungszeit des Ereignisses erhalten
+    $actionID = IPS_CreateEvent(0); // Aktion für das Ereignis erstellen
+    IPS_SetEventScript($actionID, "<?php \$this->setParameter($variableID, $timestamp); ?>"); // Skript für die Aktion setzen
+    IPS_SetEventActive($actionID, true); // Aktion aktivieren
+
+    // Aktion als Start- oder Endzeit festlegen
+    IPS_SetEventScheduleAction($eventID, 0, 1, $timestamp, $isStart); // Startzeit oder Endzeit setzen
+}
+
 }
