@@ -688,26 +688,25 @@ class WPLUX extends IPSModule
     }
 
     private function configureWeeklySchedule()
-{
-    $timerActionID = IPS_CreateEvent(1); // Erstellen eines Ereignisses für den Zeitplan
-    IPS_SetEventActive($timerActionID, false); // Deaktivieren des Ereignisses vor der Konfiguration
+    {
+        $timerActionID = IPS_CreateEvent(1); // Erstellen eines Ereignisses für den Zeitplan
+        IPS_SetEventActive($timerActionID, false); // Deaktivieren des Ereignisses vor der Konfiguration
 
-    // Hier den Wochenplan konfigurieren, z.B. für Montag
-    IPS_SetEventScheduleGroup($timerActionID, 0, 1); // Wochentag (Montag)
-    
-    // Beispiele für die Verwendung von Variablen-IDs für Start- und Endzeiten
-    $startVariableID = 223; // ID für die Startzeitvariable
-    $endVariableID = 224; // ID für die Endzeitvariable
-    
-    $startTime = GetValue($startVariableID); // Startzeit aus der Variablen lesen
-    $endTime = GetValue($endVariableID); // Endzeit aus der Variablen lesen
-    
-    // Start- und Endzeiten setzen
-    IPS_SetEventScheduleAction($timerActionID, 0, 0, $startTime, false); // Startzeit
-    IPS_SetEventScheduleAction($timerActionID, 0, 1, $endTime, true); // Endzeit
+        // Hier den Wochenplan konfigurieren, z.B. für Montag
+        IPS_SetEventCyclicTimeBounds($timerActionID, strtotime("Monday this week"), mktime(0, 0, 0, date("n"), date("j", strtotime("next Monday")), date("Y"))); // Montag
 
-    // Weiterhin für die anderen Wochentage konfigurieren...
+        // Beispiele für die Verwendung von Variablen-IDs für Start- und Endzeiten
+        $startVariableID = 223; // ID für die Startzeitvariable
+        $endVariableID = 224; // ID für die Endzeitvariable
+        
+        $startTime = GetValue($startVariableID); // Startzeit aus der Variablen lesen
+        $endTime = GetValue($endVariableID); // Endzeit aus der Variablen lesen
+        
+        // Start- und Endzeiten setzen
+        IPS_SetEventScheduleAction($timerActionID, 0, 0, $startTime, false); // Startzeit
+        IPS_SetEventScheduleAction($timerActionID, 0, 1, $endTime, true); // Endzeit
 
-    IPS_SetEventActive($timerActionID, true); // Aktivieren des Zeitplans
-}
+        IPS_SetEventActive($timerActionID, true); // Aktivieren des Zeitplans
+    }
+
 }
