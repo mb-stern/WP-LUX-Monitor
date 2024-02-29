@@ -136,6 +136,7 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('TimerVisible');
+            IPS_SetEventScheduleGroup($EreignisID, 1, 0);
             
         }
 
