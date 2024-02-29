@@ -133,6 +133,7 @@ class WPLUX extends IPSModule
             $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
             $WochenplanEventID = IPS_CreateEvent(2); //Zyklisches Ereignis
             IPS_SetEventScheduleGroup( $WochenplanEventID, 1, 1 ); //Gruppe mit der ID 1 erstellen mit 1 = Montag
+            IPS_SetEventActive($WochenplanEventID, true);             //Ereignis aktivieren
         } 
         else 
         {
