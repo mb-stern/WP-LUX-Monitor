@@ -131,13 +131,14 @@ class WPLUX extends IPSModule
         if ($timerVisible) 
         {
             $this->RegisterVariableFloat('TimerVisible', 'Timer', 'WPLUX.Wset', 5);
-            $this->configureWeeklySchedule();
-            //IPS_SetEventScheduleGroup( $WochenplanEventID, 1, 127 ); //Gruppe mit der ID 1 erstellen mit 127 = täglich
+            $WochenplanEventID = IPS_CreateEvent(1);
+            IPS_SetEventScheduleGroup( $WochenplanEventID, 1, 127 ); //Gruppe mit der ID 1 erstellen mit 127 = täglich
+            
         } 
         else 
         {
             $this->UnregisterVariable('TimerVisible');
-            //IPS_SetEventScheduleGroup($WochenplanEventID, 1, 0); //Gruppe mit der ID 1 wieder löschen
+            IPS_SetEventScheduleGroup($WochenplanEventID, 1, 0); //Gruppe mit der ID 1 wieder löschen
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
@@ -202,17 +203,6 @@ class WPLUX extends IPSModule
             $this->getParameter('Tempset');
             $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
-
-        // Hier können Sie die Aktion implementieren, um die Zeitvariablen zu aktualisieren,
-        // wenn sie sich ändern. Z.B. können Sie die Zeitvariablen setzen und den Zeitplan aktualisieren.
-        if ($ident == 'StartVariableID') {
-            SetValue($this->GetIDForIdent($ident), $value);
-            $this->configureWeeklySchedule();
-        } elseif ($ident == 'EndVariableID') {
-            SetValue($this->GetIDForIdent($ident), $value);
-            $this->configureWeeklySchedule();
-        }
-
     }
     
     public function Update()
@@ -686,27 +676,4 @@ class WPLUX extends IPSModule
         $this->WriteAttributeFloat('start_value_out', 0);
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
-
-    private function configureWeeklySchedule()
-    {
-        $timerActionID = IPS_CreateEvent(1); // Erstellen eines Ereignisses für den Zeitplan
-        IPS_SetEventActive($timerActionID, false); // Deaktivieren des Ereignisses vor der Konfiguration
-
-        // Hier den Wochenplan konfigurieren, z.B. für Montag
-        IPS_SetEventCyclicTimeBounds($timerActionID, strtotime("Monday this week"), mktime(0, 0, 0, date("n"), date("j", strtotime("next Monday")), date("Y"))); // Montag
-
-        // Beispiele für die Verwendung von Variablen-IDs für Start- und Endzeiten
-        $startVariableID = 223; // ID für die Startzeitvariable
-        $endVariableID = 224; // ID für die Endzeitvariable
-        
-        $startTime = GetValue($startVariableID); // Startzeit aus der Variablen lesen
-        $endTime = GetValue($endVariableID); // Endzeit aus der Variablen lesen
-        
-        // Start- und Endzeiten setzen
-        IPS_SetEventScheduleAction($timerActionID, 0, 0, $startTime, false); // Startzeit
-        IPS_SetEventScheduleAction($timerActionID, 0, 1, $endTime, true); // Endzeit
-
-        IPS_SetEventActive($timerActionID, true); // Aktivieren des Zeitplans
-    }
-
 }
