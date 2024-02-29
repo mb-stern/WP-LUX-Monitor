@@ -675,29 +675,28 @@ class WPLUX extends IPSModule
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
 
-    pprivate function configureWeeklySchedule()
-    {
-        // Schleife über die Wochentage (Montag = 0, Sonntag = 6)
-        for ($day = 0; $day < 7; $day++) {
-            $timerActionID = IPS_CreateEvent(1); // Erstellen eines Ereignisses für den Zeitplan
-            IPS_SetEventActive($timerActionID, false); // Deaktivieren des Ereignisses vor der Konfiguration
-    
-            // Wochentag im Zeitplan festlegen
-            IPS_SetEventScheduleGroup($timerActionID, 0, $day);
-    
-            // Beispiel-IDs für die Start- und Endzeit
-            $startID = 223; // ID für die Startzeit
-            $endID = 224; // ID für die Endzeit
-    
-            // Start- und Endzeiten im Unix-Format aus den Variablen lesen
-            $startTime = GetValue($startID);
-            $endTime = GetValue($endID);
-    
-            // Start- und Endzeiten an die entsprechenden IDs senden
-            $this->sendTimeToDevice($startID, $startTime);
-            $this->sendTimeToDevice($endID, $endTime);
-    
-            IPS_SetEventActive($timerActionID, true); // Aktivieren des Zeitplans
-        }
+    private function configureWeeklySchedule()
+{
+    // Array mit den Start- und Endzeit-IDs für jeden Wochentag
+    $schedule = array(
+        0 => array("start" => 247, "end" => 248), // Montag
+        1 => array("start" => 249, "end" => 250), // Dienstag
+        2 => array("start" => 251, "end" => 252), // Mittwoch
+        3 => array("start" => 253, "end" => 254), // Donnerstag
+        4 => array("start" => 255, "end" => 256), // Freitag
+        5 => array("start" => 257, "end" => 258), // Samstag
+        6 => array("start" => 259, "end" => 260)  // Sonntag
+    );
+
+    // Schleife über die Wochentage
+    foreach ($schedule as $day => $times) {
+        // Start- und Endzeit im Unix-Format aus den Variablen lesen
+        $startTime = GetValue($times["start"]);
+        $endTime = GetValue($times["end"]);
+
+        // Start- und Endzeiten an die Funktion senden
+        $this->setParameter($times["start"], $startTime);
+        $this->setParameter($times["end"], $endTime);
     }
+}
 }
