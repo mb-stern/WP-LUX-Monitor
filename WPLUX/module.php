@@ -679,14 +679,14 @@ class WPLUX extends IPSModule
        //Wochenplan Ereignis erstellen
         $EreignisID = IPS_CreateEvent(2);
         IPS_SetEventScheduleAction($EreignisID, 229, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        IPS_SetEventScheduleAction($EreignisID, 229, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
+        IPS_SetEventScheduleAction($EreignisID, 230, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
 
         //Anlegen von Gruppen
         IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
         IPS_SetEventScheduleGroup($EreignisID, 1, 96); //Sa + So (32 + 64)
         IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 8, 0, 0, 229); //Um 8:00 Aktion mit ID 0 (=Warm) aufrufen
-        IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 22, 30, 0, 229); //Um 22:30 Aktion mit ID 2 (=Öko) aufrufen
+        IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 22, 30, 0, 230); //Um 22:30 Aktion mit ID 2 (=Öko) aufrufen
         IPS_SetEventScheduleAction($EreignisID, 229, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        IPS_SetEventScheduleAction($EreignisID, 229, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
+        IPS_SetEventScheduleAction($EreignisID, 230, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
     }
 }
