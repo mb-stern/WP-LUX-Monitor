@@ -674,17 +674,16 @@ class WPLUX extends IPSModule
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
 
+    /*
     public function configureWeeklySchedule() //Wochenplaner
     {
        //Wochenplan Ereignis erstellen
         $EreignisID = IPS_CreateEvent(2);
-        IPS_SetEventScheduleAction($EreignisID, 229, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        //IPS_SetEventScheduleAction($EreignisID, 229, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
-        //IPS_SetEventScheduleAction($EreignisID, 230, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        IPS_SetEventScheduleAction($EreignisID, 230, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
+        IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
+        IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
 
 
-        //Anlegen von Gruppen
+        //Anlegen von Gruppen und den Ereigniszeipunkten
         IPS_SetEventScheduleGroup($EreignisID, 0, 31); //Ereignis ID 0, Mo - Fr (1 + 2 + 4 + 8 + 16)
         IPS_SetEventScheduleGroupPoint($EreignisID, 0, 0, 8, 0, 0, 229); //Um 8:00 Aktion mit ID 229
         IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, 15, 0, 0, 230); //Um 8:00 Aktion mit ID 230
@@ -694,4 +693,27 @@ class WPLUX extends IPSModule
         IPS_SetEventScheduleGroupPoint($EreignisID, 1, 1, 22, 30, 0, 230); //Um 22:30 Aktion mit ID 230
 
     }
+    */
+    public function configureWeeklySchedule() // Wochenplaner
+    {
+        // Wochenplan Ereignis erstellen
+        $EreignisID = IPS_CreateEvent(2);
+        
+        // Gruppen und Zeitpunkte definieren
+        $groups = [
+            ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
+            ['days' => [6, 7], 'actions' => [[10, 30, 0, 229], [22, 30, 0, 230]]] // Sa + So
+        ];
+        
+        foreach ($groups as $group) {
+            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+            IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
+            
+            foreach ($group['actions'] as $idx => $action) {
+                $unixTimestamp = mktime($action[0], $action[1], $action[2]);
+                IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $unixTimestamp, 0, 0, $action[3]);
+            }
+        }
+    }
+
 }
