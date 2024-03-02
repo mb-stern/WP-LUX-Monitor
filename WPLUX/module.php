@@ -167,7 +167,7 @@ class WPLUX extends IPSModule
         } 
         else 
         {
-            IPS_SetEventScheduleGroupPoint($EreignisID, 0, 1, -1, -1, -1, 0);
+            IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], 1, -1, -1, -1, 0);
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
