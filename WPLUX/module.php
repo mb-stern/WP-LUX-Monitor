@@ -734,7 +734,7 @@ class WPLUX extends IPSModule
     }
     */
     
-    private function configureWeeklySchedule($actionSettings) // Wochenplaner erstellen
+    private function configureWeeklySchedule() // Wochenplaner erstellen
 {
     // Überprüfen, ob der Wochenplan bereits existiert
     $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
@@ -745,13 +745,49 @@ class WPLUX extends IPSModule
         $WochenplanID = IPS_CreateEvent(2);
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
+        
+        // Aktionen für den Wochenplan definieren
+        $actionSettings = [
+            229 => [
+                'label' => "Ein Mo-Fr",
+                'color' => 0xFF0000,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0]]], // Mo - Fr
+                ]
+            ],
+            230 => [
+                'label' => "Aus Mo-Fr",
+                'color' => 0x0000FF,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[22, 0, 0]]], // Mo - Fr
+                ]
+            ],
+            235 => [
+                'label' => "Ein Sa+So",
+                'color' => 0xFF0001,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [6, 7], 'actions' => [[1, 0, 0]]], // Sa + So
+                ]
+            ],
+            236 => [
+                'label' => "Aus Sa+So",
+                'color' => 0x0000FE,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [6, 7], 'actions' => [[23, 0, 0]]], // Sa + So
+                ]
+            ],
+        ];
 
         foreach ($actionSettings as $actionID => $actionData) {
             IPS_SetEventScheduleActionEx($WochenplanID, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
-        }
-        
-        // Gruppen und Zeitpunkte definieren
-        foreach ($actionSettings as $actionID => $actionData) {
             foreach ($actionData['schedule'] as $dayGroup) {
                 $days = array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days']));
                 foreach ($dayGroup['actions'] as $idx => $action) {
@@ -766,6 +802,7 @@ class WPLUX extends IPSModule
         }
     }
 }
+
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
