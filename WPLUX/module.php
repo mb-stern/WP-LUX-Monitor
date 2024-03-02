@@ -750,6 +750,7 @@ class WPLUX extends IPSModule
         // Setze die erforderlichen Attribute für den Wochenplan
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
+        IPS_SetEventActive($eventID, true);
             
             // Gruppen und Zeitpunkte definieren
             $groups = 
@@ -758,10 +759,10 @@ class WPLUX extends IPSModule
                 ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 0, 236]]] // Sa + So
             ];
             
-            IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein (nur für Mo-Fr)", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 230, "Aus (nur für Mo-Fr)", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 235, "Ein (nur für Sa+So)", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 236, "Aus (nur für Sa+So)", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleAction($WochenplanID, 229, "Ein (nur für Mo-Fr)", 0xFF0000, '');
+            IPS_SetEventScheduleAction($WochenplanID, 230, "Aus (nur für Mo-Fr)", 0x0000FF, '');
+            IPS_SetEventScheduleAction($WochenplanID, 235, "Ein (nur für Sa+So)", 0xFF0001, '');
+            IPS_SetEventScheduleAction($WochenplanID, 236, "Aus (nur für Sa+So)", 0x0000FE, '');
             
             foreach ($groups as $group) 
             {
