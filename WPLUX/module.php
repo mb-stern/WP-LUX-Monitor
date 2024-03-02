@@ -716,7 +716,7 @@ class WPLUX extends IPSModule
             IPS_SetEventActive($eventId, true);
             IPS_SetEventScript($eventId, "FHT_SetTemperature(\$_IPS['TARGET'], {$action[3]});");
             IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $unixTimestamp, 0, 0, $eventId);
-            $this->SendDebug("Zeitwahl", "Ereignis-ID".$EreignisID." Group: ".$group['days'][0]." idx: ".$idx." UnixTime: ".$unixTimestamp." Event-ID: ".$eventId."", 0);
+            $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID." Group: ".$group['days'][0]." idx: ".$idx." UnixTime: ".$unixTimestamp." Event-ID: ".$eventId." Action-ID: ".$action[3]."", 0);
 
             
             // Setze die Unix-Zeit als Parameter für die entsprechende ID
