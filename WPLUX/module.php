@@ -192,6 +192,9 @@ class WPLUX extends IPSModule
                     foreach ($group['actions'] as $idx => $action) 
                     {
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
+                        // Setze die Unix-Zeit als Parameter für die entsprechende ID
+                        $this->setParameter('TimeID_' . $action[3], $value);
+                        $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                     }
                 }
             
