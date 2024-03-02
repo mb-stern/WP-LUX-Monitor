@@ -721,7 +721,7 @@ class WPLUX extends IPSModule
             
             // Ereigniszeitpunkt setzen (mit normaler Zeit)
             IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $eventId);
-            $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID." Group: ".$group['days'][0]." idx: ".$idx." Time: ".$action[0].":".$action[1]." Event-ID: ".$eventId." Action-ID: ".$action[3]."", 0);
+            $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID." id: ".$group['days'][0]." idx: ".$idx." Stunde: ".$action[0]." Minuten:".$action[1]." Event-ID: ".$eventId." Action-ID: ".$action[3]."", 0);
     
             
             // Setze die Unix-Zeit als Parameter für die entsprechende ID
