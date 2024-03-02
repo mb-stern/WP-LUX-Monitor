@@ -742,7 +742,7 @@ class WPLUX extends IPSModule
     if (!$WochenplanID) 
     {
         // Wochenplan erstellen
-        $WochenplanID = IPS_CreateEvent(1);
+        $WochenplanID = IPS_CreateEvent(2);
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
 
