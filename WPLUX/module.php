@@ -191,7 +191,7 @@ class WPLUX extends IPSModule
 
                     foreach ($group['actions'] as $idx => $action) 
                     {
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, -1, -1, -1, 0);
+                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, -1, -1, -1, $action[3]);
                     }
                 }
             
