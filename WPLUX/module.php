@@ -696,54 +696,52 @@ class WPLUX extends IPSModule
     */
     public function configureWeeklySchedule() // Wochenplaner
 {
-    // Überprüfen, ob WeekScheduleID gesetzt ist
-    if (!property_exists($this, 'WeekScheduleID')) {
-        $this->WeekScheduleID = 0; // Standardwert setzen, falls nicht vorhanden
-    }
+    $weekScheduleID = $this->ReadPropertyInteger("WeekScheduleID");
     
-    // Wenn WeekScheduleID bereits gesetzt ist, Wochenplan nicht erneut konfigurieren
-    if ($this->WeekScheduleID !== 0) {
-        return;
-    }
-    
-    // Wochenplan Ereignis erstellen
-    $EreignisID = IPS_CreateEvent(2);
-    
-    // Gruppen und Zeitpunkte definieren
-    $groups = 
-    [
-        ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
-        ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
-    ];
+    // Überprüfen, ob die Wocheplan-Variable bereits vorhanden ist
+    if ($weekScheduleID == 0 || !IPS_ObjectExists($weekScheduleID)) {
+        // Wochenplan-Ereignis erstellen
+        $EreignisID = IPS_CreateEvent(2);
 
-    IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "");
-    IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "");
-    IPS_SetEventScheduleAction($EreignisID, 235, "Ein", 0xFF0001, "");
-    IPS_SetEventScheduleAction($EreignisID, 236, "Aus", 0x0000FE, "");
-    
-    foreach ($groups as $group) {
-        $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-        IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
+        // Gruppen und Zeitpunkte definieren
+        $groups = 
+        [
+            ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
+            ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
+        ];
+
+        // Aktionen für den Wochenplan festlegen
+        IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "");
+        IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "");
+        IPS_SetEventScheduleAction($EreignisID, 235, "Ein", 0xFF0001, "");
+        IPS_SetEventScheduleAction($EreignisID, 236, "Aus", 0x0000FE, "");
+
+        // Wocheplan-Variable setzen
+        $this->WritePropertyInteger("WeekScheduleID", $EreignisID);
+
+        foreach ($groups as $group) {
+            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+            IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
+            
+            foreach ($group['actions'] as $idx => $action) {
+                // Konvertiere normale Zeit in Unix-Zeit
+                $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
+                
+                // Ereigniszeitpunkt setzen (mit normaler Zeit)
+                IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
+                $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
         
-        foreach ($group['actions'] as $idx => $action) {
-            // Konvertiere normale Zeit in Unix-Zeit
-            $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-            
-            // Ereigniszeitpunkt setzen (mit normaler Zeit)
-            IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-            $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
-    
-            
-            // Setze die Unix-Zeit als Parameter für die entsprechende ID
-            $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
-            $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$unixTimestamp."", 0);
-    
+                
+                // Setze die Unix-Zeit als Parameter für die entsprechende ID
+                $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
+                $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$unixTimestamp."", 0);
+        
+            }
         }
     }
-
-    // Setze WeekScheduleID auf das erstellte Ereignis
-    $this->WeekScheduleID = $EreignisID;
-    $this->WritePropertyInteger('WeekScheduleID', $EreignisID); // Schreibe WeekScheduleID in Eigenschaften
+    else {
+        $this->SendDebug("Wochenplan existiert bereits", "Die Wocheplan-Variable mit der ID $weekScheduleID existiert bereits im Objektbaum.", 0);
+    }
 }
 
 }
