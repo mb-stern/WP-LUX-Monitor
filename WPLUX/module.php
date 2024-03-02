@@ -180,7 +180,7 @@ class WPLUX extends IPSModule
         else 
         {
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
-            IPS_SetEventScheduleGroupPoint($WochenplanID, 0, 1, -1, -1, -1, 0);
+            IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'], 1, -1, -1, -1, 0);
             IPS_DeleteEvent($WochenplanID);
         }
 
