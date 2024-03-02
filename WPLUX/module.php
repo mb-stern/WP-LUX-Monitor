@@ -145,8 +145,8 @@ class WPLUX extends IPSModule
                 // Gruppen und Zeitpunkte definieren
                 $groups = 
                 [
-                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 1, 229], [23, 59, 59, 230]]], // Mo - Fr
-                    ['days' => [6, 7], 'actions' => [[0, 0, 1, 235], [23, 59, 59, 236]]] // Sa + So
+                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 00, 00, 230]]], // Mo - Fr
+                    ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 00, 00, 236]]] // Sa + So
                 ];
                 
                 IPS_SetEventScheduleAction($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "");
@@ -162,7 +162,6 @@ class WPLUX extends IPSModule
                     foreach ($group['actions'] as $idx => $action) 
                     {
                         // Konvertiere normale Zeit in Unix-Zeit
-                        date_default_timezone_set('Europe/Berlin');
                         $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
