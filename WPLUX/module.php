@@ -745,12 +745,10 @@ class WPLUX extends IPSModule
             $Wochenplan = IPS_CreateEvent(2);
             IPS_SetIdent($Wochenplan, 'Wochenplan');
             IPS_SetName($Wochenplan, 'Wochenplan');
-            
-            IPS_SetEventScheduleActionEx($Wochenplan, 230, "Aus Mo-Fr", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
             IPS_SetEventScheduleActionEx($Wochenplan, 229, "Ein Mo-Fr", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            
-            IPS_SetEventScheduleActionEx($Wochenplan, 236, "Aus Sa+So", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($Wochenplan, 230, "Aus Mo-Fr", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
             IPS_SetEventScheduleActionEx($Wochenplan, 235, "Ein Sa+So", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($Wochenplan, 236, "Aus Sa+So", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
 
             //Anlegen von Gruppen und den Ereigniszeipunkten
             IPS_SetEventScheduleGroup($Wochenplan, 0, 31); //Ereignis ID 0, Mo - Fr (1 + 2 + 4 + 8 + 16)
