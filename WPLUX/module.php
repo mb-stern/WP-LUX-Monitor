@@ -130,6 +130,7 @@ class WPLUX extends IPSModule
 
         if ($timerVisible) 
         {
+            $this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
             // Wochenplan Ereignis erstellen
             $EreignisID = IPS_CreateEvent(2);
             
@@ -167,6 +168,7 @@ class WPLUX extends IPSModule
         } 
         else 
         {
+            $this->UnregisterVariable('TimerVisible');
             IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], 1, -1, -1, -1, 0);
         }
 
