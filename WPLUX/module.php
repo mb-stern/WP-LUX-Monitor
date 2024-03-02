@@ -742,7 +742,7 @@ class WPLUX extends IPSModule
     if (!$Wochenplan) 
     {
         // Wochenplan erstellen
-        $Wochenplan = IPS_CreateEvent(2);
+        $Wochenplan = IPS_CreateEvent(1);
         IPS_SetIdent($Wochenplan, 'Wochenplan');
         IPS_SetName($Wochenplan, 'Wochenplan');
 
@@ -772,6 +772,14 @@ class WPLUX extends IPSModule
         }
     }
 }
+
+private function setParameter($parameter, $value)
+{
+    // Hier den Code einfügen, um den Parameter zu setzen
+    // Zum Beispiel:
+    // SetValue($parameter, $value);
+}
+
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
