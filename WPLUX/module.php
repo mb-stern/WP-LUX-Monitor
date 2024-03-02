@@ -127,36 +127,35 @@ class WPLUX extends IPSModule
         {
             $this->UnregisterVariable('WWsetVariable');
         }
+            // TimerVisible-Variable erstellen
+            $this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
 
-        if ($timerVisible) 
-        {
-            if ($Wochenplan) 
-            {
-                // TimerVisible-Variable erstellen
-                $this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
+            // Überprüfen, ob der Wochenplan bereits existiert
+            $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
 
+            if (!$WochenplanID) {
                 // Unterordner für den Wochenplan erstellen
-                $Wochenplan = IPS_CreateEvent(2);
-                IPS_SetParent($Wochenplan, $this->GetIDForIdent('TimerVisible'));
-                IPS_SetIdent($Wochenplan, 'Wochenplan');
-                IPS_SetName($Wochenplan, 'Wochenplan');
-
+                $WochenplanID = IPS_CreateEvent(2);
+                IPS_SetParent($WochenplanID, $this->GetIDForIdent('TimerVisible'));
+                IPS_SetIdent($WochenplanID, 'Wochenplan');
+                IPS_SetName($WochenplanID, 'Wochenplan');
+                
                 // Gruppen und Zeitpunkte definieren
                 $groups = 
                 [
                     ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
                     ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
                 ];
-
-                IPS_SetEventScheduleAction($Wochenplan, 229, "Ein", 0xFF0000, "");
-                IPS_SetEventScheduleAction($Wochenplan, 230, "Aus", 0x0000FF, "");
-                IPS_SetEventScheduleAction($Wochenplan, 235, "Ein", 0xFF0001, "");
-                IPS_SetEventScheduleAction($Wochenplan, 236, "Aus", 0x0000FE, "");
-
+                
+                IPS_SetEventScheduleAction($WochenplanID, 229, "Ein", 0xFF0000, "");
+                IPS_SetEventScheduleAction($WochenplanID, 230, "Aus", 0x0000FF, "");
+                IPS_SetEventScheduleAction($WochenplanID, 235, "Ein", 0xFF0001, "");
+                IPS_SetEventScheduleAction($WochenplanID, 236, "Aus", 0x0000FE, "");
+                
                 foreach ($groups as $group) 
                 {
                     $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-                    IPS_SetEventScheduleGroup($Wochenplan, $group['days'][0], $days);
+                    IPS_SetEventScheduleGroup($WochenplanID, $group['days'][0], $days);
                     
                     foreach ($group['actions'] as $idx => $action) 
                     {
@@ -164,8 +163,8 @@ class WPLUX extends IPSModule
                         $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                        IPS_SetEventScheduleGroupPoint($Wochenplan, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                        $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$Wochenplan.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
+                        IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
+                        $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
                     
                         
                         // Setze die Unix-Zeit als Parameter für die entsprechende ID
@@ -174,6 +173,7 @@ class WPLUX extends IPSModule
                     }
                 }
             }
+
         } 
         else 
         {
