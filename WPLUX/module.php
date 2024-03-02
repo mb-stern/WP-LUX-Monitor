@@ -786,15 +786,14 @@ class WPLUX extends IPSModule
     }
 }
 
-// Ereignis-Handler-Funktion, die aufgerufen wird, wenn sich der Wochenplan ändert
-function handleWeeklyScheduleChanges($eventID) {
-    // Code zum Abrufen des neuen Werts vom Wochenplan
-    // Hier den neuen Wert abrufen
-    $newValue = ...; 
+    function handleWeeklyScheduleChanges($eventID) 
+    {
+        // Code zum Abrufen des neuen Werts vom Wochenplan
+        $newValue = IPS_GetEvent($eventID)['Start']['Hour']; // Beispiel für den Abruf des neuen Werts
 
-    // Code zum Senden des neuen Werts an die setParameter-Funktion
-    $this->setParameter('TimeID_' . $eventID, $newValue);
-}
+        // Code zum Senden des neuen Werts an die setParameter-Funktion
+        $this->setParameter('TimeID_' . $eventID, $newValue);
+    }
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
