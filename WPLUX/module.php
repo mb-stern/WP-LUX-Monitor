@@ -182,8 +182,8 @@ class WPLUX extends IPSModule
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
             $groups = 
             [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [0, 0, 0, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [0, 00, 00, 236]]] // Sa + So
+                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [23, 59, 59, 230]]], // Mo - Fr
+                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 59, 236]]] // Sa + So
             ];
             foreach ($groups as $group) 
                 {
