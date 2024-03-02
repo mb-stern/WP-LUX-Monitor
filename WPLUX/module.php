@@ -35,9 +35,6 @@ class WPLUX extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        // Wochenplan-Konfiguration durchführen
-        $this->configureWeeklySchedule();
-
         //Variableprofile erstellen wenn nicht vorhanden
         require_once __DIR__ . '/variable_profile.php';
 
