@@ -736,49 +736,69 @@ class WPLUX extends IPSModule
     
     private function configureWeeklySchedule()
 {
-    // Wochenplan abrufen oder erstellen
+    // Überprüfen, ob der Wochenplan bereits existiert
     $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->InstanceID);
 
     if (!$WochenplanID) 
     {
         // Wochenplan erstellen
-        $WochenplanID = IPS_CreateEvent(2);
+        $WochenplanID = IPS_CreateEvent(1);
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
 
-        // Gruppen und Zeitpunkte definieren
-        $groups = [
-            ['days' => [1, 2, 3, 4, 5], 'actions' => []], // Mo - Fr
-            ['days' => [6, 7], 'actions' => []] // Sa + So
+        // Aktionen für den Wochenplan definieren
+        $actionSettings = [
+            229 => [
+                'label' => "Ein Mo-Fr",
+                'color' => 0xFF0000,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [1, 2, 3, 4, 5], 'time' => [2, 0, 0]],
+                ]
+            ],
+            230 => [
+                'label' => "Aus Mo-Fr",
+                'color' => 0x0000FF,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [1, 2, 3, 4, 5], 'time' => [22, 0, 0]],
+                ]
+            ],
+            235 => [
+                'label' => "Ein Sa+So",
+                'color' => 0xFF0001,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [6, 7], 'time' => [1, 0, 0]],
+                ]
+            ],
+            236 => [
+                'label' => "Aus Sa+So",
+                'color' => 0x0000FE,
+                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
+                'params' => [],
+                'schedule' => [
+                    ['days' => [6, 7], 'time' => [23, 0, 0]],
+                ]
+            ],
         ];
 
-        foreach ($groups as $group) 
-        {
-            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-            IPS_SetEventScheduleGroup($WochenplanID, $group['days'][0], $days);
-        }
-
-        // Vorhandene Aktionen löschen
-        $actions = IPS_GetEvent($WochenplanID)['ScheduleActions'];
-        foreach ($actions as $actionID) 
-        {
-            IPS_DeleteEventScheduleAction($WochenplanID, $actionID);
-        }
-
-        // Aktionen für den Wochenplan definieren und setzen
-        foreach ($groups as $group) 
-        {
-            foreach ($group['actions'] as $action) 
-            {
-                // Aktion hinzufügen
-                $actionID = IPS_SetEventScheduleAction($WochenplanID, $action['time'], $action['type'], $action['name'], $action['params']);
-
-                // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                $this->setParameter('TimeID_' . $actionID, $action['timestamp']);
+        foreach ($actionSettings as $actionID => $actionData) {
+            IPS_SetEventScheduleActionEx($WochenplanID, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
+            foreach ($actionData['schedule'] as $schedule) {
+                $days = array_sum(array_map(fn($day) => pow(2, $day-1), $schedule['days']));
+                $timestamp = mktime($schedule['time'][0], $schedule['time'][1], $schedule['time'][2], 1, 1, 1970);
+                $actionName = 'TimeID_' . $actionID;
+                $this->setParameter($actionName, $timestamp);
+                IPS_SetEventScheduleGroupPoint($WochenplanID, $schedule['days'][0], 0, $schedule['time'][0], $schedule['time'][1], $schedule['time'][2], $actionID);
             }
         }
     }
 }
+
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
