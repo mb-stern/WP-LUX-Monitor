@@ -705,6 +705,16 @@ class WPLUX extends IPSModule
         ['days' => [6, 7], 'actions' => [[10, 30, 0, 229], [22, 30, 0, 230]]] // Sa + So
     ];
     
+    // Lösche vorhandene Schaltpunkte mit ID 0 und 1
+    $existingEventId = @IPS_GetEventIDByName("Event_0", $EreignisID);
+    if ($existingEventId !== false) {
+        IPS_DeleteEvent($existingEventId);
+    }
+    $existingEventId = @IPS_GetEventIDByName("Event_1", $EreignisID);
+    if ($existingEventId !== false) {
+        IPS_DeleteEvent($existingEventId);
+    }
+    
     foreach ($groups as $group) {
         $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
         IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
