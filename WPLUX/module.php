@@ -726,6 +726,8 @@ class WPLUX extends IPSModule
             
             // Setze die Unix-Zeit als Parameter für die entsprechende ID
             $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
+            $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$unixTimestamp."", 0);
+    
         }
     }
 }
