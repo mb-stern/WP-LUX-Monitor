@@ -734,54 +734,38 @@ class WPLUX extends IPSModule
     }
     */
     
-    private function configureWeeklySchedule() // Wochenplaner erstellen
-    {
-        // Überprüfen, ob der Wochenplan bereits existiert
-        $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+    private function configureWeeklySchedule($actionSettings) // Wochenplaner erstellen
+{
+    // Überprüfen, ob der Wochenplan bereits existiert
+    $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
 
-        if (!$WochenplanID) 
-        {
-            
-            // Unterordner für den Wochenplan erstellen
-            $WochenplanID = IPS_CreateEvent(2);
-            //IPS_SetParent($WochenplanID, $this->GetIDForIdent('TimerVisible'));
-            IPS_SetIdent($WochenplanID, 'Wochenplan');
-            IPS_SetName($WochenplanID, 'Wochenplan');
-            
-            // Gruppen und Zeitpunkte definieren
-            $groups = 
-            [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 0, 0, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 0, 0, 236]]] // Sa + So
-            ];
-            
-            IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 230, "Aus Mo-Fr", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 235, "Ein Sa+So", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 236, "Aus Sa+So", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            
-            foreach ($groups as $group) 
-            {
-                $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-                IPS_SetEventScheduleGroup($WochenplanID, $group['days'][0], $days);
-                
-                foreach ($group['actions'] as $idx => $action) 
-                {
+    if (!$WochenplanID) 
+    {
+        // Unterordner für den Wochenplan erstellen
+        $WochenplanID = IPS_CreateEvent(2);
+        IPS_SetIdent($WochenplanID, 'Wochenplan');
+        IPS_SetName($WochenplanID, 'Wochenplan');
+
+        foreach ($actionSettings as $actionID => $actionData) {
+            IPS_SetEventScheduleActionEx($WochenplanID, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
+        }
+        
+        // Gruppen und Zeitpunkte definieren
+        foreach ($actionSettings as $actionID => $actionData) {
+            foreach ($actionData['schedule'] as $dayGroup) {
+                $days = array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days']));
+                foreach ($dayGroup['actions'] as $idx => $action) {
                     // Konvertiere normale Zeit in Unix-Zeit
                     $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-                    
                     // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    //IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                    $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
-                
-                    
+                    IPS_SetEventScheduleGroupPoint($WochenplanID, $dayGroup['days'][0], $idx, $action[0], $action[1], $action[2], $actionID);
                     // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                    $this->setParameter('TimeID_' . $action[3], $value);
-                    $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+                    $this->setParameter('TimeID_' . $actionID, $value);
                 }
             }
         }
     }
+}
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
