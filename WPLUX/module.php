@@ -139,10 +139,6 @@ class WPLUX extends IPSModule
             IPS_SetIdent($wochenplanID, 'Wochenplan');
             IPS_SetName($wochenplanID, 'Wochenplan');
 
-            // Wochenplan Ereignis erstellen
-            $EreignisID = IPS_CreateEvent(2);
-            IPS_SetParent($EreignisID, $wochenplanID);
-
             // Gruppen und Zeitpunkte definieren
             $groups = 
             [
@@ -178,7 +174,6 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('TimerVisible');
-            IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], 1, -1, -1, -1, 0);
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
