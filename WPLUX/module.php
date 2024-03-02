@@ -752,13 +752,17 @@ class WPLUX extends IPSModule
 
             //Anlegen von Gruppen und den Ereigniszeipunkten
             IPS_SetEventScheduleGroup($Wochenplan, 0, 31); //Ereignis ID 0, Mo - Fr (1 + 2 + 4 + 8 + 16)
-            IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 0, 2, 0, 0, 229); //Um 8:00 Aktion mit ID 229
-            IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 23, 15, 0, 0, 230); //Um 8:00 Aktion mit ID 230
+            //IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 0, 2, 0, 0, 229); //Um 8:00 Aktion mit ID 229
+            //IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 23, 15, 0, 0, 230); //Um 8:00 Aktion mit ID 230
             
             IPS_SetEventScheduleGroup($Wochenplan, 1, 96); //Ereignis ID 1, Sa + So (32 + 64)
-            IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 0, 1, 30, 0, 235); //Um 22:30 Aktion mit ID 229
-            IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 1, 23, 45, 0, 236); //Um 22:30 Aktion mit ID 230
-            }
+            //IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 0, 1, 30, 0, 235); //Um 22:30 Aktion mit ID 229
+            //IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 1, 23, 45, 0, 236); //Um 22:30 Aktion mit ID 230
+
+            // Setze die Unix-Zeit als Parameter für die entsprechende ID
+            $this->setParameter('TimeID_' . $action[3], $value);
+            $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+        }
     }
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
