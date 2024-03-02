@@ -600,25 +600,25 @@ class WPLUX extends IPSModule
                 case 'TimeID_229':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Einschalten
                     {
-                        $value += 3600; 
+                        $value; 
                     }
                     break;
                 case 'TimeID_230':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Ausschalten
                     {
-                        $value += 3600; 
+                        $value; 
                     }
                     break;
                 case 'TimeID_235':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Einschalten
                     {
-                        $value += 3600;
+                        $value;
                     }
                     break;
                 case 'TimeID_236':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Ausschalten
                     {
-                        $value += 3600; 
+                        $value; 
                     }
                     break;
                     default:
