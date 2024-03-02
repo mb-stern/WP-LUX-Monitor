@@ -696,25 +696,26 @@ class WPLUX extends IPSModule
     */
     public function configureWeeklySchedule() // Wochenplaner
 {
-    $weekScheduleID = $this->ReadPropertyInteger("WeekScheduleID");
+    // Überprüfen, ob WeekScheduleID gesetzt ist
+    if (!property_exists($this, 'WeekScheduleID')) {
+        $this->WeekScheduleID = 0; // Standardwert setzen, falls nicht vorhanden
+    }
     
-    // Überprüfen, ob der Wochenplan bereits erstellt wurde
-    if ($weekScheduleID != 0 && IPS_ObjectExists($weekScheduleID)) {
-        $this->SendDebug("Wochenplan", "Wochenplan existiert bereits", 0);
+    // Wenn WeekScheduleID bereits gesetzt ist, Wochenplan nicht erneut konfigurieren
+    if ($this->WeekScheduleID !== 0) {
         return;
     }
     
     // Wochenplan Ereignis erstellen
     $EreignisID = IPS_CreateEvent(2);
-    $this->WritePropertyInteger("WeekScheduleID", $EreignisID);
     
     // Gruppen und Zeitpunkte definieren
-    $groups = [
+    $groups = 
+    [
         ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
         ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
     ];
 
-    // Aktionen für den Wochenplan festlegen
     IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "");
     IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "");
     IPS_SetEventScheduleAction($EreignisID, 235, "Ein", 0xFF0001, "");
@@ -736,8 +737,13 @@ class WPLUX extends IPSModule
             // Setze die Unix-Zeit als Parameter für die entsprechende ID
             $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
             $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$unixTimestamp."", 0);
+    
         }
     }
+
+    // Setze WeekScheduleID auf das erstellte Ereignis
+    $this->WeekScheduleID = $EreignisID;
+    $this->WritePropertyInteger('WeekScheduleID', $EreignisID); // Schreibe WeekScheduleID in Eigenschaften
 }
 
 }
