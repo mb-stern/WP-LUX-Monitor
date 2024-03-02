@@ -695,14 +695,10 @@ class WPLUX extends IPSModule
     }
     */
     public function configureWeeklySchedule() // Wochenplaner
-{
-    $weekScheduleID = $this->ReadPropertyInteger("WeekScheduleID");
-    
-    // Überprüfen, ob die Wocheplan-Variable bereits vorhanden ist
-    if ($weekScheduleID == 0 || !IPS_ObjectExists($weekScheduleID)) {
-        // Wochenplan-Ereignis erstellen
+    {
+        // Wochenplan Ereignis erstellen
         $EreignisID = IPS_CreateEvent(2);
-
+        
         // Gruppen und Zeitpunkte definieren
         $groups = 
         [
@@ -710,15 +706,11 @@ class WPLUX extends IPSModule
             ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
         ];
 
-        // Aktionen für den Wochenplan festlegen
         IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "");
         IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "");
         IPS_SetEventScheduleAction($EreignisID, 235, "Ein", 0xFF0001, "");
         IPS_SetEventScheduleAction($EreignisID, 236, "Aus", 0x0000FE, "");
-
-        // Wocheplan-Variable setzen
-        $this->WritePropertyInteger("WeekScheduleID", $EreignisID);
-
+        
         foreach ($groups as $group) {
             $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
             IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
@@ -739,9 +731,4 @@ class WPLUX extends IPSModule
             }
         }
     }
-    else {
-        $this->SendDebug("Wochenplan existiert bereits", "Die Wocheplan-Variable mit der ID $weekScheduleID existiert bereits im Objektbaum.", 0);
-    }
-}
-
 }
