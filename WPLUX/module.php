@@ -719,10 +719,10 @@ class WPLUX extends IPSModule
             $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
             
             // Ereignis erstellen
-            $eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
-            IPS_SetEventCyclic($eventId, 0, 0, 0, 0, 0, 0); // Zyklisches Ereignis
-            IPS_SetEventActive($eventId, true);
-            IPS_SetEventScript($eventId, "FHT_SetTemperature(\$_IPS['TARGET'], {$action[3]});");
+            //$eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
+            //PS_SetEventCyclic($eventId, 0, 0, 0, 0, 0, 0); // Zyklisches Ereignis
+            //IPS_SetEventActive($eventId, true);
+            //IPS_SetEventScript($eventId, "FHT_SetTemperature(\$_IPS['TARGET'], {$action[3]});");
             
             // Ereigniszeitpunkt setzen (mit normaler Zeit)
             IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
