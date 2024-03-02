@@ -710,15 +710,8 @@ class WPLUX extends IPSModule
         IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
         
         foreach ($group['actions'] as $idx => $action) {
-            $eventId = @IPS_GetEventIDByName("Action_{$action[3]}", $EreignisID);
-            if ($eventId === false) {
-                // Schaltpunkt existiert nicht, erstelle ein neues Ereignis
-                $eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
-            } else {
-                // Schaltpunkt existiert bereits, kann aktualisiert werden
-            }
-            
             $unixTimestamp = mktime($action[0], $action[1], $action[2]);
+            $eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
             IPS_SetEventCyclic($eventId, 0, 0, 0, 0, 0, 0); // Zyklisches Ereignis
             IPS_SetEventActive($eventId, true);
             IPS_SetEventScript($eventId, "FHT_SetTemperature(\$_IPS['TARGET'], {$action[3]});");
