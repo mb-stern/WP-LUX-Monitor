@@ -138,11 +138,14 @@ class WPLUX extends IPSModule
 
             if (!$WochenplanID) 
             {
+                
+                /*
                 // Unterordner für den Wochenplan erstellen
                 $WochenplanID = IPS_CreateEvent(2);
                 IPS_SetParent($WochenplanID, $this->GetIDForIdent('TimerVisible'));
                 IPS_SetIdent($WochenplanID, 'Wochenplan');
                 IPS_SetName($WochenplanID, 'Wochenplan');
+                */
                 
                 // Gruppen und Zeitpunkte definieren
                 $groups = 
