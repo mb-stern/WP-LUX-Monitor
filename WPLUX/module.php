@@ -566,25 +566,49 @@ class WPLUX extends IPSModule
         // Auswahl senden
         switch ($type) 
         {
-            case 'Kuehlung':
-                $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
+                case 'Kuehlung':
+                    $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
+                    break;
+                case 'Tempset':
+                    if ($value >= -5 && $value <= 5) // Wert für Temperaturkorrektur
+                    {
+                        $value *= 10; 
+                    }
+                    break;
+                case 'Wset':
+                    if ($value >= 30 && $value <= 65) // Wert für Warmwasserkorrektur
+                    {
+                        $value *= 10; 
+                    }
                 break;
-            case 'Tempset':
-                if ($value >= -5 && $value <= 5) // Wert für Temperaturkorrektur
-                {
-                    $value *= 10; 
-                }
-                break;
-            case 'Wset':
-                if ($value >= 30 && $value <= 65) // Wert für Warmwasserkorrektur
-                {
-                    $value *= 10; 
-                }
-                break;
-            default:
-                // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
-                $value = ($value >= 0 && $value <= 4) ? $value : 0;
-                break;
+                case 'TimeID_229':
+                    if ($value >= -3600 && $value <= 82800) // Wert Mo-Fr Einschalten
+                    {
+                        $value; 
+                    }
+                    break;
+                case 'TimeID_230':
+                    if ($value >= -3600 && $value <= 82800) // Wert Mo-Fr Ausschalten
+                    {
+                        $value; 
+                    }
+                    break;
+                case 'TimeID_235':
+                    if ($value >= -3600 && $value <= 82800) // Wert Sa+So Einschalten
+                    {
+                        $value; 
+                    }
+                    break;
+                case 'TimeID_236':
+                    if ($value >= -3600 && $value <= 82800) // Wert Sa+So Ausschalten
+                    {
+                        $value; 
+                    }
+                    break;
+                    default:
+                    // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
+                    $value = ($value >= 0 && $value <= 4) ? $value : 0;
+                    break;
         }
 
         //Debug senden
