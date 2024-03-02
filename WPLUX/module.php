@@ -181,7 +181,8 @@ class WPLUX extends IPSModule
         } 
         else 
         {
-            $WochenplanID = @IPS_GetEventIDByName('Wochenplan');
+            $wochenplanName = 'Wochenplan';
+            $wochenplanID = @IPS_GetEventIDByName($wochenplanName);
 
             if (!$WochenplanID) 
             {
