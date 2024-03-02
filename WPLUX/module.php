@@ -785,30 +785,13 @@ class WPLUX extends IPSModule
 
 private function resetWeeklySchedule() // Wochenplaner erstellen
     {
-        $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
-        $groups = 
-        [
-            ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [23, 59, 59, 230]]], // Mo - Fr
-            ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 59, 236]]] // Sa + So
-        ];
-        foreach ($groups as $group) 
-        {
-            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+        
+    $this->setParameter(TimeID_229, -3600);
+    $this->setParameter(TimeID_230, -3600);
+    $this->setParameter(TimeID_235, -3600);
+    $this->setParameter(TimeID_236, -3600);
 
-            foreach ($group['actions'] as $idx => $action) 
-            {
-                // Konvertiere normale Zeit in Unix-Zeit
-                $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-                            
-                // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten zurück gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
-                        
-                // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                $this->setParameter('TimeID_' . $action[3], $value);
-                $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
-            }
-        }
-        IPS_DeleteEvent($WochenplanID);
+    //$this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+    IPS_DeleteEvent($WochenplanID);
     }
 }
