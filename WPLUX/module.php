@@ -179,6 +179,16 @@ class WPLUX extends IPSModule
         } 
         else 
         {
+            // Gruppen und Zeitpunkte definieren
+            $groups = 
+            [
+                ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 00, 00, 230]]], // Mo - Fr
+                ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 00, 00, 236]]] // Sa + So
+            ];
+            foreach ($groups as $group) 
+                {
+                    $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+                }
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
             IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'], 1, -1, -1, -1, 0);
             IPS_DeleteEvent($WochenplanID);
