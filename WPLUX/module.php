@@ -737,67 +737,37 @@ class WPLUX extends IPSModule
     private function configureWeeklySchedule()
 {
     // Überprüfen, ob der Wochenplan bereits existiert
-    $Wochenplan = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+    $Wochenplan = @IPS_GetEventIDByName('Wochenplan', $this->InstanceID);
 
     if (!$Wochenplan) 
     {
-        // Unterordner für den Wochenplan erstellen
-        $Wochenplan = IPS_CreateEvent(2);
+        // Wochenplan erstellen
+        $Wochenplan = IPS_CreateEvent(1);
         IPS_SetIdent($Wochenplan, 'Wochenplan');
         IPS_SetName($Wochenplan, 'Wochenplan');
-        
-        // Aktionen für den Wochenplan definieren
-        $actionSettings = [
-            229 => [
-                'label' => "Ein Mo-Fr",
-                'color' => 0xFF0000,
-                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
-                'params' => [],
-                'schedule' => [
-                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0]]], // Mo - Fr
-                ]
-            ],
-            230 => [
-                'label' => "Aus Mo-Fr",
-                'color' => 0x0000FF,
-                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
-                'params' => [],
-                'schedule' => [
-                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[22, 0, 0]]], // Mo - Fr
-                ]
-            ],
-            235 => [
-                'label' => "Ein Sa+So",
-                'color' => 0xFF0001,
-                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
-                'params' => [],
-                'schedule' => [
-                    ['days' => [6, 7], 'actions' => [[1, 0, 0]]], // Sa + So
-                ]
-            ],
-            236 => [
-                'label' => "Aus Sa+So",
-                'color' => 0x0000FE,
-                'target' => "{3644F802-C152-464A-868A-242C2A3DEC5C}",
-                'params' => [],
-                'schedule' => [
-                    ['days' => [6, 7], 'actions' => [[23, 0, 0]]], // Sa + So
-                ]
-            ],
+
+        // Gruppen und Zeitpunkte definieren
+        $groups = [
+            ['days' => [1, 2, 3, 4, 5], 'actions' => []], // Mo - Fr
+            ['days' => [6, 7], 'actions' => []] // Sa + So
         ];
 
-        foreach ($actionSettings as $actionID => $actionData) {
-            IPS_SetEventScheduleActionEx($Wochenplan, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
-            foreach ($actionData['schedule'] as $dayGroup) {
-                $groupID = IPS_SetEventScheduleGroup($Wochenplan, $dayGroup['days'][0], array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days'])));
-                foreach ($dayGroup['actions'] as $idx => $action) {
-                    // Konvertiere normale Zeit in Unix-Zeit
-                    $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-                    // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    IPS_SetEventScheduleGroupPoint($Wochenplan, $groupID, $idx, $action[0], $action[1], $action[2], $actionID);
-                    // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                    $this->setParameter('TimeID_' . $actionID, $value);
-                }
+        foreach ($groups as $group) 
+        {
+            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+            IPS_SetEventScheduleGroup($Wochenplan, $group['days'][0], $days);
+        }
+
+        // Aktionen für den Wochenplan definieren und setzen
+        foreach ($groups as $group) 
+        {
+            foreach ($group['actions'] as $action) 
+            {
+                // Aktion hinzufügen
+                $actionID = IPS_SetEventScheduleAction($Wochenplan, $action['time'], $action['type'], $action['name'], $action['params']);
+
+                // Setze die Unix-Zeit als Parameter für die entsprechende ID
+                $this->setParameter('TimeID_' . $actionID, $action['timestamp']);
             }
         }
     }
