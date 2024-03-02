@@ -166,7 +166,7 @@ class WPLUX extends IPSModule
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                        $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
+                        $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
                     
                         
                         // Setze die Unix-Zeit als Parameter für die entsprechende ID
@@ -196,7 +196,7 @@ class WPLUX extends IPSModule
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                        $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
+                        $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten zurück gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
                     
                         
                         // Setze die Unix-Zeit als Parameter für die entsprechende ID
