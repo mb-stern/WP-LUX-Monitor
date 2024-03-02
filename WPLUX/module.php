@@ -163,6 +163,7 @@ class WPLUX extends IPSModule
                     {
                         // Konvertiere normale Zeit in Unix-Zeit
                         $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
+                        $value += 3600;
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
@@ -191,7 +192,7 @@ class WPLUX extends IPSModule
 
                     foreach ($group['actions'] as $idx => $action) 
                     {
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, -1, -1, -1, 229);
+                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, -1, -1, -1, $action[3]);
                     }
                 }
             
