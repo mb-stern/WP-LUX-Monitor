@@ -158,7 +158,8 @@ class WPLUX extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
-
+        private function configureWeeklySchedule()
+        
         // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
         if ($Ident == 'HeizungVariable') 
         {
@@ -739,10 +740,10 @@ class WPLUX extends IPSModule
         // Versuchen, den Wochenplan zu finden
         $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
         
-        // Wenn der Wochenplan nicht existiert, erstellen Sie einen neuen
+        // Wenn der Wochenplan nicht existiert, erstelle einen neuen
         $WochenplanID = $WochenplanID ?: IPS_CreateEvent(2);
 
-        // Setzen Sie die erforderlichen Attribute für den Wochenplan
+        // Setze die erforderlichen Attribute für den Wochenplan
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
             
