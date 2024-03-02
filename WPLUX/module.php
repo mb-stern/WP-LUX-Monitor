@@ -695,27 +695,38 @@ class WPLUX extends IPSModule
     }
     */
     public function configureWeeklySchedule() // Wochenplaner
-    {
-        // Wochenplan Ereignis erstellen
-        $EreignisID = IPS_CreateEvent(2);
+{
+    // Wochenplan Ereignis erstellen
+    $EreignisID = IPS_CreateEvent(2);
+    
+    // Gruppen und Zeitpunkte definieren
+    $groups = [
+        ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
+        ['days' => [6, 7], 'actions' => [[10, 30, 0, 229], [22, 30, 0, 230]]] // Sa + So
+    ];
+    
+    foreach ($groups as $group) {
+        $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
+        IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
         
-        // Gruppen und Zeitpunkte definieren
-        $groups = [
-            ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
-            ['days' => [6, 7], 'actions' => [[10, 30, 0, 229], [22, 30, 0, 230]]] // Sa + So
-        ];
-        
-        foreach ($groups as $group) {
-            $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-            IPS_SetEventScheduleGroup($EreignisID, $group['days'][0], $days);
+        foreach ($group['actions'] as $idx => $action) {
+            $unixTimestamp = mktime($action[0], $action[1], $action[2]);
             
-            foreach ($group['actions'] as $idx => $action) {
-                $unixTimestamp = mktime($action[0], $action[1], $action[2]);
+            // Überprüfe, ob der Schaltpunkt bereits existiert
+            $existingPoint = IPS_GetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx);
+            
+            if ($existingPoint === false) {
+                // Schaltpunkt existiert nicht, erstelle einen neuen
                 IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $unixTimestamp, 0, 0, $action[3]);
-                
-                // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
+            } else {
+                // Schaltpunkt existiert, aktualisiere ihn
+                IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $unixTimestamp, 0, 0, $action[3], $existingPoint['ID']);
             }
+            
+            // Setze die Unix-Zeit als Parameter für die entsprechende ID
+            $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
         }
     }
+}
+
 }
