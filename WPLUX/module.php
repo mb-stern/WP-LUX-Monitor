@@ -734,7 +734,7 @@ class WPLUX extends IPSModule
     }
     */
     
-    private function configureWeeklySchedule() // Wochenplaner erstellen
+    private function configureWeeklySchedule()
 {
     // Überprüfen, ob der Wochenplan bereits existiert
     $Wochenplan = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
@@ -789,12 +789,12 @@ class WPLUX extends IPSModule
         foreach ($actionSettings as $actionID => $actionData) {
             IPS_SetEventScheduleActionEx($Wochenplan, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
             foreach ($actionData['schedule'] as $dayGroup) {
-                $days = array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days']));
+                $groupID = IPS_SetEventScheduleGroup($Wochenplan, $dayGroup['days'][0], array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days'])));
                 foreach ($dayGroup['actions'] as $idx => $action) {
                     // Konvertiere normale Zeit in Unix-Zeit
                     $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                     // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    IPS_SetEventScheduleGroupPoint($Wochenplan, $dayGroup['days'][0], $idx, $action[0], $action[1], $action[2], $actionID);
+                    IPS_SetEventScheduleGroupPoint($Wochenplan, $groupID, $idx, $action[0], $action[1], $action[2], $actionID);
                     // Setze die Unix-Zeit als Parameter für die entsprechende ID
                     $this->setParameter('TimeID_' . $actionID, $value);
                 }
@@ -802,7 +802,6 @@ class WPLUX extends IPSModule
         }
     }
 }
-
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
