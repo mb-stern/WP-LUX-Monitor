@@ -162,6 +162,7 @@ class WPLUX extends IPSModule
                     foreach ($group['actions'] as $idx => $action) 
                     {
                         // Konvertiere normale Zeit in Unix-Zeit
+                        date_default_timezone_set('Europe/Berlin');
                         $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
