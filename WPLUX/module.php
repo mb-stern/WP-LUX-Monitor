@@ -704,6 +704,11 @@ class WPLUX extends IPSModule
         ['days' => [1, 2, 3, 4, 5], 'actions' => [[8, 0, 0, 229], [15, 0, 0, 230]]], // Mo - Fr
         ['days' => [6, 7], 'actions' => [[10, 30, 0, 235], [22, 30, 0, 236]]] // Sa + So
     ];
+
+    IPS_SetEventScheduleAction($EreignisID, 229, "Ein", 0xFF0000, "");
+    IPS_SetEventScheduleAction($EreignisID, 230, "Aus", 0x0000FF, "");
+    IPS_SetEventScheduleAction($EreignisID, 235, "Ein", 0xFF0000, "");
+    IPS_SetEventScheduleAction($EreignisID, 236, "Aus", 0x0000FF, "");
     
     foreach ($groups as $group) {
         $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
