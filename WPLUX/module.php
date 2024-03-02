@@ -181,7 +181,7 @@ class WPLUX extends IPSModule
         } 
         else 
         {
-            $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+            $WochenplanID = @IPS_GetEventIDByName('Wochenplan');
 
             if (!$WochenplanID) 
             {
