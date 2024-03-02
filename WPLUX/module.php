@@ -736,15 +736,15 @@ class WPLUX extends IPSModule
     
     private function configureWeeklySchedule() // Wochenplaner erstellen
     {
-        // Überprüfen, ob der Wochenplan bereits existiert
+        // Versuchen, den Wochenplan zu finden
         $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+        
+        // Wenn der Wochenplan nicht existiert, erstellen Sie einen neuen
+        $WochenplanID = $WochenplanID ?: IPS_CreateEvent(2);
 
-            
-            // Unterordner für den Wochenplan erstellen
-            $WochenplanID = IPS_CreateEvent(2);
-            //IPS_SetParent($WochenplanID, $this->GetIDForIdent('TimerVisible'));
-            IPS_SetIdent($WochenplanID, 'Wochenplan');
-            IPS_SetName($WochenplanID, 'Wochenplan');
+        // Setzen Sie die erforderlichen Attribute für den Wochenplan
+        IPS_SetIdent($WochenplanID, 'Wochenplan');
+        IPS_SetName($WochenplanID, 'Wochenplan');
             
             // Gruppen und Zeitpunkte definieren
             $groups = 
