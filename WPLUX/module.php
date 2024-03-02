@@ -145,8 +145,8 @@ class WPLUX extends IPSModule
                 // Gruppen und Zeitpunkte definieren
                 $groups = 
                 [
-                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 00, 00, 230]]], // Mo - Fr
-                    ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 00, 00, 236]]] // Sa + So
+                    ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 0, 0, 230]]], // Mo - Fr
+                    ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 0, 0, 236]]] // Sa + So
                 ];
                 
                 IPS_SetEventScheduleAction($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "");
@@ -163,7 +163,6 @@ class WPLUX extends IPSModule
                     {
                         // Konvertiere normale Zeit in Unix-Zeit
                         $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-                        $value += 3600;
                         
                         // Ereigniszeitpunkt setzen (mit normaler Zeit)
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
@@ -183,8 +182,8 @@ class WPLUX extends IPSModule
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
             $groups = 
             [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 00, 00, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 00, 00, 236]]] // Sa + So
+                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [0, 0, 0, 230]]], // Mo - Fr
+                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [0, 00, 00, 236]]] // Sa + So
             ];
             foreach ($groups as $group) 
                 {
@@ -192,7 +191,7 @@ class WPLUX extends IPSModule
 
                     foreach ($group['actions'] as $idx => $action) 
                     {
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, -1, -1, -1, $action[3]);
+                        IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
                     }
                 }
             
@@ -600,25 +599,25 @@ class WPLUX extends IPSModule
                 case 'TimeID_229':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Einschalten
                     {
-                        $value; 
+                        $value += 3600; 
                     }
                     break;
                 case 'TimeID_230':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Ausschalten
                     {
-                        $value; 
+                        $value += 3600; 
                     }
                     break;
                 case 'TimeID_235':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Einschalten
                     {
-                        $value;
+                        $value += 3600;
                     }
                     break;
                 case 'TimeID_236':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Ausschalten
                     {
-                        $value; 
+                        $value += 3600; 
                     }
                     break;
                     default:
