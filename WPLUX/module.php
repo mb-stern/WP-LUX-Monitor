@@ -711,7 +711,7 @@ class WPLUX extends IPSModule
         
         foreach ($group['actions'] as $idx => $action) {
             // Konvertiere normale Zeit in Unix-Zeit
-            $unixTimestamp = gmmktime($action[0], $action[1], $action[2]);
+            $unixTimestamp = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
             
             // Ereignis erstellen
             $eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
