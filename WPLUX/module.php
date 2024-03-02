@@ -149,10 +149,10 @@ class WPLUX extends IPSModule
                     ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 59, 236]]] // Sa + So
                 ];
                 
-                IPS_SetEventScheduleAction($WochenplanID, 229, "Ein", 0xFF0000, "");
-                IPS_SetEventScheduleAction($WochenplanID, 230, "Aus", 0x0000FF, "");
-                IPS_SetEventScheduleAction($WochenplanID, 235, "Ein", 0xFF0001, "");
-                IPS_SetEventScheduleAction($WochenplanID, 236, "Aus", 0x0000FE, "");
+                IPS_SetEventScheduleAction($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "");
+                IPS_SetEventScheduleAction($WochenplanID, 230, "Aus Mo-Fr", 0x0000FF, "");
+                IPS_SetEventScheduleAction($WochenplanID, 235, "Ein Sa+So", 0xFF0001, "");
+                IPS_SetEventScheduleAction($WochenplanID, 236, "Aus Sa+So", 0x0000FE, "");
                 
                 foreach ($groups as $group) 
                 {
