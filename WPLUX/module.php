@@ -139,6 +139,8 @@ class WPLUX extends IPSModule
             if (!$WochenplanID) 
             {
                 $WochenplanID = IPS_CreateEvent(2);
+                IPS_SetIdent($WochenplanID, 'Wochenplan');
+                IPS_SetName($WochenplanID, 'Wochenplan');
 
                 /*
                 // Unterordner für den Wochenplan erstellen
