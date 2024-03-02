@@ -712,8 +712,10 @@ class WPLUX extends IPSModule
             foreach ($group['actions'] as $idx => $action) {
                 $unixTimestamp = mktime($action[0], $action[1], $action[2]);
                 IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $unixTimestamp, 0, 0, $action[3]);
+                
+                // Setze die Unix-Zeit als Parameter für die entsprechende ID
+                $this->setParameter('TimeID_' . $action[3], $unixTimestamp);
             }
         }
     }
-
 }
