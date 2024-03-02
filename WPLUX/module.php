@@ -747,7 +747,7 @@ class WPLUX extends IPSModule
         // Setze die erforderlichen Attribute für den Wochenplan
         IPS_SetIdent($WochenplanID, 'Wochenplan');
         IPS_SetName($WochenplanID, 'Wochenplan');
-        IPS_SetEventActive($eventID, true);
+        IPS_SetEventActive($WochenplanID, true);
             
             // Gruppen und Zeitpunkte definieren
             $groups = 
