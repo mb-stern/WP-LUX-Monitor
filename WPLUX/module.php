@@ -792,6 +792,7 @@ private function resetWeeklySchedule() // Wochenplaner erstellen
     $this->setParameter('TimeID_236', '-3600');
 
     //$this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+    $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
     IPS_DeleteEvent($WochenplanID);
     }
 }
