@@ -778,10 +778,10 @@ class WPLUX extends IPSModule
         }
 
         // Ereignis-Trigger für Änderungen im Wochenplan einrichten
-        $eventID = IPS_CreateEvent(1); // Ereignistyp 1 steht für "OnChange"
+        $eventID = IPS_CreateEvent(2); // Ereignistyp 1 steht für "OnChange"
         IPS_SetParent($eventID, $WochenplanID);
         IPS_SetIdent($eventID, 'WochenplanOnChange');
-        IPS_SetEventTrigger($eventID, 1, $WochenplanID); // 1 steht für "OnChange"
+        IPS_SetEventTrigger($eventID, 2, $WochenplanID); // 1 steht für "OnChange"
         IPS_SetEventScript($eventID, 'handleWeeklyScheduleChanges');
     }
 }
