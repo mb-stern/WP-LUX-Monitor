@@ -180,6 +180,7 @@ class WPLUX extends IPSModule
         else 
         {
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+            IPS_SetEventScheduleGroupPoint($WochenplanID, 0, 1, -1, -1, -1, 0);
             IPS_DeleteEvent($WochenplanID);
         }
 
@@ -582,25 +583,25 @@ class WPLUX extends IPSModule
                     }
                 break;
                 case 'TimeID_229':
-                    if ($value >= -3600 && $value <= 82800) // Wert Mo-Fr Einschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Einschalten
                     {
                         $value += 3600; 
                     }
                     break;
                 case 'TimeID_230':
-                    if ($value >= -3600 && $value <= 82800) // Wert Mo-Fr Ausschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Ausschalten
                     {
                         $value += 3600; 
                     }
                     break;
                 case 'TimeID_235':
-                    if ($value >= -3600 && $value <= 82800) // Wert Sa+So Einschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Einschalten
                     {
                         $value += 3600;
                     }
                     break;
                 case 'TimeID_236':
-                    if ($value >= -3600 && $value <= 82800) // Wert Sa+So Ausschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Ausschalten
                     {
                         $value += 3600; 
                     }
