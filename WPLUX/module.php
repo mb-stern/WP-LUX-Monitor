@@ -751,8 +751,8 @@ class WPLUX extends IPSModule
             // Gruppen und Zeitpunkte definieren
             $groups = 
             [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[2, 0, 0, 229], [22, 0, 0, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 0, 0, 236]]] // Sa + So
+                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [23, 59, 0, 230]]], // Mo - Fr
+                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 0, 236]]] // Sa + So
             ];
             
             IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
