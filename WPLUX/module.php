@@ -711,7 +711,7 @@ class WPLUX extends IPSModule
         
         foreach ($group['actions'] as $idx => $action) {
             // Konvertiere normale Zeit in Unix-Zeit
-            $unixTimestamp = mktime($action[0], $action[1], $action[2], date('n'), date('j'), date('Y'));
+            $unixTimestamp = mktime($action[0], $action[1], $action[2]);
             
             // Ereignis erstellen
             $eventId = IPS_CreateEvent(1); // Ereignis ohne Zeitplan
@@ -720,7 +720,7 @@ class WPLUX extends IPSModule
             IPS_SetEventScript($eventId, "FHT_SetTemperature(\$_IPS['TARGET'], {$action[3]});");
             
             // Ereigniszeitpunkt setzen (mit normaler Zeit)
-            IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], 0, $action[3]);
+            IPS_SetEventScheduleGroupPoint($EreignisID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
             $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$EreignisID." id: ".$group['days'][0]." idx: ".$idx." Stunde: ".$action[0]." Minuten: ".$action[1]." Event-ID: ".$eventId." Action-ID: ".$action[3]."", 0);
     
             
@@ -731,6 +731,5 @@ class WPLUX extends IPSModule
         }
     }
 }
-
 
 }
