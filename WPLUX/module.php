@@ -755,11 +755,10 @@ class WPLUX extends IPSModule
                 ['days' => [6, 7], 'actions' => [[1, 0, 0, 235], [23, 0, 0, 236]]] // Sa + So
             ];
             
-            IPS_SetEventScheduleAction($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "$this->setParameter('TimeID_' . $action[3], $value);");
-            IPS_SetEventScheduleAction($WochenplanID, 230, "Aus Mo-Fr", 0x0000FF, "$this->setParameter('TimeID_' . $action[3], $value);");
-            IPS_SetEventScheduleAction($WochenplanID, 235, "Ein Sa+So", 0xFF0001, "$this->setParameter('TimeID_' . $action[3], $value);");
-            IPS_SetEventScheduleAction($WochenplanID, 236, "Aus Sa+So", 0x0000FE, "$this->setParameter('TimeID_' . $action[3], $value);");
-            $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+            IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 230, "Aus Mo-Fr", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 235, "Ein Sa+So", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 236, "Aus Sa+So", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
             
             foreach ($groups as $group) 
             {
@@ -777,8 +776,8 @@ class WPLUX extends IPSModule
                 
                     
                     // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                    
-                    
+                    $this->setParameter('TimeID_' . $action[3], $value);
+                    $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                 }
             }
         }
