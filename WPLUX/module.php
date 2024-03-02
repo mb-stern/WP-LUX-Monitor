@@ -752,8 +752,8 @@ class WPLUX extends IPSModule
             // Gruppen und Zeitpunkte definieren
             $groups = 
             [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [23, 59, 0, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 0, 236]]] // Sa + So
+                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 0, 229], [23, 59, 59, 230]]], // Mo - Fr
+                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 59, 236]]] // Sa + So
             ];
             
             IPS_SetEventScheduleAction($WochenplanID, 229, "Ein (nur für Mo-Fr)", 0xFF0000, '');
@@ -781,6 +781,7 @@ class WPLUX extends IPSModule
                     $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                 }
             }
+            return $WochenplanID;
     }
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keine Einschränkungen
