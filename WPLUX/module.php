@@ -191,7 +191,14 @@ class WPLUX extends IPSModule
 
                     foreach ($group['actions'] as $idx => $action) 
                     {
+                        // Konvertiere normale Zeit in Unix-Zeit
+                        $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
+                        
+                        // Ereigniszeitpunkt setzen (mit normaler Zeit)
                         IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
+                        $this->SendDebug("Zeitwahl", "Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
+                    
+                        
                         // Setze die Unix-Zeit als Parameter für die entsprechende ID
                         $this->setParameter('TimeID_' . $action[3], $value);
                         $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
