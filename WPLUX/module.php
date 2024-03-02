@@ -739,8 +739,6 @@ class WPLUX extends IPSModule
         // Überprüfen, ob der Wochenplan bereits existiert
         $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
 
-        if (!$WochenplanID) 
-        {
             
             // Unterordner für den Wochenplan erstellen
             $WochenplanID = IPS_CreateEvent(2);
@@ -755,10 +753,10 @@ class WPLUX extends IPSModule
                 ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 0, 236]]] // Sa + So
             ];
             
-            IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein Mo-Fr", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 230, "Aus Mo-Fr", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 235, "Ein Sa+So", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
-            IPS_SetEventScheduleActionEx($WochenplanID, 236, "Aus Sa+So", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 229, "Ein (nur für Mo-Fr)", 0xFF0000, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 230, "Aus (nur für Mo-Fr)", 0x0000FF, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 235, "Ein (nur für Sa+So)", 0xFF0001, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
+            IPS_SetEventScheduleActionEx($WochenplanID, 236, "Aus (nur für Sa+So)", 0x0000FE, "{3644F802-C152-464A-868A-242C2A3DEC5C}", []);
             
             foreach ($groups as $group) 
             {
@@ -780,10 +778,9 @@ class WPLUX extends IPSModule
                     $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                 }
             }
-        }
     }
 
-    public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
+    public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keine Einschränkungen
     {
         
         $this->setParameter('TimeID_229', '-3600'); //Start und Endzeit auf 0 Uhr zurückgestellt
