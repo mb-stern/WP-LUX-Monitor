@@ -679,8 +679,8 @@ class WPLUX extends IPSModule
        //Wochenplan Ereignis erstellen
         $EreignisID = IPS_CreateEvent(2);
         IPS_SetEventScheduleAction($EreignisID, 229, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        IPS_SetEventScheduleAction($EreignisID, 229, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
-        IPS_SetEventScheduleAction($EreignisID, 230, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
+        //IPS_SetEventScheduleAction($EreignisID, 229, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
+        //IPS_SetEventScheduleAction($EreignisID, 230, "Warm", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
         IPS_SetEventScheduleAction($EreignisID, 230, "Kalt", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
 
 
