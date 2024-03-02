@@ -786,10 +786,10 @@ class WPLUX extends IPSModule
 private function resetWeeklySchedule() // Wochenplaner erstellen
     {
         
-    $this->setParameter(TimeID_229, -3600);
-    $this->setParameter(TimeID_230, -3600);
-    $this->setParameter(TimeID_235, -3600);
-    $this->setParameter(TimeID_236, -3600);
+    $this->setParameter('TimeID_229', '-3600');
+    $this->setParameter('TimeID_230', '-3600');
+    $this->setParameter('TimeID_235', '-3600');
+    $this->setParameter('TimeID_236', '-3600');
 
     //$this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
     IPS_DeleteEvent($WochenplanID);
