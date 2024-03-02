@@ -771,8 +771,8 @@ class WPLUX extends IPSModule
                     $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                     
                     // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                    $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
+                    //IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
+                    //$this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
                 
                     
                     // Setze die Unix-Zeit als Parameter für die entsprechende ID
@@ -782,7 +782,7 @@ class WPLUX extends IPSModule
             }
         }
     }
-    
+
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
         
