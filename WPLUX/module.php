@@ -131,7 +131,7 @@ class WPLUX extends IPSModule
         if ($timerVisible) 
         {
             // TimerVisible-Variable erstellen
-            $this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
+            //$this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
 
             // Überprüfen, ob der Wochenplan bereits existiert
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
@@ -184,7 +184,7 @@ class WPLUX extends IPSModule
         {
             $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
             IPS_DeleteEvent($WochenplanID);
-            $this->UnregisterVariable('TimerVisible');
+            //$this->UnregisterVariable('TimerVisible');
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
