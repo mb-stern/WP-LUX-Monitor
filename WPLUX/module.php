@@ -158,7 +158,7 @@ class WPLUX extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
-        private function configureWeeklySchedule()
+        $this->configureWeeklySchedule()
         
         // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
         if ($Ident == 'HeizungVariable') 
