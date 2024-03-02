@@ -726,7 +726,7 @@ class WPLUX extends IPSModule
         IPS_SetEventScheduleGroupPoint($EreignisID, 1, 1, 22, 30, 0, 230); //Um 22:30 Aktion mit ID 230
 
     }
-    */
+
     public function configureWeeklySchedule() // Wochenplaner
     {
         // Wochenplan Ereignis erstellen
@@ -764,4 +764,6 @@ class WPLUX extends IPSModule
             }
         }
     }
+
+    */
 }
