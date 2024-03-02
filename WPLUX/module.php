@@ -737,14 +737,14 @@ class WPLUX extends IPSModule
     private function configureWeeklySchedule() // Wochenplaner erstellen
 {
     // Überprüfen, ob der Wochenplan bereits existiert
-    $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+    $Wochenplan = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
 
-    if (!$WochenplanID) 
+    if (!$Wochenplan) 
     {
         // Unterordner für den Wochenplan erstellen
-        $WochenplanID = IPS_CreateEvent(2);
-        IPS_SetIdent($WochenplanID, 'Wochenplan');
-        IPS_SetName($WochenplanID, 'Wochenplan');
+        $Wochenplan = IPS_CreateEvent(2);
+        IPS_SetIdent($Wochenplan, 'Wochenplan');
+        IPS_SetName($Wochenplan, 'Wochenplan');
         
         // Aktionen für den Wochenplan definieren
         $actionSettings = [
@@ -787,14 +787,14 @@ class WPLUX extends IPSModule
         ];
 
         foreach ($actionSettings as $actionID => $actionData) {
-            IPS_SetEventScheduleActionEx($WochenplanID, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
+            IPS_SetEventScheduleActionEx($Wochenplan, $actionID, $actionData['label'], $actionData['color'], $actionData['target'], $actionData['params']);
             foreach ($actionData['schedule'] as $dayGroup) {
                 $days = array_sum(array_map(fn($day) => pow(2, $day-1), $dayGroup['days']));
                 foreach ($dayGroup['actions'] as $idx => $action) {
                     // Konvertiere normale Zeit in Unix-Zeit
                     $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
                     // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $dayGroup['days'][0], $idx, $action[0], $action[1], $action[2], $actionID);
+                    IPS_SetEventScheduleGroupPoint($Wochenplan, $dayGroup['days'][0], $idx, $action[0], $action[1], $action[2], $actionID);
                     // Setze die Unix-Zeit als Parameter für die entsprechende ID
                     $this->setParameter('TimeID_' . $actionID, $value);
                 }
