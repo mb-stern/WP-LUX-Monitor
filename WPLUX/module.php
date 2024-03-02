@@ -130,10 +130,18 @@ class WPLUX extends IPSModule
 
         if ($timerVisible) 
         {
+            // TimerVisible-Variable erstellen
             $this->RegisterVariableFloat('TimerVisible', 'Timer aktiv', '', 5);
-            
+
+            // Unterordner für den Wochenplan erstellen
+            $wochenplanID = IPS_CreateEvent(1);
+            IPS_SetParent($wochenplanID, $this->GetIDForIdent('TimerVisible'));
+            IPS_SetIdent($wochenplanID, 'Wochenplan');
+            IPS_SetName($wochenplanID, 'Wochenplan');
+
             // Wochenplan Ereignis erstellen
             $EreignisID = IPS_CreateEvent(2);
+            IPS_SetParent($EreignisID, $wochenplanID);
 
             // Gruppen und Zeitpunkte definieren
             $groups = 
@@ -166,7 +174,6 @@ class WPLUX extends IPSModule
 
                 }
             }
-
         } 
         else 
         {
