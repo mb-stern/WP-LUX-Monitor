@@ -130,11 +130,11 @@ class WPLUX extends IPSModule
             
         if ($timerVisible) 
         {
-            $this->configureWeeklySchedule()
+            $this->configureWeeklySchedule();
         } 
         else 
         {
-            $this->resetWeeklySchedule()
+            $this->resetWeeklySchedule();
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
