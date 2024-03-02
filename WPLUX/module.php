@@ -786,13 +786,15 @@ class WPLUX extends IPSModule
 private function resetWeeklySchedule() // Wochenplaner erstellen
     {
         
-    $this->setParameter('TimeID_229', '-3600');
-    $this->setParameter('TimeID_230', '-3600');
-    $this->setParameter('TimeID_235', '-3600');
-    $this->setParameter('TimeID_236', '-3600');
-
-    //$this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
-    $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
-    IPS_DeleteEvent($WochenplanID);
+        $this->setParameter('TimeID_229', '-3600'); //Start und Endzeit auf 0 Uhr zurückgestellt
+        $this->setParameter('TimeID_230', '-3600');
+        $this->setParameter('TimeID_235', '-3600');
+        $this->setParameter('TimeID_236', '-3600');
+        $this->SendDebug("Timer deaktiviert", "Alle Timer wurden auf 0 zurück gesetzt, das Heizprogramm hat keine Einschränkung", 0);
+        
+        $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
+        IPS_DeleteEvent($WochenplanID);
+        $this->SendDebug("Wochenplan gelöscht", "Der Wochnplan wurde gelöscht", 0);
+    
     }
 }
