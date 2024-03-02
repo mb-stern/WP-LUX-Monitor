@@ -773,14 +773,6 @@ class WPLUX extends IPSModule
     }
 }
 
-private function setParameter($parameter, $value)
-{
-    // Hier den Code einfügen, um den Parameter zu setzen
-    // Zum Beispiel:
-    // SetValue($parameter, $value);
-}
-
-
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keien Einschränkungen
     {
         
