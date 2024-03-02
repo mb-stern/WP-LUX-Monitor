@@ -760,8 +760,8 @@ class WPLUX extends IPSModule
             //IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 1, 23, 45, 0, 236); //Um 22:30 Aktion mit ID 230
 
             // Setze die Unix-Zeit als Parameter für die entsprechende ID
-            $this->setParameter('TimeID_' . $action[3], $value);
-            $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
+            //$this->setParameter('TimeID_' . $action[3], $value);
+            //$this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
         }
     }
 
