@@ -158,6 +158,9 @@ class WPLUX extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
+        
+        $this->configureWeeklySchedule();
+        
         // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
         if ($Ident == 'HeizungVariable') 
         {
@@ -293,9 +296,6 @@ class WPLUX extends IPSModule
                 $this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
-       
-        $this->configureWeeklySchedule()
-        
     }
     
     private function convertValueBasedOnID($value, $id)
