@@ -181,7 +181,7 @@ class WPLUX extends IPSModule
         } 
         else 
         {
-            IPS_Delete($Wochenplan);
+            IPS_DeleteEvent($WochenplanID);
             $this->UnregisterVariable('TimerVisible');
         }
 
