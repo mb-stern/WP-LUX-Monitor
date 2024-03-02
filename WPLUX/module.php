@@ -794,7 +794,7 @@ class WPLUX extends IPSModule
                 $actionName = 'TimeID_' . $actionID;
                 $this->setParameter($actionName, $timestamp);
                 IPS_SetEventScheduleGroupPoint($WochenplanID, $schedule['days'][0], 0, $schedule['time'][0], $schedule['time'][1], $schedule['time'][2], $actionID);
-                $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$schedule['days'][0].", idx: 0"", Stunde: ".$schedule['time'][0].", Minuten: ".$schedule['time'][1].", Sekunden: ".$schedule['time'][2].", Action-ID: ".$actionID."", 0);
+                //$this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$schedule['days'][0].", idx: 0"", Stunde: ".$schedule['time'][0].", Minuten: ".$schedule['time'][1].", Sekunden: ".$schedule['time'][2].", Action-ID: ".$actionID."", 0);
                
             }
         }
