@@ -35,6 +35,9 @@ class WPLUX extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
+        // Wochenplan-Konfiguration durchführen
+        $this->configureWeeklySchedule();
+
         //Variableprofile erstellen wenn nicht vorhanden
         require_once __DIR__ . '/variable_profile.php';
 
@@ -780,7 +783,6 @@ class WPLUX extends IPSModule
                     $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                 }
             }
-            $this->applyChanges();
     }
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keine Einschränkungen
