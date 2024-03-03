@@ -158,7 +158,7 @@ class WPLUX extends IPSModule
                 '227' => 'Woche von Set 3', '228' => 'Woche bis Set 3'
             ];
             
-            $position = -60;
+            $position = -60; //ab dieser Position im Objektbaum
 
             foreach ($ids as $id => $name) 
             {
@@ -188,7 +188,7 @@ class WPLUX extends IPSModule
                 '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1', '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2', '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
             ];
 
-            $position = -54;
+            $position = -54; //ab dieser Position im Objektbaum
             
             foreach ($ids as $id => $name) 
             {
@@ -214,16 +214,16 @@ class WPLUX extends IPSModule
         if ($timerDayVisible) 
         {
             $ids = [
-                '241' => 'Mo-Fr von Set 1', '242' => 'Mo-Fr bis Set 1', '243' => 'Mo-Fr von Set 2', '244' => 'Mo-Fr bis Set 2', '245' => 'Mo-Fr von Set 3', '246' => 'Mo-Fr bis Set 3',
-                '247' => 'Sa+So von Set 1', '248' => 'Sa+So bis Set 1', '249' => 'Sa+So von Set 2', '250' => 'Sa+So bis Set 2', '251' => 'Sa+So von Set 3', '252' => 'Sa+So bis Set 3',
-                '253' => 'Mo-Fr von Set 1', '254' => 'Mo-Fr bis Set 1', '255' => 'Mo-Fr von Set 2', '256' => 'Mo-Fr bis Set 2', '257' => 'Mo-Fr von Set 3', '258' => 'Mo-Fr bis Set 3',
-                '259' => 'Sa+So von Set 1', '260' => 'Sa+So bis Set 1', '261' => 'Sa+So von Set 2', '262' => 'Sa+So bis Set 2', '263' => 'Sa+So von Set 3', '264' => 'Sa+So bis Set 3',
-                '265' => 'Mo-Fr von Set 1', '266' => 'Mo-Fr bis Set 1', '267' => 'Mo-Fr von Set 2', '268' => 'Mo-Fr bis Set 2', '269' => 'Mo-Fr von Set 3', '270' => 'Mo-Fr bis Set 3',
-                '271' => 'Sa+So von Set 1', '272' => 'Sa+So bis Set 1', '273' => 'Sa+So von Set 2', '274' => 'Sa+So bis Set 2', '275' => 'Sa+So von Set 3', '276' => 'Sa+So bis Set 3',
-                '277' => 'Mo-Fr von Set 1', '278' => 'Mo-Fr bis Set 1', '279' => 'Mo-Fr von Set 2', '280' => 'Mo-Fr bis Set 2', '281' => 'Mo-Fr von Set 3', '282' => 'Mo-Fr bis Set 3'
+                '241' => 'Sonntag von Set 1', '242' => 'Sonntag bis Set 1', '243' => 'Sonntag von Set 2', '244' => 'Sonntag bis Set 2', '245' => 'Sonntag von Set 3', '246' => 'Sonntag bis Set 3',
+                '247' => 'Montag von Set 1', '248' => 'Montag bis Set 1', '249' => 'Montag von Set 2', '250' => 'Montag bis Set 2', '251' => 'Montag von Set 3', '252' => 'Montag bis Set 3',
+                '253' => 'Dienstag von Set 1', '254' => 'Dienstag bis Set 1', '255' => 'Dienstag von Set 2', '256' => 'Dienstag bis Set 2', '257' => 'Dienstag von Set 3', '258' => 'Dienstag bis Set 3',
+                '259' => 'Mittwoch von Set 1', '260' => 'Mittwoch bis Set 1', '261' => 'Mittwoch von Set 2', '262' => 'Mittwoch bis Set 2', '263' => 'Mittwoch von Set 3', '264' => 'Mittwoch bis Set 3',
+                '265' => 'Donnerstag von Set 1', '266' => 'Donnerstag bis Set 1', '267' => 'Donnerstag von Set 2', '268' => 'Donnerstag bis Set 2', '269' => 'Donnerstag von Set 3', '270' => 'Donnerstag bis Set 3',
+                '271' => 'Freitag von Set 1', '272' => 'Freitag bis Set 1', '273' => 'Freitag von Set 2', '274' => 'Freitag bis Set 2', '275' => 'Freitag von Set 3', '276' => 'Freitag bis Set 3',
+                '277' => 'Samstag von Set 1', '278' => 'Samstag bis Set 1', '279' => 'Samstag von Set 2', '280' => 'Samstag bis Set 2', '281' => 'Samstag von Set 3', '282' => 'Samstag bis Set 3'
             ];
 
-            $position = -42;
+            $position = -42; //ab dieser Position im Objektbaum
             
             foreach ($ids as $id => $name) 
             {
@@ -249,90 +249,28 @@ class WPLUX extends IPSModule
     }
 
     public function RequestAction($Ident, $Value) 
-    {
-        // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
-        if ($Ident == 'HeizungVariable') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('Heizung', $Value);
-            $this->getParameter('Warmwasser');
-            $this->SendDebug("Heizfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-    
-        // Überprüfe, ob die Aktion von der 'KuehlungVariable' ausgelöst wurde
-        if ($Ident == 'KuehlungVariable') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('Kuehlung', $Value);
-            $this->getParameter('Kuehlung');
-            $this->SendDebug("Kühlfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0); 
-        }
-    
-        // Überprüfe, ob die Aktion von der 'WarmwasserVariable' ausgelöst wurde
-        if ($Ident == 'WarmwasserVariable') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('Warmwasser', $Value);
-            $this->getParameter('Warmwasser');
-            $this->SendDebug("Warmwasserfunktion", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);  
-        }
-        if ($Ident == 'WWsetVariable') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('Wset', $Value);
-            $this->getParameter('Wset');
-            $this->SendDebug("Warmwasseranpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == 'TempsetVariable') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('Tempset', $Value);
-            $this->getParameter('Tempset');
-            $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '223') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('223', $Value);
-            $this->getParameter('223');
-            $this->SendDebug("Zeit Woche 1 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '224') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('224', $Value);
-            $this->getParameter('224');
-            $this->SendDebug("Zeit Woche 1 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '225') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('225', $Value);
-            $this->getParameter('225');
-            $this->SendDebug("Zeit Woche 2 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '226') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('226', $Value);
-            $this->getParameter('226');
-            $this->SendDebug("Zeit Woche 2 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '227') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('227', $Value);
-            $this->getParameter('227');
-            $this->SendDebug("Zeit Woche 3 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
-        if ($Ident == '228') 
-        {
-            // Rufe die Funktion auf und übergebe den neuen Wert
-            $this->setParameter('228', $Value);
-            $this->getParameter('228');
-            $this->SendDebug("Zeit Woche 3 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
-        }
+{
+    $parameterMapping = [
+        'HeizungVariable' => 'Heizung',
+        'KuehlungVariable' => 'Kuehlung',
+        'WarmwasserVariable' => 'Warmwasser',
+        'WWsetVariable' => 'Wset',
+        'TempsetVariable' => 'Tempset',
+        '223' => '223',
+        '224' => '224',
+        '225' => '225',
+        '226' => '226',
+        '227' => '227',
+        '228' => '228'
+    ];
+
+    if (array_key_exists($Ident, $parameterMapping)) {
+        $parameterName = $parameterMapping[$Ident];
+        $this->setParameter($parameterName, $Value);
+        $this->getParameter($parameterName);
+        $this->SendDebug("Parameter $parameterName", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
     }
+}
     
     public function Update()
     {
