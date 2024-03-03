@@ -363,8 +363,17 @@ class WPLUX extends IPSModule
             {
                 // Variable löschen, falls sie in dieser Funktion erstellt wurde
                 $varIdent = $java_dataset[$i];
-                if (in_array($varIdent, array_column($idListe, 'ident'))) 
-                {
+
+                // Überprüfen, ob die Variable in dieser Funktion erstellt wurde
+                $isCreatedInThisFunction = false;
+                foreach ($idListe as $item) {
+                    if ($item['ident'] === $varIdent) {
+                        $isCreatedInThisFunction = true;
+                        break;
+                    }
+                }
+
+                if ($isCreatedInThisFunction) {
                     //$this->DeleteVariableIfExists($varIdent);
                     $this->UnregisterVariable($varIdent);
                 }
