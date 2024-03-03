@@ -162,10 +162,10 @@ class WPLUX extends IPSModule
 
             foreach ($ids as $id => $name) 
             {
-                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->RegisterVariableInteger('set_'.$id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
                 $this->GetValue($id);
-                $this->EnableAction($id);
+                $this->EnableAction('set_'.$id);
             }
         } 
         else 
@@ -177,7 +177,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id) 
             {
-                $this->UnregisterVariable($id);
+                $this->UnregisterVariable('set_'.$id);
             }
         }
 
@@ -664,9 +664,9 @@ class WPLUX extends IPSModule
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
             case '279': case '280': case '281': case '282':
                 $weekModeValue = $datenRaw[(int)$mode] - 3600;  // Unix-Zeit korrigieren
-                $this->SetValue('set_' . $mode, $weekModeValue);
+                //$this->SetValue('set_' . $mode, $weekModeValue);
                 $this->SetValue($mode, $weekModeValue);
-                $this->SendDebug("Timer abgeholt", "Für Variable: ".$mode." wurde der Wert: ".$weekModeValue." geholt", 0);
+                $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
         }
     }
