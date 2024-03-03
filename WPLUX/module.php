@@ -186,6 +186,36 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('227');
             $this->UnregisterVariable('228');
         }
+
+        if ($timerWeekendVisible) 
+        {
+            $ids = [
+                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1',
+                '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2',
+                '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
+                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1',
+                '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2',
+                '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
+            ];
+            
+            foreach ($ids as $id => $name) {
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', -54);
+                $this->getParameter($id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
+            }
+        } 
+        else 
+        {
+            $ids = [
+                '229', '230', '231', '232', '233', '234',
+                '235', '236', '237', '238', '239', '240'
+            ];
+            
+            foreach ($ids as $id) {
+                $this->UnregisterVariable($id);
+            }
+        }
     }
 
     public function RequestAction($Ident, $Value) 
