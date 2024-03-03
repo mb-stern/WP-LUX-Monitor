@@ -680,7 +680,6 @@ class WPLUX extends IPSModule
                 //$this->SetValue($mode, $weekModeValue);
                 $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
-                */
         }
     }
 
