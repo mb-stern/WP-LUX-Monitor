@@ -184,12 +184,8 @@ class WPLUX extends IPSModule
         if ($timerWeekendVisible) 
         {
             $ids = [
-                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1',
-                '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2',
-                '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
-                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1',
-                '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2',
-                '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
+                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1', '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2', '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
+                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1', '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2', '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
             ];
 
             $position = -54;
@@ -206,8 +202,43 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                '229', '230', '231', '232', '233', '234',
-                '235', '236', '237', '238', '239', '240'
+                '229', '230', '231', '232', '233', '234', '235', '236', '237', '238', '239', '240'
+            ];
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
+        }
+
+        if ($timerDayVisible) 
+        {
+            $ids = [
+                '241' => 'Mo-Fr von Set 1', '242' => 'Mo-Fr bis Set 1', '243' => 'Mo-Fr von Set 2', '244' => 'Mo-Fr bis Set 2', '245' => 'Mo-Fr von Set 3', '246' => 'Mo-Fr bis Set 3',
+                '247' => 'Sa+So von Set 1', '248' => 'Sa+So bis Set 1', '249' => 'Sa+So von Set 2', '250' => 'Sa+So bis Set 2', '251' => 'Sa+So von Set 3', '252' => 'Sa+So bis Set 3',
+                '253' => 'Mo-Fr von Set 1', '254' => 'Mo-Fr bis Set 1', '255' => 'Mo-Fr von Set 2', '256' => 'Mo-Fr bis Set 2', '257' => 'Mo-Fr von Set 3', '258' => 'Mo-Fr bis Set 3',
+                '259' => 'Sa+So von Set 1', '260' => 'Sa+So bis Set 1', '261' => 'Sa+So von Set 2', '262' => 'Sa+So bis Set 2', '263' => 'Sa+So von Set 3', '264' => 'Sa+So bis Set 3',
+                '265' => 'Mo-Fr von Set 1', '266' => 'Mo-Fr bis Set 1', '267' => 'Mo-Fr von Set 2', '268' => 'Mo-Fr bis Set 2', '269' => 'Mo-Fr von Set 3', '270' => 'Mo-Fr bis Set 3',
+                '271' => 'Sa+So von Set 1', '272' => 'Sa+So bis Set 1', '273' => 'Sa+So von Set 2', '274' => 'Sa+So bis Set 2', '275' => 'Sa+So von Set 3', '276' => 'Sa+So bis Set 3',
+                '277' => 'Mo-Fr von Set 1', '278' => 'Mo-Fr bis Set 1', '279' => 'Mo-Fr von Set 2', '280' => 'Mo-Fr bis Set 2', '281' => 'Mo-Fr von Set 3', '282' => 'Mo-Fr bis Set 3'
+            ];
+
+            $position = -42;
+            
+            foreach ($ids as $id => $name) 
+            {
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->getParameter($id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
+            }
+        } 
+        else 
+        {
+            $ids = 
+            [
+                '241', '242', '243', '244', '245', '246', '247', '248', '249', '250', '251', '252', '253', '254', '255', '256', '257', '258', '259', '260', '261', '262','263', '264',
+                '265', '266', '267', '268', '269', '270', '271', '272', '273', '274', '275', '276', '277', '278', '279', '280', '281', '282'
             ];
             
             foreach ($ids as $id) 
