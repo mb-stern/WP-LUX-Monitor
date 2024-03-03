@@ -530,284 +530,51 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function setParameter($type, $value) //3002 Werte senden
-    {
-        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
-        $ipWwc = $this->ReadPropertyString('IPAddress');
-        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+    private function setParameter($type, $value)
+{
+    // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+    $ipWwc = $this->ReadPropertyString('IPAddress');
+    $wwcJavaPort = $this->ReadPropertyInteger('Port');
 
-        // Verbindung zum Socket herstellen
-        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+    // Verbindung zum Socket herstellen
+    $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+    $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-        // Daten senden
-        $msg = pack('N*', 3002); // 3002 senden aktivieren
-        socket_write($socket, $msg, 4);
+    // Daten senden
+    $msg = pack('N*', 3002); // 3002 senden aktivieren
+    socket_write($socket, $msg, 4);
 
-        // Parameter je nach Typ festlegen
-        $parameter = 0;
+    // Parameter je nach Typ festlegen
+    $parameter = 0;
 
-        switch ($type) {
-            case 'Tempset':
-                $parameter = 1;
-                if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
-                break;
-            case 'Wset':
-                $parameter = 2;
-                if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
-                break;
-            case 'Heizung':
-                $parameter = 3;
-                break;
-            case 'Warmwasser':
-                $parameter = 4;
-                break;
-            case 'Kuehlung':
-                $parameter = 108;
-                $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
-                break;
-            case 'set_223':
-                $parameter = 223;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_224':
-                $parameter = 224;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_225':
-                $parameter = 225;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_226':
-                $parameter = 226;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_227':
-                $parameter = 227;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_228':
-                $parameter = 228;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_229':
-                $parameter = 229;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_230':
-                $parameter = 230;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_231':
-                $parameter = 231;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_232':
-                $parameter = 232;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_233':
-                $parameter = 233;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_234':
-                $parameter = 234;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_235':
-                $parameter = 235;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_236':
-                $parameter = 236;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_237':
-                $parameter = 237;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_238':
-                $parameter = 238;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_239':
-                $parameter = 239;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_240':
-                $parameter = 240;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_241':
-                $parameter = 241;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_242':
-                $parameter = 242;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_243':
-                $parameter = 243;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_244':
-                $parameter = 244;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_245':
-                $parameter = 245;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_246':
-                $parameter = 246;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_247':
-                $parameter = 247;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_248':
-                $parameter = 248;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_249':
-                $parameter = 249;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-            case 'set_250':
-                $parameter = 250;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break;
-                case 'set_251':
-                    $parameter = 251;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_252':
-                    $parameter = 252;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_253':
-                    $parameter = 253;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_254':
-                    $parameter = 254;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_255':
-                    $parameter = 255;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_256':
-                    $parameter = 256;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_257':
-                    $parameter = 257;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_258':
-                    $parameter = 258;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_259':
-                    $parameter = 259;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_260':
-                    $parameter = 260;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_261':
-                    $parameter = 261;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_262':
-                    $parameter = 262;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_263':
-                    $parameter = 263;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_264':
-                    $parameter = 264;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_265':
-                    $parameter = 265;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_266':
-                    $parameter = 266;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_267':
-                    $parameter = 267;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_268':
-                    $parameter = 268;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_269':
-                    $parameter = 269;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_270':
-                    $parameter = 270;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_271':
-                    $parameter = 271;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_272':
-                    $parameter = 272;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_273':
-                    $parameter = 273;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_274':
-                    $parameter = 274;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_275':
-                    $parameter = 275;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_276':
-                    $parameter = 276;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_277':
-                    $parameter = 277;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_278':
-                    $parameter = 278;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_279':
-                    $parameter = 279;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_280':
-                    $parameter = 280;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_281':
-                    $parameter = 281;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-                case 'set_282':
-                    $parameter = 282;
-                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                    break;
-               
-        }
+    switch ($type) {
+        case 'Tempset':
+            $parameter = 1;
+            if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
+            break;
+        case 'Wset':
+            $parameter = 2;
+            if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
+            break;
+        case 'Heizung':
+            $parameter = 3;
+            break;
+        case 'Warmwasser':
+            $parameter = 4;
+            break;
+        case 'Kuehlung':
+            $parameter = 108;
+            $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
+            break;
+        default:
+            if (strpos($type, 'set_') === 0) {
+                $parameter = (int) substr($type, 4);
+                if ($parameter >= 223 && $parameter <= 282 && $value >= -3600 && $value <= 82800) {
+                    $value += 3600; // Unix-Zeit korrigieren
+                }
+            }
+            break;
+    }
 
         // SetParameter senden
         $msg = pack('N*', $parameter);
