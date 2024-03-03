@@ -567,16 +567,16 @@ class WPLUX extends IPSModule
             case '224':
                 $parameter = 224;
                 break;
-            case '223':
+            case '225':
                 $parameter = 225;
                 break;
-            case '224':
+            case '226':
                 $parameter = 226;
                 break;
-            case '223':
+            case '227':
                 $parameter = 227;
                 break;
-            case '224':
+            case '228':
                 $parameter = 228;
                 break;
 
