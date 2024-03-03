@@ -598,74 +598,73 @@ class WPLUX extends IPSModule
     }
 
     private function getParameter($mode) //3003 Werte holen
-{
-    // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
-    $ipWwc = $this->ReadPropertyString('IPAddress');
-    $wwcJavaPort = $this->ReadPropertyInteger('Port');
+    {
+        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
 
-    // Verbindung zum Socket herstellen
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-    $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+        // Verbindung zum Socket herstellen
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-    // Daten holen
-    $msg = pack('N*', 3003); // 3003 Daten holen
-    socket_write($socket, $msg, 4); //3003 senden
+        // Daten holen
+        $msg = pack('N*', 3003); // 3003 Daten holen
+        socket_write($socket, $msg, 4); //3003 senden
 
-    $msg = pack('N*', 0);
-    socket_write($socket, $msg, 4); //0 senden
+        $msg = pack('N*', 0);
+        socket_write($socket, $msg, 4); //0 senden
 
-    socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3003 zurückkommen
-    socket_recv($socket, $test, 4, MSG_WAITALL); // Länge der nachfolgenden Werte
-    $test = unpack('N*', $test);
-    $javaWerte = implode($test);
+        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3003 zurückkommen
+        socket_recv($socket, $test, 4, MSG_WAITALL); // Länge der nachfolgenden Werte
+        $test = unpack('N*', $test);
+        $javaWerte = implode($test);
 
-    for ($i = 0; $i < $javaWerte; ++$i) {
-        socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
-        $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
+        for ($i = 0; $i < $javaWerte; ++$i) {
+            socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
+            $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
+        }
+
+        socket_close($socket);
+
+        // Den Wert entsprechend dem gewünschten Modus setzen
+        switch ($mode) {
+            case 'Heizung':
+                $this->SetValue('HeizungVariable', $datenRaw[3]);
+                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            case 'Warmwasser':
+                $this->SetValue('WarmwasserVariable', $datenRaw[4]);
+                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            case 'Kuehlung':
+                $this->SetValue('KuehlungVariable', $datenRaw[108]);
+                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            case 'Tempset':
+                $tempSetValue = $datenRaw[1] * 0.1;
+                if ($tempSetValue > 429496000) {
+                    $tempSetValue -= 4294967296;
+                    $tempSetValue *= 0.1;
+                } else {
+                    $tempSetValue *= 0.1;
+                }
+                $this->SetValue('TempsetVariable', $tempSetValue);
+                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            case 'Wset':
+                $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
+                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
+            case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
+            case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
+            case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
+            case '279': case '280': case '281': case '282':
+                $weekModeValue = $datenRaw[(int)$mode] - 3600;
+                $this->SetValue($mode, $weekModeValue);
+                break;
+        }
     }
-
-    socket_close($socket);
-
-    // Den Wert entsprechend dem gewünschten Modus setzen
-    switch ($mode) {
-        case 'Heizung':
-            $this->SetValue('HeizungVariable', $datenRaw[3]);
-            $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-        case 'Warmwasser':
-            $this->SetValue('WarmwasserVariable', $datenRaw[4]);
-            $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-        case 'Kuehlung':
-            $this->SetValue('KuehlungVariable', $datenRaw[108]);
-            $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-        case 'Tempset':
-            $tempSetValue = $datenRaw[1] * 0.1;
-            if ($tempSetValue > 429496000) {
-                $tempSetValue -= 4294967296;
-                $tempSetValue *= 0.1;
-            } else {
-                $tempSetValue *= 0.1;
-            }
-            $this->SetValue('TempsetVariable', $tempSetValue);
-            $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-        case 'Wset':
-            $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
-            $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-        case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
-        case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
-        case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
-        case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
-        case '279': case '280': case '281': case '282':
-            $weekModeValue = $datenRaw[(int)$mode] - 3600;
-            $this->SetValue($mode, $weekModeValue);
-            $this->SendDebug("Woche " . substr($mode, -1) . " " . (($mode == '223' || $mode == '225' || $mode == '227') ? 'von' : 'bis'), "Unix Zeit Woche " . substr($mode, -1) . " " . (($mode == '223' || $mode == '225' || $mode == '227') ? 'von: ' : 'bis: ') . $weekModeValue . " von der Lux geholt und in Variable gespeichert", 0);
-            break;
-    }
-}
 
     private function calc_cop($mode, $value) //COP berechnen
     {
