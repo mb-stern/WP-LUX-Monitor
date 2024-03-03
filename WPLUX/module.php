@@ -53,6 +53,11 @@ class WPLUX extends IPSModule
             $this->SendDebug("Konfiguration", "IP-Adresse ist nicht konfiguriert", 0);   
             $this->LogMessage("IP-Adresse ist nicht konfiguriert", KL_ERROR);
         } 
+        else 
+        {
+            // Bei Änderungen am Konfigurationsformular oder bei der Initialisierung auslösen
+            $this->Update();
+        }
 
         // Überprüfen, ob die Checkboxen im Konfigurationsformuler zum erstellen der Variablen aktiviert sind
         $heizungVisible = $this->ReadPropertyBoolean('HeizungVisible');
@@ -218,7 +223,7 @@ class WPLUX extends IPSModule
                 '277' => 'Samstag von Set 1', '278' => 'Samstag bis Set 1', '279' => 'Samstag von Set 2', '280' => 'Samstag bis Set 2', '281' => 'Samstag von Set 3', '282' => 'Samstag bis Set 3'
             ];
 
-            $position = -42; //ab dieser Position im Objektbaum
+            $position = 42; //ab dieser Position im Objektbaum
             
             foreach ($ids as $id => $name) 
             {
