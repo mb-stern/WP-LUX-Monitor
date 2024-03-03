@@ -153,9 +153,9 @@ class WPLUX extends IPSModule
         if ($timerWeekVisible) 
         {
             $ids = [
-                'set_223' => 'Woche von Set 1', '224' => 'Woche bis Set 1',
-                '225' => 'Woche von Set 2', '226' => 'Woche bis Set 2',
-                '227' => 'Woche von Set 3', '228' => 'Woche bis Set 3'
+                'set_223' => 'Woche von Set 1', 'set_224' => 'Woche bis Set 1',
+                'set_225' => 'Woche von Set 2', 'set_226' => 'Woche bis Set 2',
+                'set_227' => 'Woche von Set 3', 'set_228' => 'Woche bis Set 3'
             ];
             
             $position = -60; //ab dieser Position im Objektbaum
@@ -172,7 +172,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_223', '224', '225', '226', '227', '228'
+                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
             ];
             
             foreach ($ids as $id) 
@@ -184,8 +184,8 @@ class WPLUX extends IPSModule
         if ($timerWeekendVisible) 
         {
             $ids = [
-                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1', '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2', '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
-                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1', '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2', '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
+                'set_229' => 'Mo-Fr von Set 1', 'set_230' => 'Mo-Fr bis Set 1', 'set_231' => 'Mo-Fr von Set 2', 'set_232' => 'Mo-Fr bis Set 2', 'set_233' => 'Mo-Fr von Set 3', 'set_234' => 'Mo-Fr bis Set 3',
+                'set_235' => 'Sa+So von Set 1', 'set_236' => 'Sa+So bis Set 1', 'set_237' => 'Sa+So von Set 2', 'set_238' => 'Sa+So bis Set 2', 'set_239' => 'Sa+So von Set 3', 'set_240' => 'Sa+So bis Set 3'
             ];
 
             $position = -54; //ab dieser Position im Objektbaum
@@ -202,7 +202,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                '229', '230', '231', '232', '233', '234', '235', '236', '237', '238', '239', '240'
+                'set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'
             ];
             
             foreach ($ids as $id) 
@@ -214,13 +214,13 @@ class WPLUX extends IPSModule
         if ($timerDayVisible) 
         {
             $ids = [
-                '241' => 'Sonntag von Set 1', '242' => 'Sonntag bis Set 1', '243' => 'Sonntag von Set 2', '244' => 'Sonntag bis Set 2', '245' => 'Sonntag von Set 3', '246' => 'Sonntag bis Set 3',
-                '247' => 'Montag von Set 1', '248' => 'Montag bis Set 1', '249' => 'Montag von Set 2', '250' => 'Montag bis Set 2', '251' => 'Montag von Set 3', '252' => 'Montag bis Set 3',
-                '253' => 'Dienstag von Set 1', '254' => 'Dienstag bis Set 1', '255' => 'Dienstag von Set 2', '256' => 'Dienstag bis Set 2', '257' => 'Dienstag von Set 3', '258' => 'Dienstag bis Set 3',
-                '259' => 'Mittwoch von Set 1', '260' => 'Mittwoch bis Set 1', '261' => 'Mittwoch von Set 2', '262' => 'Mittwoch bis Set 2', '263' => 'Mittwoch von Set 3', '264' => 'Mittwoch bis Set 3',
-                '265' => 'Donnerstag von Set 1', '266' => 'Donnerstag bis Set 1', '267' => 'Donnerstag von Set 2', '268' => 'Donnerstag bis Set 2', '269' => 'Donnerstag von Set 3', '270' => 'Donnerstag bis Set 3',
-                '271' => 'Freitag von Set 1', '272' => 'Freitag bis Set 1', '273' => 'Freitag von Set 2', '274' => 'Freitag bis Set 2', '275' => 'Freitag von Set 3', '276' => 'Freitag bis Set 3',
-                '277' => 'Samstag von Set 1', '278' => 'Samstag bis Set 1', '279' => 'Samstag von Set 2', '280' => 'Samstag bis Set 2', '281' => 'Samstag von Set 3', '282' => 'Samstag bis Set 3'
+                'set_241' => 'Sonntag von Set 1', 'set_242' => 'Sonntag bis Set 1', 'set_243' => 'Sonntag von Set 2', 'set_244' => 'Sonntag bis Set 2', 'set_245' => 'Sonntag von Set 3', 'set_246' => 'Sonntag bis Set 3',
+                'set_247' => 'Montag von Set 1', 'set_248' => 'Montag bis Set 1', 'set_249' => 'Montag von Set 2', 'set_250' => 'Montag bis Set 2', 'set_251' => 'Montag von Set 3', 'set_252' => 'Montag bis Set 3',
+                'set_253' => 'Dienstag von Set 1', 'set_254' => 'Dienstag bis Set 1', 'set_255' => 'Dienstag von Set 2', 'set_256' => 'Dienstag bis Set 2', 'set_257' => 'Dienstag von Set 3', 'set_258' => 'Dienstag bis Set 3',
+                'set_259' => 'Mittwoch von Set 1', 'set_260' => 'Mittwoch bis Set 1', 'set_261' => 'Mittwoch von Set 2', 'set_262' => 'Mittwoch bis Set 2', 'set_263' => 'Mittwoch von Set 3', 'set_264' => 'Mittwoch bis Set 3',
+                'set_265' => 'Donnerstag von Set 1', 'set_266' => 'Donnerstag bis Set 1', 'set_267' => 'Donnerstag von Set 2', 'set_268' => 'Donnerstag bis Set 2', 'set_269' => 'Donnerstag von Set 3', 'set_270' => 'Donnerstag bis Set 3',
+                'set_271' => 'Freitag von Set 1', 'set_272' => 'Freitag bis Set 1', 'set_273' => 'Freitag von Set 2', 'set_274' => 'Freitag bis Set 2', 'set_275' => 'Freitag von Set 3', 'set_276' => 'Freitag bis Set 3',
+                'set_277' => 'Samstag von Set 1', 'set_278' => 'Samstag bis Set 1', 'set_279' => 'Samstag von Set 2', 'set_280' => 'Samstag bis Set 2', 'set_281' => 'Samstag von Set 3', 'set_282' => 'Samstag bis Set 3'
             ];
 
             $position = -42; //ab dieser Position im Objektbaum
@@ -237,8 +237,8 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                '241', '242', '243', '244', '245', '246', '247', '248', '249', '250', '251', '252', '253', '254', '255', '256', '257', '258', '259', '260', '261', '262','263', '264',
-                '265', '266', '267', '268', '269', '270', '271', '272', '273', '274', '275', '276', '277', '278', '279', '280', '281', '282'
+                'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254', 'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262','set_263', 'set_264',
+                'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270', 'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282'
             ];
             
             foreach ($ids as $id) 
@@ -256,12 +256,12 @@ class WPLUX extends IPSModule
             'WarmwasserVariable' => 'Warmwasser',
             'WWsetVariable' => 'Wset',
             'TempsetVariable' => 'Tempset',
-            'set_223' => 'set_223', '224' => '224', '225' => '225', '226' => '226', '227' => '227', '228' => '228', '229' => '229', '230' => '230', '231' => '231', '232' => '232', '233' => '233',
-            '234' => '234', '235' => '235', '236' => '236', '237' => '237', '238' => '238', '239' => '239', '240' => '240', '241' => '241', '242' => '242', '243' => '243', '244' => '244',
-            '245' => '245', '246' => '246', '247' => '247', '248' => '248', '249' => '249', '250' => '250', '251' => '251', '252' => '252', '253' => '253', '254' => '254', '255' => '255',
-            '256' => '256', '257' => '257', '258' => '258', '259' => '259', '260' => '260', '261' => '261', '262' => '262', '263' => '263', '264' => '264', '265' => '265', '266' => '266',
-            '267' => '267', '268' => '268', '269' => '269', '270' => '270', '271' => '271', '272' => '272', '273' => '273', '274' => '274', '275' => '275', '276' => '276', '277' => '277',
-            '278' => '278', '279' => '279', '280' => '280', '281' => '281', '282' => '282'
+            'set_223' => 'set_223', 'set_224' => 'set_224', 'set_225' => 'set_225', 'set_226' => 'set_226', 'set_227' => 'set_227', 'set_228' => 'set_228', 'set_229' => 'set_229', 'set_230' => 'set_230', 'set_231' => 'set_231', 'set_232' => 'set_232', 'set_233' => 'set_233',
+            'set_234' => 'set_234', 'set_235' => 'set_235', 'set_236' => 'set_236', 'set_237' => 'set_237', 'set_238' => 'set_238', 'set_239' => 'set_239', 'set_240' => 'set_240', 'set_241' => 'set_241', 'set_242' => 'set_242', 'set_243' => 'set_243', 'set_244' => 'set_244',
+            'set_245' => 'set_245', 'set_246' => 'set_246', 'set_247' => 'set_247', 'set_248' => 'set_248', 'set_249' => 'set_249', 'set_250' => 'set_250', 'set_251' => 'set_251', 'set_252' => 'set_252', 'set_253' => 'set_253', 'set_254' => 'set_254', 'set_255' => 'set_255',
+            'set_256' => 'set_256', 'set_257' => 'set_257', 'set_258' => 'set_258', 'set_259' => 'set_259', 'set_260' => 'set_260', 'set_261' => 'set_261', 'set_262' => 'set_262', 'set_263' => 'set_263', 'set_264' => 'set_264', 'set_265' => 'set_265', 'set_266' => 'set_266',
+            'set_267' => 'set_267', 'set_268' => 'set_268', 'set_269' => 'set_269', 'set_270' => 'set_270', 'set_271' => 'set_271', 'set_272' => 'set_272', 'set_273' => 'set_273', 'set_274' => 'set_274', 'set_275' => 'set_275', 'set_276' => 'set_276', 'set_277' => 'set_277',
+            'set_278' => 'set_278', 'set_279' => 'set_279', 'set_280' => 'set_280', 'set_281' => 'set_281', 'set_282' => 'set_282'
         ];
 
         if (array_key_exists($Ident, $parameterMapping)) {
@@ -572,16 +572,242 @@ class WPLUX extends IPSModule
                 $parameter = 223;
                 if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
                 break;
-            
-            
-            case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
-            case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
-            case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
-            case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
-            case '279': case '280': case '281': case '282':
-                $parameter = (int)$type;
+            case 'set_224':
+                $parameter = 224;
                 if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
                 break;
+            case 'set_225':
+                $parameter = 225;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_226':
+                $parameter = 226;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_227':
+                $parameter = 227;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_228':
+                $parameter = 228;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_229':
+                $parameter = 229;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_230':
+                $parameter = 230;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_231':
+                $parameter = 231;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_232':
+                $parameter = 232;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_233':
+                $parameter = 233;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_234':
+                $parameter = 234;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_235':
+                $parameter = 235;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_236':
+                $parameter = 236;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_237':
+                $parameter = 237;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_238':
+                $parameter = 238;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_239':
+                $parameter = 239;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_240':
+                $parameter = 240;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_241':
+                $parameter = 241;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_242':
+                $parameter = 242;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_243':
+                $parameter = 243;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_244':
+                $parameter = 244;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_245':
+                $parameter = 245;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_246':
+                $parameter = 246;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_247':
+                $parameter = 247;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_248':
+                $parameter = 248;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_249':
+                $parameter = 249;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            case 'set_250':
+                $parameter = 250;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break
+                case 'set_251':
+                    $parameter = 251;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_252':
+                    $parameter = 252;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_253':
+                    $parameter = 253;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_254':
+                    $parameter = 254;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_255':
+                    $parameter = 255;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_256':
+                    $parameter = 256;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_257':
+                    $parameter = 257;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_258':
+                    $parameter = 258;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_259':
+                    $parameter = 259;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_260':
+                    $parameter = 260;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_261':
+                    $parameter = 261;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_262':
+                    $parameter = 262;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_263':
+                    $parameter = 263;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_264':
+                    $parameter = 264;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_265':
+                    $parameter = 265;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_266':
+                    $parameter = 266;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_267':
+                    $parameter = 267;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_268':
+                    $parameter = 268;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_269':
+                    $parameter = 269;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_270':
+                    $parameter = 270;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_271':
+                    $parameter = 271;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_272':
+                    $parameter = 272;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_273':
+                    $parameter = 273;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_274':
+                    $parameter = 274;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_275':
+                    $parameter = 275;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_276':
+                    $parameter = 276;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_277':
+                    $parameter = 277;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_278':
+                    $parameter = 278;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_279':
+                    $parameter = 279;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_280':
+                    $parameter = 280;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_281':
+                    $parameter = 281;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
+                case 'set_282':
+                    $parameter = 282;
+                    if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                    break;
                
         }
 
@@ -634,52 +860,218 @@ class WPLUX extends IPSModule
         socket_close($socket);
 
         // Den Wert entsprechend dem gewünschten Modus setzen
-        switch ($mode) {
-            case 'Heizung':
-                $this->SetValue('HeizungVariable', $datenRaw[3]);
-                $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
-                break;
-            case 'Warmwasser':
-                $this->SetValue('WarmwasserVariable', $datenRaw[4]);
-                $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
-                break;
-            case 'Kuehlung':
-                $this->SetValue('KuehlungVariable', $datenRaw[108]);
-                $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
-                break;
-            case 'Tempset':
-                $tempSetValue = $datenRaw[1] * 0.1;
-                if ($tempSetValue > 429496000) 
-                {
-                    $tempSetValue -= 4294967296;
-                    $tempSetValue *= 0.1;
-                } 
-                else 
-                {
-                    $tempSetValue *= 0.1;
-                }
-                $this->SetValue('TempsetVariable', $tempSetValue);
-                $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
-                break;
-            case 'Wset':
-                $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
-                $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
-                break;
-            case 'set_223':
-                $this->SetValue('set_223', $datenRaw[223] -= 3600);
-                    break;
-
-
-            case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
-            case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
-            case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
-            case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
-            case '279': case '280': case '281': case '282':
-                $weekModeValue = $datenRaw[(int)$mode] - 3600;  // Unix-Zeit korrigieren
-                //$this->SetValue('set_' . $mode, $weekModeValue);
-                $this->SetValue($mode, $weekModeValue);
-                $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
-                break;
+        switch ($mode) 
+        {
+                    case 'Heizung':
+                        $this->SetValue('HeizungVariable', $datenRaw[3]);
+                        $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
+                        break;
+                    case 'Warmwasser':
+                        $this->SetValue('WarmwasserVariable', $datenRaw[4]);
+                        $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
+                        break;
+                    case 'Kuehlung':
+                        $this->SetValue('KuehlungVariable', $datenRaw[108]);
+                        $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
+                        break;
+                    case 'Tempset':
+                        $tempSetValue = $datenRaw[1] * 0.1;
+                        if ($tempSetValue > 429496000) 
+                        {
+                            $tempSetValue -= 4294967296;
+                            $tempSetValue *= 0.1;
+                        } 
+                        else 
+                        {
+                            $tempSetValue *= 0.1;
+                        }
+                        $this->SetValue('TempsetVariable', $tempSetValue);
+                        $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
+                        break;
+                    case 'Wset':
+                        $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
+                        $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
+                        break;
+                    case 'set_223':
+                        $this->SetValue('set_223', $datenRaw[223] - 3600);
+                        break;
+                    case 'set_224':
+                        $this->SetValue('set_224', $datenRaw[224] - 3600);
+                        break;
+                    case 'set_225':
+                        $this->SetValue('set_225', $datenRaw[225] - 3600);
+                        break;
+                    case 'set_226':
+                        $this->SetValue('set_226', $datenRaw[226] - 3600);
+                        break;
+                    case 'set_227':
+                        $this->SetValue('set_227', $datenRaw[227] - 3600);
+                        break;
+                    case 'set_228':
+                        $this->SetValue('set_228', $datenRaw[228] - 3600);
+                        break;
+                    case 'set_229':
+                        $this->SetValue('set_229', $datenRaw[229] - 3600);
+                        break;
+                    case 'set_230':
+                        $this->SetValue('set_230', $datenRaw[230] - 3600);
+                        break;
+                    case 'set_231':
+                        $this->SetValue('set_231', $datenRaw[231] - 3600);
+                        break;
+                    case 'set_232':
+                        $this->SetValue('set_232', $datenRaw[232] - 3600);
+                        break;
+                    case 'set_233':
+                        $this->SetValue('set_233', $datenRaw[233] - 3600);
+                        break;
+                    case 'set_234':
+                        $this->SetValue('set_234', $datenRaw[234] - 3600);
+                        break;
+                    case 'set_235':
+                        $this->SetValue('set_235', $datenRaw[235] - 3600);
+                        break;
+                    case 'set_236':
+                        $this->SetValue('set_236', $datenRaw[236] - 3600);
+                        break;
+                    case 'set_237':
+                        $this->SetValue('set_237', $datenRaw[237] - 3600);
+                        break;
+                    case 'set_238':
+                        $this->SetValue('set_238', $datenRaw[238] - 3600);
+                        break;
+                    case 'set_239':
+                        $this->SetValue('set_239', $datenRaw[239] - 3600);
+                        break;
+                    case 'set_240':
+                        $this->SetValue('set_240', $datenRaw[240] - 3600);
+                        break;
+                    case 'set_241':
+                        $this->SetValue('set_241', $datenRaw[241] - 3600);
+                        break;
+                    case 'set_242':
+                        $this->SetValue('set_242', $datenRaw[242] - 3600);
+                        break;
+                    case 'set_243':
+                        $this->SetValue('set_243', $datenRaw[243] - 3600);
+                        break;
+                    case 'set_244':
+                        $this->SetValue('set_244', $datenRaw[244] - 3600);
+                        break;
+                    case 'set_245':
+                        $this->SetValue('set_245', $datenRaw[245] - 3600);
+                        break;
+                    case 'set_246':
+                        $this->SetValue('set_246', $datenRaw[246] - 3600);
+                        break;
+                    case 'set_247':
+                        $this->SetValue('set_247', $datenRaw[247] - 3600);
+                        break;
+                    case 'set_248':
+                        $this->SetValue('set_248', $datenRaw[248] - 3600);
+                        break;
+                    case 'set_249':
+                        $this->SetValue('set_249', $datenRaw[249] - 3600);
+                        break;
+                    case 'set_250':
+                        $this->SetValue('set_250', $datenRaw[250] - 3600);
+                        break;
+                    case 'set_251':
+                        $this->SetValue('set_251', $datenRaw[251] - 3600);
+                        break;
+                    case 'set_252':
+                        $this->SetValue('set_252', $datenRaw[252] - 3600);
+                        break;
+                    case 'set_253':
+                        $this->SetValue('set_253', $datenRaw[253] - 3600);
+                        break;
+                    case 'set_254':
+                        $this->SetValue('set_254', $datenRaw[254] - 3600);
+                        break;
+                    case 'set_255':
+                        $this->SetValue('set_255', $datenRaw[255] - 3600);
+                        break;
+                    case 'set_256':
+                        $this->SetValue('set_256', $datenRaw[256] - 3600);
+                        break;
+                    case 'set_257':
+                        $this->SetValue('set_257', $datenRaw[257] - 3600);
+                        break;
+                    case 'set_258':
+                        $this->SetValue('set_258', $datenRaw[258] - 3600);
+                        break;
+                    case 'set_259':
+                        $this->SetValue('set_259', $datenRaw[259] - 3600);
+                        break;
+                    case 'set_260':
+                        $this->SetValue('set_260', $datenRaw[260] - 3600);
+                        break;
+                    case 'set_261':
+                        $this->SetValue('set_261', $datenRaw[261] - 3600);
+                        break;
+                    case 'set_262':
+                        $this->SetValue('set_262', $datenRaw[262] - 3600);
+                        break;
+                    case 'set_263':
+                        $this->SetValue('set_263', $datenRaw[263] - 3600);
+                        break;
+                    case 'set_264':
+                        $this->SetValue('set_264', $datenRaw[264] - 3600);
+                        break;
+                    case 'set_265':
+                        $this->SetValue('set_265', $datenRaw[265] - 3600);
+                        break;
+                    case 'set_266':
+                        $this->SetValue('set_266', $datenRaw[266] - 3600);
+                        break;
+                    case 'set_267':
+                        $this->SetValue('set_267', $datenRaw[267] - 3600);
+                        break;
+                    case 'set_268':
+                        $this->SetValue('set_268', $datenRaw[268] - 3600);
+                        break;
+                    case 'set_269':
+                        $this->SetValue('set_269', $datenRaw[269] - 3600);
+                        break;
+                    case 'set_270':
+                        $this->SetValue('set_270', $datenRaw[270] - 3600);
+                        break;
+                    case 'set_271':
+                        $this->SetValue('set_271', $datenRaw[271] - 3600);
+                        break;
+                    case 'set_272':
+                        $this->SetValue('set_272', $datenRaw[272] - 3600);
+                        break;
+                    case 'set_273':
+                        $this->SetValue('set_273', $datenRaw[273] - 3600);
+                        break;
+                    case 'set_274':
+                        $this->SetValue('set_274', $datenRaw[274] - 3600);
+                        break;
+                    case 'set_275':
+                        $this->SetValue('set_275', $datenRaw[275] - 3600);
+                        break;
+                    case 'set_276':
+                        $this->SetValue('set_276', $datenRaw[276] - 3600);
+                        break;
+                    case 'set_277':
+                        $this->SetValue('set_277', $datenRaw[277] - 3600);
+                            break;
+                    case 'set_278':
+                        $this->SetValue('set_278', $datenRaw[278] - 3600);
+                        break;
+                    case 'set_279':
+                        $this->SetValue('set_279', $datenRaw[279] - 3600);
+                        break;
+                    case 'set_280':
+                        $this->SetValue('set_280', $datenRaw[280] - 3600);
+                        break;
+                    case 'set_281':
+                        $this->SetValue('set_281', $datenRaw[281] - 3600);
+                        break;
+                    case 'set_282':
+                        $this->SetValue('set_282', $datenRaw[282] - 3600);
+                        break;
         }
     }
 
