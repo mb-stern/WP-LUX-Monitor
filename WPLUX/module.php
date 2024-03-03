@@ -132,12 +132,10 @@ class WPLUX extends IPSModule
         {
             $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
             $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
-            $Value = $this->GetValue('223');
-            $Value = $this->GetValue('224');
             $this->getParameter('223');
             $this->getParameter('224');
-
-
+            $Value = $this->GetValue('223');
+            $Value = $this->GetValue('224');
             $this->EnableAction('223');
             $this->EnableAction('224');
         } 
