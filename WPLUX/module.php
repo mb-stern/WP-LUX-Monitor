@@ -162,10 +162,10 @@ class WPLUX extends IPSModule
 
             foreach ($ids as $id => $name) 
             {
-                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->RegisterVariableInteger('set_'.$id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
-                $this->GetValue($id);
-                $this->EnableAction($id);
+                $this->GetValue('set_'.$id);
+                $this->EnableAction('set_'.$id);
             }
         } 
         else 
@@ -177,7 +177,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id) 
             {
-                $this->UnregisterVariable($id);
+                $this->UnregisterVariable('set_'.$id);
             }
         }
 
@@ -582,7 +582,7 @@ class WPLUX extends IPSModule
                 $parameter = (int)$type;
                 if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
                 break;
-                
+               
         }
 
         // SetParameter senden
@@ -651,7 +651,7 @@ class WPLUX extends IPSModule
                 $tempSetValue = $datenRaw[1] * 0.1;
                 if ($tempSetValue > 429496000) 
                 {
-                    $tempSetValue $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1); 4294967296;
+                    $tempSetValue -= 4294967296;
                     $tempSetValue *= 0.1;
                 } 
                 else 
@@ -670,7 +670,6 @@ class WPLUX extends IPSModule
                     break;
 
 
-            
             case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
             case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
@@ -681,7 +680,7 @@ class WPLUX extends IPSModule
                 //$this->SetValue($mode, $weekModeValue);
                 $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
-                
+                */
         }
     }
 
