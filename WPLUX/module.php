@@ -574,7 +574,7 @@ class WPLUX extends IPSModule
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
             case '279': case '280': case '281': case '282':
                 $parameter = (int)$type;
-                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit anpassen
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
                 break;
         }
 
@@ -642,10 +642,13 @@ class WPLUX extends IPSModule
                 break;
             case 'Tempset':
                 $tempSetValue = $datenRaw[1] * 0.1;
-                if ($tempSetValue > 429496000) {
+                if ($tempSetValue > 429496000) 
+                {
                     $tempSetValue -= 4294967296;
                     $tempSetValue *= 0.1;
-                } else {
+                } 
+                else 
+                {
                     $tempSetValue *= 0.1;
                 }
                 $this->SetValue('TempsetVariable', $tempSetValue);
@@ -660,7 +663,7 @@ class WPLUX extends IPSModule
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
             case '279': case '280': case '281': case '282':
-                $weekModeValue = $datenRaw[(int)$mode] - 3600;
+                $weekModeValue = $datenRaw[(int)$mode] - 3600;  // Unix-Zeit korrigieren
                 $this->SetValue($mode, $weekModeValue);
                 break;
         }
