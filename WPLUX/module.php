@@ -184,8 +184,12 @@ class WPLUX extends IPSModule
         if ($timerWeekendVisible) 
         {
             $ids = [
-                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1', '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2', '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
-                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1', '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2', '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
+                '229' => 'Mo-Fr von Set 1', '230' => 'Mo-Fr bis Set 1', 
+                '231' => 'Mo-Fr von Set 2', '232' => 'Mo-Fr bis Set 2', 
+                '233' => 'Mo-Fr von Set 3', '234' => 'Mo-Fr bis Set 3',
+                '235' => 'Sa+So von Set 1', '236' => 'Sa+So bis Set 1', 
+                '237' => 'Sa+So von Set 2', '238' => 'Sa+So bis Set 2', 
+                '239' => 'Sa+So von Set 3', '240' => 'Sa+So bis Set 3'
             ];
 
             $position = -54; //ab dieser Position im Objektbaum
