@@ -74,62 +74,62 @@ class WPLUX extends IPSModule
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
-            $this->RegisterVariableInteger('HeizungVariable', 'Modus Heizung', 'WPLUX.Wwhe', 0);
+            $this->RegisterVariableInteger('Heizung', 'Modus Heizung', 'WPLUX.Wwhe', 0);
             $this->getParameter('Heizung');
-            $Value = $this->GetValue('HeizungVariable');
-            $this->EnableAction('HeizungVariable');
+            $Value = $this->GetValue('Heizung');
+            $this->EnableAction('Heizung');
         } 
         else 
         {
-            $this->UnregisterVariable('HeizungVariable');
+            $this->UnregisterVariable('Heizung');
         }
 
         if ($warmwasserVisible) 
         {
-            $this->RegisterVariableInteger('WarmwasserVariable', 'Modus Warmwasser', 'WPLUX.Wwhe', 1);
+            $this->RegisterVariableInteger('Warmwasser', 'Modus Warmwasser', 'WPLUX.Wwhe', 1);
             $this->getParameter('Warmwasser');
-            $Value = $this->GetValue('WarmwasserVariable');
-            $this->EnableAction('WarmwasserVariable');
+            $Value = $this->GetValue('Warmwasser');
+            $this->EnableAction('Warmwasser');
         } 
         else 
         {
-            $this->UnregisterVariable('WarmwasserVariable');
+            $this->UnregisterVariable('Warmwasser');
         }
 
         if ($kuehlungVisible) 
         {
-            $this->RegisterVariableInteger('KuehlungVariable', 'Modus Kühlung', 'WPLUX.Kue', 2);
+            $this->RegisterVariableInteger('Kuehlung', 'Modus Kühlung', 'WPLUX.Kue', 2);
             $this->getParameter('Kuehlung');
-            $Value = $this->GetValue('KuehlungVariable');   
-            $this->EnableAction('KuehlungVariable');
+            $Value = $this->GetValue('Kuehlung');   
+            $this->EnableAction('Kuehlung');
         } 
         else 
         {
-            $this->UnregisterVariable('KuehlungVariable');
+            $this->UnregisterVariable('Kuehlung');
         }
 
         if ($tempsetVisible) 
         {
-            $this->RegisterVariableFloat('TempsetVariable', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
+            $this->RegisterVariableFloat('Tempset', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
             $this->getParameter('Tempset'); 
-            $Value = $this->GetValue('TempsetVariable'); 
-            $this->EnableAction('TempsetVariable');
+            $Value = $this->GetValue('Tempset'); 
+            $this->EnableAction('Tempset');
         } 
         else 
         {
-            $this->UnregisterVariable('TempsetVariable');
+            $this->UnregisterVariable('Tempset');
         }
 
         if ($wwsetVisible) 
         {
-            $this->RegisterVariableFloat('WWsetVariable', 'Warmwasser Soll', 'WPLUX.Wset', 4);
+            $this->RegisterVariableFloat('Wset', 'Warmwasser Soll', 'WPLUX.Wset', 4);
             $this->getParameter('Wset'); 
-            $Value = $this->GetValue('WWsetVariable'); 
-            $this->EnableAction('WWsetVariable');
+            $Value = $this->GetValue('Wset'); 
+            $this->EnableAction('Wset');
         } 
         else 
         {
-            $this->UnregisterVariable('WWsetVariable');
+            $this->UnregisterVariable('Wset');
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
@@ -251,11 +251,11 @@ class WPLUX extends IPSModule
     public function RequestAction($Ident, $Value) 
     {
         $parameterMapping = [
-            'HeizungVariable' => 'Heizung',
-            'KuehlungVariable' => 'Kuehlung',
-            'WarmwasserVariable' => 'Warmwasser',
-            'WWsetVariable' => 'Wset',
-            'TempsetVariable' => 'Tempset',
+            'Heizung' => 'Heizung',
+            'Kuehlung' => 'Kuehlung',
+            'Warmwasser' => 'Warmwasser',
+            'Wset' => 'Wset',
+            'Tempset' => 'Tempset',
             'set_223' => 'set_223', 'set_224' => 'set_224', 'set_225' => 'set_225', 'set_226' => 'set_226', 'set_227' => 'set_227', 'set_228' => 'set_228', 'set_229' => 'set_229', 'set_230' => 'set_230', 'set_231' => 'set_231', 'set_232' => 'set_232', 'set_233' => 'set_233',
             'set_234' => 'set_234', 'set_235' => 'set_235', 'set_236' => 'set_236', 'set_237' => 'set_237', 'set_238' => 'set_238', 'set_239' => 'set_239', 'set_240' => 'set_240', 'set_241' => 'set_241', 'set_242' => 'set_242', 'set_243' => 'set_243', 'set_244' => 'set_244',
             'set_245' => 'set_245', 'set_246' => 'set_246', 'set_247' => 'set_247', 'set_248' => 'set_248', 'set_249' => 'set_249', 'set_250' => 'set_250', 'set_251' => 'set_251', 'set_252' => 'set_252', 'set_253' => 'set_253', 'set_254' => 'set_254', 'set_255' => 'set_255',
@@ -863,15 +863,15 @@ class WPLUX extends IPSModule
         switch ($mode) 
         {
                     case 'Heizung':
-                        $this->SetValue('HeizungVariable', $datenRaw[3]);
+                        $this->SetValue('Heizung', $datenRaw[3]);
                         $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
                         break;
                     case 'Warmwasser':
-                        $this->SetValue('WarmwasserVariable', $datenRaw[4]);
+                        $this->SetValue('Warmwasser', $datenRaw[4]);
                         $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
                         break;
                     case 'Kuehlung':
-                        $this->SetValue('KuehlungVariable', $datenRaw[108]);
+                        $this->SetValue('Kuehlung', $datenRaw[108]);
                         $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
                         break;
                     case 'Tempset':
@@ -885,11 +885,11 @@ class WPLUX extends IPSModule
                         {
                             $tempSetValue *= 0.1;
                         }
-                        $this->SetValue('TempsetVariable', $tempSetValue);
+                        $this->SetValue('Tempset', $tempSetValue);
                         $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
                         break;
                     case 'Wset':
-                        $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
+                        $this->SetValue('Wset', $datenRaw[2] * 0.1);
                         $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
                         break;
                     case 'set_223':
