@@ -227,7 +227,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id => $name) 
             {
-                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                //$this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', 0);
                 $this->getParameter($id);
                 $this->GetValue($id);
