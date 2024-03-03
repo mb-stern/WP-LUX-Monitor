@@ -71,7 +71,17 @@
                 {
                     "type": "CheckBox",
                     "name": "TimerWeekVisible",
-                    "caption": "Timerfunktion aktivieren"
+                    "caption": "Timer Woche aktivieren (6 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "TimerWeekendVisible",
+                    "caption": "Timer Mo-Fr/Sa+So aktivieren (12 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "TimerDayVisible",
+                    "caption": "Timer Tage aktivieren (42 Var.)"
                 }
                 ]
         },

@@ -22,6 +22,8 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
         $this->RegisterPropertyBoolean('TimerWeekVisible', false);
+        $this->RegisterPropertyBoolean('TimerWeekendVisible', false);
+        $this->RegisterPropertyBoolean('TimerDayVisible', false);
 
         $this->RegisterAttributeFloat("start_value_out", 0);
         $this->RegisterAttributeFloat("start_kwh_in", 0);
@@ -66,6 +68,8 @@ class WPLUX extends IPSModule
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $timerWeekVisible = $this->ReadPropertyBoolean('TimerWeekVisible');
+        $timerWeekendVisible = $this->ReadPropertyBoolean('TimerWeekendVisible');
+        $timerDayVisible = $this->ReadPropertyBoolean('TimerDayVisible');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
