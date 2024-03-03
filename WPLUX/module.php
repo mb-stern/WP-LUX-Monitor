@@ -547,7 +547,8 @@ class WPLUX extends IPSModule
     // Parameter je nach Typ festlegen
     $parameter = 0;
 
-    switch ($type) {
+    switch ($type) 
+    {
         case 'Tempset':
             $parameter = 1;
             if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
@@ -595,248 +596,61 @@ class WPLUX extends IPSModule
         $this->SendDebug("Socketverbindung", "Der Parameter: $parameter mit dem Wert: $value wurde an den Socket gesendet", 0);
     }
 
-    private function getParameter($mode) //3003 Werte holen
-    {
-        // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
-        $ipWwc = $this->ReadPropertyString('IPAddress');
-        $wwcJavaPort = $this->ReadPropertyInteger('Port');
+    private function getParameter($mode)
+{
+    $ipWwc = $this->ReadPropertyString('IPAddress');
+    $wwcJavaPort = $this->ReadPropertyInteger('Port');
 
-        // Verbindung zum Socket herstellen
-        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+    $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+    $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-        // Daten holen
-        $msg = pack('N*', 3003); // 3003 Daten holen
-        socket_write($socket, $msg, 4); //3003 senden
+    $msg = pack('N*', 3003);
+    socket_write($socket, $msg, 4);
 
-        $msg = pack('N*', 0);
-        socket_write($socket, $msg, 4); //0 senden
+    $msg = pack('N*', 0);
+    socket_write($socket, $msg, 4);
 
-        socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3003 zurückkommen
-        socket_recv($socket, $test, 4, MSG_WAITALL); // Länge der nachfolgenden Werte
-        $test = unpack('N*', $test);
-        $javaWerte = implode($test);
+    socket_recv($socket, $test, 4, MSG_WAITALL);
+    socket_recv($socket, $test, 4, MSG_WAITALL);
+    $test = unpack('N*', $test);
+    $javaWerte = implode($test);
 
-        for ($i = 0; $i < $javaWerte; ++$i) {
-            socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
-            $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
-        }
+    for ($i = 0; $i < $javaWerte; ++$i) {
+        socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
+        $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
+    }
 
-        socket_close($socket);
+    socket_close($socket);
 
-        // Den Wert entsprechend dem gewünschten Modus setzen
-        switch ($mode) 
+    switch ($mode) 
         {
-                    case 'Heizung':
-                        $this->SetValue('Heizung', $datenRaw[3]);
-                        $this->SendDebug("Modus Heizung", "Einstellung Modus Heizung: " . $datenRaw[3] . " von der Lux geholt und in Variable gespeichert", 0);
-                        break;
-                    case 'Warmwasser':
-                        $this->SetValue('Warmwasser', $datenRaw[4]);
-                        $this->SendDebug("Modus Warmwasser", "Einstellung Modus Warmwasser: " . $datenRaw[4] . " von der Lux geholt und in Variable gespeichert", 0);
-                        break;
-                    case 'Kuehlung':
-                        $this->SetValue('Kuehlung', $datenRaw[108]);
-                        $this->SendDebug("Modus Kühlung", "Einstellung Modus Kühlung: " . $datenRaw[108] . " von der Lux geholt und in Variable gespeichert", 0);
-                        break;
-                    case 'Tempset':
-                        $tempSetValue = $datenRaw[1] * 0.1;
-                        if ($tempSetValue > 429496000) 
-                        {
-                            $tempSetValue -= 4294967296;
-                            $tempSetValue *= 0.1;
-                        } 
-                        else 
-                        {
-                            $tempSetValue *= 0.1;
-                        }
-                        $this->SetValue('Tempset', $tempSetValue);
-                        $this->SendDebug("Temperaturanpassung", "Wert der Temperaturanpassung: " . $tempSetValue . " von der Lux geholt und in Variable gespeichert", 0);
-                        break;
-                    case 'Wset':
-                        $this->SetValue('Wset', $datenRaw[2] * 0.1);
-                        $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
-                        break;
-                    case 'set_223':
-                        $this->SetValue('set_223', $datenRaw[223] - 3600);
-                        break;
-                    case 'set_224':
-                        $this->SetValue('set_224', $datenRaw[224] - 3600);
-                        break;
-                    case 'set_225':
-                        $this->SetValue('set_225', $datenRaw[225] - 3600);
-                        break;
-                    case 'set_226':
-                        $this->SetValue('set_226', $datenRaw[226] - 3600);
-                        break;
-                    case 'set_227':
-                        $this->SetValue('set_227', $datenRaw[227] - 3600);
-                        break;
-                    case 'set_228':
-                        $this->SetValue('set_228', $datenRaw[228] - 3600);
-                        break;
-                    case 'set_229':
-                        $this->SetValue('set_229', $datenRaw[229] - 3600);
-                        break;
-                    case 'set_230':
-                        $this->SetValue('set_230', $datenRaw[230] - 3600);
-                        break;
-                    case 'set_231':
-                        $this->SetValue('set_231', $datenRaw[231] - 3600);
-                        break;
-                    case 'set_232':
-                        $this->SetValue('set_232', $datenRaw[232] - 3600);
-                        break;
-                    case 'set_233':
-                        $this->SetValue('set_233', $datenRaw[233] - 3600);
-                        break;
-                    case 'set_234':
-                        $this->SetValue('set_234', $datenRaw[234] - 3600);
-                        break;
-                    case 'set_235':
-                        $this->SetValue('set_235', $datenRaw[235] - 3600);
-                        break;
-                    case 'set_236':
-                        $this->SetValue('set_236', $datenRaw[236] - 3600);
-                        break;
-                    case 'set_237':
-                        $this->SetValue('set_237', $datenRaw[237] - 3600);
-                        break;
-                    case 'set_238':
-                        $this->SetValue('set_238', $datenRaw[238] - 3600);
-                        break;
-                    case 'set_239':
-                        $this->SetValue('set_239', $datenRaw[239] - 3600);
-                        break;
-                    case 'set_240':
-                        $this->SetValue('set_240', $datenRaw[240] - 3600);
-                        break;
-                    case 'set_241':
-                        $this->SetValue('set_241', $datenRaw[241] - 3600);
-                        break;
-                    case 'set_242':
-                        $this->SetValue('set_242', $datenRaw[242] - 3600);
-                        break;
-                    case 'set_243':
-                        $this->SetValue('set_243', $datenRaw[243] - 3600);
-                        break;
-                    case 'set_244':
-                        $this->SetValue('set_244', $datenRaw[244] - 3600);
-                        break;
-                    case 'set_245':
-                        $this->SetValue('set_245', $datenRaw[245] - 3600);
-                        break;
-                    case 'set_246':
-                        $this->SetValue('set_246', $datenRaw[246] - 3600);
-                        break;
-                    case 'set_247':
-                        $this->SetValue('set_247', $datenRaw[247] - 3600);
-                        break;
-                    case 'set_248':
-                        $this->SetValue('set_248', $datenRaw[248] - 3600);
-                        break;
-                    case 'set_249':
-                        $this->SetValue('set_249', $datenRaw[249] - 3600);
-                        break;
-                    case 'set_250':
-                        $this->SetValue('set_250', $datenRaw[250] - 3600);
-                        break;
-                    case 'set_251':
-                        $this->SetValue('set_251', $datenRaw[251] - 3600);
-                        break;
-                    case 'set_252':
-                        $this->SetValue('set_252', $datenRaw[252] - 3600);
-                        break;
-                    case 'set_253':
-                        $this->SetValue('set_253', $datenRaw[253] - 3600);
-                        break;
-                    case 'set_254':
-                        $this->SetValue('set_254', $datenRaw[254] - 3600);
-                        break;
-                    case 'set_255':
-                        $this->SetValue('set_255', $datenRaw[255] - 3600);
-                        break;
-                    case 'set_256':
-                        $this->SetValue('set_256', $datenRaw[256] - 3600);
-                        break;
-                    case 'set_257':
-                        $this->SetValue('set_257', $datenRaw[257] - 3600);
-                        break;
-                    case 'set_258':
-                        $this->SetValue('set_258', $datenRaw[258] - 3600);
-                        break;
-                    case 'set_259':
-                        $this->SetValue('set_259', $datenRaw[259] - 3600);
-                        break;
-                    case 'set_260':
-                        $this->SetValue('set_260', $datenRaw[260] - 3600);
-                        break;
-                    case 'set_261':
-                        $this->SetValue('set_261', $datenRaw[261] - 3600);
-                        break;
-                    case 'set_262':
-                        $this->SetValue('set_262', $datenRaw[262] - 3600);
-                        break;
-                    case 'set_263':
-                        $this->SetValue('set_263', $datenRaw[263] - 3600);
-                        break;
-                    case 'set_264':
-                        $this->SetValue('set_264', $datenRaw[264] - 3600);
-                        break;
-                    case 'set_265':
-                        $this->SetValue('set_265', $datenRaw[265] - 3600);
-                        break;
-                    case 'set_266':
-                        $this->SetValue('set_266', $datenRaw[266] - 3600);
-                        break;
-                    case 'set_267':
-                        $this->SetValue('set_267', $datenRaw[267] - 3600);
-                        break;
-                    case 'set_268':
-                        $this->SetValue('set_268', $datenRaw[268] - 3600);
-                        break;
-                    case 'set_269':
-                        $this->SetValue('set_269', $datenRaw[269] - 3600);
-                        break;
-                    case 'set_270':
-                        $this->SetValue('set_270', $datenRaw[270] - 3600);
-                        break;
-                    case 'set_271':
-                        $this->SetValue('set_271', $datenRaw[271] - 3600);
-                        break;
-                    case 'set_272':
-                        $this->SetValue('set_272', $datenRaw[272] - 3600);
-                        break;
-                    case 'set_273':
-                        $this->SetValue('set_273', $datenRaw[273] - 3600);
-                        break;
-                    case 'set_274':
-                        $this->SetValue('set_274', $datenRaw[274] - 3600);
-                        break;
-                    case 'set_275':
-                        $this->SetValue('set_275', $datenRaw[275] - 3600);
-                        break;
-                    case 'set_276':
-                        $this->SetValue('set_276', $datenRaw[276] - 3600);
-                        break;
-                    case 'set_277':
-                        $this->SetValue('set_277', $datenRaw[277] - 3600);
-                            break;
-                    case 'set_278':
-                        $this->SetValue('set_278', $datenRaw[278] - 3600);
-                        break;
-                    case 'set_279':
-                        $this->SetValue('set_279', $datenRaw[279] - 3600);
-                        break;
-                    case 'set_280':
-                        $this->SetValue('set_280', $datenRaw[280] - 3600);
-                        break;
-                    case 'set_281':
-                        $this->SetValue('set_281', $datenRaw[281] - 3600);
-                        break;
-                    case 'set_282':
-                        $this->SetValue('set_282', $datenRaw[282] - 3600);
-                        break;
+            case 'Heizung':
+            case 'Warmwasser':
+            case 'Kuehlung':
+            case 'Tempset':
+            case 'Wset':
+                $index = $mode == 'Tempset' ? 1 : ($mode == 'Wset' ? 2 : ($mode == 'Heizung' ? 3 : ($mode == 'Warmwasser' ? 4 : 108)));
+                $value = $datenRaw[$index];
+                if ($mode == 'Tempset') {
+                    $value *= 0.1;
+                    if ($value > 429496000) {
+                        $value -= 4294967296;
+                        $value *= 0.1;
+                    }
+                } elseif ($mode == 'Wset') {
+                    $value *= 0.1;
+                }
+                $this->SetValue($mode, $value);
+                $this->SendDebug("Parameter $mode", "Wert des Parameters $mode: $value von der Lux geholt und in Variable gespeichert", 0);
+                break;
+            default:
+                if (strpos($mode, 'set_') === 0) {
+                    $index = (int) substr($mode, 4);
+                    if ($index >= 223 && $index <= 282) {
+                        $this->SetValue($mode, $datenRaw[$index] - 3600);
+                    }
+                }
+                break;
         }
     }
 
