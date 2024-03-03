@@ -132,6 +132,12 @@ class WPLUX extends IPSModule
         {
             $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
             $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
+            $Value = $this->GetValue('223');
+            $Value = $this->GetValue('224');
+            $this->getParameter('223');
+            $this->getParameter('224');
+
+
             $this->EnableAction('223');
             $this->EnableAction('224');
         } 
@@ -654,6 +660,16 @@ class WPLUX extends IPSModule
             {
                 $this->SetValue('WWsetVariable', $daten_raw[$i] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: ".$daten_raw[$i] * 0.1." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '223' && $i == 223) // Warmwasseranpassung
+            {
+                $this->SetValue('223', $daten_raw[$i]);
+                $this->SendDebug("Woche von", "Unix Zeit Woche von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '224' && $i == 224) // Warmwasseranpassung
+            {
+                $this->SetValue('224', $daten_raw[$i]);
+                $this->SendDebug("Woche bis", "Unix Zeit Woche bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
