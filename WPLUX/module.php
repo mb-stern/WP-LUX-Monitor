@@ -130,8 +130,8 @@ class WPLUX extends IPSModule
             
         if ($timerVisible) 
         {
-            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10)
-            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9)
+            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
+            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
             $this->EnableAction('223');
             $this->EnableAction('224');
         } 
