@@ -130,16 +130,20 @@ class WPLUX extends IPSModule
             
         if ($timerVisible) 
         {
-            $this->configureWeeklySchedule();
+            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10)
+            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9)
+            $this->EnableAction('223');
+            $this->EnableAction('224');
         } 
         else 
         {
-            $this->resetWeeklySchedule();
+            $this->UnregisterVariable('223');
+            $this->UnregisterVariable('224');
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 6);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
         } 
         else 
         {
@@ -148,7 +152,7 @@ class WPLUX extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 7);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
         } 
         else 
         {
@@ -158,9 +162,6 @@ class WPLUX extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
-        
-        $this->configureWeeklySchedule();
-        
         // Überprüfe, ob der Wert der Steuervariablen geändert hat und senden an die Funktion setParameter
         if ($Ident == 'HeizungVariable') 
         {
@@ -734,7 +735,7 @@ class WPLUX extends IPSModule
         IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 1, 23, 45, 0, 236); //Um 22:30 Aktion mit ID 230
 
     }
-    */
+    
     
     private function configureWeeklySchedule() // Wochenplaner erstellen
     {
@@ -782,8 +783,8 @@ class WPLUX extends IPSModule
                     $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
                 }
             }
-            return $WochenplanID;
     }
+   
 
     public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keine Einschränkungen
     {
@@ -799,4 +800,5 @@ class WPLUX extends IPSModule
         $this->SendDebug("Wochenplan gelöscht", "Der Wochnplan wurde gelöscht", 0);
     
     }
+     */
 }
