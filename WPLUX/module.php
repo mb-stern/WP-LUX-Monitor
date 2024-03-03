@@ -223,11 +223,12 @@ class WPLUX extends IPSModule
                 '277' => 'Samstag von Set 1', '278' => 'Samstag bis Set 1', '279' => 'Samstag von Set 2', '280' => 'Samstag bis Set 2', '281' => 'Samstag von Set 3', '282' => 'Samstag bis Set 3'
             ];
 
-            $position = 42; //ab dieser Position im Objektbaum
+            $position = -42; //ab dieser Position im Objektbaum
             
             foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', 0);
                 $this->getParameter($id);
                 $this->GetValue($id);
                 $this->EnableAction($id);
