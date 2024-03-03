@@ -21,7 +21,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyBoolean('TimerVisible', false);
+        $this->RegisterPropertyBoolean('TimerWeekVisible', false);
 
         $this->RegisterAttributeFloat("start_value_out", 0);
         $this->RegisterAttributeFloat("start_kwh_in", 0);
