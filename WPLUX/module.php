@@ -153,7 +153,7 @@ class WPLUX extends IPSModule
             $this->RegisterVariableInteger('225', 'Woche von Set 2', '~UnixTimestampTime', -8);
             $this->RegisterVariableInteger('226', 'Woche bis Set 2', '~UnixTimestampTime', -7);
             $this->RegisterVariableInteger('227', 'Woche von Set 3', '~UnixTimestampTime', -6);
-            $this->RegisterVariableInteger('228', 'Woche bis Set 3', '~UnixTimestampTime', -59);
+            $this->RegisterVariableInteger('228', 'Woche bis Set 3', '~UnixTimestampTime', -5);
             $this->getParameter('223');
             $this->getParameter('224');
             $this->getParameter('225');
