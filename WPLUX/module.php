@@ -251,26 +251,24 @@ class WPLUX extends IPSModule
     public function RequestAction($Ident, $Value) 
     {
         $parameterMapping = [
-            'Heizung' => 'Heizung',
-            'Kuehlung' => 'Kuehlung',
-            'Warmwasser' => 'Warmwasser',
-            'Wset' => 'Wset',
-            'Tempset' => 'Tempset',
-            'set_223' => 'set_223', 'set_224' => 'set_224', 'set_225' => 'set_225', 'set_226' => 'set_226', 'set_227' => 'set_227', 'set_228' => 'set_228', 'set_229' => 'set_229', 'set_230' => 'set_230', 'set_231' => 'set_231', 'set_232' => 'set_232', 'set_233' => 'set_233',
-            'set_234' => 'set_234', 'set_235' => 'set_235', 'set_236' => 'set_236', 'set_237' => 'set_237', 'set_238' => 'set_238', 'set_239' => 'set_239', 'set_240' => 'set_240', 'set_241' => 'set_241', 'set_242' => 'set_242', 'set_243' => 'set_243', 'set_244' => 'set_244',
-            'set_245' => 'set_245', 'set_246' => 'set_246', 'set_247' => 'set_247', 'set_248' => 'set_248', 'set_249' => 'set_249', 'set_250' => 'set_250', 'set_251' => 'set_251', 'set_252' => 'set_252', 'set_253' => 'set_253', 'set_254' => 'set_254', 'set_255' => 'set_255',
-            'set_256' => 'set_256', 'set_257' => 'set_257', 'set_258' => 'set_258', 'set_259' => 'set_259', 'set_260' => 'set_260', 'set_261' => 'set_261', 'set_262' => 'set_262', 'set_263' => 'set_263', 'set_264' => 'set_264', 'set_265' => 'set_265', 'set_266' => 'set_266',
-            'set_267' => 'set_267', 'set_268' => 'set_268', 'set_269' => 'set_269', 'set_270' => 'set_270', 'set_271' => 'set_271', 'set_272' => 'set_272', 'set_273' => 'set_273', 'set_274' => 'set_274', 'set_275' => 'set_275', 'set_276' => 'set_276', 'set_277' => 'set_277',
-            'set_278' => 'set_278', 'set_279' => 'set_279', 'set_280' => 'set_280', 'set_281' => 'set_281', 'set_282' => 'set_282'
+            'Heizung', 'Kuehlung', 'Warmwasser', 'Wset', 'Tempset',
+            'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228', 'set_229', 'set_230',
+            'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238',
+            'set_239', 'set_240', 'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246',
+            'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254',
+            'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262',
+            'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
+            'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278',
+            'set_279', 'set_280', 'set_281', 'set_282'
         ];
 
-        if (array_key_exists($Ident, $parameterMapping)) {
-            $parameterName = $parameterMapping[$Ident];
-            $this->setParameter($parameterName, $Value);
-            $this->getParameter($parameterName);
-            $this->SendDebug("Parameter $parameterName", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
+        if (in_array($Ident, $parameterMapping)) {
+            $this->setParameter($Ident, $Value);
+            $this->getParameter($Ident);
+            $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
         }
     }
+
     
     public function Update()
     {
