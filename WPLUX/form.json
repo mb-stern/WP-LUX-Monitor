@@ -20,8 +20,23 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzliche Funktionen aktivieren/deaktivieren",
+            "caption": "Zusätzliche Funktionen aktivieren",
             "items": [
+                {
+                    "type": "CheckBox",
+                    "name": "TimerWeekVisible",
+                    "caption": "Timer Woche aktivieren (6 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "TimerWeekendVisible",
+                    "caption": "Timer Mo-Fr/Sa+So aktivieren (12 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "TimerDayVisible",
+                    "caption": "Timer Tage aktivieren (42 Var.)"
+                },
                 {
                     "type": "CheckBox",
                     "name": "HeizungVisible",
@@ -61,27 +76,6 @@
                     "type": "Button",
                     "label": "JAZ-Berechnung zurücksetzen",
                     "onClick": "WPLUX_reset_jaz($id);"
-                }
-                ]
-        },
-        {
-            "type": "ExpansionPanel",
-            "caption": "Timer aktivieren",
-            "items": [
-                {
-                    "type": "CheckBox",
-                    "name": "TimerWeekVisible",
-                    "caption": "Timer Woche aktivieren (6 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "TimerWeekendVisible",
-                    "caption": "Timer Mo-Fr/Sa+So aktivieren (12 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "TimerDayVisible",
-                    "caption": "Timer Tage aktivieren (42 Var.)"
                 }
                 ]
         },
