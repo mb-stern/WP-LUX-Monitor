@@ -665,6 +665,7 @@ class WPLUX extends IPSModule
             case '279': case '280': case '281': case '282':
                 $weekModeValue = $datenRaw[(int)$mode] - 3600;  // Unix-Zeit korrigieren
                 $this->SetValue('set_' . $mode, $weekModeValue);
+                $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
         }
     }
