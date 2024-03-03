@@ -162,10 +162,10 @@ class WPLUX extends IPSModule
 
             foreach ($ids as $id => $name) 
             {
-                $this->RegisterVariableInteger('set_'.$id, $name, '~UnixTimestampTime', $position++);
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
-                $this->GetValue('set_'.$id);
-                $this->EnableAction('set_'.$id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
             }
         } 
         else 
@@ -177,7 +177,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id) 
             {
-                $this->UnregisterVariable('set_'.$id);
+                $this->UnregisterVariable($id);
             }
         }
 
