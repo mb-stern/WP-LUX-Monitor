@@ -127,23 +127,6 @@ class WPLUX extends IPSModule
         {
             $this->UnregisterVariable('WWsetVariable');
         }
-            
-        if ($timerVisible) 
-        {
-            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
-            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
-            $this->getParameter('223');
-            $this->getParameter('224');
-            $Value = $this->GetValue('223');
-            $Value = $this->GetValue('224');
-            $this->EnableAction('223');
-            $this->EnableAction('224');
-        } 
-        else 
-        {
-            $this->UnregisterVariable('223');
-            $this->UnregisterVariable('224');
-        }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
@@ -161,6 +144,23 @@ class WPLUX extends IPSModule
         else 
         {
             $this->UnregisterVariable('jazfaktor');
+        }
+
+        if ($timerVisible) 
+        {
+            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
+            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
+            $this->getParameter('223');
+            $this->getParameter('224');
+            $Value = $this->GetValue('223');
+            $Value = $this->GetValue('224');
+            $this->EnableAction('223');
+            $this->EnableAction('224');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('223');
+            $this->UnregisterVariable('224');
         }
     }
 
@@ -205,6 +205,20 @@ class WPLUX extends IPSModule
             $this->setParameter('Tempset', $Value);
             $this->getParameter('Tempset');
             $this->SendDebug("Temperaturanpassung", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '223') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('223', $Value);
+            $this->getParameter('223');
+            $this->SendDebug("Zeit Woche von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '224') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('224', $Value);
+            $this->getParameter('224');
+            $this->SendDebug("Zeit Woche bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
     }
     
@@ -499,20 +513,11 @@ class WPLUX extends IPSModule
             case 'Kuehlung':
                 $parameter = 108;
                 break;
-            case 'TimeID_229':
-                $parameter = 229;
+            case '223':
+                $parameter = 223;
                 break;
-            case 'TimeID_230':
-                $parameter = 230;
-                break;
-            case 'TimeID_236':
-                $parameter = 236;
-                break;
-            case 'TimeID_235':
-                $parameter = 235;
-                break;
-            case 'TimeID_236':
-                $parameter = 236;
+            case '224':
+                $parameter = 224;
                 break;
 
             default:
@@ -542,26 +547,14 @@ class WPLUX extends IPSModule
                         $value *= 10; 
                     }
                 break;
-                case '229':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Einschalten
+                case '223':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche Einschalten
                     {
                         $value += 3600; 
                     }
                     break;
-                case '230':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Ausschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '235':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Einschalten
-                    {
-                        $value += 3600;
-                    }
-                    break;
-                case '236':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Ausschalten
+                case '224':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche Ausschalten
                     {
                         $value += 3600; 
                     }
