@@ -679,7 +679,7 @@ class WPLUX extends IPSModule
             case 'set_250':
                 $parameter = 250;
                 if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
-                break
+                break;
                 case 'set_251':
                     $parameter = 251;
                     if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
