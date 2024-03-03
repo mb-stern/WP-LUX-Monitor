@@ -148,19 +148,39 @@ class WPLUX extends IPSModule
 
         if ($timerVisible) 
         {
-            $this->RegisterVariableInteger('223', 'Woche von', '~UnixTimestampTime', -10);
-            $this->RegisterVariableInteger('224', 'Woche bis', '~UnixTimestampTime', -9);
+            $this->RegisterVariableInteger('223', 'Woche von Set1', '~UnixTimestampTime', -10);
+            $this->RegisterVariableInteger('224', 'Woche bis Set1', '~UnixTimestampTime', -9);
+            $this->RegisterVariableInteger('223', 'Woche von Set2', '~UnixTimestampTime', -8);
+            $this->RegisterVariableInteger('224', 'Woche bis Set2', '~UnixTimestampTime', -7);
+            $this->RegisterVariableInteger('223', 'Woche von Set3', '~UnixTimestampTime', -6);
+            $this->RegisterVariableInteger('224', 'Woche bis Set3', '~UnixTimestampTime', -59);
             $this->getParameter('223');
             $this->getParameter('224');
+            $this->getParameter('225');
+            $this->getParameter('226');
+            $this->getParameter('227');
+            $this->getParameter('228');
             $Value = $this->GetValue('223');
             $Value = $this->GetValue('224');
+            $Value = $this->GetValue('225');
+            $Value = $this->GetValue('226');
+            $Value = $this->GetValue('227');
+            $Value = $this->GetValue('228');
             $this->EnableAction('223');
             $this->EnableAction('224');
+            $this->EnableAction('225');
+            $this->EnableAction('226');
+            $this->EnableAction('227');
+            $this->EnableAction('228');
         } 
         else 
         {
             $this->UnregisterVariable('223');
             $this->UnregisterVariable('224');
+            $this->UnregisterVariable('225');
+            $this->UnregisterVariable('226');
+            $this->UnregisterVariable('227');
+            $this->UnregisterVariable('228');
         }
     }
 
@@ -519,6 +539,18 @@ class WPLUX extends IPSModule
             case '224':
                 $parameter = 224;
                 break;
+            case '223':
+                $parameter = 225;
+                break;
+            case '224':
+                $parameter = 226;
+                break;
+            case '223':
+                $parameter = 227;
+                break;
+            case '224':
+                $parameter = 228;
+                break;
 
             default:
                 $parameter = 0;
@@ -548,18 +580,43 @@ class WPLUX extends IPSModule
                     }
                 break;
                 case '223':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche Einschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 1 Einschalten
                     {
                         $value += 3600; 
                     }
                     break;
                 case '224':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche Ausschalten
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 1 Ausschalten
                     {
                         $value += 3600; 
                     }
                     break;
-                    default:
+                case '225':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 2 Einschalten
+                    {
+                        $value += 3600; 
+                    }
+                    break;
+                case '226':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 2 Ausschalten
+                    {
+                        $value += 3600; 
+                    }
+                    break;
+                case '227':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 3 Einschalten
+                    {
+                        $value += 3600; 
+                    }
+                    break;
+                case '228':
+                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 3 Ausschalten
+                    {
+                        $value += 3600; 
+                    }
+                    break;
+
+                default:
                     // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
                     $value = ($value >= 0 && $value <= 4) ? $value : 0;
                     break;
@@ -655,12 +712,32 @@ class WPLUX extends IPSModule
             elseif ($mode == '223' && $i == 223) // Warmwasseranpassung
             {
                 $this->SetValue('223', $daten_raw[$i] -= 3600);
-                $this->SendDebug("Woche von", "Unix Zeit Woche von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Woche von", "Unix Zeit Woche 1 von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == '224' && $i == 224) // Warmwasseranpassung
             {
                 $this->SetValue('224', $daten_raw[$i] -= 3600);
-                $this->SendDebug("Woche bis", "Unix Zeit Woche bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+                $this->SendDebug("Woche bis", "Unix Zeit Woche 1 bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '225' && $i == 225) // Warmwasseranpassung
+            {
+                $this->SetValue('225', $daten_raw[$i] -= 3600);
+                $this->SendDebug("Woche von", "Unix Zeit Woche 2 von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '226' && $i == 226) // Warmwasseranpassung
+            {
+                $this->SetValue('226', $daten_raw[$i] -= 3600);
+                $this->SendDebug("Woche bis", "Unix Zeit Woche 2 bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '227' && $i == 227) // Warmwasseranpassung
+            {
+                $this->SetValue('227', $daten_raw[$i] -= 3600);
+                $this->SendDebug("Woche von", "Unix Zeit Woche 3 von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
+            }
+            elseif ($mode == '228' && $i == 228) // Warmwasseranpassung
+            {
+                $this->SetValue('228', $daten_raw[$i] -= 3600);
+                $this->SendDebug("Woche bis", "Unix Zeit Woche 3 bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
     }
@@ -722,90 +799,4 @@ class WPLUX extends IPSModule
         $this->WriteAttributeFloat('start_value_out', 0);
         $this->SendDebug("JAZ-Reset", "Der Reset der Start-Werte zur JAZ-Berechnung wurde durchgeführt", 0);
     }
-
-    /*
-    public function configureWeeklySchedule() //Wochenplaner
-    {
-       //Wochenplan Ereignis erstellen
-        $Wochenplan = IPS_CreateEvent(2);
-        IPS_SetEventScheduleAction($Wochenplan, 229, "Ein", 0xFF0000, "FHT_SetTemperature(\$_IPS['TARGET'], 22.5);");
-        IPS_SetEventScheduleAction($Wochenplan, 230, "Aus", 0x0000FF, "FHT_SetTemperature(\$_IPS['TARGET'], 17);");
-
-
-        //Anlegen von Gruppen und den Ereigniszeipunkten
-        IPS_SetEventScheduleGroup($Wochenplan, 0, 31); //Ereignis ID 0, Mo - Fr (1 + 2 + 4 + 8 + 16)
-        IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 0, 2, 0, 0, 229); //Um 8:00 Aktion mit ID 229
-        IPS_SetEventScheduleGroupPoint($Wochenplan, 0, 23, 15, 0, 0, 230); //Um 8:00 Aktion mit ID 230
-        
-        IPS_SetEventScheduleGroup($Wochenplan, 1, 96); //Ereignis ID 1, Sa + So (32 + 64)
-        IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 0, 1, 30, 0, 235); //Um 22:30 Aktion mit ID 229
-        IPS_SetEventScheduleGroupPoint($Wochenplan, 1, 1, 23, 45, 0, 236); //Um 22:30 Aktion mit ID 230
-
-    }
-    
-    
-    private function configureWeeklySchedule() // Wochenplaner erstellen
-    {
-        // Versuchen, den Wochenplan zu finden
-        $WochenplanID = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
-        
-        // Wenn der Wochenplan nicht existiert, erstelle einen neuen
-        $WochenplanID = $WochenplanID ?: IPS_CreateEvent(2);
-
-        // Setze die erforderlichen Attribute für den Wochenplan
-        IPS_SetIdent($WochenplanID, 'Wochenplan');
-        IPS_SetName($WochenplanID, 'Wochenplan');
-        IPS_SetEventActive($WochenplanID, true);
-            
-        IPS_SetEventScheduleAction($WochenplanID, 229, "Ein (nur für Mo-Fr)", 0xFF0000, '');
-        IPS_SetEventScheduleAction($WochenplanID, 230, "Aus (nur für Mo-Fr)", 0x0000FF, '');
-        IPS_SetEventScheduleAction($WochenplanID, 235, "Ein (nur für Sa+So)", 0xFF0001, '');
-        IPS_SetEventScheduleAction($WochenplanID, 236, "Aus (nur für Sa+So)", 0x0000FE, '');
-        
-        // Gruppen und Zeitpunkte definieren
-            $groups = 
-            [
-                ['days' => [1, 2, 3, 4, 5], 'actions' => [[0, 0, 1, 229], [23, 59, 59, 230]]], // Mo - Fr
-                ['days' => [6, 7], 'actions' => [[0, 0, 0, 235], [23, 59, 58, 236]]] // Sa + So
-            ];
-            
-            
-            foreach ($groups as $group) 
-            {
-                $days = array_sum(array_map(fn($day) => pow(2, $day-1), $group['days']));
-                IPS_SetEventScheduleGroup($WochenplanID, $group['days'][0], $days);
-                
-                foreach ($group['actions'] as $idx => $action) 
-                {
-                    // Konvertiere normale Zeit in Unix-Zeit
-                    $value = mktime($action[0], $action[1], $action[2], 1, 1, 1970);
-                    
-                    // Ereigniszeitpunkt setzen (mit normaler Zeit)
-                    IPS_SetEventScheduleGroupPoint($WochenplanID, $group['days'][0], $idx, $action[0], $action[1], $action[2], $action[3]);
-                    $this->SendDebug("Zeitschaltprogramm", "Schaltzeiten gesetzt, Ereignis-ID: ".$WochenplanID.", id: ".$group['days'][0].", idx: ".$idx.", Stunde: ".$action[0].", Minuten: ".$action[1].", Sekunden: ".$action[2].", Action-ID: ".$action[3]."", 0);
-                
-                    
-                    // Setze die Unix-Zeit als Parameter für die entsprechende ID
-                    $this->setParameter('TimeID_' . $action[3], $value);
-                    $this->SendDebug("An Funktion senden", "Time-ID: ".'TimeID_' . $action[3]." Unix-Time: ".$value."", 0);
-                }
-            }
-    }
-   
-
-    public function resetWeeklySchedule() // Wochenplaner löschen und alle Programmierzeiten auf 0 Uhr stellen, dh keine Einschränkungen
-    {
-        
-        $this->setParameter('TimeID_229', '-3600'); //Start und Endzeit auf 0 Uhr zurückgestellt
-        $this->setParameter('TimeID_230', '-3600');
-        $this->setParameter('TimeID_235', '-3600');
-        $this->setParameter('TimeID_236', '-3600');
-        $this->SendDebug("Timer deaktiviert", "Alle Timer wurden auf 0 Uhr zurück gesetzt, das Heizprogramm hat keine Einschränkung", 0);
-        
-        $Wochenplan = @IPS_GetEventIDByName('Wochenplan', $this->GetIDForIdent('TimerVisible'));
-        IPS_DeleteEvent($Wochenplan);
-        $this->SendDebug("Wochenplan gelöscht", "Der Wochnplan wurde gelöscht", 0);
-    
-    }
-     */
 }
