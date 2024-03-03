@@ -177,7 +177,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id) 
             {
-                $this->UnregisterVariable(.$id);
+                $this->UnregisterVariable($id);
             }
         }
 
