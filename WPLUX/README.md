@@ -103,6 +103,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.4 (3.03.2024)
+
+- Es kann nun die interne Timerfunktion der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich.
+
 Version 3.3 (25.02.2024)
 
 - Berechnung des JAZ jetzt durch auswählen einer externen Variable für die Eingangsleistung in kWh möglich. Ebenfalls besteht die Möglichkeit, den JAZ-Faktor zu reseten, um zum Beispiel bei Jahresende oder bei Bedarf die Berechnung neu zu starten.
