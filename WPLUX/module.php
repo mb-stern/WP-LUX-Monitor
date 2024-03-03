@@ -542,25 +542,25 @@ class WPLUX extends IPSModule
                         $value *= 10; 
                     }
                 break;
-                case 'TimeID_229':
+                case '229':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Einschalten
                     {
                         $value += 3600; 
                     }
                     break;
-                case 'TimeID_230':
+                case '230':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Mo-Fr Ausschalten
                     {
                         $value += 3600; 
                     }
                     break;
-                case 'TimeID_235':
+                case '235':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Einschalten
                     {
                         $value += 3600;
                     }
                     break;
-                case 'TimeID_236':
+                case '236':
                     if ($value >= -3600 && $value <= 82800) // Unix-Zeit Sa+So Ausschalten
                     {
                         $value += 3600; 
@@ -661,12 +661,12 @@ class WPLUX extends IPSModule
             }
             elseif ($mode == '223' && $i == 223) // Warmwasseranpassung
             {
-                $this->SetValue('223', $daten_raw[$i]);
+                $this->SetValue('223', $daten_raw[$i] -= 3600);
                 $this->SendDebug("Woche von", "Unix Zeit Woche von: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
             elseif ($mode == '224' && $i == 224) // Warmwasseranpassung
             {
-                $this->SetValue('224', $daten_raw[$i]);
+                $this->SetValue('224', $daten_raw[$i] -= 3600);
                 $this->SendDebug("Woche bis", "Unix Zeit Woche bis: ".$daten_raw[$i]." von der Lux geholt und in Variable gespeichert", 0);
             }
         }
