@@ -148,12 +148,12 @@ class WPLUX extends IPSModule
 
         if ($timerVisible) 
         {
-            $this->RegisterVariableInteger('223', 'Woche von Set1', '~UnixTimestampTime', -10);
-            $this->RegisterVariableInteger('224', 'Woche bis Set1', '~UnixTimestampTime', -9);
-            $this->RegisterVariableInteger('223', 'Woche von Set2', '~UnixTimestampTime', -8);
-            $this->RegisterVariableInteger('224', 'Woche bis Set2', '~UnixTimestampTime', -7);
-            $this->RegisterVariableInteger('223', 'Woche von Set3', '~UnixTimestampTime', -6);
-            $this->RegisterVariableInteger('224', 'Woche bis Set3', '~UnixTimestampTime', -59);
+            $this->RegisterVariableInteger('223', 'Woche von Set 1', '~UnixTimestampTime', -10);
+            $this->RegisterVariableInteger('224', 'Woche bis Set 1', '~UnixTimestampTime', -9);
+            $this->RegisterVariableInteger('225', 'Woche von Set 2', '~UnixTimestampTime', -8);
+            $this->RegisterVariableInteger('226', 'Woche bis Set 2', '~UnixTimestampTime', -7);
+            $this->RegisterVariableInteger('227', 'Woche von Set 3', '~UnixTimestampTime', -6);
+            $this->RegisterVariableInteger('228', 'Woche bis Set 3', '~UnixTimestampTime', -59);
             $this->getParameter('223');
             $this->getParameter('224');
             $this->getParameter('225');
