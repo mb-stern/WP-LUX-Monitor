@@ -202,7 +202,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'
+                '229', '230', '231', '232', '233', '234', '235', '236', '237', '238', '239', '240'
             ];
             
             foreach ($ids as $id) 
