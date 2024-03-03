@@ -153,9 +153,9 @@ class WPLUX extends IPSModule
         if ($timerWeekVisible) 
         {
             $ids = [
-                'set_223' => 'Woche von Set 1', 'set_224' => 'Woche bis Set 1',
-                'set_225' => 'Woche von Set 2', 'set_226' => 'Woche bis Set 2',
-                'set_227' => 'Woche von Set 3', 'set_228' => 'Woche bis Set 3'
+                'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
+                'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)',
+                'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
             ];
             
             $position = -60; //ab dieser Position im Objektbaum
@@ -184,8 +184,8 @@ class WPLUX extends IPSModule
         if ($timerWeekendVisible) 
         {
             $ids = [
-                'set_229' => 'Mo-Fr von Set 1', 'set_230' => 'Mo-Fr bis Set 1', 'set_231' => 'Mo-Fr von Set 2', 'set_232' => 'Mo-Fr bis Set 2', 'set_233' => 'Mo-Fr von Set 3', 'set_234' => 'Mo-Fr bis Set 3',
-                'set_235' => 'Sa+So von Set 1', 'set_236' => 'Sa+So bis Set 1', 'set_237' => 'Sa+So von Set 2', 'set_238' => 'Sa+So bis Set 2', 'set_239' => 'Sa+So von Set 3', 'set_240' => 'Sa+So bis Set 3'
+                'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)',
+                'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)', 'set_239' => 'Sa+So von (3)', 'set_240' => 'Sa+So bis (3)'
             ];
 
             $position = -54; //ab dieser Position im Objektbaum
@@ -214,13 +214,13 @@ class WPLUX extends IPSModule
         if ($timerDayVisible) 
         {
             $ids = [
-                'set_241' => 'Sonntag von Set 1', 'set_242' => 'Sonntag bis Set 1', 'set_243' => 'Sonntag von Set 2', 'set_244' => 'Sonntag bis Set 2', 'set_245' => 'Sonntag von Set 3', 'set_246' => 'Sonntag bis Set 3',
-                'set_247' => 'Montag von Set 1', 'set_248' => 'Montag bis Set 1', 'set_249' => 'Montag von Set 2', 'set_250' => 'Montag bis Set 2', 'set_251' => 'Montag von Set 3', 'set_252' => 'Montag bis Set 3',
-                'set_253' => 'Dienstag von Set 1', 'set_254' => 'Dienstag bis Set 1', 'set_255' => 'Dienstag von Set 2', 'set_256' => 'Dienstag bis Set 2', 'set_257' => 'Dienstag von Set 3', 'set_258' => 'Dienstag bis Set 3',
-                'set_259' => 'Mittwoch von Set 1', 'set_260' => 'Mittwoch bis Set 1', 'set_261' => 'Mittwoch von Set 2', 'set_262' => 'Mittwoch bis Set 2', 'set_263' => 'Mittwoch von Set 3', 'set_264' => 'Mittwoch bis Set 3',
-                'set_265' => 'Donnerstag von Set 1', 'set_266' => 'Donnerstag bis Set 1', 'set_267' => 'Donnerstag von Set 2', 'set_268' => 'Donnerstag bis Set 2', 'set_269' => 'Donnerstag von Set 3', 'set_270' => 'Donnerstag bis Set 3',
-                'set_271' => 'Freitag von Set 1', 'set_272' => 'Freitag bis Set 1', 'set_273' => 'Freitag von Set 2', 'set_274' => 'Freitag bis Set 2', 'set_275' => 'Freitag von Set 3', 'set_276' => 'Freitag bis Set 3',
-                'set_277' => 'Samstag von Set 1', 'set_278' => 'Samstag bis Set 1', 'set_279' => 'Samstag von Set 2', 'set_280' => 'Samstag bis Set 2', 'set_281' => 'Samstag von Set 3', 'set_282' => 'Samstag bis Set 3'
+                'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
+                'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)', 'set_251' => 'Montag von (3)', 'set_252' => 'Montag bis (3)',
+                'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)', 'set_257' => 'Dienstag von (3)', 'set_258' => 'Dienstag bis (3)',
+                'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_261' => 'Mittwoch von (2)', 'set_262' => 'Mittwoch bis (2)', 'set_263' => 'Mittwoch von (3)', 'set_264' => 'Mittwoch bis (3)',
+                'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_267' => 'Donnerstag von (2)', 'set_268' => 'Donnerstag bis (2)', 'set_269' => 'Donnerstag von (3)', 'set_270' => 'Donnerstag bis (3)',
+                'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)', 'set_273' => 'Freitag von (2)', 'set_274' => 'Freitag bis (2)', 'set_275' => 'Freitag von (3)', 'set_276' => 'Freitag bis (3)',
+                'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)', 'set_281' => 'Samstag von (3)', 'set_282' => 'Samstag bis (3)'
             ];
 
             $position = -42; //ab dieser Position im Objektbaum
@@ -567,7 +567,8 @@ class WPLUX extends IPSModule
             $parameter = 108;
             $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
             break;
-        default:
+        
+        default: //Hier werden die ganzen Timer gespeichert
             if (strpos($type, 'set_') === 0) {
                 $parameter = (int) substr($type, 4);
                 if ($parameter >= 223 && $parameter <= 282 && $value >= -3600 && $value <= 82800) {
@@ -643,7 +644,8 @@ class WPLUX extends IPSModule
                 $this->SetValue($mode, $value);
                 $this->SendDebug("Parameter $mode", "Wert des Parameters $mode: $value von der Lux geholt und in Variable gespeichert", 0);
                 break;
-            default:
+            
+                default: //Hier werden die ganzen Timer geholt
                 if (strpos($mode, 'set_') === 0) {
                     $index = (int) substr($mode, 4);
                     if ($index >= 223 && $index <= 282) {
