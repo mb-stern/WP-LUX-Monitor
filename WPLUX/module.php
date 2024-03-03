@@ -544,15 +544,19 @@ class WPLUX extends IPSModule
 
         // Daten senden
         $msg = pack('N*', 3002); // 3002 senden aktivieren
-        $send = socket_write($socket, $msg, 4);
+        socket_write($socket, $msg, 4);
 
         // Parameter je nach Typ festlegen
+        $parameter = 0;
+
         switch ($type) {
             case 'Tempset':
                 $parameter = 1;
+                if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
                 break;
             case 'Wset':
                 $parameter = 2;
+                if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
                 break;
             case 'Heizung':
                 $parameter = 3;
@@ -562,111 +566,35 @@ class WPLUX extends IPSModule
                 break;
             case 'Kuehlung':
                 $parameter = 108;
+                $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
-            case '223':
-                $parameter = 223;
-                break;
-            case '224':
-                $parameter = 224;
-                break;
-            case '225':
-                $parameter = 225;
-                break;
-            case '226':
-                $parameter = 226;
-                break;
-            case '227':
-                $parameter = 227;
-                break;
-            case '228':
-                $parameter = 228;
-                break;
-
-            default:
-                $parameter = 0;
+            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
+            case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
+            case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
+            case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
+            case '279': case '280': case '281': case '282':
+                $parameter = (int)$type;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit anpassen
                 break;
         }
 
         // SetParameter senden
         $msg = pack('N*', $parameter);
-        $send = socket_write($socket, $msg, 4);
+        socket_write($socket, $msg, 4);
 
-        // Auswahl senden
-        switch ($type) 
-        {
-                case 'Kuehlung':
-                    $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
-                    break;
-                case 'Tempset':
-                    if ($value >= -5 && $value <= 5) // Wert für Temperaturkorrektur
-                    {
-                        $value *= 10; 
-                    }
-                    break;
-                case 'Wset':
-                    if ($value >= 30 && $value <= 65) // Wert für Warmwasserkorrektur
-                    {
-                        $value *= 10; 
-                    }
-                break;
-                case '223':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 1 Einschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '224':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 1 Ausschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '225':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 2 Einschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '226':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 2 Ausschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '227':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 3 Einschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-                case '228':
-                    if ($value >= -3600 && $value <= 82800) // Unix-Zeit Woche 3 Ausschalten
-                    {
-                        $value += 3600; 
-                    }
-                    break;
-
-                default:
-                    // Fallback auf 0, wenn der Wert nicht innerhalb des erwarteten Bereichs liegt
-                    $value = ($value >= 0 && $value <= 4) ? $value : 0;
-                    break;
-        }
-
-        //Debug senden
-        $this->SendDebug("Socketverbindung", "Der Parameter: ".$parameter." mit dem Wert: ".$value." wurde an den Socket gesendet", 0);
-
-        $msg = pack('N*', $value); // Wert packen
-        $send = socket_write($socket, $msg, 4); // Daten senden
+        // Wert senden
+        $msg = pack('N*', $value);
+        socket_write($socket, $msg, 4);
 
         // Daten vom Socket empfangen und verarbeiten
         socket_recv($socket, $test, 4, MSG_WAITALL);  // Lesen, sollte 3002 zurückkommen
-        $test = unpack('N*', $test);
-
         socket_recv($socket, $test, 4, MSG_WAITALL); // Lesen, sollte Status zurückkommen
-        $test = unpack('N*', $test);
 
         // Socket schließen
         socket_close($socket);
+
+        // Debug senden
+        $this->SendDebug("Socketverbindung", "Der Parameter: $parameter mit dem Wert: $value wurde an den Socket gesendet", 0);
     }
 
     private function getParameter($mode) //3003 Werte holen
