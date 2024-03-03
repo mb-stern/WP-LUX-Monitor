@@ -666,7 +666,7 @@ class WPLUX extends IPSModule
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
                 break;
             case 'set_223':
-                $this->SetValue('set_223', $datenRaw[2] -= 3600);
+                $this->SetValue('set_223', $datenRaw[223] -= 3600);
                     break;
 
 
