@@ -519,6 +519,7 @@ class WPLUX extends IPSModule
         $this->SendDebug("Variable aktualisiert", "Variable erstellt/aktualisiert und Profil zugeordnet, ID: ".$id.", Name: ".$ident.", Wert: ".$value."", 0);
     }
     
+    /*
     private function DeleteVariableIfExists($ident)
     {
         $variableID = @IPS_GetObjectIDByIdent($ident, $this->InstanceID);
@@ -531,6 +532,7 @@ class WPLUX extends IPSModule
             $this->SendDebug("Variable gelöscht", "Variable wurde gelöscht da die ID nicht mehr in der ID-Liste vorhanden ist - Variablen-ID: ".$variableID."  Name: ".$ident."", 0);       
         }
     }
+    */
 
     private function setParameter($type, $value) //3002 Werte senden
     {
