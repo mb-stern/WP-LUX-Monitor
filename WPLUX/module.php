@@ -153,9 +153,9 @@ class WPLUX extends IPSModule
         if ($timerWeekVisible) 
         {
             $ids = [
-                'set_223' => 'Woche von Set 1', 'set_224' => 'Woche bis Set 1',
-                'set_225' => 'Woche von Set 2', 'set_226' => 'Woche bis Set 2',
-                'set_227' => 'Woche von Set 3', 'set_228' => 'Woche bis Set 3'
+                '223' => 'Woche von Set 1', '224' => 'Woche bis Set 1',
+                '225' => 'Woche von Set 2', '226' => 'Woche bis Set 2',
+                '227' => 'Woche von Set 3', '228' => 'Woche bis Set 3'
             ];
             
             $position = -60; //ab dieser Position im Objektbaum
@@ -172,7 +172,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
+                '223', '224', '225', '226', '227', '228'
             ];
             
             foreach ($ids as $id) 
@@ -665,7 +665,8 @@ class WPLUX extends IPSModule
             case '279': case '280': case '281': case '282':
                 $weekModeValue = $datenRaw[(int)$mode] - 3600;  // Unix-Zeit korrigieren
                 $this->SetValue('set_' . $mode, $weekModeValue);
-                $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
+                $this->SetValue($mode, $weekModeValue);
+                $this->SendDebug("Timer abgeholt", "Für Variable: ".$mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
         }
     }
