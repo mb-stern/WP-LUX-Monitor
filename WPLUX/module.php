@@ -153,7 +153,7 @@ class WPLUX extends IPSModule
         if ($timerWeekVisible) 
         {
             $ids = [
-                '223' => 'Woche von Set 1', '224' => 'Woche bis Set 1',
+                'set_223' => 'Woche von Set 1', '224' => 'Woche bis Set 1',
                 '225' => 'Woche von Set 2', '226' => 'Woche bis Set 2',
                 '227' => 'Woche von Set 3', '228' => 'Woche bis Set 3'
             ];
@@ -162,22 +162,22 @@ class WPLUX extends IPSModule
 
             foreach ($ids as $id => $name) 
             {
-                $this->RegisterVariableInteger('set_'.$id, $name, '~UnixTimestampTime', $position++);
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
-                $this->GetValue('set_'.$id);
-                $this->EnableAction('set_'.$id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
             }
         } 
         else 
         {
             $ids = 
             [
-                '223', '224', '225', '226', '227', '228'
+                'set_223', '224', '225', '226', '227', '228'
             ];
             
             foreach ($ids as $id) 
             {
-                $this->UnregisterVariable('set_'.$id);
+                $this->UnregisterVariable(.$id);
             }
         }
 
@@ -256,7 +256,7 @@ class WPLUX extends IPSModule
             'WarmwasserVariable' => 'Warmwasser',
             'WWsetVariable' => 'Wset',
             'TempsetVariable' => 'Tempset',
-            '223' => '223', '224' => '224', '225' => '225', '226' => '226', '227' => '227', '228' => '228', '229' => '229', '230' => '230', '231' => '231', '232' => '232', '233' => '233',
+            'set_223' => 'set_223', '224' => '224', '225' => '225', '226' => '226', '227' => '227', '228' => '228', '229' => '229', '230' => '230', '231' => '231', '232' => '232', '233' => '233',
             '234' => '234', '235' => '235', '236' => '236', '237' => '237', '238' => '238', '239' => '239', '240' => '240', '241' => '241', '242' => '242', '243' => '243', '244' => '244',
             '245' => '245', '246' => '246', '247' => '247', '248' => '248', '249' => '249', '250' => '250', '251' => '251', '252' => '252', '253' => '253', '254' => '254', '255' => '255',
             '256' => '256', '257' => '257', '258' => '258', '259' => '259', '260' => '260', '261' => '261', '262' => '262', '263' => '263', '264' => '264', '265' => '265', '266' => '266',
@@ -568,7 +568,13 @@ class WPLUX extends IPSModule
                 $parameter = 108;
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
-            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
+            case 'set_223':
+                $parameter = 223;
+                if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
+                break;
+            
+            /*
+                case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
             case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
@@ -576,6 +582,7 @@ class WPLUX extends IPSModule
                 $parameter = (int)$type;
                 if ($value >= -3600 && $value <= 82800) $value += 3600; // Unix-Zeit korrigieren
                 break;
+                */
         }
 
         // SetParameter senden
@@ -644,7 +651,7 @@ class WPLUX extends IPSModule
                 $tempSetValue = $datenRaw[1] * 0.1;
                 if ($tempSetValue > 429496000) 
                 {
-                    $tempSetValue -= 4294967296;
+                    $tempSetValue $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1); 4294967296;
                     $tempSetValue *= 0.1;
                 } 
                 else 
@@ -658,6 +665,12 @@ class WPLUX extends IPSModule
                 $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
                 break;
+            case 'set_223':
+                $this->SetValue('set_223', $datenRaw[2] -= 3600);
+                    break;
+
+
+                /*
             case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
             case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
@@ -668,6 +681,7 @@ class WPLUX extends IPSModule
                 //$this->SetValue($mode, $weekModeValue);
                 $this->SendDebug("Timer abgeholt", "Für Variable: ".'set_' . $mode." wurde der Wert: ".$weekModeValue." geholt", 0);
                 break;
+                */
         }
     }
 
