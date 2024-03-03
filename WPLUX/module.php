@@ -202,7 +202,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                '229', '230', '231', 'set_232', '233', '234', '235', '236', '237', '238', '239', '240'
+                '229', '230', '231', '232', '233', '234', '235', '236', '237', '238', '239', '240'
             ];
             
             foreach ($ids as $id) 
@@ -256,7 +256,7 @@ class WPLUX extends IPSModule
             'WarmwasserVariable' => 'Warmwasser',
             'WWsetVariable' => 'Wset',
             'TempsetVariable' => 'Tempset',
-            '223' => '223', '224' => '224', '225' => '225', '226' => '226', '227' => '227', '228' => '228', '229' => '229', '230' => '230', '231' => '231', 'set_232' => 'set_232', '233' => '233',
+            '223' => '223', '224' => '224', '225' => '225', '226' => '226', '227' => '227', '228' => '228', '229' => '229', '230' => '230', '231' => '231', 'set_232' => '232', '233' => '233',
             '234' => '234', '235' => '235', '236' => '236', '237' => '237', '238' => '238', '239' => '239', '240' => '240', '241' => '241', '242' => '242', '243' => '243', '244' => '244',
             '245' => '245', '246' => '246', '247' => '247', '248' => '248', '249' => '249', '250' => '250', '251' => '251', '252' => '252', '253' => '253', '254' => '254', '255' => '255',
             '256' => '256', '257' => '257', '258' => '258', '259' => '259', '260' => '260', '261' => '261', '262' => '262', '263' => '263', '264' => '264', '265' => '265', '266' => '266',
@@ -568,7 +568,7 @@ class WPLUX extends IPSModule
                 $parameter = 108;
                 $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
                 break;
-            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case 'set_232': case '233': case '234': case '235': case '236':
+            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
             case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
@@ -658,7 +658,7 @@ class WPLUX extends IPSModule
                 $this->SetValue('WWsetVariable', $datenRaw[2] * 0.1);
                 $this->SendDebug("Warmwasser Soll", "Wert der Warmwassser Solltemperatur: " . $datenRaw[2] * 0.1 . " von der Lux geholt und in Variable gespeichert", 0);
                 break;
-            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case 'set_232': case '233': case '234': case '235': case '236':
+            case '223': case '224': case '225': case '226': case '227': case '228': case '229': case '230': case '231': case '232': case '233': case '234': case '235': case '236':
             case '237': case '238': case '239': case '240': case '241': case '242': case '243': case '244': case '245': case '246': case '247': case '248': case '249': case '250':
             case '251': case '252': case '253': case '254': case '255': case '256': case '257': case '258': case '259': case '260': case '261': case '262': case '263': case '264':
             case '265': case '266': case '267': case '268': case '269': case '270': case '271': case '272': case '273': case '274': case '275': case '276': case '277': case '278':
