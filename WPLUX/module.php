@@ -231,14 +231,42 @@ class WPLUX extends IPSModule
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->setParameter('223', $Value);
             $this->getParameter('223');
-            $this->SendDebug("Zeit Woche von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+            $this->SendDebug("Zeit Woche 1 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
         if ($Ident == '224') 
         {
             // Rufe die Funktion auf und übergebe den neuen Wert
             $this->setParameter('224', $Value);
             $this->getParameter('224');
-            $this->SendDebug("Zeit Woche bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+            $this->SendDebug("Zeit Woche 1 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '225') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('225', $Value);
+            $this->getParameter('225');
+            $this->SendDebug("Zeit Woche 2 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '226') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('226', $Value);
+            $this->getParameter('226');
+            $this->SendDebug("Zeit Woche 2 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '227') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('227', $Value);
+            $this->getParameter('227');
+            $this->SendDebug("Zeit Woche 3 von", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
+        }
+        if ($Ident == '228') 
+        {
+            // Rufe die Funktion auf und übergebe den neuen Wert
+            $this->setParameter('228', $Value);
+            $this->getParameter('228');
+            $this->SendDebug("Zeit Woche 3 bis", "Folgender Wert wird an die Funktion setParameter gesendet: ".$Value."", 0);   
         }
     }
     
