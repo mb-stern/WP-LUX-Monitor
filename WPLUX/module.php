@@ -361,7 +361,7 @@ class WPLUX extends IPSModule
             
             else 
             {
-            $this->DeleteVariableIfExists($varIdent);
+            $this->DeleteVariableIfExists($Ident);
             }
         }
     }
