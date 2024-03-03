@@ -214,7 +214,7 @@ class WPLUX extends IPSModule
         if ($timerDayVisible) 
         {
             $ids = [
-                '241' => 'Sonntag von Set 1', '242' => 'Sonntag bis Set 1', '243' => 'Sonntag von Set 2', '244' => 'Sonntag bis Set 2', '245' => 'Sonntag von Set 3', '246' => 'Sonntag bis Set 3',
+                '241' => 'Sonntag von Set 1','242' => 'Sonntag bis Set 1','243' => 'Sonntag von Set 2','244' => 'Sonntag bis Set 2','245' => 'Sonntag von Set 3','246' => 'Sonntag bis Set 3',
                 '247' => 'Montag von Set 1', '248' => 'Montag bis Set 1', '249' => 'Montag von Set 2', '250' => 'Montag bis Set 2', '251' => 'Montag von Set 3', '252' => 'Montag bis Set 3',
                 '253' => 'Dienstag von Set 1', '254' => 'Dienstag bis Set 1', '255' => 'Dienstag von Set 2', '256' => 'Dienstag bis Set 2', '257' => 'Dienstag von Set 3', '258' => 'Dienstag bis Set 3',
                 '259' => 'Mittwoch von Set 1', '260' => 'Mittwoch bis Set 1', '261' => 'Mittwoch von Set 2', '262' => 'Mittwoch bis Set 2', '263' => 'Mittwoch von Set 3', '264' => 'Mittwoch bis Set 3',
@@ -227,8 +227,7 @@ class WPLUX extends IPSModule
             
             foreach ($ids as $id => $name) 
             {
-                //$this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
-                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', 0);
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
                 $this->GetValue($id);
                 $this->EnableAction($id);
