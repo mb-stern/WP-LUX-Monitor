@@ -248,7 +248,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    public function RequestAction($key, $Value) 
+    public function RequestAction($Ident, $Value) 
 {
     $parameterMapping = [
         'HeizungVariable' => 'Heizung',
@@ -264,8 +264,8 @@ class WPLUX extends IPSModule
         '278' => '278', '279' => '279', '280' => '280', '281' => '281', '282' => '282'
     ];
 
-    if (array_key_exists($key, $parameterMapping)) {
-        $parameterName = $parameterMapping[$key];
+    if (array_key_exists($Ident, $parameterMapping)) {
+        $parameterName = $parameterMapping[$Ident];
         $this->setParameter($parameterName, $Value);
         $this->getParameter($parameterName);
         $this->SendDebug("Parameter $parameterName", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
