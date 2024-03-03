@@ -361,7 +361,8 @@ class WPLUX extends IPSModule
             
             else 
             {
-            $this->DeleteVariableIfExists($Ident);
+            // Variable löschen, da sie nicht mehr in der ID-Liste ist
+            $this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
     }
