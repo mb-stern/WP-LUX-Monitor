@@ -48,11 +48,6 @@
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 {
-                    "type": "CheckBox",
-                    "name": "TimerVisible",
-                    "caption": "Timerfunktion aktivieren"
-                },
-                {
                     "type": "SelectVariable",
                     "name": "kwin",
                     "caption": "Externe Variable zur Berechnung des COP (kW)"
@@ -66,6 +61,17 @@
                     "type": "Button",
                     "label": "JAZ-Berechnung zurücksetzen",
                     "onClick": "WPLUX_reset_jaz($id);"
+                }
+                ]
+        },
+        {
+            "type": "ExpansionPanel",
+            "caption": "Timer aktivieren",
+            "items": [
+                {
+                    "type": "CheckBox",
+                    "name": "TimerWeekVisible",
+                    "caption": "Timerfunktion aktivieren"
                 }
                 ]
         },
