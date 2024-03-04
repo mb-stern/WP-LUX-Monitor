@@ -80,62 +80,62 @@ class WPLUX extends IPSModule
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
         {
-            $this->RegisterVariableInteger('Heizung', 'Modus Heizung', 'WPLUX.Wwhe', 0);
-            $this->getParameter('Heizung');
-            $Value = $this->GetValue('Heizung');
-            $this->EnableAction('Heizung');
+            $this->RegisterVariableInteger('Mode_Heizung', 'Modus Heizung', 'WPLUX.Wwhe', 0);
+            $this->getParameter('Mode_Heizung');
+            $Value = $this->GetValue('Mode_Heizung');
+            $this->EnableAction('Mode_Heizung');
         } 
         else 
         {
-            $this->UnregisterVariable('Heizung');
+            $this->UnregisterVariable('Mode_Heizung');
         }
 
         if ($warmwasserVisible) 
         {
-            $this->RegisterVariableInteger('Warmwasser', 'Modus Warmwasser', 'WPLUX.Wwhe', 1);
-            $this->getParameter('Warmwasser');
-            $Value = $this->GetValue('Warmwasser');
-            $this->EnableAction('Warmwasser');
+            $this->RegisterVariableInteger('Mode_WW', 'Modus Warmwasser', 'WPLUX.Wwhe', 1);
+            $this->getParameter('Mode_WW');
+            $Value = $this->GetValue('Mode_WW');
+            $this->EnableAction('Mode_WW');
         } 
         else 
         {
-            $this->UnregisterVariable('Warmwasser');
+            $this->UnregisterVariable('Mode_WW');
         }
 
         if ($kuehlungVisible) 
         {
-            $this->RegisterVariableInteger('Kuehlung', 'Modus Kühlung', 'WPLUX.Kue', 2);
-            $this->getParameter('Kuehlung');
-            $Value = $this->GetValue('Kuehlung');   
-            $this->EnableAction('Kuehlung');
+            $this->RegisterVariableInteger('Mode_Kuehlung', 'Modus Kühlung', 'WPLUX.Kue', 2);
+            $this->getParameter('Mode_Kuehlung');
+            $Value = $this->GetValue('Mode_Kuehlung');   
+            $this->EnableAction('Mode_Kuehlung');
         } 
         else 
         {
-            $this->UnregisterVariable('Kuehlung');
+            $this->UnregisterVariable('Mode_Kuehlung');
         }
 
         if ($tempsetVisible) 
         {
-            $this->RegisterVariableFloat('Tempset', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
-            $this->getParameter('Tempset'); 
-            $Value = $this->GetValue('Tempset'); 
-            $this->EnableAction('Tempset');
+            $this->RegisterVariableFloat('Anpassung_Temp', 'Temperaturkorrektur', 'WPLUX.Tset', 3);
+            $this->getParameter('Anpassung_Temp'); 
+            $Value = $this->GetValue('Anpassung_Temp'); 
+            $this->EnableAction('Anpassung_Temp');
         } 
         else 
         {
-            $this->UnregisterVariable('Tempset');
+            $this->UnregisterVariable('Anpassung_Temp');
         }
 
         if ($wwsetVisible) 
         {
-            $this->RegisterVariableFloat('Wset', 'Warmwasser Soll', 'WPLUX.Wset', 4);
-            $this->getParameter('Wset'); 
-            $Value = $this->GetValue('Wset'); 
-            $this->EnableAction('Wset');
+            $this->RegisterVariableFloat('Anpassung_WW', 'Warmwasser Soll', 'WPLUX.Wset', 4);
+            $this->getParameter('Anpassung_WW'); 
+            $Value = $this->GetValue('Anpassung_WW'); 
+            $this->EnableAction('Anpassung_WW');
         } 
         else 
         {
-            $this->UnregisterVariable('Wset');
+            $this->UnregisterVariable('Anpassung_WW');
         }
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
@@ -189,7 +189,8 @@ class WPLUX extends IPSModule
 
         if ($hz_timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
         {
-            $ids = [
+            $ids = 
+            [
                 'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)',
                 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)', 'set_239' => 'Sa+So von (3)', 'set_240' => 'Sa+So bis (3)'
             ];
@@ -219,7 +220,8 @@ class WPLUX extends IPSModule
 
         if ($hz_timerDayVisible) //Variabelerstellung Timer Tage Heizung
         {
-            $ids = [
+            $ids = 
+            [
                 'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
                 'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)', 'set_251' => 'Montag von (3)', 'set_252' => 'Montag bis (3)',
                 'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)', 'set_257' => 'Dienstag von (3)', 'set_258' => 'Dienstag bis (3)',
@@ -286,7 +288,8 @@ class WPLUX extends IPSModule
 
         if ($bw_timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
         {
-            $ids = [
+            $ids = 
+            [
                 'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
                 'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_424' => 'Mo-Fr von (5)', 'set_425' => 'Mo-Fr bis (5)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 
                 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)',
@@ -318,7 +321,8 @@ class WPLUX extends IPSModule
 
         if ($bw_timerDayVisible) //Variabelerstellung Timer Tage Warmwasser
         {
-            $ids = [
+            $ids = 
+            [
                 'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
                 'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_444' => 'Sonntag von (5)', 'set_445' => 'Sonntag bis (5)',
                 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)',
@@ -365,8 +369,9 @@ class WPLUX extends IPSModule
 
     public function RequestAction($Ident, $Value) 
     {
-        $parameterMapping = [
-            'Heizung', 'Kuehlung', 'Warmwasser', 'Wset', 'Tempset',
+        $parameterMapping = 
+        [
+            'Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp',
             'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228', 'set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238',
             'set_239', 'set_240', 'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254',
             'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262', 'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
@@ -377,16 +382,14 @@ class WPLUX extends IPSModule
             'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 
             'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 
             'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
-
         ];
 
-        if (in_array($Ident, $parameterMapping)) {
+        if (in_array($Ident, $parameterMapping)) 
+        {
             $this->setParameter($Ident, $Value);
             $this->getParameter($Ident);
             $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
         }
-
-        
     }
 
     
@@ -506,7 +509,7 @@ class WPLUX extends IPSModule
                 }
                 return round($value, 1); 
 
-            case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Laufzeit umrechnen in Stunden und Minuten ausgeben
+            case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Laufzeit umrechnen und in Stunden und Minuten ausgeben
                 $time = $value;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
@@ -515,7 +518,7 @@ class WPLUX extends IPSModule
                 $value = "{$hours}h {$minutes}m";
                 return ($value); 
             
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)): //Laufzeit umrechnen in Stunden ausgeben
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)): //Laufzeit umrechnen und in Stunden ausgeben
                 $time = $value;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
@@ -680,21 +683,21 @@ class WPLUX extends IPSModule
 
     switch ($type) 
     {
-        case 'Tempset':
+        case 'Anpassung_Temp':
             $parameter = 1;
             if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
             break;
-        case 'Wset':
+        case 'Anpassung_WW':
             $parameter = 2;
             if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
             break;
-        case 'Heizung':
+        case 'Mode_Heizung':
             $parameter = 3;
             break;
-        case 'Warmwasser':
+        case 'Mode_WW':
             $parameter = 4;
             break;
-        case 'Kuehlung':
+        case 'Mode_Kuehlung':
             $parameter = 108;
             $value = ($value == 0) ? 0 : 1; // Wert für Kühlung auf 0 oder 1 setzen
             break;
@@ -759,14 +762,14 @@ class WPLUX extends IPSModule
 
         switch ($mode) 
         {
-            case 'Heizung':
-            case 'Warmwasser':
-            case 'Kuehlung':
-            case 'Tempset':
-            case 'Wset':
-                $index = $mode == 'Tempset' ? 1 : ($mode == 'Wset' ? 2 : ($mode == 'Heizung' ? 3 : ($mode == 'Warmwasser' ? 4 : 108)));
+            case 'Mode_Heizung':
+            case 'Mode_WW':
+            case 'Mode_Kuehlung':
+            case 'Anpassung_Temp':
+            case 'Anpassung_WW':
+                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 2 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
                 $value = $datenRaw[$index];
-                if ($mode == 'Tempset') 
+                if ($mode == 'Anpassung_Temp') 
                 {
                     $value *= 0.1;
                     if ($value > 429496000) 
@@ -775,7 +778,7 @@ class WPLUX extends IPSModule
                         $value *= 0.1;
                     }
                 } 
-                elseif ($mode == 'Wset') 
+                elseif ($mode == 'Anpassung_WW') 
                 {
                     $value *= 0.1;
                 }
