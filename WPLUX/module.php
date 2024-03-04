@@ -253,7 +253,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekVisible) //Variabelerstellung Timer Woche
+        if ($bw_timerWeekVisible) //Variabelerstellung Timer Woche Warmwasser
         {
             $ids = 
             [
@@ -275,7 +275,7 @@ class WPLUX extends IPSModule
             $ids = 
             [
                 'set_406'
-            ]
+            ];
             
             foreach ($ids as $id) 
             {
