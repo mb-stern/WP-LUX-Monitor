@@ -621,7 +621,7 @@ class WPLUX extends IPSModule
             if (strpos($type, 'set_') === 0) 
             {
                 $parameter = (int) substr($type, 4);
-                if ($parameter >= 223 && $parameter <= 282 && $value >= -3600 && $value <= 82800) 
+                if ($parameter >= 223 && $parameter <= 406 && $value >= -3600 && $value <= 82800) 
                 {
                     $value += 3600; // Unix-Zeit korrigieren
                 }
@@ -705,7 +705,7 @@ class WPLUX extends IPSModule
                 if (strpos($mode, 'set_') === 0) 
                 {
                     $index = (int) substr($mode, 4);
-                    if ($index >= 223 && $index <= 282) 
+                    if ($index >= 223 && $index <= 406) 
                     {
                         $this->SetValue($mode, $datenRaw[$index] - 3600);
                     }
