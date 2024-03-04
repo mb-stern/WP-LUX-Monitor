@@ -349,9 +349,11 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                , 'set_436', 'set_437', 'set_438', 'set_439',
-                'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 'set_451', 'set_452', 'set_453', 'set_454',
-                'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465'
+                'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 
+                'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
+                'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 
+                'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
+                'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
             ];
             
             foreach ($ids as $id) 
