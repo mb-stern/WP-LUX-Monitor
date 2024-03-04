@@ -21,9 +21,12 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyBoolean('TimerWeekVisible', false);
-        $this->RegisterPropertyBoolean('TimerWeekendVisible', false);
-        $this->RegisterPropertyBoolean('TimerDayVisible', false);
+        $this->RegisterPropertyBoolean('HZ_TimerWeekVisible', false);
+        $this->RegisterPropertyBoolean('HZ_TimerWeekendVisible', false);
+        $this->RegisterPropertyBoolean('HZ_TimerDayVisible', false);
+        $this->RegisterPropertyBoolean('BW_TimerWeekVisible', false);
+        $this->RegisterPropertyBoolean('BW_TimerWeekendVisible', false);
+        $this->RegisterPropertyBoolean('BW_TimerDayVisible', false);
 
         $this->RegisterAttributeFloat("start_value_out", 0);
         $this->RegisterAttributeFloat("start_kwh_in", 0);
@@ -67,9 +70,12 @@ class WPLUX extends IPSModule
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-        $timerWeekVisible = $this->ReadPropertyBoolean('TimerWeekVisible');
-        $timerWeekendVisible = $this->ReadPropertyBoolean('TimerWeekendVisible');
-        $timerDayVisible = $this->ReadPropertyBoolean('TimerDayVisible');
+        $hz_timerWeekVisible = $this->ReadPropertyBoolean('HZ_TimerWeekVisible');
+        $hz_timerWeekendVisible = $this->ReadPropertyBoolean('HZ_TimerWeekendVisible');
+        $hz_timerDayVisible = $this->ReadPropertyBoolean('HZ_TimerDayVisible');
+        $bw_timerWeekVisible = $this->ReadPropertyBoolean('BW_TimerWeekVisible');
+        $bw_timerWeekendVisible = $this->ReadPropertyBoolean('BW_TimerWeekendVisible');
+        $bw_timerDayVisible = $this->ReadPropertyBoolean('BW_TimerDayVisible');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -150,7 +156,7 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
 
-        if ($timerWeekVisible) //Variabelerstellung Timer Woche
+        if ($hz_timerWeekVisible) //Variabelerstellung Timer Woche
         {
             $ids = [
                 'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
@@ -181,7 +187,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So
+        if ($hz_timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So
         {
             $ids = [
                 'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)',
@@ -211,7 +217,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($timerDayVisible) //Variabelerstellung Timer Tage
+        if ($hz_timerDayVisible) //Variabelerstellung Timer Tage
         {
             $ids = [
                 'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
@@ -246,6 +252,36 @@ class WPLUX extends IPSModule
                 $this->UnregisterVariable($id);
             }
         }
+
+        if ($bw_timerWeekVisible) //Variabelerstellung Timer Woche
+        {
+            $ids = 
+            [
+                'set_406' => 'Woche von (1)'
+            ];
+            
+            $position = -120; //ab dieser Position im Objektbaum einordnen
+
+            foreach ($ids as $id => $name) 
+            {
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->getParameter($id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
+            }
+        } 
+        else 
+        {
+            $ids = 
+            [
+                'set_406'
+            ]
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
+        }
     }
 
     public function RequestAction($Ident, $Value) 
@@ -259,7 +295,7 @@ class WPLUX extends IPSModule
             'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262',
             'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
             'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278',
-            'set_279', 'set_280', 'set_281', 'set_282'
+            'set_279', 'set_280', 'set_281', 'set_282', 'set_406'
         ];
 
         if (in_array($Ident, $parameterMapping)) {
@@ -267,6 +303,8 @@ class WPLUX extends IPSModule
             $this->getParameter($Ident);
             $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
         }
+
+        
     }
 
     
@@ -541,7 +579,7 @@ class WPLUX extends IPSModule
         }
     }
 
-    private function setParameter($type, $value)
+    private function setParameter($type, $value) //Parameter setzen, 3002
 {
     // IP-Adresse und Port aus den Konfigurationseinstellungen lesen
     $ipWwc = $this->ReadPropertyString('IPAddress');
@@ -610,7 +648,7 @@ class WPLUX extends IPSModule
         $this->SendDebug("Socketverbindung", "Der Parameter: $parameter mit dem Wert: $value wurde an den Socket gesendet", 0);
     }
 
-    private function getParameter($mode)
+    private function getParameter($mode) //Parameter holen, 3003
     {
         $ipWwc = $this->ReadPropertyString('IPAddress');
         $wwcJavaPort = $this->ReadPropertyInteger('Port');

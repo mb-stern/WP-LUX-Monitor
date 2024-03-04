@@ -24,18 +24,33 @@
             "items": [
                 {
                     "type": "CheckBox",
-                    "name": "TimerWeekVisible",
-                    "caption": "Timer Woche aktivieren (6 Var.)"
+                    "name": "HZ_TimerWeekVisible",
+                    "caption": "Timer Heizung Woche aktivieren (6 Var.)"
                 },
                 {
                     "type": "CheckBox",
-                    "name": "TimerWeekendVisible",
-                    "caption": "Timer Mo-Fr/Sa+So aktivieren (12 Var.)"
+                    "name": "HZ_TimerWeekendVisible",
+                    "caption": "Timer Heizung Mo-Fr/Sa+So aktivieren (12 Var.)"
                 },
                 {
                     "type": "CheckBox",
-                    "name": "TimerDayVisible",
-                    "caption": "Timer Tage aktivieren (42 Var.)"
+                    "name": "HZ_TimerDayVisible",
+                    "caption": "Timer Heizung Tage aktivieren (42 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "BW_TimerWeekVisible",
+                    "caption": "Timer Warmwasser Woche aktivieren (6 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "BW_TimerWeekendVisible",
+                    "caption": "Timer Warmwasser Mo-Fr/Sa+So aktivieren (12 Var.)"
+                },
+                {
+                    "type": "CheckBox",
+                    "name": "BW_TimerDayVisible",
+                    "caption": "Timer Warmwasser Tage aktivieren (42 Var.)"
                 },
                 {
                     "type": "CheckBox",
