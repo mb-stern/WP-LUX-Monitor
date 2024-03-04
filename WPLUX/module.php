@@ -257,7 +257,8 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 'set_411' => 'Woche bis (3)'
+                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
+                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)', 'set_414' => 'Woche von (5)', 'set_415' => 'Woche bis (5)'
             ];
             
             $position = -120; //ab dieser Position im Objektbaum einordnen
@@ -274,7 +275,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411'
+                'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415'
             ];
             
             foreach ($ids as $id) 
@@ -286,8 +287,10 @@ class WPLUX extends IPSModule
         if ($bw_timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
         {
             $ids = [
-                'set_412' => 'Mo-Fr von (1)', 'set_413' => 'Mo-Fr bis (1)', 'set_414' => 'Mo-Fr von (2)', 'set_415' => 'Mo-Fr bis (2)', 'set_416' => 'Mo-Fr von (3)', 'set_417' => 'Mo-Fr bis (3)',
-                'set_418' => 'Sa+So von (1)', 'set_419' => 'Sa+So bis (1)', 'set_420' => 'Sa+So von (2)', 'set_421' => 'Sa+So bis (2)', 'set_422' => 'Sa+So von (3)', 'set_423' => 'Sa+So bis (3)'
+                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
+                'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_424' => 'Mo-Fr von (5)', 'set_425' => 'Mo-Fr bis (5)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 
+                'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)',
+                'set_434' => 'Sa+So von (5)', 'set_435' => 'Sa+So bis (5)'
             ];
 
             $position = -54; //ab dieser Position im Objektbaum einordnen
@@ -304,7 +307,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_412', 'set_413', 'set_414', 'set_415', 'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423'
+                'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435'
             ];
             
             foreach ($ids as $id) 
@@ -316,13 +319,20 @@ class WPLUX extends IPSModule
         if ($bw_timerDayVisible) //Variabelerstellung Timer Tage Warmwasser
         {
             $ids = [
-                'set_424' => 'Sonntag von (1)', 'set_425' => 'Sonntag bis (1)', 'set_426' => 'Sonntag von (2)', 'set_427' => 'Sonntag bis (2)', 'set_428' => 'Sonntag von (3)', 'set_429' => 'Sonntag bis (3)',
-                'set_430' => 'Montag von (1)', 'set_431' => 'Montag bis (1)', 'set_432' => 'Montag von (2)', 'set_433' => 'Montag bis (2)', 'set_434' => 'Montag von (3)', 'set_435' => 'Montag bis (3)',
-                'set_436' => 'Dienstag von (1)', 'set_437' => 'Dienstag bis (1)', 'set_438' => 'Dienstag von (2)', 'set_439' => 'Dienstag bis (2)', 'set_440' => 'Dienstag von (3)', 'set_441' => 'Dienstag bis (3)',
-                'set_442' => 'Mittwoch von (1)', 'set_443' => 'Mittwoch bis (1)', 'set_444' => 'Mittwoch von (2)', 'set_445' => 'Mittwoch bis (2)', 'set_446' => 'Mittwoch von (3)', 'set_447' => 'Mittwoch bis (3)',
-                'set_448' => 'Donnerstag von (1)', 'set_449' => 'Donnerstag bis (1)', 'set_450' => 'Donnerstag von (2)', 'set_451' => 'Donnerstag bis (2)', 'set_452' => 'Donnerstag von (3)', 'set_453' => 'Donnerstag bis (3)',
-                'set_454' => 'Freitag von (1)', 'set_455' => 'Freitag bis (1)', 'set_456' => 'Freitag von (2)', 'set_457' => 'Freitag bis (2)', 'set_458' => 'Freitag von (3)', 'set_459' => 'Freitag bis (3)',
-                'set_460' => 'Samstag von (1)', 'set_461' => 'Samstag bis (1)', 'set_462' => 'Samstag von (2)', 'set_463' => 'Samstag bis (2)', 'set_464' => 'Samstag von (3)', 'set_465' => 'Samstag bis (3)'
+                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
+                'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_444' => 'Sonntag von (5)', 'set_445' => 'Sonntag bis (5)',
+                'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)',
+                'set_451' => 'Montag bis (3)', 'set_452' => 'Montag von (4)', 'set_453' => 'Montag bis (4)', 'set_454' => 'Montag von (5)', 'set_455' => 'Montag bis (5)',
+                'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)',
+                'set_461' => 'Dienstag bis (3)', 'set_462' => 'Dienstag von (4)', 'set_463' => 'Dienstag bis (4)', 'set_464' => 'Dienstag von (5)', 'set_465' => 'Dienstag bis (5)',
+                'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)',
+                'set_471' => 'Mittwoch bis (3)', 'set_472' => 'Mittwoch von (4)', 'set_473' => 'Mittwoch bis (4)', 'set_474' => 'Mittwoch von (5)', 'set_475' => 'Mittwoch bis (5)',
+                'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)',
+                'set_481' => 'Donnerstag bis (3)', 'set_482' => 'Donnerstag von (4)', 'set_483' => 'Donnerstag bis (4)', 'set_484' => 'Donnerstag von (5)', 'set_485' => 'Donnerstag bis (5)',
+                'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)',
+                'set_491' => 'Freitag bis (3)', 'set_492' => 'Freitag von (4)', 'set_493' => 'Freitag bis (4)', 'set_494' => 'Freitag von (5)', 'set_495' => 'Freitag bis (5)',
+                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)',
+                'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)', 'set_504' => 'Samstag von (5)', 'set_505' => 'Samstag bis (5)'
             ];
 
             $position = -42; //ab dieser Position im Objektbaum einordnen
@@ -339,7 +349,7 @@ class WPLUX extends IPSModule
         {
             $ids = 
             [
-                'set_424', 'set_425', 'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435', 'set_436', 'set_437', 'set_438', 'set_439',
+                , 'set_436', 'set_437', 'set_438', 'set_439',
                 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 'set_451', 'set_452', 'set_453', 'set_454',
                 'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465'
             ];
@@ -355,21 +365,17 @@ class WPLUX extends IPSModule
     {
         $parameterMapping = [
             'Heizung', 'Kuehlung', 'Warmwasser', 'Wset', 'Tempset',
-            'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228', 'set_229', 'set_230',
-            'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238',
-            'set_239', 'set_240', 'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246',
-            'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254',
-            'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262',
-            'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
-            'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278',
-            'set_279', 'set_280', 'set_281', 'set_282', 'set_406', 'set_407', 'set_408', 'set_409', 
-            'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415', 'set_416', 'set_417', 
-            'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 
-            'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 
-            'set_434', 'set_435', 'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 
-            'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 
-            'set_450', 'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 
-            'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465'
+            'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228', 'set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238',
+            'set_239', 'set_240', 'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254',
+            'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262', 'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
+            'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282', 'set_406', 'set_407', 'set_408', 'set_409', 
+            'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415', 'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 
+            'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435', 'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 
+            'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 
+            'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 
+            'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 
+            'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
+
         ];
 
         if (in_array($Ident, $parameterMapping)) {
@@ -695,7 +701,7 @@ class WPLUX extends IPSModule
             if (strpos($type, 'set_') === 0) 
             {
                 $parameter = (int) substr($type, 4);
-                if ($parameter >= 223 && $parameter <= 465 && $value >= -3600 && $value <= 82800) 
+                if ($parameter >= 223 && $parameter <= 505 && $value >= -3600 && $value <= 82800) 
                 {
                     $value += 3600; // Unix-Zeit korrigieren
                 }
@@ -779,7 +785,7 @@ class WPLUX extends IPSModule
                 if (strpos($mode, 'set_') === 0) 
                 {
                     $index = (int) substr($mode, 4);
-                    if ($index >= 223 && $index <= 465) 
+                    if ($index >= 223 && $index <= 505) 
                     {
                         $this->SetValue($mode, $datenRaw[$index] - 3600);
                     }
