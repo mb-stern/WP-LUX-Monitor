@@ -150,7 +150,7 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
 
-        if ($timerWeekVisible) 
+        if ($timerWeekVisible) //Variabelerstellung Timer Woche
         {
             $ids = [
                 'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
@@ -158,7 +158,7 @@ class WPLUX extends IPSModule
                 'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
             ];
             
-            $position = -60; //ab dieser Position im Objektbaum
+            $position = -60; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -181,14 +181,14 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($timerWeekendVisible) 
+        if ($timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So
         {
             $ids = [
                 'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)',
                 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)', 'set_239' => 'Sa+So von (3)', 'set_240' => 'Sa+So bis (3)'
             ];
 
-            $position = -54; //ab dieser Position im Objektbaum
+            $position = -54; //ab dieser Position im Objektbaum einordnen
             
             foreach ($ids as $id => $name) 
             {
@@ -211,7 +211,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($timerDayVisible) 
+        if ($timerDayVisible) //Variabelerstellung Timer Tage
         {
             $ids = [
                 'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
@@ -223,7 +223,7 @@ class WPLUX extends IPSModule
                 'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)', 'set_281' => 'Samstag von (3)', 'set_282' => 'Samstag bis (3)'
             ];
 
-            $position = -42; //ab dieser Position im Objektbaum
+            $position = -42; //ab dieser Position im Objektbaum einordnen
             
             foreach ($ids as $id => $name) 
             {
@@ -386,7 +386,7 @@ class WPLUX extends IPSModule
                 }
                 return round($value, 1); 
 
-            case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Laufzeit umrechnen in Stunden und Minuten
+            case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161): //Laufzeit umrechnen in Stunden und Minuten ausgeben
                 $time = $value;
                 $hours = floor($time / (60 * 60));
                 $time -= $hours * (60 * 60);
@@ -394,6 +394,13 @@ class WPLUX extends IPSModule
                 $time -= $minutes * 60;
                 $value = "{$hours}h {$minutes}m";
                 return ($value); 
+            
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)): //Laufzeit umrechnen in Stunden ausgeben
+                $time = $value;
+                $hours = floor($time / (60 * 60));
+                $time -= $hours * (60 * 60);
+                $value = $hours;
+                return ($value);
 
             case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
                 return round($value * 0.01, 1);
@@ -419,8 +426,12 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableBoolean($ident, $ident, '~Switch', $id);
                     break;    
     
-                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
+                case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
                     $this->RegisterVariableString($ident, $ident, '', $id);
+                    break;
+
+                case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Std', $id);
                     break;
                     
                 case ($id == 57 || $id == 59):
@@ -569,9 +580,11 @@ class WPLUX extends IPSModule
             break;
         
         default: //Hier werden die ganzen Timer gespeichert
-            if (strpos($type, 'set_') === 0) {
+            if (strpos($type, 'set_') === 0) 
+            {
                 $parameter = (int) substr($type, 4);
-                if ($parameter >= 223 && $parameter <= 282 && $value >= -3600 && $value <= 82800) {
+                if ($parameter >= 223 && $parameter <= 282 && $value >= -3600 && $value <= 82800) 
+                {
                     $value += 3600; // Unix-Zeit korrigieren
                 }
             }
@@ -598,32 +611,33 @@ class WPLUX extends IPSModule
     }
 
     private function getParameter($mode)
-{
-    $ipWwc = $this->ReadPropertyString('IPAddress');
-    $wwcJavaPort = $this->ReadPropertyInteger('Port');
+    {
+        $ipWwc = $this->ReadPropertyString('IPAddress');
+        $wwcJavaPort = $this->ReadPropertyInteger('Port');
 
-    $socket = socket_create(AF_INET, SOCK_STREAM, 0);
-    $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
+        $socket = socket_create(AF_INET, SOCK_STREAM, 0);
+        $connect = socket_connect($socket, $ipWwc, $wwcJavaPort);
 
-    $msg = pack('N*', 3003);
-    socket_write($socket, $msg, 4);
+        $msg = pack('N*', 3003);
+        socket_write($socket, $msg, 4);
 
-    $msg = pack('N*', 0);
-    socket_write($socket, $msg, 4);
+        $msg = pack('N*', 0);
+        socket_write($socket, $msg, 4);
 
-    socket_recv($socket, $test, 4, MSG_WAITALL);
-    socket_recv($socket, $test, 4, MSG_WAITALL);
-    $test = unpack('N*', $test);
-    $javaWerte = implode($test);
+        socket_recv($socket, $test, 4, MSG_WAITALL);
+        socket_recv($socket, $test, 4, MSG_WAITALL);
+        $test = unpack('N*', $test);
+        $javaWerte = implode($test);
 
-    for ($i = 0; $i < $javaWerte; ++$i) {
-        socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
-        $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
-    }
+        for ($i = 0; $i < $javaWerte; ++$i) 
+        {
+            socket_recv($socket, $inBuff[$i], 4, MSG_WAITALL);
+            $datenRaw[$i] = implode(unpack('N*', $inBuff[$i]));
+        }
 
-    socket_close($socket);
+        socket_close($socket);
 
-    switch ($mode) 
+        switch ($mode) 
         {
             case 'Heizung':
             case 'Warmwasser':
@@ -632,23 +646,29 @@ class WPLUX extends IPSModule
             case 'Wset':
                 $index = $mode == 'Tempset' ? 1 : ($mode == 'Wset' ? 2 : ($mode == 'Heizung' ? 3 : ($mode == 'Warmwasser' ? 4 : 108)));
                 $value = $datenRaw[$index];
-                if ($mode == 'Tempset') {
+                if ($mode == 'Tempset') 
+                {
                     $value *= 0.1;
-                    if ($value > 429496000) {
+                    if ($value > 429496000) 
+                    {
                         $value -= 4294967296;
                         $value *= 0.1;
                     }
-                } elseif ($mode == 'Wset') {
+                } 
+                elseif ($mode == 'Wset') 
+                {
                     $value *= 0.1;
                 }
                 $this->SetValue($mode, $value);
                 $this->SendDebug("Parameter $mode", "Wert des Parameters $mode: $value von der Lux geholt und in Variable gespeichert", 0);
                 break;
-            
-                default: //Hier werden die ganzen Timer geholt
-                if (strpos($mode, 'set_') === 0) {
+                
+            default: //Hier werden die ganzen Timer geholt
+                if (strpos($mode, 'set_') === 0) 
+                {
                     $index = (int) substr($mode, 4);
-                    if ($index >= 223 && $index <= 282) {
+                    if ($index >= 223 && $index <= 282) 
+                    {
                         $this->SetValue($mode, $datenRaw[$index] - 3600);
                     }
                 }

@@ -86,8 +86,7 @@ WPLUX.Wwhe	|  Integer
 WPLUX.Kue	|  Integer
 WPLUX.Tset	|  Float
 WPLUX.Wset	|  Float
-
-
+WPLUX.Std	|  Integer
 
 ### 6. WebFront
 
@@ -103,9 +102,10 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.4 (3.03.2024)
+Version 3.4 (4.03.2024)
 
-- Es kann nun die interne Timerfunktion der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich.
+- Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich.
+- Wert 56, 58, 60-66 (Betriebsstunden) werden nun auch in Stunden dargestellt
 
 Version 3.3 (25.02.2024)
 
