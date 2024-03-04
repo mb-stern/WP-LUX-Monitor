@@ -261,7 +261,7 @@ class WPLUX extends IPSModule
                 'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)', 'set_414' => 'Woche von (5)', 'set_415' => 'Woche bis (5)'
             ];
             
-            $position = -120; //ab dieser Position im Objektbaum einordnen
+            $position = -160; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -293,7 +293,7 @@ class WPLUX extends IPSModule
                 'set_434' => 'Sa+So von (5)', 'set_435' => 'Sa+So bis (5)'
             ];
 
-            $position = -54; //ab dieser Position im Objektbaum einordnen
+            $position = -150; //ab dieser Position im Objektbaum einordnen
             
             foreach ($ids as $id => $name) 
             {
@@ -335,7 +335,7 @@ class WPLUX extends IPSModule
                 'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)', 'set_504' => 'Samstag von (5)', 'set_505' => 'Samstag bis (5)'
             ];
 
-            $position = -42; //ab dieser Position im Objektbaum einordnen
+            $position = -130; //ab dieser Position im Objektbaum einordnen
             
             foreach ($ids as $id => $name) 
             {

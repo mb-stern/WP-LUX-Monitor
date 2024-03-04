@@ -40,17 +40,17 @@
                 {
                     "type": "CheckBox",
                     "name": "BW_TimerWeekVisible",
-                    "caption": "Timer Warmwasser Woche aktivieren (6 Var.)"
+                    "caption": "Timer Warmwasser Woche aktivieren (10 Var.)"
                 },
                 {
                     "type": "CheckBox",
                     "name": "BW_TimerWeekendVisible",
-                    "caption": "Timer Warmwasser Mo-Fr/Sa+So aktivieren (12 Var.)"
+                    "caption": "Timer Warmwasser Mo-Fr/Sa+So aktivieren (20 Var.)"
                 },
                 {
                     "type": "CheckBox",
                     "name": "BW_TimerDayVisible",
-                    "caption": "Timer Warmwasser Tage aktivieren (42 Var.)"
+                    "caption": "Timer Warmwasser Tage aktivieren (70 Var.)"
                 },
                 {
                     "type": "CheckBox",
