@@ -156,18 +156,14 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
         
-        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) // Variabelerstellung Timer Woche Heizung
+        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche Heizung
         {
-            // Erstelle ein Array mit den IDs der aktuellen Variablen
-            $current_ids = ['set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'];
-
-            // Array für die neuen Variablen
-            $new_ids = [];
+            $ids = [];
             
-            // Neue Variablen basierend auf der ausgewählten Option erstellen und gleichzeitig prüfen, welche Variablen gelöscht werden müssen
             if ($hz_timerWeekVisible === 3) 
             {
-                $new_ids = [
+                $ids = 
+                [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)',
                     'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)',
                     'set_227' => 'Heizung Woche von (3)', 'set_228' => 'Heizung Woche bis (3)'
@@ -175,185 +171,154 @@ class WPLUX extends IPSModule
             } 
             elseif ($hz_timerWeekVisible === 2) 
             {
-                $new_ids = [
-                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 
-                    'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
+                $ids = 
+                [
+                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
             }
             elseif ($hz_timerWeekVisible === 1) 
             {
-                $new_ids = [
+                $ids = 
+                [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
                 ];
             }
             
-            // Die IDs der zu löschenden Variablen sind die Differenz zwischen den aktuellen und den neuen IDs
-            $ids_to_delete = array_diff($current_ids, array_keys($new_ids));
+            $position = -60; //ab dieser Position im Objektbaum einordnen
 
-            // Lösche die Variablen, die nicht mehr benötigt werden
-            foreach ($ids_to_delete as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
-
-            // Erstelle die neuen Variablen oder aktualisiere die vorhandenen
-            $position = -60; // ab dieser Position im Objektbaum einordnen
-
-            foreach ($new_ids as $id => $name) 
+            foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
                 $this->GetValue($id);
                 $this->EnableAction($id);
             }
+        } 
+        if ($hz_timerWeekVisible === 0) //alle Timer löschen
+        {
+            $ids =
+            [
+                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
+            ];
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
         }
 
-
-        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) // Variabelerstellung Timer Mo-Fr/Sa+So Heizung
+        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
         {
-            // Erstelle ein Array mit den IDs der aktuellen Variablen
-            $current_ids = ['set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'];
-
-            // Array für die neuen Variablen
-            $new_ids = [];
+            $ids = [];
             
-            // Neue Variablen basierend auf der ausgewählten Option erstellen und gleichzeitig prüfen, welche Variablen gelöscht werden müssen
             if ($hz_timerWeekendVisible === 3) 
             {
-                $new_ids = [
-                    'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
-                    'set_233' => 'Heizung Mo-Fr von (3)', 'set_234' => 'Heizung Mo-Fr bis (3)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 
-                    'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)', 'set_239' => 'Heizung Sa+So von (3)', 'set_240' => 'Heizung Sa+So bis (3)'
+                $ids = 
+                [
+                'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
+				'set_233' => 'Heizung Mo-Fr von (3)', 'set_234' => 'Heizung Mo-Fr bis (3)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 
+				'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)', 'set_239' => 'Heizung Sa+So von (3)', 'set_240' => 'Heizung Sa+So bis (3)'
                 ];
             } 
             elseif ($hz_timerWeekendVisible === 2) 
             {
-                $new_ids = [
+                $ids = 
+                [
                     'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
-                    'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)'
+					'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)'
                 ];
             }
             elseif ($hz_timerWeekendVisible === 1) 
             {
-                $new_ids = [
+                $ids = 
+                [
                     'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)'
                 ];
             }
             
-            // Die IDs der zu löschenden Variablen sind die Differenz zwischen den aktuellen und den neuen IDs
-            $ids_to_delete = array_diff($current_ids, array_keys($new_ids));
+            $position = -56; //ab dieser Position im Objektbaum einordnen
 
-            // Lösche die Variablen, die nicht mehr benötigt werden
-            foreach ($ids_to_delete as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
-
-            // Erstelle die neuen Variablen oder aktualisiere die vorhandenen
-            $position = -56; // ab dieser Position im Objektbaum einordnen
-
-            foreach ($new_ids as $id => $name) 
+            foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
                 $this->GetValue($id);
                 $this->EnableAction($id);
             }
+        } 
+        if ($hz_timerWeekendVisible === 0) //alle Timer löschen
+        {
+            $ids = ['set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'];
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
         }
-
 
         if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) //Variabelerstellung Timer Tage Heizung
 {
-    $ids = [];
-    
-    if ($hz_timerDayVisible === 3) 
-    {
-        $ids = [
-            'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)', 'set_245' => 'Heizung Sonntag von (3)', 'set_246' => 'Heizung Sonntag bis (3)',
-            'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)', 'set_251' => 'Heizung Montag von (3)', 'set_252' => 'Heizung Montag bis (3)',
-            'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)', 'set_257' => 'Heizung Dienstag von (3)', 'set_258' => 'Heizung Dienstag bis (3)',
-            'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)', 'set_263' => 'Heizung Mittwoch von (3)', 'set_264' => 'Heizung Mittwoch bis (3)',
-            'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)', 'set_269' => 'Heizung Donnerstag von (3)', 'set_270' => 'Heizung Donnerstag bis (3)',
-            'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)', 'set_275' => 'Heizung Freitag von (3)', 'set_276' => 'Heizung Freitag bis (3)',
-            'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)', 'set_281' => 'Heizung Samstag von (3)', 'set_282' => 'Heizung Samstag bis (3)'
-        ];
-    } 
-    elseif ($hz_timerDayVisible === 2) 
-    {
-        $ids = [
-            'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)',
-            'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)',
-            'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)',
-            'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)',
-            'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)',
-            'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)',
-            'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)'
-        ];
-    }
-    elseif ($hz_timerDayVisible === 1) 
-    {
-        $ids = [
-            'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)',
-            'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)',
-            'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)'
-        ];
-       // Speichere die IDs der aktuellen Variablen
-       $current_ids = array_keys($ids);
+            $ids = [];
+            
+            if ($hz_timerDayVisible === 3) 
+            {
+                $ids = 
+                [
+                'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)', 'set_245' => 'Heizung Sonntag von (3)', 'set_246' => 'Heizung Sonntag bis (3)',
+                'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)', 'set_251' => 'Heizung Montag von (3)', 'set_252' => 'Heizung Montag bis (3)',
+                'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)', 'set_257' => 'Heizung Dienstag von (3)', 'set_258' => 'Heizung Dienstag bis (3)',
+                'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)', 'set_263' => 'Heizung Mittwoch von (3)', 'set_264' => 'Heizung Mittwoch bis (3)',
+                'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)', 'set_269' => 'Heizung Donnerstag von (3)', 'set_270' => 'Heizung Donnerstag bis (3)',
+                'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)', 'set_275' => 'Heizung Freitag von (3)', 'set_276' => 'Heizung Freitag bis (3)',
+                'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)', 'set_281' => 'Heizung Samstag von (3)', 'set_282' => 'Heizung Samstag bis (3)'
+                ];
+            } 
+            elseif ($hz_timerDayVisible === 2) 
+            {
+                $ids = 
+                [
+                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)',
+					'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)',
+					'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)',
+					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)',
+					'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)',
+					'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)',
+					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)'
+                ];
+            }
+            elseif ($hz_timerDayVisible === 1) 
+            {
+                $ids = 
+                [
+                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)',
+					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)',
+					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)'
+                ];
+            }
+            
+            $position = -42; //ab dieser Position im Objektbaum einordnen
 
-       // Neue Position für die Variablen festlegen
-       $position = -42;
-   
-       // Iteriere durch die IDs und aktualisiere die Variablen oder lösche sie
-       foreach ($ids as $id => $name) 
-       {
-           if ($this->IPS_VariableExists($id)) {
-               // Wenn die Variable bereits existiert, aktualisiere sie
-               $this->IPS_SetVariableCustomProfile($id, '~UnixTimestampTime');
-               $this->IPS_SetName($id, $name);
-               $this->IPS_SetPosition($id, $position++);
-           } else {
-               // Wenn die Variable nicht existiert, erstelle sie
-               $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
-           }
-           
-           $this->getParameter($id);
-           $this->GetValue($id);
-           $this->EnableAction($id);
-       }
-   
-       // Finde die IDs der zu löschenden Variablen
-       $ids_to_delete = array_diff($current_ids, array_keys($ids));
-   
-       // Lösche die nicht mehr benötigten Variablen
-       foreach ($ids_to_delete as $id) 
-       {
-           $this->UnregisterVariable($id);
-       }
-   }
-   
-   // Alle Timer löschen
-   if ($hz_timerDayVisible === 0) 
-   {
-       $ids = [
-           'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 
-           'set_251', 'set_252', 'set_253', 'set_254', 'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 
-           'set_261', 'set_262', 'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270', 
-           'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 
-           'set_281', 'set_282'
-       ];
-   
-       foreach ($ids as $id) 
-       {
-           $this->UnregisterVariable($id);
-       }
-   }
-}
-   
-
-
-
-
-
+            foreach ($ids as $id => $name) 
+            {
+                $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
+                $this->getParameter($id);
+                $this->GetValue($id);
+                $this->EnableAction($id);
+            }
+        } 
+        if ($hz_timerDayVisible === 0) //alle Timer löschen
+        {
+            $ids = 
+			[
+			'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254', 'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262','set_263', 'set_264',
+            'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270', 'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282'
+			];
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
+        }
 
         if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Woche Warmwasser
         {
