@@ -22,16 +22,6 @@
             "type": "ExpansionPanel",
             "caption": "Zusätzliche Funktionen aktivieren",
             "items": [
-                { 
-                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 }
-                    ]
-                },
                 {
                     "type": "CheckBox",
                     "name": "HZ_TimerWeekendVisible",
@@ -81,6 +71,16 @@
                     "type": "CheckBox",
                     "name": "WWsetVisible",
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
+                },
+                { 
+                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
                 },
                 {
                     "type": "SelectVariable",
