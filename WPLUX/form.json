@@ -94,6 +94,35 @@
                 }
                 ]
         },
+
+        
+        { "type": "Select", "name": "OutputDevice", "caption": "Ausgabegerät",
+        "options": [
+            {"caption" : "No sound",
+                "value": [
+                    {"name": "DeviceName", "value": "No sound"},
+                    {"name": "DeviceChannels", "value": 0},
+                    {"name": "DeviceNum", "value": 0}
+                ]
+            },
+            {"caption" : "Kopfhörer",
+                "value": [
+                    {"name": "DeviceName", "value": "Kopfhörer"},
+                    {"name": "DeviceChannels", "value": 2},
+                    {"name": "DeviceNum", "value": 1}
+                ]
+            },
+            {"caption" : "Lautsprecher",
+                "value": [
+                    {"name": "DeviceName", "value": "Stereolautsprecher"},
+                    {"name": "DeviceChannels", "value": 2},
+                    {"name": "DeviceNum", "value": 2}
+                ]
+            }
+        ]
+    },
+
+
         {
             "name": "IPAddress",
             "type": "ValidationTextBox",
