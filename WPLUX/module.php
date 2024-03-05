@@ -194,7 +194,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerWeekVisible === 0) 
+        if ($hz_timerWeekVisible === 0) //alle Timer löschen
         {
             $ids =
             [
@@ -246,7 +246,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerWeekendVisible === 0) 
+        if ($hz_timerWeekendVisible === 0) //alle Timer löschen
         {
             $ids = ['set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'];
             
@@ -306,7 +306,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerDayVisible === 0) 
+        if ($hz_timerDayVisible === 0) //alle Timer löschen
         {
             $ids = 
 			[
@@ -320,15 +320,50 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekVisible) //Variabelerstellung Timer Woche Warmwasser
-        {
-            $ids = 
-            [
+        if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Tage
+{
+            $ids = [];
+            
+            if ($bw_timerWeekVisible === 5) 
+            {
+                $ids = 
+                [
                 'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
                 'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)', 'set_414' => 'Woche von (5)', 'set_415' => 'Woche bis (5)'
-            ];
+                ];
+            } 
+            elseif ($bw_timerWeekVisible === 4) 
+            {
+                $ids = 
+                [
+                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
+                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)',
+                ];
+            }
+            elseif ($bw_timerWeekVisible === 3) 
+            {
+                $ids = 
+                [
+                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
+                'set_411' => 'Woche bis (3)'
+                ];
+            }
+			elseif ($bw_timerWeekVisible === 2) 
+            {
+                $ids = 
+                [
+                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)'
+                ];
+            }
+            elseif ($bw_timerWeekVisible === 1) 
+            {
+                $ids = 
+                [
+                    'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)'
+                ];
+            }
             
-            $position = -160; //ab dieser Position im Objektbaum einordnen
+            $position = -42; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -338,12 +373,13 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        else 
+        
+        if ($bw_timerWeekVisible === 0) 
         {
             $ids = 
-            [
-                'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415'
-            ];
+			[
+			'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415
+			];
             
             foreach ($ids as $id) 
             {

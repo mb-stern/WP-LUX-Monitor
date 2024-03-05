@@ -78,7 +78,7 @@
                     ]
                 },
                 { 
-                    "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Warmwasser",
                     "options": 
                     [
                     { "caption": "deaktiviert", "value": 0 },
@@ -90,7 +90,7 @@
                     ]
                 },
                 { 
-                    "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Woche Heizung",
+                    "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Woche Warmwasser",
                     "options": 
                     [
                     { "caption": "deaktiviert", "value": 0 },
@@ -102,7 +102,7 @@
                     ]
                 },
                 { 
-                    "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Woche Heizung",
+                    "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Woche Warmwasser",
                     "options": 
                     [
                     { "caption": "deaktiviert", "value": 0 },
