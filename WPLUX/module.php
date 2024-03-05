@@ -162,20 +162,25 @@ class WPLUX extends IPSModule
             
             if ($hz_timerWeekVisible === 3) 
             {
-                $ids = [
+                $ids = 
+                [
                     'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
                     'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)',
                     'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
                 ];
-            } elseif ($hz_timerWeekVisible === 2) 
+            } 
+            elseif ($hz_timerWeekVisible === 2) 
             {
-                $ids = [
+                $ids = 
+                [
                     'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
                     'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)'
                 ];
-            } elseif ($hz_timerWeekVisible === 1) 
+            }
+            elseif ($hz_timerWeekVisible === 1) 
             {
-                $ids = [
+                $ids = 
+                [
                     'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)'
                 ];
             }
@@ -189,7 +194,9 @@ class WPLUX extends IPSModule
                 $this->GetValue($id);
                 $this->EnableAction($id);
             }
-        } else {
+        } 
+        if ($hz_timerWeekVisible === 0) 
+        {
             $ids = ['set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'];
             
             foreach ($ids as $id) 
