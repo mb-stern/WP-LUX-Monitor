@@ -368,29 +368,25 @@ class WPLUX extends IPSModule
     }
 
     public function RequestAction($Ident, $Value) 
+{
+    // Parameterbereich von 'set_223' bis 'set_504'
+    if (strpos($Ident, 'set_') === 0 && intval(substr($Ident, 4)) >= 223 && intval(substr($Ident, 4)) <= 504) 
     {
-        $parameterMapping = 
-        [
-            'Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp',
-            'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228', 'set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238',
-            'set_239', 'set_240', 'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254',
-            'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262', 'set_263', 'set_264', 'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270',
-            'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282', 'set_406', 'set_407', 'set_408', 'set_409', 
-            'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415', 'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 
-            'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435', 'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 
-            'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 
-            'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 
-            'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 
-            'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
-        ];
-
-        if (in_array($Ident, $parameterMapping)) 
-        {
-            $this->setParameter($Ident, $Value);
-            $this->getParameter($Ident);
-            $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
-        }
+        // Funktionen aufrufen
+        $this->setParameter($Ident, $Value);
+        $this->getParameter($Ident);
+        $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
     }
+    // Weitere spezifische Werte wie 'Mode_Heizung', 'Mode_Kuehlung' usw.
+    elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp'])) 
+    {
+        // Funktionen aufrufen
+        $this->setParameter($Ident, $Value);
+        $this->getParameter($Ident);
+        $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
+    }
+}
+
 
     
     public function Update()
