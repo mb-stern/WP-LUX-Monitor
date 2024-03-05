@@ -156,24 +156,18 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
         
-        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche Heizung
+        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) // Variabelerstellung Timer Woche Heizung
         {
-            $ids =
-            [
-                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
-            ];
-            
-            foreach ($ids as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
+            // Erstelle ein Array mit den IDs der aktuellen Variablen
+            $current_ids = ['set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'];
 
-            $ids = [];
+            // Array für die neuen Variablen
+            $new_ids = [];
             
+            // Neue Variablen basierend auf der ausgewählten Option erstellen und gleichzeitig prüfen, welche Variablen gelöscht werden müssen
             if ($hz_timerWeekVisible === 3) 
             {
-                $ids = 
-                [
+                $new_ids = [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)',
                     'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)',
                     'set_227' => 'Heizung Woche von (3)', 'set_228' => 'Heizung Woche bis (3)'
@@ -181,29 +175,39 @@ class WPLUX extends IPSModule
             } 
             elseif ($hz_timerWeekVisible === 2) 
             {
-                $ids = 
-                [
-                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
+                $new_ids = [
+                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 
+                    'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
             }
             elseif ($hz_timerWeekVisible === 1) 
             {
-                $ids = 
-                [
+                $new_ids = [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
                 ];
             }
             
-            $position = -60; //ab dieser Position im Objektbaum einordnen
+            // Die IDs der zu löschenden Variablen sind die Differenz zwischen den aktuellen und den neuen IDs
+            $ids_to_delete = array_diff($current_ids, array_keys($new_ids));
 
-            foreach ($ids as $id => $name) 
+            // Lösche die Variablen, die nicht mehr benötigt werden
+            foreach ($ids_to_delete as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
+
+            // Erstelle die neuen Variablen oder aktualisiere die vorhandenen
+            $position = -60; // ab dieser Position im Objektbaum einordnen
+
+            foreach ($new_ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
                 $this->getParameter($id);
                 $this->GetValue($id);
                 $this->EnableAction($id);
             }
-        } 
+        }
+
 
         if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
         {
