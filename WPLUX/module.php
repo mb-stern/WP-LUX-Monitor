@@ -158,7 +158,7 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
 
-        if ($hz_timerWeekVisible === 3); //Variabelerstellung Timer Woche
+        if ($hz_timerWeekVisible === 3) //Variabelerstellung Timer Woche
         
         //if ($hz_timerWeekVisible) //Variabelerstellung Timer Woche
        
@@ -179,7 +179,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerWeekVisible === 0);
+        if ($hz_timerWeekVisible === 0)
         {
             $ids = 
             [
