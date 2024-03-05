@@ -164,23 +164,23 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
-                    'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)',
-                    'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
+                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)',
+                    'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)',
+                    'set_227' => 'Heizung Woche von (3)', 'set_228' => 'Heizung Woche bis (3)'
                 ];
             } 
             elseif ($hz_timerWeekVisible === 2) 
             {
                 $ids = 
                 [
-                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)', 'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)'
+                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
             }
             elseif ($hz_timerWeekVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)'
+                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
                 ];
             }
             
@@ -215,24 +215,24 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 
-				'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)', 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 
-				'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)', 'set_239' => 'Sa+So von (3)', 'set_240' => 'Sa+So bis (3)'
+                'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
+				'set_233' => 'Heizung Mo-Fr von (3)', 'set_234' => 'Heizung Mo-Fr bis (3)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 
+				'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)', 'set_239' => 'Heizung Sa+So von (3)', 'set_240' => 'Heizung Sa+So bis (3)'
                 ];
             } 
             elseif ($hz_timerWeekendVisible === 2) 
             {
                 $ids = 
                 [
-                    'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 
-					'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)'
+                    'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
+					'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)'
                 ];
             }
             elseif ($hz_timerWeekendVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)'
+                    'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)'
                 ];
             }
             
@@ -264,35 +264,35 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
-                'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)', 'set_251' => 'Montag von (3)', 'set_252' => 'Montag bis (3)',
-                'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)', 'set_257' => 'Dienstag von (3)', 'set_258' => 'Dienstag bis (3)',
-                'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_261' => 'Mittwoch von (2)', 'set_262' => 'Mittwoch bis (2)', 'set_263' => 'Mittwoch von (3)', 'set_264' => 'Mittwoch bis (3)',
-                'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_267' => 'Donnerstag von (2)', 'set_268' => 'Donnerstag bis (2)', 'set_269' => 'Donnerstag von (3)', 'set_270' => 'Donnerstag bis (3)',
-                'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)', 'set_273' => 'Freitag von (2)', 'set_274' => 'Freitag bis (2)', 'set_275' => 'Freitag von (3)', 'set_276' => 'Freitag bis (3)',
-                'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)', 'set_281' => 'Samstag von (3)', 'set_282' => 'Samstag bis (3)'
+                'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)', 'set_245' => 'Heizung Sonntag von (3)', 'set_246' => 'Heizung Sonntag bis (3)',
+                'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)', 'set_251' => 'Heizung Montag von (3)', 'set_252' => 'Heizung Montag bis (3)',
+                'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)', 'set_257' => 'Heizung Dienstag von (3)', 'set_258' => 'Heizung Dienstag bis (3)',
+                'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)', 'set_263' => 'Heizung Mittwoch von (3)', 'set_264' => 'Heizung Mittwoch bis (3)',
+                'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)', 'set_269' => 'Heizung Donnerstag von (3)', 'set_270' => 'Heizung Donnerstag bis (3)',
+                'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)', 'set_275' => 'Heizung Freitag von (3)', 'set_276' => 'Heizung Freitag bis (3)',
+                'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)', 'set_281' => 'Heizung Samstag von (3)', 'set_282' => 'Heizung Samstag bis (3)'
                 ];
             } 
             elseif ($hz_timerDayVisible === 2) 
             {
                 $ids = 
                 [
-                    'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)',
-					'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)',
-					'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)',
-					'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_261' => 'Mittwoch von (2)', 'set_262' => 'Mittwoch bis (2)',
-					'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_267' => 'Donnerstag von (2)', 'set_268' => 'Donnerstag bis (2)',
-					'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)', 'set_273' => 'Freitag von (2)', 'set_274' => 'Freitag bis (2)',
-					'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)'
+                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)',
+					'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)',
+					'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)',
+					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)',
+					'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)',
+					'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)',
+					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)'
                 ];
             }
             elseif ($hz_timerDayVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)',
-					'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)',
-					'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)'
+                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)',
+					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)',
+					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)'
                 ];
             }
             
@@ -328,38 +328,38 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
-                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)', 'set_414' => 'Woche von (5)', 'set_415' => 'Woche bis (5)'
+                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
+                'set_411' => 'Warmwasser Woche bis (3)', 'set_412' => 'Warmwasser Woche von (4)', 'set_413' => 'Warmwasser Woche bis (4)', 'set_414' => 'Warmwasser Woche von (5)', 'set_415' => 'Warmwasser Woche bis (5)'
                 ];
             } 
             elseif ($bw_timerWeekVisible === 4) 
             {
                 $ids = 
                 [
-                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
-                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)'
+                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
+                'set_411' => 'Warmwasser Woche bis (3)', 'set_412' => 'Warmwasser Woche von (4)', 'set_413' => 'Warmwasser Woche bis (4)'
                 ];
             }
             elseif ($bw_timerWeekVisible === 3) 
             {
                 $ids = 
                 [
-                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
-                'set_411' => 'Woche bis (3)'
+                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
+                'set_411' => 'Warmwasser Woche bis (3)'
                 ];
             }
 			elseif ($bw_timerWeekVisible === 2) 
             {
                 $ids = 
                 [
-                'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)'
+                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)'
                 ];
             }
             elseif ($bw_timerWeekVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)'
+                    'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)'
                 ];
             }
             
@@ -395,42 +395,42 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
-                'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_424' => 'Mo-Fr von (5)', 'set_425' => 'Mo-Fr bis (5)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 
-                'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)',
-                'set_434' => 'Sa+So von (5)', 'set_435' => 'Sa+So bis (5)'
+                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
+                'set_422' => 'Warmwasser Mo-Fr von (4)', 'set_423' => 'Warmwasser Mo-Fr bis (4)', 'set_424' => 'Warmwasser Mo-Fr von (5)', 'set_425' => 'Warmwasser Mo-Fr bis (5)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 
+                'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)', 'set_432' => 'Warmwasser Sa+So von (4)', 'set_433' => 'Warmwasser Sa+So bis (4)',
+                'set_434' => 'Warmwasser Sa+So von (5)', 'set_435' => 'Warmwasser Sa+So bis (5)'
                 ];
             } 
             elseif ($bw_timerWeekendVisible === 4) 
             {
                 $ids = 
                 [
-                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
-                'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 
-				'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)'
+                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
+                'set_422' => 'Warmwasser Mo-Fr von (4)', 'set_423' => 'Warmwasser Mo-Fr bis (4)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 
+				'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)', 'set_432' => 'Warmwasser Sa+So von (4)', 'set_433' => 'Warmwasser Sa+So bis (4)'
                 ];
             }
             elseif ($bw_timerWeekendVisible === 3) 
             {
                 $ids = 
                 [
-                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
-                'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)'
+                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
+                'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)'
                 ];
             }
 			elseif ($bw_timerWeekendVisible === 2) 
             {
                 $ids = 
                 [
-                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 
-                'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)'
+                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 
+                'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)'
                 ];
             }
             elseif ($bw_timerWeekendVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)'
+                    'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)'
                 ];
             }
             
@@ -465,72 +465,72 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
-                'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_444' => 'Sonntag von (5)', 'set_445' => 'Sonntag bis (5)',
-                'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)',
-                'set_451' => 'Montag bis (3)', 'set_452' => 'Montag von (4)', 'set_453' => 'Montag bis (4)', 'set_454' => 'Montag von (5)', 'set_455' => 'Montag bis (5)',
-                'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)',
-                'set_461' => 'Dienstag bis (3)', 'set_462' => 'Dienstag von (4)', 'set_463' => 'Dienstag bis (4)', 'set_464' => 'Dienstag von (5)', 'set_465' => 'Dienstag bis (5)',
-                'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)',
-                'set_471' => 'Mittwoch bis (3)', 'set_472' => 'Mittwoch von (4)', 'set_473' => 'Mittwoch bis (4)', 'set_474' => 'Mittwoch von (5)', 'set_475' => 'Mittwoch bis (5)',
-                'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)',
-                'set_481' => 'Donnerstag bis (3)', 'set_482' => 'Donnerstag von (4)', 'set_483' => 'Donnerstag bis (4)', 'set_484' => 'Donnerstag von (5)', 'set_485' => 'Donnerstag bis (5)',
-                'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)',
-                'set_491' => 'Freitag bis (3)', 'set_492' => 'Freitag von (4)', 'set_493' => 'Freitag bis (4)', 'set_494' => 'Freitag von (5)', 'set_495' => 'Freitag bis (5)',
-                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)',
-                'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)', 'set_504' => 'Samstag von (5)', 'set_505' => 'Samstag bis (5)'
+                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
+                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_442' => 'Warmwasser Sonntag von (4)', 'set_443' => 'Warmwasser Sonntag bis (4)', 'set_444' => 'Warmwasser Sonntag von (5)', 'set_445' => 'Warmwasser Sonntag bis (5)',
+                'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_450' => 'Warmwasser Montag von (3)',
+                'set_451' => 'Warmwasser Montag bis (3)', 'set_452' => 'Warmwasser Montag von (4)', 'set_453' => 'Warmwasser Montag bis (4)', 'set_454' => 'Warmwasser Montag von (5)', 'set_455' => 'Warmwasser Montag bis (5)',
+                'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)',
+                'set_461' => 'Warmwasser Dienstag bis (3)', 'set_462' => 'Warmwasser Dienstag von (4)', 'set_463' => 'Warmwasser Dienstag bis (4)', 'set_464' => 'Warmwasser Dienstag von (5)', 'set_465' => 'Warmwasser Dienstag bis (5)',
+                'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)',
+                'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_472' => 'Warmwasser Mittwoch von (4)', 'set_473' => 'Warmwasser Mittwoch bis (4)', 'set_474' => 'Warmwasser Mittwoch von (5)', 'set_475' => 'Warmwasser Mittwoch bis (5)',
+                'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)',
+                'set_481' => 'Warmwasser Donnerstag bis (3)', 'set_482' => 'Warmwasser Donnerstag von (4)', 'set_483' => 'Warmwasser Donnerstag bis (4)', 'set_484' => 'Warmwasser Donnerstag von (5)', 'set_485' => 'Warmwasser Donnerstag bis (5)',
+                'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)',
+                'set_491' => 'Warmwasser Freitag bis (3)', 'set_492' => 'Warmwasser Freitag von (4)', 'set_493' => 'Warmwasser Freitag bis (4)', 'set_494' => 'Warmwasser Freitag von (5)', 'set_495' => 'Warmwasser Freitag bis (5)',
+                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)',
+                'set_501' => 'Warmwasser Samstag bis (3)', 'set_502' => 'Warmwasser Samstag von (4)', 'set_503' => 'Warmwasser Samstag bis (4)', 'set_504' => 'Warmwasser Samstag von (5)', 'set_505' => 'Warmwasser Samstag bis (5)'
                 ];
             } 
             elseif ($bw_timerDayVisible === 4) 
             {
                 $ids = 
                 [
-                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
-                'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 
-				'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)', 'set_451' => 'Montag bis (3)', 'set_452' => 'Montag von (4)', 'set_453' => 'Montag bis (4)',
-                'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)',
-                'set_461' => 'Dienstag bis (3)', 'set_462' => 'Dienstag von (4)', 'set_463' => 'Dienstag bis (4)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 
-				'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)', 'set_471' => 'Mittwoch bis (3)', 'set_472' => 'Mittwoch von (4)', 'set_473' => 'Mittwoch bis (4)',
-                'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)',
-                'set_481' => 'Donnerstag bis (3)', 'set_482' => 'Donnerstag von (4)', 'set_483' => 'Donnerstag bis (4)', 'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 
-				'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)', 'set_491' => 'Freitag bis (3)', 'set_492' => 'Freitag von (4)', 'set_493' => 'Freitag bis (4)',
-                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)',
-                'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)'
+                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
+                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_442' => 'Warmwasser Sonntag von (4)', 'set_443' => 'Warmwasser Sonntag bis (4)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 
+				'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_450' => 'Warmwasser Montag von (3)', 'set_451' => 'Warmwasser Montag bis (3)', 'set_452' => 'Warmwasser Montag von (4)', 'set_453' => 'Warmwasser Montag bis (4)',
+                'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)',
+                'set_461' => 'Warmwasser Dienstag bis (3)', 'set_462' => 'Warmwasser Dienstag von (4)', 'set_463' => 'Warmwasser Dienstag bis (4)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 
+				'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)', 'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_472' => 'Warmwasser Mittwoch von (4)', 'set_473' => 'Warmwasser Mittwoch bis (4)',
+                'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)',
+                'set_481' => 'Warmwasser Donnerstag bis (3)', 'set_482' => 'Warmwasser Donnerstag von (4)', 'set_483' => 'Warmwasser Donnerstag bis (4)', 'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 
+				'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)', 'set_491' => 'Warmwasser Freitag bis (3)', 'set_492' => 'Warmwasser Freitag von (4)', 'set_493' => 'Warmwasser Freitag bis (4)',
+                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)',
+                'set_501' => 'Warmwasser Samstag bis (3)', 'set_502' => 'Warmwasser Samstag von (4)', 'set_503' => 'Warmwasser Samstag bis (4)'
                 ];
             }
             elseif ($bw_timerDayVisible === 3) 
             {
                 $ids = 
                 [
-                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
-                'set_441' => 'Sonntag bis (3)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 
-				'set_450' => 'Montag von (3)', 'set_451' => 'Montag bis (3)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 
-				'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)', 'set_461' => 'Dienstag bis (3)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 
-				'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)', 'set_471' => 'Mittwoch bis (3)', 'set_476' => 'Donnerstag von (1)', 
-				'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)', 'set_481' => 'Donnerstag bis (3)', 
-				'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)', 'set_491' => 'Freitag bis (3)',
-                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)', 'set_501' => 'Samstag bis (3)'
+                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
+                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 
+				'set_450' => 'Warmwasser Montag von (3)', 'set_451' => 'Warmwasser Montag bis (3)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 
+				'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)', 'set_461' => 'Warmwasser Dienstag bis (3)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 
+				'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)', 'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_476' => 'Warmwasser Donnerstag von (1)', 
+				'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)', 'set_481' => 'Warmwasser Donnerstag bis (3)', 
+				'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)', 'set_491' => 'Warmwasser Freitag bis (3)',
+                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)', 'set_501' => 'Warmwasser Samstag bis (3)'
                 ];
             }
 			elseif ($bw_timerDayVisible === 2) 
             {
                 $ids = 
                 [
-                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_446' => 'Montag von (1)', 
-				'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 
-				'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_468' => 'Mittwoch von (2)', 
-				'set_469' => 'Mittwoch bis (2)', 'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)',
-				'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_496' => 'Samstag von (1)', 
-				'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)'
+                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_446' => 'Warmwasser Montag von (1)', 
+				'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 
+				'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_468' => 'Warmwasser Mittwoch von (2)', 
+				'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)',
+				'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_496' => 'Warmwasser Samstag von (1)', 
+				'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)'
                 ];
             }
             elseif ($bw_timerDayVisible === 1) 
             {
                 $ids = 
                 [
-                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 
-				'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_486' => 'Freitag von (1)', 
-				'set_487' => 'Freitag bis (1)', 'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)'
+                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 
+				'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_486' => 'Warmwasser Freitag von (1)', 
+				'set_487' => 'Warmwasser Freitag bis (1)', 'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)'
 				];
             }
             
