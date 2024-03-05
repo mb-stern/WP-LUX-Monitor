@@ -96,12 +96,12 @@
         },
 
 
-       { "type": "Select", "name": "DeviceType", "caption": "Einheit",
+       { "type": "Select", "name": "HZ_Timer_Woche", "caption": "Timer Woche Heizung",
         "options": [
-            { "caption": "Bit (1Bit)", "value": 0 },
-            { "caption": "Bits (2Bit)", "value": 1 },
-            { "caption": "Bits (4Bit)", "value": 2 },
-            { "caption": "Byte (8Bit)", "value": 3 }
+            { "caption": "deaktiviert", "value": 0 },
+            { "caption": "1 Zeitfenster", "value": 1 },
+            { "caption": "2 Zeitfenster", "value": 2 },
+            { "caption": "2 Zeitfenster", "value": 3 }
         ]
     },
 
