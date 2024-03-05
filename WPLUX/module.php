@@ -347,6 +347,7 @@ class WPLUX extends IPSModule
            $this->UnregisterVariable($id);
        }
    }
+}
    
 
 
