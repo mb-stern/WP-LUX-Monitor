@@ -167,7 +167,7 @@ class WPLUX extends IPSModule
             {
                 $this->UnregisterVariable($id);
             }
-            
+
             $ids = [];
             
             if ($hz_timerWeekVisible === 3) 
@@ -204,18 +204,6 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerWeekVisible === 0) //alle Timer löschen
-        {
-            $ids =
-            [
-                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
-            ];
-            
-            foreach ($ids as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
-        }
 
         if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
         {
