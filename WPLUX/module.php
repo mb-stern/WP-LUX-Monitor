@@ -363,7 +363,7 @@ class WPLUX extends IPSModule
                 ];
             }
             
-            $position = -200; //ab dieser Position im Objektbaum einordnen
+            $position = -160; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -434,7 +434,7 @@ class WPLUX extends IPSModule
                 ];
             }
             
-            $position = -190; //ab dieser Position im Objektbaum einordnen
+            $position = -150; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -534,7 +534,7 @@ class WPLUX extends IPSModule
 				];
             }
             
-            $position = -170; //ab dieser Position im Objektbaum einordnen
+            $position = -130; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
