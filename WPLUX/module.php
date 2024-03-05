@@ -156,7 +156,7 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
         
-        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche
+        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche Heizung
         {
             $ids = [];
             
@@ -207,7 +207,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So
+        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
         {
             $ids = [];
             
@@ -256,7 +256,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) //Variabelerstellung Timer Tage
+        if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) //Variabelerstellung Timer Tage Heizung
 {
             $ids = [];
             
@@ -320,7 +320,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Tage
+        if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Woche Warmwasser
 {
             $ids = [];
             
@@ -363,7 +363,7 @@ class WPLUX extends IPSModule
                 ];
             }
             
-            $position = -42; //ab dieser Position im Objektbaum einordnen
+            $position = -200; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -387,7 +387,7 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) //Variabelerstellung Timer Tage
+        if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
 {
             $ids = [];
             
@@ -434,7 +434,7 @@ class WPLUX extends IPSModule
                 ];
             }
             
-            $position = -42; //ab dieser Position im Objektbaum einordnen
+            $position = -190; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -457,10 +457,14 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerDayVisible) //Variabelerstellung Timer Tage Warmwasser
-        {
-            $ids = 
-            [
+        if ($bw_timerDayVisible >= 0 && $bw_timerDayVisible <= 5) //Variabelerstellung Timer Tage Warmwasser
+{
+            $ids = [];
+            
+            if ($bw_timerDayVisible === 5) 
+            {
+                $ids = 
+                [
                 'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
                 'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_444' => 'Sonntag von (5)', 'set_445' => 'Sonntag bis (5)',
                 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)',
@@ -475,10 +479,63 @@ class WPLUX extends IPSModule
                 'set_491' => 'Freitag bis (3)', 'set_492' => 'Freitag von (4)', 'set_493' => 'Freitag bis (4)', 'set_494' => 'Freitag von (5)', 'set_495' => 'Freitag bis (5)',
                 'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)',
                 'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)', 'set_504' => 'Samstag von (5)', 'set_505' => 'Samstag bis (5)'
-            ];
-
-            $position = -130; //ab dieser Position im Objektbaum einordnen
+                ];
+            } 
+            elseif ($bw_timerDayVisible === 4) 
+            {
+                $ids = 
+                [
+                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
+                'set_441' => 'Sonntag bis (3)', 'set_442' => 'Sonntag von (4)', 'set_443' => 'Sonntag bis (4)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 
+				'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_450' => 'Montag von (3)', 'set_451' => 'Montag bis (3)', 'set_452' => 'Montag von (4)', 'set_453' => 'Montag bis (4)',
+                'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)',
+                'set_461' => 'Dienstag bis (3)', 'set_462' => 'Dienstag von (4)', 'set_463' => 'Dienstag bis (4)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 
+				'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)', 'set_471' => 'Mittwoch bis (3)', 'set_472' => 'Mittwoch von (4)', 'set_473' => 'Mittwoch bis (4)',
+                'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)',
+                'set_481' => 'Donnerstag bis (3)', 'set_482' => 'Donnerstag von (4)', 'set_483' => 'Donnerstag bis (4)', 'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 
+				'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)', 'set_491' => 'Freitag bis (3)', 'set_492' => 'Freitag von (4)', 'set_493' => 'Freitag bis (4)',
+                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)',
+                'set_501' => 'Samstag bis (3)', 'set_502' => 'Samstag von (4)', 'set_503' => 'Samstag bis (4)'
+                ];
+            }
+            elseif ($bw_timerDayVisible === 3) 
+            {
+                $ids = 
+                [
+                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_440' => 'Sonntag von (3)',
+                'set_441' => 'Sonntag bis (3)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 
+				'set_450' => 'Montag von (3)', 'set_451' => 'Montag bis (3)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 'set_458' => 'Dienstag von (2)', 
+				'set_459' => 'Dienstag bis (2)', 'set_460' => 'Dienstag von (3)', 'set_461' => 'Dienstag bis (3)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 
+				'set_468' => 'Mittwoch von (2)', 'set_469' => 'Mittwoch bis (2)', 'set_470' => 'Mittwoch von (3)', 'set_471' => 'Mittwoch bis (3)', 'set_476' => 'Donnerstag von (1)', 
+				'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)', 'set_480' => 'Donnerstag von (3)', 'set_481' => 'Donnerstag bis (3)', 
+				'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_490' => 'Freitag von (3)', 'set_491' => 'Freitag bis (3)',
+                'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)', 'set_500' => 'Samstag von (3)', 'set_501' => 'Samstag bis (3)'
+                ];
+            }
+			elseif ($bw_timerDayVisible === 2) 
+            {
+                $ids = 
+                [
+                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_438' => 'Sonntag von (2)', 'set_439' => 'Sonntag bis (2)', 'set_446' => 'Montag von (1)', 
+				'set_447' => 'Montag bis (1)', 'set_448' => 'Montag von (2)', 'set_449' => 'Montag bis (2)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 
+				'set_458' => 'Dienstag von (2)', 'set_459' => 'Dienstag bis (2)', 'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_468' => 'Mittwoch von (2)', 
+				'set_469' => 'Mittwoch bis (2)', 'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_478' => 'Donnerstag von (2)', 'set_479' => 'Donnerstag bis (2)',
+				'set_486' => 'Freitag von (1)', 'set_487' => 'Freitag bis (1)', 'set_488' => 'Freitag von (2)', 'set_489' => 'Freitag bis (2)', 'set_496' => 'Samstag von (1)', 
+				'set_497' => 'Samstag bis (1)', 'set_498' => 'Samstag von (2)', 'set_499' => 'Samstag bis (2)'
+                ];
+            }
+            elseif ($bw_timerDayVisible === 1) 
+            {
+                $ids = 
+                [
+                'set_436' => 'Sonntag von (1)', 'set_437' => 'Sonntag bis (1)', 'set_446' => 'Montag von (1)', 'set_447' => 'Montag bis (1)', 'set_456' => 'Dienstag von (1)', 'set_457' => 'Dienstag bis (1)', 
+				'set_466' => 'Mittwoch von (1)', 'set_467' => 'Mittwoch bis (1)', 'set_476' => 'Donnerstag von (1)', 'set_477' => 'Donnerstag bis (1)', 'set_486' => 'Freitag von (1)', 
+				'set_487' => 'Freitag bis (1)', 'set_496' => 'Samstag von (1)', 'set_497' => 'Samstag bis (1)'
+				];
+            }
             
+            $position = -170; //ab dieser Position im Objektbaum einordnen
+
             foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
@@ -487,16 +544,16 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        else 
+        if ($bw_timerDayVisible === 0) 
         {
             $ids = 
-            [
-                'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 
+			[
+			'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 
                 'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
                 'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 
                 'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
                 'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
-            ];
+			];
             
             foreach ($ids as $id) 
             {
