@@ -24,31 +24,6 @@
             "items": [
                 {
                     "type": "CheckBox",
-                    "name": "HZ_TimerWeekendVisible",
-                    "caption": "Timer Heizung Mo-Fr/Sa+So aktivieren (12 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "HZ_TimerDayVisible",
-                    "caption": "Timer Heizung Tage aktivieren (42 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "BW_TimerWeekVisible",
-                    "caption": "Timer Warmwasser Woche aktivieren (10 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "BW_TimerWeekendVisible",
-                    "caption": "Timer Warmwasser Mo-Fr/Sa+So aktivieren (20 Var.)"
-                },
-                {
-                    "type": "CheckBox",
-                    "name": "BW_TimerDayVisible",
-                    "caption": "Timer Warmwasser Tage aktivieren (70 Var.)"
-                },
-                {
-                    "type": "CheckBox",
                     "name": "HeizungVisible",
                     "caption": "Steuervariable für Heizungs-Modus aktivieren"
                 },
@@ -80,6 +55,62 @@
                     { "caption": "1 Zeitfenster", "value": 1 },
                     { "caption": "2 Zeitfenster", "value": 2 },
                     { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "HZ_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "HZ_TimerDayVisible", "caption": "Timer Tage Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
                     ]
                 },
                 {
