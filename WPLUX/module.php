@@ -321,7 +321,7 @@ class WPLUX extends IPSModule
         }
 
         if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Woche Warmwasser
-{
+        {
             $ids = [];
             
             if ($bw_timerWeekVisible === 5) 
@@ -388,7 +388,7 @@ class WPLUX extends IPSModule
         }
 
         if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
-{
+        {
             $ids = [];
             
             if ($bw_timerWeekendVisible === 5) 
@@ -458,7 +458,7 @@ class WPLUX extends IPSModule
         }
 
         if ($bw_timerDayVisible >= 0 && $bw_timerDayVisible <= 5) //Variabelerstellung Timer Tage Warmwasser
-{
+        {
             $ids = [];
             
             if ($bw_timerDayVisible === 5) 
