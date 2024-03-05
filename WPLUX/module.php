@@ -179,7 +179,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        elseif ($hz_timerWeekVisible = 0);
+        if ($hz_timerWeekVisible = 0);
         {
             $ids = 
             [
