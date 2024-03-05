@@ -373,12 +373,12 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        
+
         if ($bw_timerWeekVisible === 0) 
         {
             $ids = 
 			[
-			'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415
+			'set_406', 'set_407', 'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415'
 			];
             
             foreach ($ids as $id) 
