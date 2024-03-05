@@ -20,13 +20,12 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyInteger('HZ_Timer_Woche', 0);
-        //$this->RegisterPropertyBoolean('HZ_TimerWeekVisible', false);
-        $this->RegisterPropertyBoolean('HZ_TimerWeekendVisible', false);
-        $this->RegisterPropertyBoolean('HZ_TimerDayVisible', false);
-        $this->RegisterPropertyBoolean('BW_TimerWeekVisible', false);
-        $this->RegisterPropertyBoolean('BW_TimerWeekendVisible', false);
-        $this->RegisterPropertyBoolean('BW_TimerDayVisible', false);
+        $this->RegisterPropertyInteger('HZ_TimerWeekVisible', 0);
+        $this->RegisterPropertyInteger('HZ_TimerWeekendVisible', 0);
+        $this->RegisterPropertyInteger('HZ_TimerDayVisible', 0);
+        $this->RegisterPropertyInteger('BW_TimerWeekVisible', 0);
+        $this->RegisterPropertyInteger('BW_TimerWeekendVisible', 0);
+        $this->RegisterPropertyInteger('BW_TimerDayVisible', 0);
 
         //Attribute als unsichtbare Variablen
         $this->RegisterAttributeFloat("start_value_out", 0);
@@ -71,13 +70,12 @@ class WPLUX extends IPSModule
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-        //$hz_timerWeekVisible = $this->ReadPropertyBoolean('HZ_TimerWeekVisible');
-        $hz_timerWeekVisible = $this->ReadPropertyInteger('HZ_Timer_Woche');
-        $hz_timerWeekendVisible = $this->ReadPropertyBoolean('HZ_TimerWeekendVisible');
-        $hz_timerDayVisible = $this->ReadPropertyBoolean('HZ_TimerDayVisible');
-        $bw_timerWeekVisible = $this->ReadPropertyBoolean('BW_TimerWeekVisible');
-        $bw_timerWeekendVisible = $this->ReadPropertyBoolean('BW_TimerWeekendVisible');
-        $bw_timerDayVisible = $this->ReadPropertyBoolean('BW_TimerDayVisible');
+        $hz_timerWeekVisible = $this->ReadPropertyInteger('HZ_TimerWeekVisible');
+        $hz_timerWeekendVisible = $this->ReadPropertyInteger('HZ_TimerWeekendVisible');
+        $hz_timerDayVisible = $this->ReadPropertyInteger('HZ_TimerDayVisible');
+        $bw_timerWeekVisible = $this->ReadPropertyInteger('BW_TimerWeekVisible');
+        $bw_timerWeekendVisible = $this->ReadPropertyInteger('BW_TimerWeekendVisible');
+        $bw_timerDayVisible = $this->ReadPropertyInteger('BW_TimerDayVisible');
 
         // Steuervariablen erstellen und senden an die Funktion RequestAction
         if ($heizungVisible) 
@@ -157,17 +155,30 @@ class WPLUX extends IPSModule
         {
             $this->UnregisterVariable('jazfaktor');
         }
-
-        if ($hz_timerWeekVisible === 3) //Variabelerstellung Timer Woche
         
-        //if ($hz_timerWeekVisible) //Variabelerstellung Timer Woche
-       
+        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche
         {
-            $ids = [
-                'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
-                'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)',
-                'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
-            ];
+            $ids = [];
+            
+            if ($hz_timerWeekVisible === 3) 
+            {
+                $ids = [
+                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
+                    'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)',
+                    'set_227' => 'Woche von (3)', 'set_228' => 'Woche bis (3)'
+                ];
+            } elseif ($hz_timerWeekVisible === 2) 
+            {
+                $ids = [
+                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
+                    'set_225' => 'Woche von (2)', 'set_226' => 'Woche bis (2)'
+                ];
+            } elseif ($hz_timerWeekVisible === 1) 
+            {
+                $ids = [
+                    'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)'
+                ];
+            }
             
             $position = -60; //ab dieser Position im Objektbaum einordnen
 
@@ -178,13 +189,8 @@ class WPLUX extends IPSModule
                 $this->GetValue($id);
                 $this->EnableAction($id);
             }
-        } 
-        if ($hz_timerWeekVisible === 0)
-        {
-            $ids = 
-            [
-                'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
-            ];
+        } else {
+            $ids = ['set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'];
             
             foreach ($ids as $id) 
             {

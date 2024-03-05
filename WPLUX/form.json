@@ -22,10 +22,15 @@
             "type": "ExpansionPanel",
             "caption": "Zusätzliche Funktionen aktivieren",
             "items": [
-                {
-                    "type": "CheckBox",
-                    "name": "HZ_TimerWeekVisible",
-                    "caption": "Timer Heizung Woche aktivieren (6 Var.)"
+                { 
+                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
                 },
                 {
                     "type": "CheckBox",
@@ -94,18 +99,6 @@
                 }
                 ]
         },
-
-
-       { "type": "Select", "name": "HZ_Timer_Woche", "caption": "Timer Woche Heizung",
-        "options": [
-            { "caption": "deaktiviert", "value": 0 },
-            { "caption": "1 Zeitfenster", "value": 1 },
-            { "caption": "2 Zeitfenster", "value": 2 },
-            { "caption": "2 Zeitfenster", "value": 3 }
-        ]
-    },
-
-
         {
             "name": "IPAddress",
             "type": "ValidationTextBox",
