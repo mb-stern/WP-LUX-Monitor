@@ -225,14 +225,14 @@ class WPLUX extends IPSModule
                 $ids = 
                 [
                     'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)', 
-					'set_233' => 'Mo-Fr von (3)', 'set_234' => 'Mo-Fr bis (3)', 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)',
+					'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)', 'set_237' => 'Sa+So von (2)', 'set_238' => 'Sa+So bis (2)'
                 ];
             }
             elseif ($hz_timerWeekendVisible === 1) 
             {
                 $ids = 
                 [
-                    'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_231' => 'Mo-Fr von (2)', 'set_232' => 'Mo-Fr bis (2)',
+                    'set_229' => 'Mo-Fr von (1)', 'set_230' => 'Mo-Fr bis (1)', 'set_235' => 'Sa+So von (1)', 'set_236' => 'Sa+So bis (1)'
                 ];
             }
             
