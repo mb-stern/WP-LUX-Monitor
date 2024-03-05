@@ -337,7 +337,7 @@ class WPLUX extends IPSModule
                 $ids = 
                 [
                 'set_406' => 'Woche von (1)', 'set_407' => 'Woche bis (1)', 'set_408' => 'Woche von (2)', 'set_409' => 'Woche bis (2)', 'set_410' => 'Woche von (3)', 
-                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)',
+                'set_411' => 'Woche bis (3)', 'set_412' => 'Woche von (4)', 'set_413' => 'Woche bis (4)'
                 ];
             }
             elseif ($bw_timerWeekVisible === 3) 
@@ -387,18 +387,55 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekendVisible) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
-        {
-            $ids = 
-            [
+        if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) //Variabelerstellung Timer Tage
+{
+            $ids = [];
+            
+            if ($bw_timerWeekendVisible === 5) 
+            {
+                $ids = 
+                [
                 'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
                 'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_424' => 'Mo-Fr von (5)', 'set_425' => 'Mo-Fr bis (5)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 
                 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)',
                 'set_434' => 'Sa+So von (5)', 'set_435' => 'Sa+So bis (5)'
-            ];
-
-            $position = -150; //ab dieser Position im Objektbaum einordnen
+                ];
+            } 
+            elseif ($bw_timerWeekendVisible === 4) 
+            {
+                $ids = 
+                [
+                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
+                'set_422' => 'Mo-Fr von (4)', 'set_423' => 'Mo-Fr bis (4)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 
+				'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)', 'set_432' => 'Sa+So von (4)', 'set_433' => 'Sa+So bis (4)'
+                ];
+            }
+            elseif ($bw_timerWeekendVisible === 3) 
+            {
+                $ids = 
+                [
+                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 'set_420' => 'Mo-Fr von (3)', 'set_421' => 'Mo-Fr bis (3)', 
+                'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)', 'set_430' => 'Sa+So von (3)', 'set_431' => 'Sa+So bis (3)'
+                ];
+            }
+			elseif ($bw_timerWeekendVisible === 2) 
+            {
+                $ids = 
+                [
+                'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)',  'set_418' => 'Mo-Fr von (2)', 'set_419' => 'Mo-Fr bis (2)', 
+                'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)', 'set_428' => 'Sa+So von (2)', 'set_429' => 'Sa+So bis (2)'
+                ];
+            }
+            elseif ($bw_timerWeekendVisible === 1) 
+            {
+                $ids = 
+                [
+                    'set_416' => 'Mo-Fr von (1)', 'set_417' => 'Mo-Fr bis (1)', 'set_426' => 'Sa+So von (1)', 'set_427' => 'Sa+So bis (1)'
+                ];
+            }
             
+            $position = -42; //ab dieser Position im Objektbaum einordnen
+
             foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
@@ -407,12 +444,12 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        else 
+        if ($bw_timerWeekendVisible === 0) 
         {
             $ids = 
-            [
-                'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435'
-            ];
+			[
+			'set_416', 'set_417', 'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 'set_426', 'set_427', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435'
+			];
             
             foreach ($ids as $id) 
             {
