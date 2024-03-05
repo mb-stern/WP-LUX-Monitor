@@ -20,7 +20,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->ReadPropertyInteger('HZ_Timer_Woche', 0);
+        $this->RegisterPropertyInteger('HZ_Timer_Woche', 0);
         //$this->RegisterPropertyBoolean('HZ_TimerWeekVisible', false);
         $this->RegisterPropertyBoolean('HZ_TimerWeekendVisible', false);
         $this->RegisterPropertyBoolean('HZ_TimerDayVisible', false);
