@@ -236,7 +236,7 @@ class WPLUX extends IPSModule
                 ];
             }
             
-            $position = -60; //ab dieser Position im Objektbaum einordnen
+            $position = -56; //ab dieser Position im Objektbaum einordnen
 
             foreach ($ids as $id => $name) 
             {
@@ -256,10 +256,14 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($hz_timerDayVisible) //Variabelerstellung Timer Tage Heizung
-        {
-            $ids = 
-            [
+        if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) //Variabelerstellung Timer Tage
+{
+            $ids = [];
+            
+            if ($hz_timerDayVisible === 3) 
+            {
+                $ids = 
+                [
                 'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)', 'set_245' => 'Sonntag von (3)', 'set_246' => 'Sonntag bis (3)',
                 'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)', 'set_251' => 'Montag von (3)', 'set_252' => 'Montag bis (3)',
                 'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)', 'set_257' => 'Dienstag von (3)', 'set_258' => 'Dienstag bis (3)',
@@ -267,10 +271,33 @@ class WPLUX extends IPSModule
                 'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_267' => 'Donnerstag von (2)', 'set_268' => 'Donnerstag bis (2)', 'set_269' => 'Donnerstag von (3)', 'set_270' => 'Donnerstag bis (3)',
                 'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)', 'set_273' => 'Freitag von (2)', 'set_274' => 'Freitag bis (2)', 'set_275' => 'Freitag von (3)', 'set_276' => 'Freitag bis (3)',
                 'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)', 'set_281' => 'Samstag von (3)', 'set_282' => 'Samstag bis (3)'
-            ];
-
-            $position = -42; //ab dieser Position im Objektbaum einordnen
+                ];
+            } 
+            elseif ($hz_timerDayVisible === 2) 
+            {
+                $ids = 
+                [
+                    'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_243' => 'Sonntag von (2)', 'set_244' => 'Sonntag bis (2)',
+					'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_249' => 'Montag von (2)', 'set_250' => 'Montag bis (2)',
+					'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)', 'set_255' => 'Dienstag von (2)', 'set_256' => 'Dienstag bis (2)',
+					'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_261' => 'Mittwoch von (2)', 'set_262' => 'Mittwoch bis (2)',
+					'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_267' => 'Donnerstag von (2)', 'set_268' => 'Donnerstag bis (2)',
+					'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)', 'set_273' => 'Freitag von (2)', 'set_274' => 'Freitag bis (2)',
+					'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)', 'set_279' => 'Samstag von (2)', 'set_280' => 'Samstag bis (2)'
+                ];
+            }
+            elseif ($hz_timerDayVisible === 1) 
+            {
+                $ids = 
+                [
+                    'set_241' => 'Sonntag von (1)', 'set_242' => 'Sonntag bis (1)', 'set_247' => 'Montag von (1)', 'set_248' => 'Montag bis (1)', 'set_253' => 'Dienstag von (1)', 'set_254' => 'Dienstag bis (1)',
+					'set_259' => 'Mittwoch von (1)', 'set_260' => 'Mittwoch bis (1)', 'set_265' => 'Donnerstag von (1)', 'set_266' => 'Donnerstag bis (1)', 'set_271' => 'Freitag von (1)', 'set_272' => 'Freitag bis (1)',
+					'set_277' => 'Samstag von (1)', 'set_278' => 'Samstag bis (1)'
+                ];
+            }
             
+            $position = -42; //ab dieser Position im Objektbaum einordnen
+
             foreach ($ids as $id => $name) 
             {
                 $this->RegisterVariableInteger($id, $name, '~UnixTimestampTime', $position++);
@@ -279,13 +306,13 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        else 
+        if ($hz_timerDayVisible === 0) 
         {
             $ids = 
-            [
-                'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254', 'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262','set_263', 'set_264',
-                'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270', 'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282'
-            ];
+			[
+			'set_241', 'set_242', 'set_243', 'set_244', 'set_245', 'set_246', 'set_247', 'set_248', 'set_249', 'set_250', 'set_251', 'set_252', 'set_253', 'set_254', 'set_255', 'set_256', 'set_257', 'set_258', 'set_259', 'set_260', 'set_261', 'set_262','set_263', 'set_264',
+            'set_265', 'set_266', 'set_267', 'set_268', 'set_269', 'set_270', 'set_271', 'set_272', 'set_273', 'set_274', 'set_275', 'set_276', 'set_277', 'set_278', 'set_279', 'set_280', 'set_281', 'set_282'
+			];
             
             foreach ($ids as $id) 
             {
