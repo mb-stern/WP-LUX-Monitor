@@ -12,8 +12,7 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyString('IPAddress', '0.0.0.0');
         $this->RegisterPropertyInteger('Port', 8889);
         $this->RegisterPropertyString('IDListe', '[]');
-        $this->RegisterPropertyInteger('UpdateInterval', 0);
-        
+        $this->RegisterPropertyInteger('UpdateInterval', 0); 
         $this->RegisterPropertyBoolean('HeizungVisible', false);
         $this->RegisterPropertyBoolean('KuehlungVisible', false);
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
@@ -21,13 +20,15 @@ class WPLUX extends IPSModule
         $this->RegisterPropertyBoolean('WWsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
-        $this->RegisterPropertyBoolean('HZ_TimerWeekVisible', false);
+        $this->ReadPropertyInteger('HZ_Timer_Woche', 0);
+        //$this->RegisterPropertyBoolean('HZ_TimerWeekVisible', false);
         $this->RegisterPropertyBoolean('HZ_TimerWeekendVisible', false);
         $this->RegisterPropertyBoolean('HZ_TimerDayVisible', false);
         $this->RegisterPropertyBoolean('BW_TimerWeekVisible', false);
         $this->RegisterPropertyBoolean('BW_TimerWeekendVisible', false);
         $this->RegisterPropertyBoolean('BW_TimerDayVisible', false);
 
+        //Attribute als unsichtbare Variablen
         $this->RegisterAttributeFloat("start_value_out", 0);
         $this->RegisterAttributeFloat("start_kwh_in", 0);
 
@@ -70,7 +71,8 @@ class WPLUX extends IPSModule
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
-        $hz_timerWeekVisible = $this->ReadPropertyBoolean('HZ_TimerWeekVisible');
+        //$hz_timerWeekVisible = $this->ReadPropertyBoolean('HZ_TimerWeekVisible');
+        $hz_timerWeekVisible = $this->ReadPropertyInteger('HZ_Timer_Woche');
         $hz_timerWeekendVisible = $this->ReadPropertyBoolean('HZ_TimerWeekendVisible');
         $hz_timerDayVisible = $this->ReadPropertyBoolean('HZ_TimerDayVisible');
         $bw_timerWeekVisible = $this->ReadPropertyBoolean('BW_TimerWeekVisible');
@@ -156,7 +158,10 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
 
-        if ($hz_timerWeekVisible) //Variabelerstellung Timer Woche
+        if ($hz_timerWeekVisible) = 3; //Variabelerstellung Timer Woche
+        
+        //if ($hz_timerWeekVisible) //Variabelerstellung Timer Woche
+       
         {
             $ids = [
                 'set_223' => 'Woche von (1)', 'set_224' => 'Woche bis (1)',
@@ -174,7 +179,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        else 
+        elseif ($hz_timerWeekVisible) = 0;
         {
             $ids = 
             [
@@ -368,27 +373,25 @@ class WPLUX extends IPSModule
     }
 
     public function RequestAction($Ident, $Value) 
-{
-    // Parameterbereich von 'set_223' bis 'set_504'
-    if (strpos($Ident, 'set_') === 0 && intval(substr($Ident, 4)) >= 223 && intval(substr($Ident, 4)) <= 504) 
     {
-        // Funktionen aufrufen
-        $this->setParameter($Ident, $Value);
-        $this->getParameter($Ident);
-        $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
+        // Parameterbereich von 'set_223' bis 'set_504'
+        if (strpos($Ident, 'set_') === 0 && intval(substr($Ident, 4)) >= 223 && intval(substr($Ident, 4)) <= 504) 
+        {
+            // Funktionen aufrufen
+            $this->setParameter($Ident, $Value);
+            $this->getParameter($Ident);
+            $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
+        }
+        // Weitere spezifische Werte wie 'Mode_Heizung', 'Mode_Kuehlung' usw.
+        elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp'])) 
+        {
+            // Funktionen aufrufen
+            $this->setParameter($Ident, $Value);
+            $this->getParameter($Ident);
+            $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
+        }
     }
-    // Weitere spezifische Werte wie 'Mode_Heizung', 'Mode_Kuehlung' usw.
-    elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp'])) 
-    {
-        // Funktionen aufrufen
-        $this->setParameter($Ident, $Value);
-        $this->getParameter($Ident);
-        $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
-    }
-}
 
-
-    
     public function Update()
     {
         //Verbindung zur Lux
