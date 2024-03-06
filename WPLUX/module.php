@@ -168,34 +168,39 @@ class WPLUX extends IPSModule
                     'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)',
                     'set_227' => 'Heizung Woche von (3)', 'set_228' => 'Heizung Woche bis (3)'
                 ];
+            } 
+            elseif ($hz_timerWeekVisible === 2) 
+           
+            $ids = //löschen was nicht benötigt
+            [
+                'set_227', 'set_228'
+            ];
             
             foreach ($ids as $id) 
             {
                 $this->UnregisterVariable($id);
             }
-            } 
-            elseif ($hz_timerWeekVisible === 2) 
             {
                 $ids = 
                 [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
-                
-                $ids = //löschen wenn andere Auwahl getroffen
-                [
-                    'set_223', 'set_224', 'set_225', 'set_226', 'set_227', 'set_228'
-                ];
             }
             elseif ($hz_timerWeekVisible === 1) 
+
+            $ids = //löschen was nicht benötigt
+            [
+                'set_225', 'set_226', 'set_227', 'set_228'
+            ];
+            
+            foreach ($ids as $id) 
+            {
+                $this->UnregisterVariable($id);
+            }
             {
                 $ids = 
                 [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
-                ];
-
-                $ids = //löschen wenn andere Auwahl getroffen
-                [
-                    'set_223', 'set_224', 'set_225', 'set_226'
                 ];
             }
             
