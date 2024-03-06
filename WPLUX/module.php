@@ -170,16 +170,6 @@ class WPLUX extends IPSModule
                 ];
             } 
             elseif ($hz_timerWeekVisible === 2) 
-           
-            $ids = //löschen was nicht benötigt
-            [
-                'set_227', 'set_228'
-            ]
-            
-            foreach ($ids as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
             {
                 $ids = 
                 [
@@ -187,16 +177,6 @@ class WPLUX extends IPSModule
                 ];
             }
             elseif ($hz_timerWeekVisible === 1) 
-
-            $ids = //löschen was nicht benötigt
-            [
-                'set_225', 'set_226', 'set_227', 'set_228'
-            ]
-            
-            foreach ($ids as $id) 
-            {
-                $this->UnregisterVariable($id);
-            }
             {
                 $ids = 
                 [
