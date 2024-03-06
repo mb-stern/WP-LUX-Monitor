@@ -174,7 +174,7 @@ class WPLUX extends IPSModule
             $ids = //löschen was nicht benötigt
             [
                 'set_227', 'set_228'
-            ];
+            ]
             
             foreach ($ids as $id) 
             {
@@ -191,7 +191,7 @@ class WPLUX extends IPSModule
             $ids = //löschen was nicht benötigt
             [
                 'set_225', 'set_226', 'set_227', 'set_228'
-            ];
+            ]
             
             foreach ($ids as $id) 
             {
