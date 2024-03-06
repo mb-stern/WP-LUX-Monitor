@@ -156,7 +156,9 @@ class WPLUX extends IPSModule
             $this->UnregisterVariable('jazfaktor');
         }
         
-        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) //Variabelerstellung Timer Woche Heizung
+        //Variabelerstellung Timer Woche Heizung
+
+        if ($hz_timerWeekVisible >= 0 && $hz_timerWeekVisible <= 3) 
         {
             $ids = [];
             
@@ -176,7 +178,32 @@ class WPLUX extends IPSModule
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
             }
+            
+            
+            
+            
+            
+            
+            
+            
             elseif ($hz_timerWeekVisible === 1) 
+            
+            {
+                $ids =
+                [
+                    'set_225', 'set_226', 'set_227', 'set_228'
+                ];
+                
+                foreach ($ids as $id) 
+                {
+                    $this->UnregisterVariable($id);
+                }
+            }
+            
+            
+            
+            
+            
             {
                 $ids = 
                 [
@@ -194,6 +221,17 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         if ($hz_timerWeekVisible === 0) //alle Timer löschen
         {
             $ids =
@@ -207,7 +245,9 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
+        //Variabelerstellung Timer Mo-Fr/Sa+So Heizung
+
+        if ($hz_timerWeekendVisible >= 0 && $hz_timerWeekendVisible <= 3) 
         {
             $ids = [];
             
