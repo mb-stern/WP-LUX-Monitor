@@ -176,7 +176,7 @@ class WPLUX extends IPSModule
                 {
                     $ids =
                     [
-                        'set_227', 'set_228'
+                        'set_227', 'set_228' //abgewählte Timer löschen
                     ];
                     
                     foreach ($ids as $id) 
@@ -190,14 +190,13 @@ class WPLUX extends IPSModule
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
                 ];
             }
-            
             elseif ($hz_timerWeekVisible === 1) 
             {
 
                 {
                     $ids =
                     [
-                        'set_225', 'set_226', 'set_227', 'set_228'
+                        'set_225', 'set_226', 'set_227', 'set_228' //abgewählte Timer löschen
                     ];
                     
                     foreach ($ids as $id) 
@@ -213,7 +212,7 @@ class WPLUX extends IPSModule
 
             }
             
-            $position = -60; //ab dieser Position im Objektbaum einordnen
+            $position = -60;
 
             foreach ($ids as $id => $name) 
             {
@@ -254,6 +253,17 @@ class WPLUX extends IPSModule
             } 
             elseif ($hz_timerWeekendVisible === 2) 
             {
+                {
+                    $ids = 
+                    [
+                        'set_233', 'set_234', 'set_239', 'set_240' //abgewählte Timer löschen
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                     'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
@@ -262,6 +272,17 @@ class WPLUX extends IPSModule
             }
             elseif ($hz_timerWeekendVisible === 1) 
             {
+                {
+                    $ids =
+                    [
+                        'set_231', 'set_232', 'set_233', 'set_234','set_237', 'set_238', 'set_239', 'set_240' //abgewählte Timer löschen
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                     'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)'
@@ -288,7 +309,9 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) //Variabelerstellung Timer Tage Heizung
+        //Variabelerstellung Timer Tage Heizung
+
+        if ($hz_timerDayVisible >= 0 && $hz_timerDayVisible <= 3) 
 {
             $ids = [];
             
@@ -307,6 +330,17 @@ class WPLUX extends IPSModule
             } 
             elseif ($hz_timerDayVisible === 2) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_245', 'set_246', 'set_251', 'set_252', 'set_257', 'set_258', 'set_263', 'set_264', 'set_269', 'set_270', 'set_275', 'set_276', 'set_281', 'set_282'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                     'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)',
@@ -320,6 +354,18 @@ class WPLUX extends IPSModule
             }
             elseif ($hz_timerDayVisible === 1) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_243', 'set_244', 'set_245', 'set_246', 'set_249', 'set_250', 'set_251', 'set_252', 'set_255', 'set_256', 'set_257', 'set_258', 'set_261', 'set_262','set_263', 'set_264',
+                    'set_267', 'set_268', 'set_269', 'set_270', 'set_273', 'set_274', 'set_275', 'set_276', 'set_279', 'set_280', 'set_281', 'set_282'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                     'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)',
@@ -352,7 +398,9 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) //Variabelerstellung Timer Woche Warmwasser
+        //Variabelerstellung Timer Woche Warmwasser
+
+        if ($bw_timerWeekVisible >= 0 && $bw_timerWeekVisible <= 5) 
         {
             $ids = [];
             
@@ -366,6 +414,17 @@ class WPLUX extends IPSModule
             } 
             elseif ($bw_timerWeekVisible === 4) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_414', 'set_415'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
@@ -374,6 +433,17 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerWeekVisible === 3) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_412', 'set_413', 'set_414', 'set_415'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
@@ -382,6 +452,17 @@ class WPLUX extends IPSModule
             }
 			elseif ($bw_timerWeekVisible === 2) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)'
@@ -389,6 +470,17 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerWeekVisible === 1) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_408', 'set_409', 'set_410', 'set_411', 'set_412', 'set_413', 'set_414', 'set_415'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                     'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)'
@@ -419,7 +511,9 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
+        //Variabelerstellung Timer Mo-Fr/Sa+So Warmwasser
+
+        if ($bw_timerWeekendVisible >= 0 && $bw_timerWeekendVisible <= 5) 
         {
             $ids = [];
             
@@ -435,6 +529,17 @@ class WPLUX extends IPSModule
             } 
             elseif ($bw_timerWeekendVisible === 4) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_424', 'set_425', 'set_434', 'set_435'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
@@ -444,6 +549,17 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerWeekendVisible === 3) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_422', 'set_423', 'set_424', 'set_425', 'set_432', 'set_433', 'set_434', 'set_435'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
@@ -452,6 +568,17 @@ class WPLUX extends IPSModule
             }
 			elseif ($bw_timerWeekendVisible === 2) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 
@@ -460,7 +587,18 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerWeekendVisible === 1) 
             {
-                $ids = 
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_418', 'set_419', 'set_420', 'set_421', 'set_422', 'set_423', 'set_424', 'set_425', 'set_428', 'set_429', 'set_430', 'set_431', 'set_432', 'set_433', 'set_434', 'set_435'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
+                $ids =
                 [
                     'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)'
                 ];
@@ -489,7 +627,9 @@ class WPLUX extends IPSModule
             }
         }
 
-        if ($bw_timerDayVisible >= 0 && $bw_timerDayVisible <= 5) //Variabelerstellung Timer Tage Warmwasser
+        //Variabelerstellung Timer Tage Warmwasser
+
+        if ($bw_timerDayVisible >= 0 && $bw_timerDayVisible <= 5) 
         {
             $ids = [];
             
@@ -515,6 +655,17 @@ class WPLUX extends IPSModule
             } 
             elseif ($bw_timerDayVisible === 4) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_444', 'set_445', 'set_454', 'set_455', 'set_464', 'set_465', 'set_474', 'set_475', 'set_484', 'set_485', 'set_494', 'set_495', 'set_504', 'set_505'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
@@ -532,6 +683,19 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerDayVisible === 3) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_442', 'set_443', 'set_444', 'set_445', 'set_452', 'set_453', 'set_454', 'set_455', 'set_462', 'set_463', 'set_464', 'set_465', 
+                    'set_472', 'set_473', 'set_474', 'set_475', 'set_482', 'set_483', 'set_484', 'set_485', 'set_492', 'set_493', 'set_494', 'set_495', 
+                    'set_502', 'set_503', 'set_504', 'set_505'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
@@ -546,6 +710,21 @@ class WPLUX extends IPSModule
             }
 			elseif ($bw_timerDayVisible === 2) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_450', 
+                    'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
+                    'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_480', 
+                    'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
+                    'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_446' => 'Warmwasser Montag von (1)', 
@@ -558,6 +737,21 @@ class WPLUX extends IPSModule
             }
             elseif ($bw_timerDayVisible === 1) 
             {
+                {
+                    $ids = //abgewählte Timer löschen
+                    [
+                    'set_438', 'set_439', 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_448', 'set_449', 'set_450', 
+                    'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
+                    'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_478', 'set_479', 'set_480', 
+                    'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_488', 'set_489', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
+                    'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+                }
                 $ids = 
                 [
                 'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 
@@ -581,10 +775,10 @@ class WPLUX extends IPSModule
             $ids = 
 			[
 			'set_436', 'set_437', 'set_438', 'set_439', 'set_440', 'set_441', 'set_442', 'set_443', 'set_444', 'set_445', 'set_446', 'set_447', 'set_448', 'set_449', 'set_450', 
-                'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
-                'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 
-                'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
-                'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
+            'set_451', 'set_452', 'set_453', 'set_454', 'set_455', 'set_456', 'set_457', 'set_458', 'set_459', 'set_460', 'set_461', 'set_462', 'set_463', 'set_464', 'set_465', 
+            'set_466', 'set_467', 'set_468', 'set_469', 'set_470', 'set_471', 'set_472', 'set_473', 'set_474', 'set_475', 'set_476', 'set_477', 'set_478', 'set_479', 'set_480', 
+            'set_481', 'set_482', 'set_483', 'set_484', 'set_485', 'set_486', 'set_487', 'set_488', 'set_489', 'set_490', 'set_491', 'set_492', 'set_493', 'set_494', 'set_495', 
+            'set_496', 'set_497', 'set_498', 'set_499', 'set_500', 'set_501', 'set_502', 'set_503', 'set_504', 'set_505'
 			];
             
             foreach ($ids as $id) 
