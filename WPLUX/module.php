@@ -188,27 +188,27 @@ class WPLUX extends IPSModule
             
             elseif ($hz_timerWeekVisible === 1) 
             
+      
+            
             {
-                $ids =
-                [
-                    'set_225', 'set_226', 'set_227', 'set_228'
-                ];
-                
-                foreach ($ids as $id) 
+
                 {
-                    $this->UnregisterVariable($id);
+                    $ids =
+                    [
+                        'set_225', 'set_226', 'set_227', 'set_228'
+                    ];
+                    
+                    foreach ($ids as $id) 
+                    {
+                        $this->UnregisterVariable($id);
+                    }
+
                 }
-            }
-            
-            
-            
-            
-            
-            {
                 $ids = 
                 [
                     'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
                 ];
+                
             }
             
             $position = -60; //ab dieser Position im Objektbaum einordnen
