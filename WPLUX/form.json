@@ -48,7 +48,7 @@
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 { 
-                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung", "widht": 500,
+                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung", "widht": 400px,
                     "options": 
                     [
                     { "caption": "deaktiviert", "value": 0 },
