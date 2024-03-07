@@ -10,7 +10,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden. Durch auswählen von externen Variabeln der Versorgung kann der COP und der JAZ berechnet werden. Ebenfalls ist die Aktiverung der Timerfunktion möglich. Achtung: Beim löschen der Timerfunktion bleiben die eingetragenen Zeiten in der Lux gespeichert"
+                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden. Durch auswählen von externen Variabeln der Versorgung kann der COP und der JAZ berechnet werden. Auch das  Aktiveren der Timerfunktion ist möglich. Achtung: Beim ändern der Timer-Darstelleung (zb deaktiveren) bleiben die eingetragenen Zeiten in der Lux gespeichert"
                 },
                 {
                     "type": "Label",
@@ -48,7 +48,7 @@
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 { 
-                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung", "widht": 400,
                     "options": 
                     [
                     { "caption": "deaktiviert", "value": 0 },

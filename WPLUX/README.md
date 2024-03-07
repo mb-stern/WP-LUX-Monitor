@@ -105,8 +105,8 @@ Beispiel:
 
 Version 3.4 (4.03.2024)
 
-- Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich. Achtung, je nach Timer werden eine ordentliche Menge Variablen erstellt.
-- Wert 56, 58, 60-66 (Betriebsstunden) werden nun auch in Stunden dargestellt
+- Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich. Um Variabeln zu sparen ist es möglich, nur die gewünschte Anzahl Zeitfenster einzublenden. Beim Ändern oer deaktiviern bleiben aber die gespeicherten Zeiten erhalten
+- Wert 56, 58, 60-66 (Betriebsstunden) werden nun in Stunden dargestellt
 
 Version 3.3 (25.02.2024)
 
