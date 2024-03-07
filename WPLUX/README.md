@@ -29,7 +29,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Es können Variablen für die Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, je nach Funktionsumfang der Wärmepumpe. Diese Variablen zur Steuerung werden nicht live synchronisiert, sondern immer erst dann, wenn Änderungen am Konfigurationsformular vorgenommen wurden.
 * Die Anzeige des COP-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kW) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden.
 * Die Anzeige des JAZ-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kWh) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt und die Berechnung bei Bedarf zurückgesetzt werden.
-* Es kann die interne Timerfunktion der Luxtronik genutzt werden. Ja nach Timerfunktion (Woche, Mo-Fr/Sa+So oder Tage) werden serh viele Variablen erstellt. Hinter dem Schalter steht, wie viele... Die Menge ist analog den Programmiermöglichkeiten über das Webinterface.
+* Es kann die interne Timerfunktion der Luxtronik genutzt werden. Es kann ausgewählt werden, wie viele Variablen (Zeitfenster) erstellt werden sollen, um nicht unnötige Variablen zu verschwenden. Die maximale Menge ist analog den Programmiermöglichkeiten über das Webinterface.
 
 ### 2. Voraussetzungen
 
@@ -103,7 +103,7 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.4 (4.03.2024)
+Version 3.4 (07.03.2024)
 
 - Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich. Um Variabeln zu sparen ist es möglich, nur die gewünschte Anzahl Zeitfenster einzublenden. Beim Ändern oer deaktiviern bleiben aber die gespeicherten Zeiten erhalten
 - Wert 56, 58, 60-66 (Betriebsstunden) werden nun in Stunden dargestellt

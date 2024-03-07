@@ -223,7 +223,7 @@ class WPLUX extends IPSModule
             }
         } 
         
-        if ($hz_timerWeekVisible === 0) //alle Timer löschen
+        if ($hz_timerWeekVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids =
             [
@@ -299,7 +299,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerWeekendVisible === 0) //alle Timer löschen
+        if ($hz_timerWeekendVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids = ['set_229', 'set_230', 'set_231', 'set_232', 'set_233', 'set_234', 'set_235', 'set_236', 'set_237', 'set_238', 'set_239', 'set_240'];
             
@@ -384,7 +384,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($hz_timerDayVisible === 0) //alle Timer löschen
+        if ($hz_timerDayVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids = 
 			[
@@ -498,7 +498,7 @@ class WPLUX extends IPSModule
             }
         } 
 
-        if ($bw_timerWeekVisible === 0) 
+        if ($bw_timerWeekVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids = 
 			[
@@ -614,7 +614,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($bw_timerWeekendVisible === 0) 
+        if ($bw_timerWeekendVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids = 
 			[
@@ -770,7 +770,7 @@ class WPLUX extends IPSModule
                 $this->EnableAction($id);
             }
         } 
-        if ($bw_timerDayVisible === 0) 
+        if ($bw_timerDayVisible === 0) //alle Timer löschen wenn Option deaktiviert
         {
             $ids = 
 			[
