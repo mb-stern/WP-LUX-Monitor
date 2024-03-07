@@ -10,7 +10,7 @@
                 },
                 {
                     "type": "Label",
-                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden."
+                    "label": "Es können nun Variablen für die Modus-Steuerung von Heizung, Warmwasser und Kühlung aktiviert werden, ja nach Ausstattung der WP. Ebenfalls können Variablen für die Temperaturkorrektur und Warmwasser Soll eingeblendet werden. Durch auswählen von externen Variabeln der Versorgung kann der COP und der JAZ berechnet werden. Auch das  Aktiveren der Lux internen Timerfunktion ist möglich. Achtung: Beim deaktiviren der Timer bleiben die eingetragenen Zeiten in der Lux weiterhin gespeichert"
                 },
                 {
                     "type": "Label",
@@ -20,7 +20,7 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzliche Funktionen aktivieren/deaktivieren",
+            "caption": "Zusätzliche Funktionen aktivieren",
             "items": [
                 {
                     "type": "CheckBox",
@@ -47,15 +47,81 @@
                     "name": "WWsetVisible",
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
+                { 
+                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "HZ_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "HZ_TimerDayVisible", "caption": "Timer Tage Heizung",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Warmwasser",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Warmwasser",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
+                    ]
+                },
+                { 
+                    "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Tage Warmwasser",
+                    "options": 
+                    [
+                    { "caption": "deaktiviert", "value": 0 },
+                    { "caption": "1 Zeitfenster", "value": 1 },
+                    { "caption": "2 Zeitfenster", "value": 2 },
+                    { "caption": "3 Zeitfenster", "value": 3 },
+                    { "caption": "4 Zeitfenster", "value": 4 },
+                    { "caption": "5 Zeitfenster", "value": 5 }
+                    ]
+                },
                 {
                     "type": "SelectVariable",
                     "name": "kwin",
-                    "caption": "Externe Variable zur Berechnung des COP auswählen (kW)."
+                    "caption": "Externe Variable zur Berechnung des COP (kW)"
                 },
                 {
                     "type": "SelectVariable",
                     "name": "kwhin",
-                    "caption": "Externe Variable zur Berechnung des JAZ auswählen (kWh)."
+                    "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
                 },
                 {
                     "type": "Button",
