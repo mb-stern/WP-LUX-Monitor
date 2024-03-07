@@ -128,7 +128,7 @@ class WPLUX extends IPSModule
 
         if ($wwsetVisible) 
         {
-            $this->RegisterVariableFloat('Anpassung_WW', 'Warmwasser Soll', 'WPLUX.Wset', 4);
+            $this->RegisterVariableFloat('Anpassung_WW', 'Timer Warmwasser Soll', 'WPLUX.Wset', 4);
             $this->getParameter('Anpassung_WW'); 
             $Value = $this->GetValue('Anpassung_WW'); 
             $this->EnableAction('Anpassung_WW');
@@ -166,9 +166,9 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)',
-                    'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)',
-                    'set_227' => 'Heizung Woche von (3)', 'set_228' => 'Heizung Woche bis (3)'
+                    'set_223' => 'Timer Heizung Woche von (1)', 'set_224' => 'Timer Heizung Woche bis (1)',
+                    'set_225' => 'Timer Heizung Woche von (2)', 'set_226' => 'Timer Heizung Woche bis (2)',
+                    'set_227' => 'Timer Heizung Woche von (3)', 'set_228' => 'Timer Heizung Woche bis (3)'
                 ];
             } 
             elseif ($hz_timerWeekVisible === 2) 
@@ -187,7 +187,7 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)', 'set_225' => 'Heizung Woche von (2)', 'set_226' => 'Heizung Woche bis (2)'
+                    'set_223' => 'Timer Heizung Woche von (1)', 'set_224' => 'Timer Heizung Woche bis (1)', 'set_225' => 'Timer Heizung Woche von (2)', 'set_226' => 'Timer Heizung Woche bis (2)'
                 ];
             }
             elseif ($hz_timerWeekVisible === 1) 
@@ -207,7 +207,7 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_223' => 'Heizung Woche von (1)', 'set_224' => 'Heizung Woche bis (1)'
+                    'set_223' => 'Timer Heizung Woche von (1)', 'set_224' => 'Timer Heizung Woche bis (1)'
                 ];
 
             }
@@ -246,9 +246,9 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
-				'set_233' => 'Heizung Mo-Fr von (3)', 'set_234' => 'Heizung Mo-Fr bis (3)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 
-				'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)', 'set_239' => 'Heizung Sa+So von (3)', 'set_240' => 'Heizung Sa+So bis (3)'
+                'set_229' => 'Timer Heizung Mo-Fr von (1)', 'set_230' => 'Timer Heizung Mo-Fr bis (1)', 'set_231' => 'Timer Heizung Mo-Fr von (2)', 'set_232' => 'Timer Heizung Mo-Fr bis (2)', 
+				'set_233' => 'Timer Heizung Mo-Fr von (3)', 'set_234' => 'Timer Heizung Mo-Fr bis (3)', 'set_235' => 'Timer Heizung Sa+So von (1)', 'set_236' => 'Timer Heizung Sa+So bis (1)', 
+				'set_237' => 'Timer Heizung Sa+So von (2)', 'set_238' => 'Timer Heizung Sa+So bis (2)', 'set_239' => 'Timer Heizung Sa+So von (3)', 'set_240' => 'Timer Heizung Sa+So bis (3)'
                 ];
             } 
             elseif ($hz_timerWeekendVisible === 2) 
@@ -266,8 +266,8 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_231' => 'Heizung Mo-Fr von (2)', 'set_232' => 'Heizung Mo-Fr bis (2)', 
-					'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)', 'set_237' => 'Heizung Sa+So von (2)', 'set_238' => 'Heizung Sa+So bis (2)'
+                    'set_229' => 'Timer Heizung Mo-Fr von (1)', 'set_230' => 'Timer Heizung Mo-Fr bis (1)', 'set_231' => 'Timer Heizung Mo-Fr von (2)', 'set_232' => 'Timer Heizung Mo-Fr bis (2)', 
+					'set_235' => 'Timer Heizung Sa+So von (1)', 'set_236' => 'Timer Heizung Sa+So bis (1)', 'set_237' => 'Timer Heizung Sa+So von (2)', 'set_238' => 'Timer Heizung Sa+So bis (2)'
                 ];
             }
             elseif ($hz_timerWeekendVisible === 1) 
@@ -285,7 +285,7 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_229' => 'Heizung Mo-Fr von (1)', 'set_230' => 'Heizung Mo-Fr bis (1)', 'set_235' => 'Heizung Sa+So von (1)', 'set_236' => 'Heizung Sa+So bis (1)'
+                    'set_229' => 'Timer Heizung Mo-Fr von (1)', 'set_230' => 'Timer Heizung Mo-Fr bis (1)', 'set_235' => 'Timer Heizung Sa+So von (1)', 'set_236' => 'Timer Heizung Sa+So bis (1)'
                 ];
             }
             
@@ -319,13 +319,13 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)', 'set_245' => 'Heizung Sonntag von (3)', 'set_246' => 'Heizung Sonntag bis (3)',
-                'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)', 'set_251' => 'Heizung Montag von (3)', 'set_252' => 'Heizung Montag bis (3)',
-                'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)', 'set_257' => 'Heizung Dienstag von (3)', 'set_258' => 'Heizung Dienstag bis (3)',
-                'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)', 'set_263' => 'Heizung Mittwoch von (3)', 'set_264' => 'Heizung Mittwoch bis (3)',
-                'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)', 'set_269' => 'Heizung Donnerstag von (3)', 'set_270' => 'Heizung Donnerstag bis (3)',
-                'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)', 'set_275' => 'Heizung Freitag von (3)', 'set_276' => 'Heizung Freitag bis (3)',
-                'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)', 'set_281' => 'Heizung Samstag von (3)', 'set_282' => 'Heizung Samstag bis (3)'
+                'set_241' => 'Timer Heizung Sonntag von (1)', 'set_242' => 'Timer Heizung Sonntag bis (1)', 'set_243' => 'Timer Heizung Sonntag von (2)', 'set_244' => 'Timer Heizung Sonntag bis (2)', 'set_245' => 'Timer Heizung Sonntag von (3)', 'set_246' => 'Timer Heizung Sonntag bis (3)',
+                'set_247' => 'Timer Heizung Montag von (1)', 'set_248' => 'Timer Heizung Montag bis (1)', 'set_249' => 'Timer Heizung Montag von (2)', 'set_250' => 'Timer Heizung Montag bis (2)', 'set_251' => 'Timer Heizung Montag von (3)', 'set_252' => 'Timer Heizung Montag bis (3)',
+                'set_253' => 'Timer Heizung Dienstag von (1)', 'set_254' => 'Timer Heizung Dienstag bis (1)', 'set_255' => 'Timer Heizung Dienstag von (2)', 'set_256' => 'Timer Heizung Dienstag bis (2)', 'set_257' => 'Timer Heizung Dienstag von (3)', 'set_258' => 'Timer Heizung Dienstag bis (3)',
+                'set_259' => 'Timer Heizung Mittwoch von (1)', 'set_260' => 'Timer Heizung Mittwoch bis (1)', 'set_261' => 'Timer Heizung Mittwoch von (2)', 'set_262' => 'Timer Heizung Mittwoch bis (2)', 'set_263' => 'Timer Heizung Mittwoch von (3)', 'set_264' => 'Timer Heizung Mittwoch bis (3)',
+                'set_265' => 'Timer Heizung Donnerstag von (1)', 'set_266' => 'Timer Heizung Donnerstag bis (1)', 'set_267' => 'Timer Heizung Donnerstag von (2)', 'set_268' => 'Timer Heizung Donnerstag bis (2)', 'set_269' => 'Timer Heizung Donnerstag von (3)', 'set_270' => 'Timer Heizung Donnerstag bis (3)',
+                'set_271' => 'Timer Heizung Freitag von (1)', 'set_272' => 'Timer Heizung Freitag bis (1)', 'set_273' => 'Timer Heizung Freitag von (2)', 'set_274' => 'Timer Heizung Freitag bis (2)', 'set_275' => 'Timer Heizung Freitag von (3)', 'set_276' => 'Timer Heizung Freitag bis (3)',
+                'set_277' => 'Timer Heizung Samstag von (1)', 'set_278' => 'Timer Heizung Samstag bis (1)', 'set_279' => 'Timer Heizung Samstag von (2)', 'set_280' => 'Timer Heizung Samstag bis (2)', 'set_281' => 'Timer Heizung Samstag von (3)', 'set_282' => 'Timer Heizung Samstag bis (3)'
                 ];
             } 
             elseif ($hz_timerDayVisible === 2) 
@@ -343,13 +343,13 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_243' => 'Heizung Sonntag von (2)', 'set_244' => 'Heizung Sonntag bis (2)',
-					'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_249' => 'Heizung Montag von (2)', 'set_250' => 'Heizung Montag bis (2)',
-					'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)', 'set_255' => 'Heizung Dienstag von (2)', 'set_256' => 'Heizung Dienstag bis (2)',
-					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_261' => 'Heizung Mittwoch von (2)', 'set_262' => 'Heizung Mittwoch bis (2)',
-					'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_267' => 'Heizung Donnerstag von (2)', 'set_268' => 'Heizung Donnerstag bis (2)',
-					'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)', 'set_273' => 'Heizung Freitag von (2)', 'set_274' => 'Heizung Freitag bis (2)',
-					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)', 'set_279' => 'Heizung Samstag von (2)', 'set_280' => 'Heizung Samstag bis (2)'
+                    'set_241' => 'Timer Heizung Sonntag von (1)', 'set_242' => 'Timer Heizung Sonntag bis (1)', 'set_243' => 'Timer Heizung Sonntag von (2)', 'set_244' => 'Timer Heizung Sonntag bis (2)',
+					'set_247' => 'Timer Heizung Montag von (1)', 'set_248' => 'Timer Heizung Montag bis (1)', 'set_249' => 'Timer Heizung Montag von (2)', 'set_250' => 'Timer Heizung Montag bis (2)',
+					'set_253' => 'Timer Heizung Dienstag von (1)', 'set_254' => 'Timer Heizung Dienstag bis (1)', 'set_255' => 'Timer Heizung Dienstag von (2)', 'set_256' => 'Timer Heizung Dienstag bis (2)',
+					'set_259' => 'Timer Heizung Mittwoch von (1)', 'set_260' => 'Timer Heizung Mittwoch bis (1)', 'set_261' => 'Timer Heizung Mittwoch von (2)', 'set_262' => 'Timer Heizung Mittwoch bis (2)',
+					'set_265' => 'Timer Heizung Donnerstag von (1)', 'set_266' => 'Timer Heizung Donnerstag bis (1)', 'set_267' => 'Timer Heizung Donnerstag von (2)', 'set_268' => 'Timer Heizung Donnerstag bis (2)',
+					'set_271' => 'Timer Heizung Freitag von (1)', 'set_272' => 'Timer Heizung Freitag bis (1)', 'set_273' => 'Timer Heizung Freitag von (2)', 'set_274' => 'Timer Heizung Freitag bis (2)',
+					'set_277' => 'Timer Heizung Samstag von (1)', 'set_278' => 'Timer Heizung Samstag bis (1)', 'set_279' => 'Timer Heizung Samstag von (2)', 'set_280' => 'Timer Heizung Samstag bis (2)'
                 ];
             }
             elseif ($hz_timerDayVisible === 1) 
@@ -368,9 +368,9 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_241' => 'Heizung Sonntag von (1)', 'set_242' => 'Heizung Sonntag bis (1)', 'set_247' => 'Heizung Montag von (1)', 'set_248' => 'Heizung Montag bis (1)', 'set_253' => 'Heizung Dienstag von (1)', 'set_254' => 'Heizung Dienstag bis (1)',
-					'set_259' => 'Heizung Mittwoch von (1)', 'set_260' => 'Heizung Mittwoch bis (1)', 'set_265' => 'Heizung Donnerstag von (1)', 'set_266' => 'Heizung Donnerstag bis (1)', 'set_271' => 'Heizung Freitag von (1)', 'set_272' => 'Heizung Freitag bis (1)',
-					'set_277' => 'Heizung Samstag von (1)', 'set_278' => 'Heizung Samstag bis (1)'
+                    'set_241' => 'Timer Heizung Sonntag von (1)', 'set_242' => 'Timer Heizung Sonntag bis (1)', 'set_247' => 'Timer Heizung Montag von (1)', 'set_248' => 'Timer Heizung Montag bis (1)', 'set_253' => 'Timer Heizung Dienstag von (1)', 'set_254' => 'Timer Heizung Dienstag bis (1)',
+					'set_259' => 'Timer Heizung Mittwoch von (1)', 'set_260' => 'Timer Heizung Mittwoch bis (1)', 'set_265' => 'Timer Heizung Donnerstag von (1)', 'set_266' => 'Timer Heizung Donnerstag bis (1)', 'set_271' => 'Timer Heizung Freitag von (1)', 'set_272' => 'Timer Heizung Freitag bis (1)',
+					'set_277' => 'Timer Heizung Samstag von (1)', 'set_278' => 'Timer Heizung Samstag bis (1)'
                 ];
             }
             
@@ -408,8 +408,8 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
-                'set_411' => 'Warmwasser Woche bis (3)', 'set_412' => 'Warmwasser Woche von (4)', 'set_413' => 'Warmwasser Woche bis (4)', 'set_414' => 'Warmwasser Woche von (5)', 'set_415' => 'Warmwasser Woche bis (5)'
+                'set_406' => 'Timer Warmwasser Woche von (1)', 'set_407' => 'Timer Warmwasser Woche bis (1)', 'set_408' => 'Timer Warmwasser Woche von (2)', 'set_409' => 'Timer Warmwasser Woche bis (2)', 'set_410' => 'Timer Warmwasser Woche von (3)', 
+                'set_411' => 'Timer Warmwasser Woche bis (3)', 'set_412' => 'Timer Warmwasser Woche von (4)', 'set_413' => 'Timer Warmwasser Woche bis (4)', 'set_414' => 'Timer Warmwasser Woche von (5)', 'set_415' => 'Timer Warmwasser Woche bis (5)'
                 ];
             } 
             elseif ($bw_timerWeekVisible === 4) 
@@ -427,8 +427,8 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
-                'set_411' => 'Warmwasser Woche bis (3)', 'set_412' => 'Warmwasser Woche von (4)', 'set_413' => 'Warmwasser Woche bis (4)'
+                'set_406' => 'Timer Warmwasser Woche von (1)', 'set_407' => 'Timer Warmwasser Woche bis (1)', 'set_408' => 'Timer Warmwasser Woche von (2)', 'set_409' => 'Timer Warmwasser Woche bis (2)', 'set_410' => 'Timer Warmwasser Woche von (3)', 
+                'set_411' => 'Timer Warmwasser Woche bis (3)', 'set_412' => 'Timer Warmwasser Woche von (4)', 'set_413' => 'Timer Warmwasser Woche bis (4)'
                 ];
             }
             elseif ($bw_timerWeekVisible === 3) 
@@ -446,8 +446,8 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)', 'set_410' => 'Warmwasser Woche von (3)', 
-                'set_411' => 'Warmwasser Woche bis (3)'
+                'set_406' => 'Timer Warmwasser Woche von (1)', 'set_407' => 'Timer Warmwasser Woche bis (1)', 'set_408' => 'Timer Warmwasser Woche von (2)', 'set_409' => 'Timer Warmwasser Woche bis (2)', 'set_410' => 'Timer Warmwasser Woche von (3)', 
+                'set_411' => 'Timer Warmwasser Woche bis (3)'
                 ];
             }
 			elseif ($bw_timerWeekVisible === 2) 
@@ -465,7 +465,7 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)', 'set_408' => 'Warmwasser Woche von (2)', 'set_409' => 'Warmwasser Woche bis (2)'
+                'set_406' => 'Timer Warmwasser Woche von (1)', 'set_407' => 'Timer Warmwasser Woche bis (1)', 'set_408' => 'Timer Warmwasser Woche von (2)', 'set_409' => 'Timer Warmwasser Woche bis (2)'
                 ];
             }
             elseif ($bw_timerWeekVisible === 1) 
@@ -483,7 +483,7 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                    'set_406' => 'Warmwasser Woche von (1)', 'set_407' => 'Warmwasser Woche bis (1)'
+                    'set_406' => 'Timer Warmwasser Woche von (1)', 'set_407' => 'Timer Warmwasser Woche bis (1)'
                 ];
             }
             
@@ -521,10 +521,10 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
-                'set_422' => 'Warmwasser Mo-Fr von (4)', 'set_423' => 'Warmwasser Mo-Fr bis (4)', 'set_424' => 'Warmwasser Mo-Fr von (5)', 'set_425' => 'Warmwasser Mo-Fr bis (5)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 
-                'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)', 'set_432' => 'Warmwasser Sa+So von (4)', 'set_433' => 'Warmwasser Sa+So bis (4)',
-                'set_434' => 'Warmwasser Sa+So von (5)', 'set_435' => 'Warmwasser Sa+So bis (5)'
+                'set_416' => 'Timer Warmwasser Mo-Fr von (1)', 'set_417' => 'Timer Warmwasser Mo-Fr bis (1)',  'set_418' => 'Timer Warmwasser Mo-Fr von (2)', 'set_419' => 'Timer Warmwasser Mo-Fr bis (2)', 'set_420' => 'Timer Warmwasser Mo-Fr von (3)', 'set_421' => 'Timer Warmwasser Mo-Fr bis (3)', 
+                'set_422' => 'Timer Warmwasser Mo-Fr von (4)', 'set_423' => 'Timer Warmwasser Mo-Fr bis (4)', 'set_424' => 'Timer Warmwasser Mo-Fr von (5)', 'set_425' => 'Timer Warmwasser Mo-Fr bis (5)', 'set_426' => 'Timer Warmwasser Sa+So von (1)', 'set_427' => 'Timer Warmwasser Sa+So bis (1)', 
+                'set_428' => 'Timer Warmwasser Sa+So von (2)', 'set_429' => 'Timer Warmwasser Sa+So bis (2)', 'set_430' => 'Timer Warmwasser Sa+So von (3)', 'set_431' => 'Timer Warmwasser Sa+So bis (3)', 'set_432' => 'Timer Warmwasser Sa+So von (4)', 'set_433' => 'Timer Warmwasser Sa+So bis (4)',
+                'set_434' => 'Timer Warmwasser Sa+So von (5)', 'set_435' => 'Timer Warmwasser Sa+So bis (5)'
                 ];
             } 
             elseif ($bw_timerWeekendVisible === 4) 
@@ -542,9 +542,9 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
-                'set_422' => 'Warmwasser Mo-Fr von (4)', 'set_423' => 'Warmwasser Mo-Fr bis (4)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 
-				'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)', 'set_432' => 'Warmwasser Sa+So von (4)', 'set_433' => 'Warmwasser Sa+So bis (4)'
+                'set_416' => 'Timer Warmwasser Mo-Fr von (1)', 'set_417' => 'Timer Warmwasser Mo-Fr bis (1)',  'set_418' => 'Timer Warmwasser Mo-Fr von (2)', 'set_419' => 'Timer Warmwasser Mo-Fr bis (2)', 'set_420' => 'Timer Warmwasser Mo-Fr von (3)', 'set_421' => 'Timer Warmwasser Mo-Fr bis (3)', 
+                'set_422' => 'Timer Warmwasser Mo-Fr von (4)', 'set_423' => 'Timer Warmwasser Mo-Fr bis (4)', 'set_426' => 'Timer Warmwasser Sa+So von (1)', 'set_427' => 'Timer Warmwasser Sa+So bis (1)', 'set_428' => 'Timer Warmwasser Sa+So von (2)', 'set_429' => 'Timer Warmwasser Sa+So bis (2)', 
+				'set_430' => 'Timer Warmwasser Sa+So von (3)', 'set_431' => 'Timer Warmwasser Sa+So bis (3)', 'set_432' => 'Timer Warmwasser Sa+So von (4)', 'set_433' => 'Timer Warmwasser Sa+So bis (4)'
                 ];
             }
             elseif ($bw_timerWeekendVisible === 3) 
@@ -562,8 +562,8 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 'set_420' => 'Warmwasser Mo-Fr von (3)', 'set_421' => 'Warmwasser Mo-Fr bis (3)', 
-                'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)', 'set_430' => 'Warmwasser Sa+So von (3)', 'set_431' => 'Warmwasser Sa+So bis (3)'
+                'set_416' => 'Timer Warmwasser Mo-Fr von (1)', 'set_417' => 'Timer Warmwasser Mo-Fr bis (1)',  'set_418' => 'Timer Warmwasser Mo-Fr von (2)', 'set_419' => 'Timer Warmwasser Mo-Fr bis (2)', 'set_420' => 'Timer Warmwasser Mo-Fr von (3)', 'set_421' => 'Timer Warmwasser Mo-Fr bis (3)', 
+                'set_426' => 'Timer Warmwasser Sa+So von (1)', 'set_427' => 'Timer Warmwasser Sa+So bis (1)', 'set_428' => 'Timer Warmwasser Sa+So von (2)', 'set_429' => 'Timer Warmwasser Sa+So bis (2)', 'set_430' => 'Timer Warmwasser Sa+So von (3)', 'set_431' => 'Timer Warmwasser Sa+So bis (3)'
                 ];
             }
 			elseif ($bw_timerWeekendVisible === 2) 
@@ -581,8 +581,8 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)',  'set_418' => 'Warmwasser Mo-Fr von (2)', 'set_419' => 'Warmwasser Mo-Fr bis (2)', 
-                'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)', 'set_428' => 'Warmwasser Sa+So von (2)', 'set_429' => 'Warmwasser Sa+So bis (2)'
+                'set_416' => 'Timer Warmwasser Mo-Fr von (1)', 'set_417' => 'Timer Warmwasser Mo-Fr bis (1)',  'set_418' => 'Timer Warmwasser Mo-Fr von (2)', 'set_419' => 'Timer Warmwasser Mo-Fr bis (2)', 
+                'set_426' => 'Timer Warmwasser Sa+So von (1)', 'set_427' => 'Timer Warmwasser Sa+So bis (1)', 'set_428' => 'Timer Warmwasser Sa+So von (2)', 'set_429' => 'Timer Warmwasser Sa+So bis (2)'
                 ];
             }
             elseif ($bw_timerWeekendVisible === 1) 
@@ -600,7 +600,7 @@ class WPLUX extends IPSModule
                 }
                 $ids =
                 [
-                    'set_416' => 'Warmwasser Mo-Fr von (1)', 'set_417' => 'Warmwasser Mo-Fr bis (1)', 'set_426' => 'Warmwasser Sa+So von (1)', 'set_427' => 'Warmwasser Sa+So bis (1)'
+                    'set_416' => 'Timer Warmwasser Mo-Fr von (1)', 'set_417' => 'Timer Warmwasser Mo-Fr bis (1)', 'set_426' => 'Timer Warmwasser Sa+So von (1)', 'set_427' => 'Timer Warmwasser Sa+So bis (1)'
                 ];
             }
             
@@ -637,20 +637,20 @@ class WPLUX extends IPSModule
             {
                 $ids = 
                 [
-                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
-                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_442' => 'Warmwasser Sonntag von (4)', 'set_443' => 'Warmwasser Sonntag bis (4)', 'set_444' => 'Warmwasser Sonntag von (5)', 'set_445' => 'Warmwasser Sonntag bis (5)',
-                'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_450' => 'Warmwasser Montag von (3)',
-                'set_451' => 'Warmwasser Montag bis (3)', 'set_452' => 'Warmwasser Montag von (4)', 'set_453' => 'Warmwasser Montag bis (4)', 'set_454' => 'Warmwasser Montag von (5)', 'set_455' => 'Warmwasser Montag bis (5)',
-                'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)',
-                'set_461' => 'Warmwasser Dienstag bis (3)', 'set_462' => 'Warmwasser Dienstag von (4)', 'set_463' => 'Warmwasser Dienstag bis (4)', 'set_464' => 'Warmwasser Dienstag von (5)', 'set_465' => 'Warmwasser Dienstag bis (5)',
-                'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)',
-                'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_472' => 'Warmwasser Mittwoch von (4)', 'set_473' => 'Warmwasser Mittwoch bis (4)', 'set_474' => 'Warmwasser Mittwoch von (5)', 'set_475' => 'Warmwasser Mittwoch bis (5)',
-                'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)',
-                'set_481' => 'Warmwasser Donnerstag bis (3)', 'set_482' => 'Warmwasser Donnerstag von (4)', 'set_483' => 'Warmwasser Donnerstag bis (4)', 'set_484' => 'Warmwasser Donnerstag von (5)', 'set_485' => 'Warmwasser Donnerstag bis (5)',
-                'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)',
-                'set_491' => 'Warmwasser Freitag bis (3)', 'set_492' => 'Warmwasser Freitag von (4)', 'set_493' => 'Warmwasser Freitag bis (4)', 'set_494' => 'Warmwasser Freitag von (5)', 'set_495' => 'Warmwasser Freitag bis (5)',
-                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)',
-                'set_501' => 'Warmwasser Samstag bis (3)', 'set_502' => 'Warmwasser Samstag von (4)', 'set_503' => 'Warmwasser Samstag bis (4)', 'set_504' => 'Warmwasser Samstag von (5)', 'set_505' => 'Warmwasser Samstag bis (5)'
+                'set_436' => 'Timer Warmwasser Sonntag von (1)', 'set_437' => 'Timer Warmwasser Sonntag bis (1)', 'set_438' => 'Timer Warmwasser Sonntag von (2)', 'set_439' => 'Timer Warmwasser Sonntag bis (2)', 'set_440' => 'Timer Warmwasser Sonntag von (3)',
+                'set_441' => 'Timer Warmwasser Sonntag bis (3)', 'set_442' => 'Timer Warmwasser Sonntag von (4)', 'set_443' => 'Timer Warmwasser Sonntag bis (4)', 'set_444' => 'Timer Warmwasser Sonntag von (5)', 'set_445' => 'Timer Warmwasser Sonntag bis (5)',
+                'set_446' => 'Timer Warmwasser Montag von (1)', 'set_447' => 'Timer Warmwasser Montag bis (1)', 'set_448' => 'Timer Warmwasser Montag von (2)', 'set_449' => 'Timer Warmwasser Montag bis (2)', 'set_450' => 'Timer Warmwasser Montag von (3)',
+                'set_451' => 'Timer Warmwasser Montag bis (3)', 'set_452' => 'Timer Warmwasser Montag von (4)', 'set_453' => 'Timer Warmwasser Montag bis (4)', 'set_454' => 'Timer Warmwasser Montag von (5)', 'set_455' => 'Timer Warmwasser Montag bis (5)',
+                'set_456' => 'Timer Warmwasser Dienstag von (1)', 'set_457' => 'Timer Warmwasser Dienstag bis (1)', 'set_458' => 'Timer Warmwasser Dienstag von (2)', 'set_459' => 'Timer Warmwasser Dienstag bis (2)', 'set_460' => 'Timer Warmwasser Dienstag von (3)',
+                'set_461' => 'Timer Warmwasser Dienstag bis (3)', 'set_462' => 'Timer Warmwasser Dienstag von (4)', 'set_463' => 'Timer Warmwasser Dienstag bis (4)', 'set_464' => 'Timer Warmwasser Dienstag von (5)', 'set_465' => 'Timer Warmwasser Dienstag bis (5)',
+                'set_466' => 'Timer Warmwasser Mittwoch von (1)', 'set_467' => 'Timer Warmwasser Mittwoch bis (1)', 'set_468' => 'Timer Warmwasser Mittwoch von (2)', 'set_469' => 'Timer Warmwasser Mittwoch bis (2)', 'set_470' => 'Timer Warmwasser Mittwoch von (3)',
+                'set_471' => 'Timer Warmwasser Mittwoch bis (3)', 'set_472' => 'Timer Warmwasser Mittwoch von (4)', 'set_473' => 'Timer Warmwasser Mittwoch bis (4)', 'set_474' => 'Timer Warmwasser Mittwoch von (5)', 'set_475' => 'Timer Warmwasser Mittwoch bis (5)',
+                'set_476' => 'Timer Warmwasser Donnerstag von (1)', 'set_477' => 'Timer Warmwasser Donnerstag bis (1)', 'set_478' => 'Timer Warmwasser Donnerstag von (2)', 'set_479' => 'Timer Warmwasser Donnerstag bis (2)', 'set_480' => 'Timer Warmwasser Donnerstag von (3)',
+                'set_481' => 'Timer Warmwasser Donnerstag bis (3)', 'set_482' => 'Timer Warmwasser Donnerstag von (4)', 'set_483' => 'Timer Warmwasser Donnerstag bis (4)', 'set_484' => 'Timer Warmwasser Donnerstag von (5)', 'set_485' => 'Timer Warmwasser Donnerstag bis (5)',
+                'set_486' => 'Timer Warmwasser Freitag von (1)', 'set_487' => 'Timer Warmwasser Freitag bis (1)', 'set_488' => 'Timer Warmwasser Freitag von (2)', 'set_489' => 'Timer Warmwasser Freitag bis (2)', 'set_490' => 'Timer Warmwasser Freitag von (3)',
+                'set_491' => 'Timer Warmwasser Freitag bis (3)', 'set_492' => 'Timer Warmwasser Freitag von (4)', 'set_493' => 'Timer Warmwasser Freitag bis (4)', 'set_494' => 'Timer Warmwasser Freitag von (5)', 'set_495' => 'Timer Warmwasser Freitag bis (5)',
+                'set_496' => 'Timer Warmwasser Samstag von (1)', 'set_497' => 'Timer Warmwasser Samstag bis (1)', 'set_498' => 'Timer Warmwasser Samstag von (2)', 'set_499' => 'Timer Warmwasser Samstag bis (2)', 'set_500' => 'Timer Warmwasser Samstag von (3)',
+                'set_501' => 'Timer Warmwasser Samstag bis (3)', 'set_502' => 'Timer Warmwasser Samstag von (4)', 'set_503' => 'Timer Warmwasser Samstag bis (4)', 'set_504' => 'Timer Warmwasser Samstag von (5)', 'set_505' => 'Timer Warmwasser Samstag bis (5)'
                 ];
             } 
             elseif ($bw_timerDayVisible === 4) 
@@ -668,17 +668,17 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
-                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_442' => 'Warmwasser Sonntag von (4)', 'set_443' => 'Warmwasser Sonntag bis (4)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 
-				'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_450' => 'Warmwasser Montag von (3)', 'set_451' => 'Warmwasser Montag bis (3)', 'set_452' => 'Warmwasser Montag von (4)', 'set_453' => 'Warmwasser Montag bis (4)',
-                'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)',
-                'set_461' => 'Warmwasser Dienstag bis (3)', 'set_462' => 'Warmwasser Dienstag von (4)', 'set_463' => 'Warmwasser Dienstag bis (4)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 
-				'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)', 'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_472' => 'Warmwasser Mittwoch von (4)', 'set_473' => 'Warmwasser Mittwoch bis (4)',
-                'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)',
-                'set_481' => 'Warmwasser Donnerstag bis (3)', 'set_482' => 'Warmwasser Donnerstag von (4)', 'set_483' => 'Warmwasser Donnerstag bis (4)', 'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 
-				'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)', 'set_491' => 'Warmwasser Freitag bis (3)', 'set_492' => 'Warmwasser Freitag von (4)', 'set_493' => 'Warmwasser Freitag bis (4)',
-                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)',
-                'set_501' => 'Warmwasser Samstag bis (3)', 'set_502' => 'Warmwasser Samstag von (4)', 'set_503' => 'Warmwasser Samstag bis (4)'
+                'set_436' => 'Timer Warmwasser Sonntag von (1)', 'set_437' => 'Timer Warmwasser Sonntag bis (1)', 'set_438' => 'Timer Warmwasser Sonntag von (2)', 'set_439' => 'Timer Warmwasser Sonntag bis (2)', 'set_440' => 'Timer Warmwasser Sonntag von (3)',
+                'set_441' => 'Timer Warmwasser Sonntag bis (3)', 'set_442' => 'Timer Warmwasser Sonntag von (4)', 'set_443' => 'Timer Warmwasser Sonntag bis (4)', 'set_446' => 'Timer Warmwasser Montag von (1)', 'set_447' => 'Timer Warmwasser Montag bis (1)', 
+				'set_448' => 'Timer Warmwasser Montag von (2)', 'set_449' => 'Timer Warmwasser Montag bis (2)', 'set_450' => 'Timer Warmwasser Montag von (3)', 'set_451' => 'Timer Warmwasser Montag bis (3)', 'set_452' => 'Timer Warmwasser Montag von (4)', 'set_453' => 'Timer Warmwasser Montag bis (4)',
+                'set_456' => 'Timer Warmwasser Dienstag von (1)', 'set_457' => 'Timer Warmwasser Dienstag bis (1)', 'set_458' => 'Timer Warmwasser Dienstag von (2)', 'set_459' => 'Timer Warmwasser Dienstag bis (2)', 'set_460' => 'Timer Warmwasser Dienstag von (3)',
+                'set_461' => 'Timer Warmwasser Dienstag bis (3)', 'set_462' => 'Timer Warmwasser Dienstag von (4)', 'set_463' => 'Timer Warmwasser Dienstag bis (4)', 'set_466' => 'Timer Warmwasser Mittwoch von (1)', 'set_467' => 'Timer Warmwasser Mittwoch bis (1)', 
+				'set_468' => 'Timer Warmwasser Mittwoch von (2)', 'set_469' => 'Timer Warmwasser Mittwoch bis (2)', 'set_470' => 'Timer Warmwasser Mittwoch von (3)', 'set_471' => 'Timer Warmwasser Mittwoch bis (3)', 'set_472' => 'Timer Warmwasser Mittwoch von (4)', 'set_473' => 'Timer Warmwasser Mittwoch bis (4)',
+                'set_476' => 'Timer Warmwasser Donnerstag von (1)', 'set_477' => 'Timer Warmwasser Donnerstag bis (1)', 'set_478' => 'Timer Warmwasser Donnerstag von (2)', 'set_479' => 'Timer Warmwasser Donnerstag bis (2)', 'set_480' => 'Timer Warmwasser Donnerstag von (3)',
+                'set_481' => 'Timer Warmwasser Donnerstag bis (3)', 'set_482' => 'Timer Warmwasser Donnerstag von (4)', 'set_483' => 'Timer Warmwasser Donnerstag bis (4)', 'set_486' => 'Timer Warmwasser Freitag von (1)', 'set_487' => 'Timer Warmwasser Freitag bis (1)', 
+				'set_488' => 'Timer Warmwasser Freitag von (2)', 'set_489' => 'Timer Warmwasser Freitag bis (2)', 'set_490' => 'Timer Warmwasser Freitag von (3)', 'set_491' => 'Timer Warmwasser Freitag bis (3)', 'set_492' => 'Timer Warmwasser Freitag von (4)', 'set_493' => 'Timer Warmwasser Freitag bis (4)',
+                'set_496' => 'Timer Warmwasser Samstag von (1)', 'set_497' => 'Timer Warmwasser Samstag bis (1)', 'set_498' => 'Timer Warmwasser Samstag von (2)', 'set_499' => 'Timer Warmwasser Samstag bis (2)', 'set_500' => 'Timer Warmwasser Samstag von (3)',
+                'set_501' => 'Timer Warmwasser Samstag bis (3)', 'set_502' => 'Timer Warmwasser Samstag von (4)', 'set_503' => 'Timer Warmwasser Samstag bis (4)'
                 ];
             }
             elseif ($bw_timerDayVisible === 3) 
@@ -698,14 +698,14 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_440' => 'Warmwasser Sonntag von (3)',
-                'set_441' => 'Warmwasser Sonntag bis (3)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 
-				'set_450' => 'Warmwasser Montag von (3)', 'set_451' => 'Warmwasser Montag bis (3)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 'set_458' => 'Warmwasser Dienstag von (2)', 
-				'set_459' => 'Warmwasser Dienstag bis (2)', 'set_460' => 'Warmwasser Dienstag von (3)', 'set_461' => 'Warmwasser Dienstag bis (3)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 
-				'set_468' => 'Warmwasser Mittwoch von (2)', 'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_470' => 'Warmwasser Mittwoch von (3)', 'set_471' => 'Warmwasser Mittwoch bis (3)', 'set_476' => 'Warmwasser Donnerstag von (1)', 
-				'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)', 'set_480' => 'Warmwasser Donnerstag von (3)', 'set_481' => 'Warmwasser Donnerstag bis (3)', 
-				'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_490' => 'Warmwasser Freitag von (3)', 'set_491' => 'Warmwasser Freitag bis (3)',
-                'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)', 'set_500' => 'Warmwasser Samstag von (3)', 'set_501' => 'Warmwasser Samstag bis (3)'
+                'set_436' => 'Timer Warmwasser Sonntag von (1)', 'set_437' => 'Timer Warmwasser Sonntag bis (1)', 'set_438' => 'Timer Warmwasser Sonntag von (2)', 'set_439' => 'Timer Warmwasser Sonntag bis (2)', 'set_440' => 'Timer Warmwasser Sonntag von (3)',
+                'set_441' => 'Timer Warmwasser Sonntag bis (3)', 'set_446' => 'Timer Warmwasser Montag von (1)', 'set_447' => 'Timer Warmwasser Montag bis (1)', 'set_448' => 'Timer Warmwasser Montag von (2)', 'set_449' => 'Timer Warmwasser Montag bis (2)', 
+				'set_450' => 'Timer Warmwasser Montag von (3)', 'set_451' => 'Timer Warmwasser Montag bis (3)', 'set_456' => 'Timer Warmwasser Dienstag von (1)', 'set_457' => 'Timer Warmwasser Dienstag bis (1)', 'set_458' => 'Timer Warmwasser Dienstag von (2)', 
+				'set_459' => 'Timer Warmwasser Dienstag bis (2)', 'set_460' => 'Timer Warmwasser Dienstag von (3)', 'set_461' => 'Timer Warmwasser Dienstag bis (3)', 'set_466' => 'Timer Warmwasser Mittwoch von (1)', 'set_467' => 'Timer Warmwasser Mittwoch bis (1)', 
+				'set_468' => 'Timer Warmwasser Mittwoch von (2)', 'set_469' => 'Timer Warmwasser Mittwoch bis (2)', 'set_470' => 'Timer Warmwasser Mittwoch von (3)', 'set_471' => 'Timer Warmwasser Mittwoch bis (3)', 'set_476' => 'Timer Warmwasser Donnerstag von (1)', 
+				'set_477' => 'Timer Warmwasser Donnerstag bis (1)', 'set_478' => 'Timer Warmwasser Donnerstag von (2)', 'set_479' => 'Timer Warmwasser Donnerstag bis (2)', 'set_480' => 'Timer Warmwasser Donnerstag von (3)', 'set_481' => 'Timer Warmwasser Donnerstag bis (3)', 
+				'set_486' => 'Timer Warmwasser Freitag von (1)', 'set_487' => 'Timer Warmwasser Freitag bis (1)', 'set_488' => 'Timer Warmwasser Freitag von (2)', 'set_489' => 'Timer Warmwasser Freitag bis (2)', 'set_490' => 'Timer Warmwasser Freitag von (3)', 'set_491' => 'Timer Warmwasser Freitag bis (3)',
+                'set_496' => 'Timer Warmwasser Samstag von (1)', 'set_497' => 'Timer Warmwasser Samstag bis (1)', 'set_498' => 'Timer Warmwasser Samstag von (2)', 'set_499' => 'Timer Warmwasser Samstag bis (2)', 'set_500' => 'Timer Warmwasser Samstag von (3)', 'set_501' => 'Timer Warmwasser Samstag bis (3)'
                 ];
             }
 			elseif ($bw_timerDayVisible === 2) 
@@ -727,12 +727,12 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_438' => 'Warmwasser Sonntag von (2)', 'set_439' => 'Warmwasser Sonntag bis (2)', 'set_446' => 'Warmwasser Montag von (1)', 
-				'set_447' => 'Warmwasser Montag bis (1)', 'set_448' => 'Warmwasser Montag von (2)', 'set_449' => 'Warmwasser Montag bis (2)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 
-				'set_458' => 'Warmwasser Dienstag von (2)', 'set_459' => 'Warmwasser Dienstag bis (2)', 'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_468' => 'Warmwasser Mittwoch von (2)', 
-				'set_469' => 'Warmwasser Mittwoch bis (2)', 'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_478' => 'Warmwasser Donnerstag von (2)', 'set_479' => 'Warmwasser Donnerstag bis (2)',
-				'set_486' => 'Warmwasser Freitag von (1)', 'set_487' => 'Warmwasser Freitag bis (1)', 'set_488' => 'Warmwasser Freitag von (2)', 'set_489' => 'Warmwasser Freitag bis (2)', 'set_496' => 'Warmwasser Samstag von (1)', 
-				'set_497' => 'Warmwasser Samstag bis (1)', 'set_498' => 'Warmwasser Samstag von (2)', 'set_499' => 'Warmwasser Samstag bis (2)'
+                'set_436' => 'Timer Warmwasser Sonntag von (1)', 'set_437' => 'Timer Warmwasser Sonntag bis (1)', 'set_438' => 'Timer Warmwasser Sonntag von (2)', 'set_439' => 'Timer Warmwasser Sonntag bis (2)', 'set_446' => 'Timer Warmwasser Montag von (1)', 
+				'set_447' => 'Timer Warmwasser Montag bis (1)', 'set_448' => 'Timer Warmwasser Montag von (2)', 'set_449' => 'Timer Warmwasser Montag bis (2)', 'set_456' => 'Timer Warmwasser Dienstag von (1)', 'set_457' => 'Timer Warmwasser Dienstag bis (1)', 
+				'set_458' => 'Timer Warmwasser Dienstag von (2)', 'set_459' => 'Timer Warmwasser Dienstag bis (2)', 'set_466' => 'Timer Warmwasser Mittwoch von (1)', 'set_467' => 'Timer Warmwasser Mittwoch bis (1)', 'set_468' => 'Timer Warmwasser Mittwoch von (2)', 
+				'set_469' => 'Timer Warmwasser Mittwoch bis (2)', 'set_476' => 'Timer Warmwasser Donnerstag von (1)', 'set_477' => 'Timer Warmwasser Donnerstag bis (1)', 'set_478' => 'Timer Warmwasser Donnerstag von (2)', 'set_479' => 'Timer Warmwasser Donnerstag bis (2)',
+				'set_486' => 'Timer Warmwasser Freitag von (1)', 'set_487' => 'Timer Warmwasser Freitag bis (1)', 'set_488' => 'Timer Warmwasser Freitag von (2)', 'set_489' => 'Timer Warmwasser Freitag bis (2)', 'set_496' => 'Timer Warmwasser Samstag von (1)', 
+				'set_497' => 'Timer Warmwasser Samstag bis (1)', 'set_498' => 'Timer Warmwasser Samstag von (2)', 'set_499' => 'Timer Warmwasser Samstag bis (2)'
                 ];
             }
             elseif ($bw_timerDayVisible === 1) 
@@ -754,9 +754,9 @@ class WPLUX extends IPSModule
                 }
                 $ids = 
                 [
-                'set_436' => 'Warmwasser Sonntag von (1)', 'set_437' => 'Warmwasser Sonntag bis (1)', 'set_446' => 'Warmwasser Montag von (1)', 'set_447' => 'Warmwasser Montag bis (1)', 'set_456' => 'Warmwasser Dienstag von (1)', 'set_457' => 'Warmwasser Dienstag bis (1)', 
-				'set_466' => 'Warmwasser Mittwoch von (1)', 'set_467' => 'Warmwasser Mittwoch bis (1)', 'set_476' => 'Warmwasser Donnerstag von (1)', 'set_477' => 'Warmwasser Donnerstag bis (1)', 'set_486' => 'Warmwasser Freitag von (1)', 
-				'set_487' => 'Warmwasser Freitag bis (1)', 'set_496' => 'Warmwasser Samstag von (1)', 'set_497' => 'Warmwasser Samstag bis (1)'
+                'set_436' => 'Timer Warmwasser Sonntag von (1)', 'set_437' => 'Timer Warmwasser Sonntag bis (1)', 'set_446' => 'Timer Warmwasser Montag von (1)', 'set_447' => 'Timer Warmwasser Montag bis (1)', 'set_456' => 'Timer Warmwasser Dienstag von (1)', 'set_457' => 'Timer Warmwasser Dienstag bis (1)', 
+				'set_466' => 'Timer Warmwasser Mittwoch von (1)', 'set_467' => 'Timer Warmwasser Mittwoch bis (1)', 'set_476' => 'Timer Warmwasser Donnerstag von (1)', 'set_477' => 'Timer Warmwasser Donnerstag bis (1)', 'set_486' => 'Timer Warmwasser Freitag von (1)', 
+				'set_487' => 'Timer Warmwasser Freitag bis (1)', 'set_496' => 'Timer Warmwasser Samstag von (1)', 'set_497' => 'Timer Warmwasser Samstag bis (1)'
 				];
             }
             
