@@ -128,7 +128,7 @@ class WPLUX extends IPSModule
 
         if ($wwsetVisible) 
         {
-            $this->RegisterVariableFloat('Anpassung_WW', 'Timer Warmwasser Soll', 'WPLUX.Wset', 4);
+            $this->RegisterVariableFloat('Anpassung_WW', 'Warmwasser Soll', 'WPLUX.Wset', 4);
             $this->getParameter('Anpassung_WW'); 
             $Value = $this->GetValue('Anpassung_WW'); 
             $this->EnableAction('Anpassung_WW');
