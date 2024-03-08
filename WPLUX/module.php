@@ -1192,6 +1192,10 @@ class WPLUX extends IPSModule
                         $value -= 4294967296;
                         $value *= 0.1;
                     }
+                    else 
+                    {
+                        $value *=0.1;
+                    }
                 } 
                 elseif ($mode == 'Anpassung_WW') 
                 {
