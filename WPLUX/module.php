@@ -1186,7 +1186,7 @@ class WPLUX extends IPSModule
                 $value = $datenRaw[$index];
                 if ($mode == 'Anpassung_Temp') 
                 {
-                    $value *= 0.1;
+                    $value * 0.1;
                     if ($value > 429496000) 
                     {
                         $value -= 4294967296;
