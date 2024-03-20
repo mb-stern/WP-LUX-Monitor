@@ -197,3 +197,10 @@ if (!IPS_VariableProfileExists("WPLUX.Wset")) {
     IPS_SetVariableProfileText("WPLUX.Wset", "", " °C"); //Präfix, Suffix
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Wset erstellt", 0);   
 }
+if (!IPS_VariableProfileExists("WPLUX.Std")) {
+    IPS_CreateVariableProfile("WPLUX.Std", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Std", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Std", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Std", "", " Std."); //Präfix, Suffix  
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Std erstellt", 0);
+}
