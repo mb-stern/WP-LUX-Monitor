@@ -52,7 +52,7 @@ Name     | Beschreibung
 IP-Adresse      |	IP-Adresse des Rechners auf dem der Libre Hardware Monitor läuft
 Port            |   Port der Luxtronic/Wärmepumpe (8888 oder 8889). Der Port muss in der Firewall geöffnet sein
 Intervall       |   Intervall für das Update der Werte
-Überwachte ID's  |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
+Überwachte ID's |  Hier die gewünschten ID's der Werte. Diese Wert sind hier ersichtlich https://loxwiki.atlassian.net/wiki/spaces/LOX/pages/1533935933/Java+Webinterface
 
 ![image](https://github.com/mb-stern/Luxtronik/assets/95777848/a29e9039-9026-49e1-af82-0dac7ca72536)
 
@@ -71,23 +71,23 @@ Es werden Variablen/Typen je nach Wahl der ID's erstellt. Pro ID wird eine Varia
 
 Name   | Typ
 ------ | ------- 
-WPLUX.Imp     |  Integer   
-WPLUX.Typ     |  Integer   
-WPLUX.Biv     |  Integer   
-WPLUX.BZ      |  Integer 
-WPLUX.Comf    |  Bool 
-WPLUX.Men1    |  Integer
-WPLUX.Men2    |  Integer
-WPLUX.Men3    |  Integer
-WPLUX.Akt     |  Bool
-WPLUX.Pres    |  Float
-WPLUX.Fan    |  Integer
-WPLUX.lh	|  Integer
-WPLUX.Wwhe	|  Integer
+WPLUX.Imp   |  Integer   
+WPLUX.Typ   |  Integer   
+WPLUX.Biv   |  Integer   
+WPLUX.BZ    |  Integer 
+WPLUX.Comf  |  Bool 
+WPLUX.Men1  |  Integer
+WPLUX.Men2  |  Integer
+WPLUX.Men3  |  Integer
+WPLUX.Akt   |  Bool
+WPLUX.Pres  |  Float
+WPLUX.Fan   |  Integer
+WPLUX.lh    |  Integer
+WPLUX.Wwhe  |  Integer
 WPLUX.Kue	|  Integer
 WPLUX.Tset	|  Float
 WPLUX.Wset	|  Float
-WPLUX.Std	|  Integer
+WPLUX.Std   |  Integer
 
 ### 6. WebFront
 
@@ -105,7 +105,7 @@ Beispiel:
 
 Version 3.4 (07.03.2024)
 
-- Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich. Um Variabeln zu sparen ist es möglich, nur die gewünschte Anzahl Zeitfenster einzublenden. Beim Ändern oer deaktiviern bleiben aber die gespeicherten Zeiten erhalten
+- Es kann nun die internen Timerfunktionen für Heizung und Warmwasser der LUX gesteuert werden. Eine Anpassung für die gesamte Woche, Mo-Fr/Sa+So und Wochentage analog dem LUX-Timer ist möglich. Um Variabeln zu sparen ist es möglich, nur die gewünschte Anzahl Zeitfenster einzublenden. Beim Deaktivieren der Variablen bleiben aber die gespeicherten Zeiten erhalten
 - Wert 56, 58, 60-66 (Betriebsstunden) werden nun in Stunden dargestellt
 
 Version 3.3 (25.02.2024)
