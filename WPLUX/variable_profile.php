@@ -156,7 +156,7 @@ if (!IPS_VariableProfileExists("WPLUX.Bet")) {
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Bet erstellt", 0); 
 }  
 if (!IPS_VariableProfileExists("WPLUX.lh")) {
-    IPS_CreateVariableProfile("WPLUX.lh", 1); //1 für Integer
+    IPS_CreateVariableProfile("WPLUX.lh", 2); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.lh", 0, 0, 1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.lh", 0); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.lh", "", " l/h"); //Präfix, Suffix
