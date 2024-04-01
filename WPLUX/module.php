@@ -1021,7 +1021,7 @@ class WPLUX extends IPSModule
                     break;
 
                 case ($id == 173):
-                    $this->RegisterVariableFloat($ident, $ident, 'WPLUX.lh', $id);
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.lh', $id);
                     break;
     
                 case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
