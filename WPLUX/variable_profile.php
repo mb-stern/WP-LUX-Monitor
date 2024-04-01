@@ -211,3 +211,10 @@ if (!IPS_VariableProfileExists("WPLUX.Std")) {
     IPS_SetVariableProfileText("WPLUX.Std", "", " Std."); //Präfix, Suffix  
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Std erstellt", 0);
 }
+if (!IPS_VariableProfileExists("WPLUX.kW")) {
+    IPS_CreateVariableProfile("WPLUX.kW", 2); //2 für Float
+    IPS_SetVariableProfileValues("WPLUX.kW", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.kW", 2); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.kW", "", " kW."); //Präfix, Suffix  
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.kW erstellt", 0);
+}

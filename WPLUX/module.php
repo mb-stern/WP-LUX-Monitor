@@ -1057,7 +1057,7 @@ class WPLUX extends IPSModule
                     break;
     
                 case ($id == 257):
-                    $this->RegisterVariableFloat($ident, $ident, '~Power', $id);
+                    $this->RegisterVariableFloat($ident, $ident, 'WPLUX.kW', $id);
                     break;
 
                 default:

@@ -88,6 +88,8 @@ WPLUX.Kue	|  Integer
 WPLUX.Tset	|  Float
 WPLUX.Wset	|  Float
 WPLUX.Std   |  Integer
+WPLUX.Ver   |  Integer
+WPLUX.kW   |  Float
 
 ### 6. WebFront
 
@@ -102,6 +104,10 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 3.5 (02.04.2024)
+
+- Es wird nun ein separates Variablenprofil WLUX.Ver und WPLUX.Fan für die Versichterdrehzahl und Ventilatordrehzahl angelegt. Dies um die Maximalwerte im Profil separat zu definieren. Ebenfalls wird das Profil WPLUX.kW angelegt, um auch hier nicht das allgemeine Profil zu verwenden und den Maximalwert definieren zu können. Hintergrund ist die Nutzung der tollen html-Kacheln ua. für die Wärmepumpe von da8ter (https://github.com/da8ter/TileVisu-Kachelsammlung)
 
 Version 3.4 (07.03.2024)
 
