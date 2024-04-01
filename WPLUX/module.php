@@ -1036,7 +1036,7 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableFloat($ident, $ident, '~Valve.F', $id);
                     break;
     
-                case ($id == 184 || $id == 193  || $id == 231):
+                case ($id == 184):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Fan', $id);
                     break;
     
@@ -1046,6 +1046,10 @@ class WPLUX extends IPSModule
     
                 case ($id == 191):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Bet', $id);
+                    break;
+
+                case ($id == 193  || $id == 231):
+                    $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Ver', $id);
                     break;
     
                 case ($id == 231):

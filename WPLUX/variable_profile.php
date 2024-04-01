@@ -135,6 +135,13 @@ if (!IPS_VariableProfileExists("WPLUX.Fan")) {
     IPS_SetVariableProfileText("WPLUX.Fan", "", " rpm"); //Präfix, Suffix  
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Fan erstellt", 0);
 }
+if (!IPS_VariableProfileExists("WPLUX.Ver")) {
+    IPS_CreateVariableProfile("WPLUX.Ver", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Ver", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Ver", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Ver", "", " rpm"); //Präfix, Suffix  
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Ver erstellt", 0);
+}
 if (!IPS_VariableProfileExists("WPLUX.Bet")) {
     IPS_CreateVariableProfile("WPLUX.Bet", 1); //1 für Integer
     IPS_SetVariableProfileValues("WPLUX.Bet", 0, 12, 1); //Min, Max, Schritt
