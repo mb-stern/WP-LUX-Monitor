@@ -96,7 +96,15 @@
             },
                 
                 
-                
+            {
+                "type": "Label",
+                "caption": "Timer Warmwasser",
+                "bold": true
+            },
+            {
+                "type": "RowLayout",
+                "items": 
+            [
                 
                 
                 { 
@@ -134,7 +142,15 @@
                     { "caption": "4 Zeitfenster", "value": 4 },
                     { "caption": "5 Zeitfenster", "value": 5 }
                     ]
-                },
+                }
+            ]
+        },
+                
+                
+                
+                
+                
+                
                 {
                     "type": "SelectVariable",
                     "name": "kwin",
