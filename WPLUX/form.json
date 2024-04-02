@@ -47,6 +47,21 @@
                     "name": "WWsetVisible",
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
+                
+               
+               
+               
+               
+                {
+                    "type": "Label",
+                    "caption": "Timer Heizung",
+                    "bold": true
+                },
+                {
+                    "type": "RowLayout",
+                    "items": 
+                [
+
                 { 
                     "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
                     "options": 
@@ -76,7 +91,14 @@
                     { "caption": "2 Zeitfenster", "value": 2 },
                     { "caption": "3 Zeitfenster", "value": 3 }
                     ]
-                },
+                }
+            ]
+            },
+                
+                
+                
+                
+                
                 { 
                     "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Warmwasser",
                     "options": 
