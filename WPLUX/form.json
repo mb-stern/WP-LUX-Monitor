@@ -161,6 +161,7 @@
                             "type": "Button",
                             "label": "JAZ-Berechnung zurücksetzen",
                             "onClick": "WPLUX_reset_jaz($id);"
+                        }
                     ]
                 }
             ]
