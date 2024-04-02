@@ -151,18 +151,18 @@
                 [
                 
                 
-                
+                    {
+                        "type": "SelectVariable",
+                        "name": "kwhin",
+                        "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
+                    },
                 
             {
                 "type": "SelectVariable",
                 "name": "kwin",
                 "caption": "Externe Variable zur Berechnung des COP (kW)"
-            },
-            {
-                "type": "SelectVariable",
-                "name": "kwhin",
-                "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
             }
+            
         ]
     },
             {
