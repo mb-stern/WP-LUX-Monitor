@@ -163,7 +163,8 @@
                 "name": "kwhin",
                 "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
             }
-        ],
+        ]
+    },
             {
                 "type": "Button",
                 "label": "JAZ-Berechnung zurücksetzen",
