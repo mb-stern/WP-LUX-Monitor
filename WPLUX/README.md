@@ -105,10 +105,13 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.6 (02.04.2024)
+
+- Der Bereich 'Zusätzlich Funktionen' im  Konfigurationsformular ist nun übersichtlicher und platzsparender gestaltet.
+
 Version 3.5 (01.04.2024)
 
 - Es wird nun ein separates Variablenprofil WLUX.Ver und WPLUX.Fan für die Verdichterdrehzahl und Ventilatordrehzahl angelegt. Dies um die Maximalwerte im Profil separat zu definieren. Ebenfalls wird das Profil WPLUX.kW angelegt, um auch hier nicht das allgemeine Profil zu verwenden und somit den Maximalwert definieren zu können. Hintergrund ist die Nutzung der tollen html-Kacheln ua. für die Wärmepumpe von da8ter (https://github.com/da8ter/TileVisu-Kachelsammlung)
-- Der Bereich 'Zusätzlich Funktionen' im  Konfigurationsformular ist nun übersichtlicher und platzsparender.
 
 Version 3.4 (07.03.2024)
 
