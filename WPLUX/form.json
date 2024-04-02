@@ -59,7 +59,6 @@
                     "type": "RowLayout",
                     "items": 
                     [
-
                         { 
                             "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
                             "options": 
@@ -139,7 +138,6 @@
                         }
                     ]
                 },
-                    
                 {
                     "type": "Label",
                     "caption": "JAZ & COP berechnen",
@@ -149,26 +147,21 @@
                     "type": "RowLayout",
                     "items": 
                     [
-                    
-                    
+                        {
+                            "type": "SelectVariable",
+                            "name": "kwin",
+                            "caption": "Externe Variable zur Berechnung des COP (kW)"
+                        },
                         {
                             "type": "SelectVariable",
                             "name": "kwhin",
                             "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
                         },
-                    
                         {
-                            "type": "SelectVariable",
-                            "name": "kwin",
-                            "caption": "Externe Variable zur Berechnung des COP (kW)"
-                        }
-                        
+                            "type": "Button",
+                            "label": "JAZ-Berechnung zurücksetzen",
+                            "onClick": "WPLUX_reset_jaz($id);"
                     ]
-                },
-                {
-                    "type": "Button",
-                    "label": "JAZ-Berechnung zurücksetzen",
-                    "onClick": "WPLUX_reset_jaz($id);"
                 }
             ]
         },
