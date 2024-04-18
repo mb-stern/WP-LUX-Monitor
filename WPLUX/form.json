@@ -1,9 +1,11 @@
 {
-    "elements": [
+    "elements": 
+    [
         {
             "type": "ExpansionPanel",
             "caption": "Info zum Modul",
-            "items": [
+            "items": 
+            [
                 {
                     "type": "Label",
                     "label": "Dieses Modul ermöglicht den Zugriff auf die Luxtronic-Steuerung diverser Wärmepumpen-Hersteller. Es muss sichergestellt werden, dass der Port 8888 (ältere Lux) oder 8889 (neuere Lux) nicht durch die Firewall blockiert ist."
@@ -20,8 +22,9 @@
         },
         {
             "type": "ExpansionPanel",
-            "caption": "Zusätzliche Funktionen aktivieren",
-            "items": [
+            "caption": "Zusätzliche Funktionen",
+            "items": 
+            [
                 {
                     "type": "CheckBox",
                     "name": "HeizungVisible",
@@ -47,88 +50,121 @@
                     "name": "WWsetVisible",
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
-                { 
-                    "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 }
-                    ]
+                {
+                    "type": "Label",
+                    "caption": "Timer Heizung",
+                    "bold": true
                 },
-                { 
-                    "type": "Select", "name": "HZ_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Heizung",
-                    "options": 
+                {
+                    "type": "RowLayout",
+                    "items": 
                     [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 }
-                    ]
-                },
-                { 
-                    "type": "Select", "name": "HZ_TimerDayVisible", "caption": "Timer Tage Heizung",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 }
-                    ]
-                },
-                { 
-                    "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Warmwasser",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 },
-                    { "caption": "4 Zeitfenster", "value": 4 },
-                    { "caption": "5 Zeitfenster", "value": 5 }
-                    ]
-                },
-                { 
-                    "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Warmwasser",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 },
-                    { "caption": "4 Zeitfenster", "value": 4 },
-                    { "caption": "5 Zeitfenster", "value": 5 }
-                    ]
-                },
-                { 
-                    "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Tage Warmwasser",
-                    "options": 
-                    [
-                    { "caption": "deaktiviert", "value": 0 },
-                    { "caption": "1 Zeitfenster", "value": 1 },
-                    { "caption": "2 Zeitfenster", "value": 2 },
-                    { "caption": "3 Zeitfenster", "value": 3 },
-                    { "caption": "4 Zeitfenster", "value": 4 },
-                    { "caption": "5 Zeitfenster", "value": 5 }
+                        { 
+                            "type": "Select", "name": "HZ_TimerWeekVisible", "caption": "Timer Woche Heizung",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 }
+                            ]
+                        },
+                        { 
+                            "type": "Select", "name": "HZ_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Heizung",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 }
+                            ]
+                        },
+                        { 
+                            "type": "Select", "name": "HZ_TimerDayVisible", "caption": "Timer Tage Heizung",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 }
+                            ]
+                        }
                     ]
                 },
                 {
-                    "type": "SelectVariable",
-                    "name": "kwin",
-                    "caption": "Externe Variable zur Berechnung des COP (kW)"
+                    "type": "Label",
+                    "caption": "Timer Warmwasser",
+                    "bold": true
                 },
                 {
-                    "type": "SelectVariable",
-                    "name": "kwhin",
-                    "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
+                    "type": "RowLayout",
+                    "items": 
+                    [
+                        { 
+                            "type": "Select", "name": "BW_TimerWeekVisible", "caption": "Timer Woche Warmwasser",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 },
+                            { "caption": "4 Zeitfenster", "value": 4 },
+                            { "caption": "5 Zeitfenster", "value": 5 }
+                            ]
+                        },
+                        { 
+                            "type": "Select", "name": "BW_TimerWeekendVisible", "caption": "Timer Mo-Fr/Sa+So Warmwasser",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 },
+                            { "caption": "4 Zeitfenster", "value": 4 },
+                            { "caption": "5 Zeitfenster", "value": 5 }
+                            ]
+                        },
+                        { 
+                            "type": "Select", "name": "BW_TimerDayVisible", "caption": "Timer Tage Warmwasser",
+                            "options": 
+                            [
+                            { "caption": "deaktiviert", "value": 0 },
+                            { "caption": "1 Zeitfenster", "value": 1 },
+                            { "caption": "2 Zeitfenster", "value": 2 },
+                            { "caption": "3 Zeitfenster", "value": 3 },
+                            { "caption": "4 Zeitfenster", "value": 4 },
+                            { "caption": "5 Zeitfenster", "value": 5 }
+                            ]
+                        }
+                    ]
                 },
                 {
-                    "type": "Button",
-                    "label": "JAZ-Berechnung zurücksetzen",
-                    "onClick": "WPLUX_reset_jaz($id);"
+                    "type": "Label",
+                    "caption": "JAZ & COP berechnen",
+                    "bold": true
+                },
+                {
+                    "type": "RowLayout",
+                    "items": 
+                    [
+                        {
+                            "type": "SelectVariable",
+                            "name": "kwin",
+                            "caption": "Externe Variable zur Berechnung des COP (kW)"
+                        },
+                        {
+                            "type": "SelectVariable",
+                            "name": "kwhin",
+                            "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
+                        },
+                        {
+                            "type": "Button",
+                            "label": "JAZ-Berechnung zurücksetzen",
+                            "onClick": "WPLUX_reset_jaz($id);"
+                        }
+                    ]
                 }
-                ]
+            ]
         },
         {
             "name": "IPAddress",
@@ -152,22 +188,25 @@
             "rowCount": 15,
             "add": true,
             "delete": true,
-            "sort": {
+            "sort": 
+            {
                 "column": "id",
                 "direction": "ascending"
             },
-            "columns": [
+            "columns": 
+            [
                 {
                     "name": "id",
                     "caption": "ID des Wertes",
                     "width": "150",
                     "add": 0,
-                    "edit": {
+                    "edit": 
+                    {
                         "type": "NumberSpinner"
                     }
                 }
             ]
         }
     ]
-  }
+}
   
