@@ -105,6 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.6 (20.04.2024)
+
+- Einige Java-Werte wurden ergänzt
+
 Version 3.5 (01.04.2024)
 
 - Es wird nun ein separates Variablenprofil WLUX.Ver und WPLUX.Fan für die Verdichterdrehzahl und Ventilatordrehzahl angelegt. Dies um die Maximalwerte im Profil separat zu definieren. Ebenfalls wird das Profil WPLUX.kW angelegt, um auch hier nicht das allgemeine Profil zu verwenden und somit den Maximalwert definieren zu können. Hintergrund ist die Nutzung der tollen html-Kacheln ua. für die Wärmepumpe von da8ter (https://github.com/da8ter/TileVisu-Kachelsammlung)
