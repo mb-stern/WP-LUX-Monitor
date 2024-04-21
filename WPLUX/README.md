@@ -107,7 +107,7 @@ Beispiel:
 
 Version 3.6 (20.04.2024)
 
-- Einige Java-Werte wurden ergänzt
+- Einige Java-Werte ab Wert 232 wurden ergänzt und den entsprechend Variablenprofile zugeteilt
 
 Version 3.5 (01.04.2024)
 
