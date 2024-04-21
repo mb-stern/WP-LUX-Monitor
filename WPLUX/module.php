@@ -1024,7 +1024,7 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.lh', $id);
                     break;
     
-                case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
+                case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209) || ($id >= 239 && $id <= 240) || ($id >= 242 && $id <= 243)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature.Difference', $id);
                     break;
     
@@ -1050,10 +1050,6 @@ class WPLUX extends IPSModule
 
                 case ($id == 193  || $id == 231|| $id == 236):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Ver', $id);
-                    break;
-
-                case (($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243)):
-                    $this->RegisterVariableFloat($ident, $ident, '~Temperatur.Difference', $id);
                     break;
     
                 case ($id == 257):
