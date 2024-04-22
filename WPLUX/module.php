@@ -873,7 +873,7 @@ class WPLUX extends IPSModule
                 $this->calc_cop('cop', $value);
             }  
 
-            if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des JAZ
+            if ($i == 154) //Wärmemenge an Funktion senden zur Berechnung des JAZ
             {
                 $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calc_jaz('jaz', $value_out);
