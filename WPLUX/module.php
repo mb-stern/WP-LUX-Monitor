@@ -140,7 +140,7 @@ class WPLUX extends IPSModule
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 5);
         } 
         else 
         {
@@ -149,7 +149,7 @@ class WPLUX extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 6);
         } 
         else 
         {
