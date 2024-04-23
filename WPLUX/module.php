@@ -866,19 +866,26 @@ class WPLUX extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             
-            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl eine ID zur Berechnung an die Funktion gesandt werden
+            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl einer ID zur Berechnung an die Funktion gesandt werden
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calc_cop('cop', $value);
             }  
 
-            if ($i == 154) //Wärmemenge an Funktion senden zur Berechnung des JAZ
+            if ($i == 151) //Wärmemenge an Funktion senden zur Berechnung des JAZ
             {
-                $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calc_jaz('jaz', $value_out);
+                $value_out_heizung = $this->convertValueBasedOnID($daten_raw[$i], $i);
+            }
+
+            if ($i == 152) //Wärmemenge an Funktion senden zur Berechnung des JAZ
+            {
+                $value_out_warmwasser = $this->convertValueBasedOnID($daten_raw[$i], $i);
             }
             
+            $value_out = $value_out_heizung + $value_out_warmwasser
+            $this->calc_jaz('jaz', $value_out);
+
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
             {
