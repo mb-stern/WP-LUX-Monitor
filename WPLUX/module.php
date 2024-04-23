@@ -873,17 +873,16 @@ class WPLUX extends IPSModule
                 $this->calc_cop('cop', $value);
             }  
 
-            if ($i == 151) //Wärmemenge an Funktion senden zur Berechnung des JAZ
+            if ($i == 151) //Wärmemenge Heizung erfassen zur Berechnung des JAZ
             {
                 $value_out_heizung = $this->convertValueBasedOnID($daten_raw[$i], $i);
             }
 
-            if ($i == 152) //Wärmemenge an Funktion senden zur Berechnung des JAZ
+            if ($i == 152) //Wärmemenge Warmwasser erfassen zur Berechnung des JAZ
             {
                 $value_out_warmwasser = $this->convertValueBasedOnID($daten_raw[$i], $i);
             }
             
-
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
             {
@@ -907,9 +906,9 @@ class WPLUX extends IPSModule
             }
         }
 
+        //Hier wird die Wärmemenge von Heizung und Warmwasser addiert und zur Berechnung des JAZ an die Funktion gesendet
         $value_out = $value_out_heizung + $value_out_warmwasser;
-        $this->calc_jaz('jaz', $value_out);
-        
+        $this->calc_jaz('jaz', $value_out);  
     }
     
     private function convertValueBasedOnID($value, $id)
