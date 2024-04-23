@@ -107,7 +107,7 @@ Beispiel:
 Version 3.6 (23.04.2024)
 
 - Einige Java-Werte ab Wert 232 wurden ergänzt und den entsprechenden Variablenprofile zugeteilt
-- Die JAZ-Berechnung hat mit einigen LUX nicht funktioniert, da die 'Wärmemenge gesamt' nicht immer geliefert wird. Neu wird dieser Wert intern vom Modul berechnet durch addieren von 'Wärmemenge Heizung' und 'Wärmemenge Warmwasser'. Dadurch kann es nötig sein, nach dem Update auf Version 3.6 im Konfigurationsformular den Button 'JAZ-Berechnung zurücksetzen' zu betätigen.
+- Die JAZ-Berechnung hat mit einigen LUX nicht funktioniert, da es die 'Wärmemenge gesamt' als Variablenwert nicht gibt. Neu wird dieser Wert intern vom Modul berechnet durch addieren von 'Wärmemenge Heizung' und 'Wärmemenge Warmwasser'. Dadurch kann es nötig sein, nach dem Update auf Version 3.6 im Konfigurationsformular den Button 'JAZ-Berechnung zurücksetzen' zu betätigen.
 
 Version 3.5 (01.04.2024)
 
