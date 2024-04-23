@@ -883,8 +883,6 @@ class WPLUX extends IPSModule
                 $value_out_warmwasser = $this->convertValueBasedOnID($daten_raw[$i], $i);
             }
             
-            $value_out = $value_out_heizung + $value_out_warmwasser;
-            $this->calc_jaz('jaz', $value_out);
 
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
             if (in_array($i, array_column($idListe, 'id'))) 
@@ -908,6 +906,10 @@ class WPLUX extends IPSModule
             $this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
+
+        $value_out = $value_out_heizung + $value_out_warmwasser;
+        $this->calc_jaz('jaz', $value_out);
+        
     }
     
     private function convertValueBasedOnID($value, $id)
