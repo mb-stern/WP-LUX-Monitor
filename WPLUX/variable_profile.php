@@ -213,14 +213,14 @@ if (!IPS_VariableProfileExists("WPLUX.Std")) {
 }
 if (!IPS_VariableProfileExists("WPLUX.kW")) {
     IPS_CreateVariableProfile("WPLUX.kW", 2); //2 für Float
-    IPS_SetVariableProfileValues("WPLUX.kW", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileValues("WPLUX.kW", 0, 0, 0.01); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.kW", 2); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.kW", "", " kW"); //Präfix, Suffix  
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.kW erstellt", 0);
 }
 if (!IPS_VariableProfileExists("WPLUX.Cop")) {
     IPS_CreateVariableProfile("WPLUX.Cop", 2); //2 für Float
-    IPS_SetVariableProfileValues("WPLUX.Cop", 0, 0, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileValues("WPLUX.Cop", 0, 0, 0.1); //Min, Max, Schritt
     IPS_SetVariableProfileDigits("WPLUX.Cop", 1); //Nachkommastellen
     IPS_SetVariableProfileText("WPLUX.Cop", "", ""); //Präfix, Suffix  
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Cop erstellt", 0);
