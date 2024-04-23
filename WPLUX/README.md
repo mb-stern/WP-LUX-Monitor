@@ -37,8 +37,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 ### 3. Software-Installation
 
-* Über den Module Store kann das Modul unter dem Namen Luxtronik gefunden und installiert werden.
-* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/Luxtronik
+* Über den Module Store kann das Modul installiert werden.
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -107,8 +106,8 @@ Beispiel:
 
 Version 3.6 (23.04.2024)
 
-- Einige Java-Werte ab Wert 232 wurden ergänzt und den entsprechend Variablenprofile zugeteilt
-- Die JAZ-Berechnung hat mit einigen LUX nicht funktioniert, da die 'Wärmemenge gesamt' nicht immer geliefert wird. Neu wird dieser Wert intern vom Modul berechnet durch addieren von 'Wärmemenge Heizung' und 'Wärmemenge Warmwasser'. Dadurch kann es nötig sein, nach dem Update auf 3.6 im Konfigurationsformular die 'JAZ-Berechnung zurücksetzen' zu betätigen.
+- Einige Java-Werte ab Wert 232 wurden ergänzt und den entsprechenden Variablenprofile zugeteilt
+- Die JAZ-Berechnung hat mit einigen LUX nicht funktioniert, da die 'Wärmemenge gesamt' nicht immer geliefert wird. Neu wird dieser Wert intern vom Modul berechnet durch addieren von 'Wärmemenge Heizung' und 'Wärmemenge Warmwasser'. Dadurch kann es nötig sein, nach dem Update auf Version 3.6 im Konfigurationsformular den Button 'JAZ-Berechnung zurücksetzen' zu betätigen.
 
 Version 3.5 (01.04.2024)
 
