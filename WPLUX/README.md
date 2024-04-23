@@ -89,6 +89,7 @@ WPLUX.Wset	|  Float
 WPLUX.Std   |  Integer
 WPLUX.Ver   |  Integer
 WPLUX.kW    |  Float
+WPLUX.Cop   |  Float
 
 ### 6. WebFront
 
