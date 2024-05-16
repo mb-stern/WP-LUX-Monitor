@@ -90,6 +90,7 @@ WPLUX.Std   |  Integer
 WPLUX.Ver   |  Integer
 WPLUX.kW    |  Float
 WPLUX.Cop   |  Float
+WPLUX.Proz   |  Integer
 
 ### 6. WebFront
 
@@ -104,6 +105,11 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 3.7 (16.05.2024)
+
+- Die Fehlermeldung beim auswählen von Wert 179 ist behoben
+- Für Wert 241 wir nun ein Integer-Variablenprofil für % zugeeordnet
 
 Version 3.6 (23.04.2024)
 
