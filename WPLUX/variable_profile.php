@@ -225,3 +225,10 @@ if (!IPS_VariableProfileExists("WPLUX.Cop")) {
     IPS_SetVariableProfileText("WPLUX.Cop", "", ""); //Präfix, Suffix  
     $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Cop erstellt", 0);
 }
+if (!IPS_VariableProfileExists("WPLUX.Proz")) {
+    IPS_CreateVariableProfile("WPLUX.Proz", 1); //1 für Integer
+    IPS_SetVariableProfileValues("WPLUX.Proz", 0, 100, 1); //Min, Max, Schritt
+    IPS_SetVariableProfileDigits("WPLUX.Proz", 0); //Nachkommastellen
+    IPS_SetVariableProfileText("WPLUX.Proz", "", " %"); //Präfix, Suffix
+    $this->SendDebug("Variablenprofil", "Variablenprofil WPLUX.Proz erstellt", 0);
+}
