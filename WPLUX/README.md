@@ -108,8 +108,8 @@ Beispiel:
 
 Version 3.7 (16.05.2024)
 
-- Die Fehlermeldung beim auswählen von Wert 179 ist behoben
-- Für Wert 241 wir nun ein Integer-Variablenprofil für % zugeeordnet
+- Die Fehlermeldung beim auswählen von Wert 179 ist behoben.
+- Für Wert 241 wir nun ein Integer-Variablenprofil für % zugeeordnet.
 
 Version 3.6 (23.04.2024)
 
