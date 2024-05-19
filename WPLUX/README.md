@@ -105,11 +105,12 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.7 (19.05.2024)
+Version 3.7 (20.05.2024)
 
 - Die Fehlermeldung beim auswählen von Wert 179 ist behoben.
 - Für Wert 241 wir nun richtig zugeeordnet.
-- Für Wert 91-94 werden nun die Adressen richtig dargestellt
+- Für Wert 91-94 werden nun die IP, Subnetz und Broadcast-Adressen etc richtig dargestellt
+- Wert 81-90 wird nun in ASCII Zeichen konvertiert, um die Luxtronic-Version auszugeben
 - Spenden-Button im Konfigurationsformuler eingefügt.
 
 Version 3.6 (23.04.2024)
