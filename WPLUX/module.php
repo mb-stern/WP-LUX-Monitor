@@ -948,9 +948,14 @@ class WPLUX extends IPSModule
                 $value = $hours;
                 return ($value);
 
-                case ($id >= 91 && $id <= 94):
+                case ($id >= 81 && $id <= 90):
                 $decimalValue = $value;
                 $value = long2ip($decimalValue); // Konvertiert die Dezimalzahl in eine IP-Adresse
+                return ($value);
+                
+                case ($id >= 91 && $id <= 94):
+                $ascii = $value;
+                $value = chr($ascii); // Konvertiert die Dezimalzahl in ASCII Zeichen
                 return ($value);
 
             case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
