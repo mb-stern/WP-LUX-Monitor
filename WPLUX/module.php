@@ -949,7 +949,7 @@ class WPLUX extends IPSModule
                 return ($value);
 
                 case ($id >= 91 && $id <= 94):
-                $decimalValue = $value; // Die Dezimalzahl, die konvertiert werden soll
+                $decimalValue = $value;
                 $value = long2ip($decimalValue); // Konvertiert die Dezimalzahl in eine IP-Adresse
                 return ($value);
 

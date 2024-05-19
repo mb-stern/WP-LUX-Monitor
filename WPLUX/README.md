@@ -105,11 +105,12 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.7 (18.05.2024)
+Version 3.7 (19.05.2024)
 
 - Die Fehlermeldung beim auswählen von Wert 179 ist behoben.
 - Für Wert 241 wir nun richtig zugeeordnet.
-- Spenden-Button im Konfigurationsformuler eingefügt
+- Für Wert 91-94 werden nun die Adressen richtig dargestellt
+- Spenden-Button im Konfigurationsformuler eingefügt.
 
 Version 3.6 (23.04.2024)
 
