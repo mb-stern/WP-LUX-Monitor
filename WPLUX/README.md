@@ -37,8 +37,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 
 ### 3. Software-Installation
 
-* Über den Module Store kann das Modul unter dem Namen Luxtronik gefunden und installiert werden.
-* Alternativ über das Module Control folgende URL hinzufügen: https://github.com/mb-stern/Luxtronik
+* Über den Module Store kann das Modul installiert werden.
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -90,6 +89,7 @@ WPLUX.Wset	|  Float
 WPLUX.Std   |  Integer
 WPLUX.Ver   |  Integer
 WPLUX.kW    |  Float
+WPLUX.Cop   |  Float
 
 ### 6. WebFront
 
@@ -104,6 +104,19 @@ Beispiel:
 `WPLUX_Update(12345);`
 
 ### 8. Versionen
+
+Version 3.7 (20.05.2024)
+
+- Die Fehlermeldung beim auswählen von Wert 179 ist behoben.
+- Für Wert 241 wir nun richtig zugeeordnet.
+- Für Wert 91-94 werden nun die IP, Subnetz und Broadcast-Adressen etc richtig dargestellt
+- Wert 81-90 wird nun in ASCII Zeichen konvertiert, um die Luxtronic-Version auszugeben
+- Spenden-Button im Konfigurationsformuler eingefügt.
+
+Version 3.6 (23.04.2024)
+
+- Einige Java-Werte ab Wert 232 wurden ergänzt und den entsprechenden Variablenprofile zugeteilt
+- Die JAZ-Berechnung hat mit einigen LUX nicht funktioniert, da es die 'Wärmemenge gesamt' als Variablenwert nicht gibt. Neu wird dieser Wert intern vom Modul berechnet durch addieren von 'Wärmemenge Heizung' und 'Wärmemenge Warmwasser'. Dadurch kann es nötig sein, nach dem Update auf Version 3.6 im Konfigurationsformular den Button 'JAZ-Berechnung zurücksetzen' zu betätigen.
 
 Version 3.5 (01.04.2024)
 

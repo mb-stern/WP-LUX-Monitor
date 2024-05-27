@@ -140,7 +140,7 @@ class WPLUX extends IPSModule
 
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', '', 5);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 5);
         } 
         else 
         {
@@ -149,7 +149,7 @@ class WPLUX extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', '', 6);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 6);
         } 
         else 
         {
@@ -866,17 +866,21 @@ class WPLUX extends IPSModule
         for ($i = 0; $i < $JavaWerte; ++$i) 
         {
             
-            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl eine ID zur Berechnung an die Funktion gesandt werden
+            //Hier startet der Ablauf um Werte abzugreifen, welche ohne Auswahl einer ID zur Berechnung an die Funktion gesandt werden
             if ($i == 257) //Wärmeleistung an Funktion senden zur Berechnung des COP
             {
                 $value = $this->convertValueBasedOnID($daten_raw[$i], $i);
                 $this->calc_cop('cop', $value);
             }  
 
-            if ($i == 154) //Wärmeleistung an Funktion senden zur Berechnung des JAZ
+            if ($i == 151) //Wärmemenge Heizung erfassen zur Berechnung des JAZ
             {
-                $value_out = $this->convertValueBasedOnID($daten_raw[$i], $i);
-                $this->calc_jaz('jaz', $value_out);
+                $value_out_heizung = $this->convertValueBasedOnID($daten_raw[$i], $i);
+            }
+
+            if ($i == 152) //Wärmemenge Warmwasser erfassen zur Berechnung des JAZ
+            {
+                $value_out_warmwasser = $this->convertValueBasedOnID($daten_raw[$i], $i);
             }
             
             //Hier startet der allgemeine Ablauf zum aktualiseren der Variablen nach Auswahl der ID's durch den Anwender
@@ -901,6 +905,10 @@ class WPLUX extends IPSModule
             $this->DeleteVariableIfExists($java_dataset[$i]);
             }
         }
+
+        //Hier wird die Wärmemenge von Heizung und Warmwasser addiert und zur Berechnung des JAZ an die Funktion gesendet
+        $value_out = $value_out_heizung + $value_out_warmwasser;
+        $this->calc_jaz('jaz', $value_out);  
     }
     
     private function convertValueBasedOnID($value, $id)
@@ -908,7 +916,7 @@ class WPLUX extends IPSModule
         // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
-            case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229)):
+            case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229) || ($id >= 232 && $id <= 233) || ($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243) || $id == 267):
                 return round($value * 0.1, 1);
             
             case ($id == 15): //Aussentemperatur Minustest
@@ -940,11 +948,23 @@ class WPLUX extends IPSModule
                 $value = $hours;
                 return ($value);
 
+                case ($id >= 81 && $id <= 90):
+                $ascii = $value;
+                $value = chr($ascii); // Konvertiert die Dezimalzahl in ASCII Zeichen
+                return ($value);
+                
+                case ($id >= 91 && $id <= 94):
+                $decimalValue = $value;
+                $value = long2ip($decimalValue); // Konvertiert die Dezimalzahl in eine IP-Adresse
+                return ($value);
+
             case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
                 return round($value * 0.01, 1);
 
             case ($id == 257):
                 return round($value * 0.001, 2);
+
+            
             
             default:
                 return round($value * 1, 1); // Standardmäßig Konvertierung
@@ -956,7 +976,7 @@ class WPLUX extends IPSModule
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)):
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)|| ($id >= 232 && $id <= 233)|| $id == 267):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                     break;
 
@@ -1020,11 +1040,11 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableFloat($ident, $ident, '~Volt', $id);
                     break;
 
-                case ($id == 173):
+                case ($id == 173 || $id == 254):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.lh', $id);
                     break;
     
-                case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209)):
+                case (($id >= 178 && $id <= 179) || ($id >= 196 && $id <= 197) || ($id >= 208 && $id <= 209) || ($id >= 239 && $id <= 240) || ($id >= 242 && $id <= 243)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature.Difference', $id);
                     break;
     
@@ -1032,7 +1052,7 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableFloat($ident, $ident, 'WPLUX.Pres', $id);
                     break;
     
-                case ($id == 183):
+                case ($id == 183 || $id == 241):
                     $this->RegisterVariableFloat($ident, $ident, '~Valve.F', $id);
                     break;
     
@@ -1048,12 +1068,8 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Bet', $id);
                     break;
 
-                case ($id == 193  || $id == 231):
+                case ($id == 193  || $id == 231|| $id == 236):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Ver', $id);
-                    break;
-    
-                case ($id == 231):
-                    $this->RegisterVariableFloat($ident, $ident, '~Hertz', $id);
                     break;
     
                 case ($id == 257):
