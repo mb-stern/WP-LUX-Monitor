@@ -105,6 +105,11 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.8 (07.07.2024)
+
+- Dokumentationslink hinzugefügt.
+- Bild der Luxtronik unter 'Info zum Modul' hinzugefügt.
+
 Version 3.7 (20.05.2024)
 
 - Die Fehlermeldung beim auswählen von Wert 179 ist behoben.
