@@ -107,7 +107,7 @@ Beispiel:
 
 Version 3.8 (12.08.2024)
 
-- Aswahlmöglichkeit eines externen Wärmemengenzählers zur Berechnung des JAZ hinzugefügt.
+- Auswahlmöglichkeit eines externen Wärmemengenzählers zur Berechnung des JAZ hinzugefügt.
 
 Version 3.8 (07.07.2024)
 
