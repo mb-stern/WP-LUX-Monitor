@@ -1263,12 +1263,14 @@ class WPLUX extends IPSModule
     {
         $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
 
-        // Prüfen, ob $kwh_out verfügbar ist, ansonsten $value_out verwenden
+        // Prüfen, ob $kwh_out (vom externen Wärmemengenzähler) verfügbar ist, ansonsten $value_out (vom internen) verwenden
         $kwh_out = 0;
         if ($this->ReadPropertyFloat('kwhout') !== 0 && IPS_VariableExists($this->ReadPropertyFloat('kwhout'))) {
             $kwh_out = GetValue($this->ReadPropertyFloat('kwhout'));
+            $this->SendDebug("JAZ-Berechnung", "Berechnung des JAZ mit externem Wärmemengenzähler");
         } else {
             $kwh_out = $value_out;
+            $this->SendDebug("JAZ-Berechnung", "Berechnung des JAZ mit internem Wärmemengenzähler");
         }
 
         $this->SendDebug("JAZ-Berechnung", "Berechnungsgrundlagen: Verbrauch (Reset): " . $this->ReadAttributeFloat('start_kwh_in') . " kWh, Produktion (Reset): " . $this->ReadAttributeFloat('start_value_out') . " kWh, Verbrauch (gesamt): $kwh_in kWh, Produktion (gesamt): $kwh_out kWh", 0);
