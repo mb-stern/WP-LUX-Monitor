@@ -1254,54 +1254,53 @@ class WPLUX extends IPSModule
             }
     }
 
-    private function calc_jaz(string $mode, float $value_out)
+    private function calc_jaz(string $mode, float $value_out) 
+{
+    $jazVisible = $this->ReadPropertyFloat('kwhin');
+    $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
+
+    if ($mode == 'jaz' && $jazVisible !== 0 && IPS_VariableExists($jazVisible) && $jazfaktorVariableID !== false) 
     {
-        $kwhinVariableID = $this->ReadPropertyFloat('kwhin');
-        $kwhoutVariableID = $this->ReadPropertyFloat('kwhout'); // ID des externen Wärmemengenzählers
-        $jazfaktorVariableID = @$this->GetIDForIdent('jazfaktor');
-    
-        // Überprüfen, ob die benötigten Variablen verfügbar sind
-        if ($mode !== 'jaz' || $kwhinVariableID === 0 || !IPS_VariableExists($kwhinVariableID) || $jazfaktorVariableID === false) {
+        $kwh_in = GetValue($this->ReadPropertyFloat('kwhin'));
+
+        // Prüfen, ob $kwh_out verfügbar ist, ansonsten $value_out verwenden
+        $kwh_out = 0;
+        if ($this->ReadPropertyFloat('kwhout') !== 0 && IPS_VariableExists($this->ReadPropertyFloat('kwhout'))) {
+            $kwh_out = GetValue($this->ReadPropertyFloat('kwhout'));
+        } else {
+            $kwh_out = $value_out;
+        }
+
+        $this->SendDebug("JAZ-Berechnung", "Berechnungsgrundlagen: Verbrauch (Reset): " . $this->ReadAttributeFloat('start_kwh_in') . " kWh, Produktion (Reset): " . $this->ReadAttributeFloat('start_value_out') . " kWh, Verbrauch (gesamt): $kwh_in kWh, Produktion (gesamt): $kwh_out kWh", 0);
+
+        // Erstmalige Synchronisation bei Startwert 0
+        if ($this->ReadAttributeFloat('start_kwh_in') == 0 || $this->ReadAttributeFloat('start_value_out') == 0) 
+        {
+            $this->WriteAttributeFloat('start_kwh_in', $kwh_in);
+            $this->WriteAttributeFloat('start_value_out', $kwh_out);
+
+            $this->SendDebug("JAZ-Synch", "Die Variablen wurden synchronisiert (sollte nur einmalig nach dem Reset passieren)", 0);
             return;
         }
-    
-        $kwh_in = GetValue($kwhinVariableID);
-        
-        // Wenn der externe Wärmemengenzähler vorhanden ist und einen Wert liefert, diesen verwenden
-        if ($kwhoutVariableID !== 0 && IPS_VariableExists($kwhoutVariableID)) {
-            $kwh_out = GetValue($kwhoutVariableID);
-        } else {
-            $kwh_out = $value_out; // Fallback auf den ursprünglich übergebenen Wert
-        }
-    
-        $start_kwh_in = $this->ReadAttributeFloat('start_kwh_in');
-        $start_kwh_out = $this->ReadAttributeFloat('start_kwh_out');
-    
-        $this->SendDebug("JAZ-Berechnung", "Berechnungsgrundlagen eingegangen: Verbrauch (zum Zeitpunkt des Reset): $start_kwh_in kWh, Produktion (zum Zeitpunkt des Reset): $start_kwh_out kWh, Verbrauch (gesamt): $kwh_in kWh, Produktion (gesamt): $kwh_out kWh", 0);
-        
-        // Synchronisation der Startwerte, falls diese auf 0 stehen
-        if ($start_kwh_in == 0 || $start_kwh_out == 0) {
-            $this->WriteAttributeFloat('start_kwh_in', $kwh_in);
-            $this->WriteAttributeFloat('start_kwh_out', $kwh_out);
-    
-            $this->SendDebug("JAZ-Synch", "Die Variablen wurden synchronisiert (sollte nur einmalig nach dem Reset passieren)", 0);
-            return;  // Beenden der Funktion, da eine Berechnung erst nach der Synchronisation sinnvoll ist
-        }
-    
-        $kwh_in_Change = $kwh_in - $start_kwh_in;
-        $kwh_out_Change = $kwh_out - $start_kwh_out;
-    
-        // Vermeiden einer Division durch 0
-        if ($kwh_in_Change != 0) {
-            $jaz = $kwh_out_Change / $kwh_in_Change;
+
+        $kwh_in_Change = $kwh_in - $this->ReadAttributeFloat('start_kwh_in');
+        $value_out_Change = $kwh_out - $this->ReadAttributeFloat('start_value_out');
+
+        // Überprüfen, ob der Wert von $kwh_in_Change nicht 0 ist, um eine Division durch 0 zu verhindern
+        if ($kwh_in_Change != 0) 
+        {
+            $jaz = $value_out_Change / $kwh_in_Change;
             $this->SetValue('jazfaktor', $jaz);
-            $this->SendDebug("JAZ-Faktor", "Faktor: $jaz wurde berechnet anhand des Energieverbrauchs (seit Reset): $kwh_in_Change kWh und der Energieproduktion (seit Reset): $kwh_out_Change kWh", 0);
-        } else {
+            $this->SendDebug("JAZ-Faktor", "Faktor: $jaz wurde berechnet anhand des Energieverbrauchs (seit Reset): $kwh_in_Change kWh und der Energieproduktion (seit Reset): $value_out_Change kWh", 0);
+        } 
+        else 
+        {
             $this->SetValue('jazfaktor', 0);
             $this->SendDebug("JAZ-Faktor", "JAZ-Faktor konnte noch nicht berechnet werden, da sich der Wert der Energieversorgung noch nicht geändert hat seit dem Reset", 0);
         }
     }
-    
+}
+
 
     public function reset_jaz() //Startwerte der JAZ-Berechnung zurücksetzen
     {
