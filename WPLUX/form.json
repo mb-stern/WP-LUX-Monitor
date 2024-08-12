@@ -154,12 +154,17 @@
                         {
                             "type": "SelectVariable",
                             "name": "kwin",
-                            "caption": "Externe Variable zur Berechnung des COP (kW)"
+                            "caption": "Leistung zur Berechnung des COP (kW)"
                         },
                         {
                             "type": "SelectVariable",
                             "name": "kwhin",
-                            "caption": "Externe Variable zur Berechnung des JAZ (kWh)"
+                            "caption": "Energie zur Berechnung des JAZ (kWh)"
+                        },
+                        {
+                            "type": "SelectVariable",
+                            "name": "kwhout",
+                            "caption": "Externer Wärmemengenzähler für JAZ (kWh)"
                         },
                         {
                             "type": "Button",
