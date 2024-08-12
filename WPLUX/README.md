@@ -105,6 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.8 (12.08.2024)
+
+- Auswahlmöglichkeit eines externen Wärmemengenzählers zur Berechnung des JAZ hinzugefügt.
+
 Version 3.8 (07.07.2024)
 
 - Dokumentationslink hinzugefügt.
