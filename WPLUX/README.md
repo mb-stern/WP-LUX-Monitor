@@ -107,7 +107,7 @@ Beispiel:
 
 Version 3.10 (26.09.2024)
 
-- Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronic vermeiden.
+- Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronik vermeiden.
 
 Version 3.9 (12.08.2024)
 
