@@ -105,6 +105,14 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.10 (26.09.2024)
+
+- Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronic vermeiden.
+
+Version 3.9 (12.08.2024)
+
+- Auswahlmöglichkeit eines externen Wärmemengenzählers zur Berechnung des JAZ hinzugefügt.
+
 Version 3.8 (07.07.2024)
 
 - Dokumentationslink hinzugefügt.
