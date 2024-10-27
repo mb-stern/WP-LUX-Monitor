@@ -1203,7 +1203,7 @@ class WPLUX extends IPSModule
             case 'Mode_Kuehlung':
             case 'Anpassung_Temp':
             case 'Anpassung_WW':
-                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 2 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
+                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
                 $value = $datenRaw[$index];
                 if ($mode == 'Anpassung_Temp') 
                 {
