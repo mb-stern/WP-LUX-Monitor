@@ -105,6 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.11 (27.10.2024)
+
+- Problem behoben, dass die Steuervariable für Warmwasser-Soll in der Lux statt den Wunschwert den Deckung WP verstellt hat.
+
 Version 3.10 (26.09.2024)
 
 - Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronik vermeiden.
