@@ -107,7 +107,7 @@ Beispiel:
 
 Version 3.11 (27.10.2024)
 
-- Problem behoben, dass die Steuervariable für Warmwasser-Soll in der Lux statt den Wunschwert den Deckung WP verstellt hat.
+- Problem behoben, dass die Steuervariable für Warmwasser-Soll in der Lux statt den 'Wunschwert' die 'Deckung WP' verstellt hat.
 
 Version 3.10 (26.09.2024)
 
