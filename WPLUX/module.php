@@ -1124,7 +1124,7 @@ class WPLUX extends IPSModule
             if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
             break;
         case 'Anpassung_WW':
-            $parameter = 2;
+            $parameter = 105;
             if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
             break;
         case 'Mode_Heizung':
