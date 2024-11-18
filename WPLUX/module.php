@@ -917,10 +917,10 @@ class WPLUX extends IPSModule
         // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
-            case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229) || ($id >= 232 && $id <= 233) || ($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243) || $id == 267):
+            case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229) || $id == 233 || ($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243) || $id == 267):
                 return round($value * 0.1, 1);
             
-            case ($id == 15): //Aussentemperatur Minustest
+            case ($id == 15 || $id == 232): //Temperatur Minustest
                 $minusTest = $value * 0.1;
                 if ($minusTest > 429496000) 
                 {
@@ -1124,7 +1124,7 @@ class WPLUX extends IPSModule
             if ($value >= -5 && $value <= 5) $value *= 10; // Wert für Temperaturkorrektur
             break;
         case 'Anpassung_WW':
-            $parameter = 2;
+            $parameter = 105;
             if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
             break;
         case 'Mode_Heizung':
@@ -1203,7 +1203,7 @@ class WPLUX extends IPSModule
             case 'Mode_Kuehlung':
             case 'Anpassung_Temp':
             case 'Anpassung_WW':
-                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 2 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
+                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
                 $value = $datenRaw[$index];
                 if ($mode == 'Anpassung_Temp') 
                 {

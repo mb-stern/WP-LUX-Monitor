@@ -105,9 +105,17 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.12 (03.11.2024)
+
+- Minustest zur ID 232 (Verdampfertemperatur) hinzugefügt, damit bei Minustemperaturen plausible Werte angezeigt werden.
+
+Version 3.11 (27.10.2024)
+
+- Problem behoben, dass die Steuervariable für Warmwasser-Soll in der Lux statt den 'Wunschwert' die 'Deckung WP' verstellt hat.
+
 Version 3.10 (26.09.2024)
 
-- Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronic vermeiden.
+- Erhöhung der Java-ID's auf 275 sollte Fehlermeldungen gewisser Luxtronik vermeiden.
 
 Version 3.9 (12.08.2024)
 
