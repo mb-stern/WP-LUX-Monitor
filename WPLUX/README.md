@@ -107,7 +107,7 @@ Beispiel:
 
 Version 3.12 (03.11.2024)
 
-- Minustest zur ID 232 (Verdampfertemperatur) hinzugefügt, damit bei Minustemperaturen plausible Werte angezeigt werden.
+- Minustest zu allen Temperaturvariablen hinzugefügt, damit bei Minustemperaturen plausible Werte angezeigt werden.
 
 Version 3.11 (27.10.2024)
 
