@@ -956,7 +956,7 @@ class WPLUX extends IPSModule
                 $value = long2ip($decimalValue); // Konvertiert die Dezimalzahl in eine IP-Adresse
                 return ($value);
 
-            case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211) || $id == 58):
+            case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || $id == 201 || ($id >= 210 && $id <= 211) || $id == 58):
                 return round($value * 0.01, 1);
 
             case ($id == 257):
