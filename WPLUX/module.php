@@ -917,10 +917,7 @@ class WPLUX extends IPSModule
         // Hier erfolgt die Konvertierung der Werte basierend auf der 'id'
         switch ($id) 
         {
-            case (($id >= 10 && $id <= 14) || ($id >= 16 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229) || $id == 233 || ($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243) || $id == 267):
-                return round($value * 0.1, 1);
-            
-            case ($id == 15 || $id == 232): //Temperatur Minustest
+            case (($id >= 10 && $id <= 28) || $id == 122 || ($id >= 136 && $id <= 137) || ($id >= 142 && $id <= 144) || ($id >= 151 && $id <= 154) || ($id >= 175 && $id <= 179) ||$id == 183 || $id == 189 || ($id >= 194 && $id <= 200) || ($id >= 208 && $id <= 209) || ($id >= 227 && $id <= 229) || ($id >= 232 && $id <= 233) || ($id >= 239 && $id <= 240)|| ($id >= 242 && $id <= 243) || $id == 267):
                 $minusTest = $value * 0.1;
                 if ($minusTest > 429496000) 
                 {
@@ -959,7 +956,7 @@ class WPLUX extends IPSModule
                 $value = long2ip($decimalValue); // Konvertiert die Dezimalzahl in eine IP-Adresse
                 return ($value);
 
-            case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211)):
+            case ($id == 147 || ($id >= 156 && $id <= 157) || ($id >= 162 && $id <= 165) || ($id >= 168 && $id <= 169) || ($id >= 180 && $id <= 181) || ($id >= 187 && $id <= 188) || ($id >= 210 && $id <= 211) || $id == 58):
                 return round($value * 0.01, 1);
 
             case ($id == 257):
@@ -1049,7 +1046,7 @@ class WPLUX extends IPSModule
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature.Difference', $id);
                     break;
     
-                case (($id >= 180 && $id <= 181) || ($id >= 210 && $id <= 211)):
+                case (($id >= 180 && $id <= 181) || $id == 201 || ($id >= 210 && $id <= 211)):
                     $this->RegisterVariableFloat($ident, $ident, 'WPLUX.Pres', $id);
                     break;
     
