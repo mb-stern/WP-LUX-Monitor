@@ -1,6 +1,6 @@
 {
     "id": "{3884C1C3-F4FF-9A56-B982-B986E934A5E7}",
-    "name": "WPLUX",
+    "name": "Luxtronik",
     "type": 3,
     "vendor": "",
     "aliases": [
@@ -10,5 +10,5 @@
     "childRequirements": [],
     "implemented": [],
     "prefix": "WPLUX",
-    "url": "https://community.symcon.de/t/modul-luxtronik/136470"
+    "url": "https://github.com/mb-stern/Luxtronik/tree/beta"
 }
