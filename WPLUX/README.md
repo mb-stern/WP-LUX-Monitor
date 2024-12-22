@@ -105,6 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.14 (22.12.2024)
+- Anpassung Modulname
+- Anpassung Readme mit geänderter URL
+
 Version 3.13 (23.11.2024)
 
 - Wert 201 (Druck EVI) hat jetzt den korrekten Wert in bar.

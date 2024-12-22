@@ -1,6 +1,6 @@
 <?php
 
-class WPLUX extends IPSModule
+class Luxtronik extends IPSModule
 {
     private $updateTimer;
 
