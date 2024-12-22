@@ -106,6 +106,7 @@ Beispiel:
 ### 8. Versionen
 
 Version 3.14 (22.12.2024)
+
 - Anpassung Modulname
 - Anpassung Readme mit geänderter URL
 
