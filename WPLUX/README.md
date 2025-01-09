@@ -105,6 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
+Version 3.15 (22.12.2024)
+
+- Raumbedieneinheit RBE als Steuervariable hinzugefügt
+
 Version 3.14 (22.12.2024)
 
 - Anpassung Modulname
