@@ -55,6 +55,11 @@
                     "caption": "Steuervariable für Warmwasser-Soll aktivieren"
                 },
                 {
+                    "type": "CheckBox",
+                    "name": "RBEsetVisible",
+                    "caption": "Steuervariable für Raumbedieneinheit aktivieren"
+                },
+                {
                     "type": "Label",
                     "caption": "Timer Heizung",
                     "bold": true
