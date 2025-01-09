@@ -18,6 +18,7 @@ class Luxtronik extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
+        $this->RegisterPropertyBoolean('RBEsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
         $this->RegisterPropertyFloat('kwhout', 0);
