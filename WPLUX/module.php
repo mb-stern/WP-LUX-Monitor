@@ -18,6 +18,7 @@ class Luxtronik extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
+        $this->RegisterPropertyBoolean('RBEsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
         $this->RegisterPropertyFloat('kwhout', 0);
@@ -69,6 +70,7 @@ class Luxtronik extends IPSModule
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
+        $rbesetVisible = $this->ReadPropertyBoolean('RBEsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $hz_timerWeekVisible = $this->ReadPropertyInteger('HZ_TimerWeekVisible');
@@ -139,9 +141,21 @@ class Luxtronik extends IPSModule
             $this->UnregisterVariable('Anpassung_WW');
         }
 
+        if ($rbesetVisible) 
+        {
+            $this->RegisterVariableFloat('Anpassung_RBE', 'Raumtemperatur Soll', 'WPLUX.Wset', 5);
+            $this->getParameter('Anpassung_RBE'); 
+            $Value = $this->GetValue('Anpassung_RBE'); 
+            $this->EnableAction('Anpassung_RBE');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('Anpassung_RBE');
+        }
+
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 5);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 6);
         } 
         else 
         {
@@ -150,7 +164,7 @@ class Luxtronik extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 6);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 7);
         } 
         else 
         {
@@ -1124,6 +1138,10 @@ class Luxtronik extends IPSModule
             $parameter = 105;
             if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
             break;
+        case 'Anpassung_RBE':
+            $parameter = 1148;
+            if ($value >= 10 && $value <= 30) $value *= 10; // Wert für Raumbedieneinheit
+            break;
         case 'Mode_Heizung':
             $parameter = 3;
             break;
@@ -1200,7 +1218,7 @@ class Luxtronik extends IPSModule
             case 'Mode_Kuehlung':
             case 'Anpassung_Temp':
             case 'Anpassung_WW':
-                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
+                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : ($mode == 'Anpassung_RBE' ? 1148 : 108))));
                 $value = $datenRaw[$index];
                 if ($mode == 'Anpassung_Temp') 
                 {
@@ -1216,6 +1234,10 @@ class Luxtronik extends IPSModule
                     }
                 } 
                 elseif ($mode == 'Anpassung_WW') 
+                {
+                    $value *= 0.1;
+                }
+                elseif ($mode == 'Anpassung_RBE') 
                 {
                     $value *= 0.1;
                 }
