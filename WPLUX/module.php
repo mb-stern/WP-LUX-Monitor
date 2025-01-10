@@ -1263,21 +1263,15 @@ class Luxtronik extends IPSModule
         $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
         $copVisible = $this->ReadPropertyFloat('kwin');
         
-        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false) {
-            $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
-            
-            if ($kw_in == 0) {
-                $this->SetValue('copfaktor', 0); // COP auf 0 setzen
-                $this->SendDebug("COP-Faktor", "Eingangsleistung (kw_in) ist 0. COP-Faktor wurde auf 0 gesetzt.", 0);
-                return; // Verarbeitung beenden
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false)
+            {
+                $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
+                $cop = $value / $kw_in;
+                $this->SetValue('copfaktor', $cop);
+                
+                $this->SendDebug("COP-Faktor", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
             }
-            
-            $cop = $value / $kw_in;
-            $this->SetValue('copfaktor', $cop);
-            
-            $this->SendDebug("COP-Faktor", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
-        }
-    }    
+    }
 
     private function calc_jaz(string $mode, float $value_out) 
 {
