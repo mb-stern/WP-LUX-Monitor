@@ -814,7 +814,7 @@ class Luxtronik extends IPSModule
             $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
         }
         // Weitere spezifische Werte wie 'Mode_Heizung', 'Mode_Kuehlung' usw.
-        elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp'])) 
+        elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp', 'Anpassung_RBE'])) 
         {
             // Funktionen aufrufen
             $this->setParameter($Ident, $Value);
@@ -1267,9 +1267,9 @@ class Luxtronik extends IPSModule
             $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
             
             if ($kw_in == 0) {
-                $this->SetValue('copfaktor', 0); // COP auf 0 setzen
+                $this->SetValue('copfaktor', 0);
                 $this->SendDebug("COP-Faktor", "Eingangsleistung (kw_in) ist 0. COP-Faktor wurde auf 0 gesetzt.", 0);
-                return; // Verarbeitung beenden
+                return; 
             }
             
             $cop = $value / $kw_in;
@@ -1279,7 +1279,6 @@ class Luxtronik extends IPSModule
         }
     }
     
-
     private function calc_jaz(string $mode, float $value_out) 
 {
     $jazVisible = $this->ReadPropertyFloat('kwhin');

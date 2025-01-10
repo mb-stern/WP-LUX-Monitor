@@ -105,9 +105,10 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.15 (22.12.2024)
+Version 3.15 (10.1.2025)
 
 - Raumbedieneinheit RBE als Steuervariable hinzugefügt
+- Fehlermeldung COP-Berechnung bei Einangangsleistung 0 abgefangen
 
 Version 3.14 (22.12.2024)
 
