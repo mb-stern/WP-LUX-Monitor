@@ -1140,7 +1140,7 @@ class Luxtronik extends IPSModule
             break;
         case 'Anpassung_RBE':
             $parameter = 1148;
-            if ($value >= 10 && $value <= 30) $value *= 10; // Wert für Raumbedieneinheit
+            if ($value >= 0 && $value <= 35) $value *= 10; // Wert für Raumbedieneinheit
             break;
         case 'Mode_Heizung':
             $parameter = 3;
@@ -1211,51 +1211,56 @@ class Luxtronik extends IPSModule
 
         socket_close($socket);
 
-        switch ($mode) 
-        {
+        switch ($mode) {
             case 'Mode_Heizung':
             case 'Mode_WW':
             case 'Mode_Kuehlung':
             case 'Anpassung_Temp':
             case 'Anpassung_WW':
-                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : ($mode == 'Anpassung_RBE' ? 1148 : 108))));
+            case 'Anpassung_RBE':
+                // Index bestimmen
+                $index = match ($mode) {
+                    'Anpassung_Temp' => 1,
+                    'Anpassung_WW'   => 105,
+                    'Mode_Heizung'   => 3,
+                    'Mode_WW'        => 4,
+                    'Mode_Kuehlung'  => 108,
+                    'Anpassung_RBE'  => 1148,
+                    default          => null
+                };
+        
+                if ($index === null || !isset($datenRaw[$index])) {
+                    $this->SendDebug("Parameter $mode", "Index $index ungültig oder Wert nicht gefunden.", 0);
+                    break;
+                }
+        
+                // Wert aus dem Index holen
                 $value = $datenRaw[$index];
-                if ($mode == 'Anpassung_Temp') 
-                {
-                    $value * 0.1;
-                    if ($value > 429496000) 
-                    {
+        
+                // Berechnungen basierend auf dem Modus durchführen
+                if ($mode === 'Anpassung_Temp') {
+                    if ($value > 429496000) {
                         $value -= 4294967296;
-                        $value *= 0.1;
                     }
-                    else 
-                    {
-                        $value *=0.1;
-                    }
-                } 
-                elseif ($mode == 'Anpassung_WW') 
-                {
+                    $value *= 0.1;
+                } elseif (in_array($mode, ['Anpassung_WW', 'Anpassung_RBE'], true)) {
                     $value *= 0.1;
                 }
-                elseif ($mode == 'Anpassung_RBE') 
-                {
-                    $value *= 0.1;
-                }
+        
+                // Wert setzen und Debug-Info senden
                 $this->SetValue($mode, $value);
                 $this->SendDebug("Parameter $mode", "Wert des Parameters $mode: $value von der Lux geholt und in Variable gespeichert", 0);
                 break;
-                
-            default: //Hier werden die ganzen Timer geholt
-                if (strpos($mode, 'set_') === 0) 
-                {
+        
+            default: // Hier werden die ganzen Timer geholt
+                if (strpos($mode, 'set_') === 0) {
                     $index = (int) substr($mode, 4);
-                    if ($index >= 223 && $index <= 505) 
-                    {
+                    if ($index >= 223 && $index <= 505) {
                         $this->SetValue($mode, $datenRaw[$index] - 3600);
                     }
                 }
                 break;
-        }
+        }        
     }
 
     private function calc_cop($mode, $value) //COP berechnen
