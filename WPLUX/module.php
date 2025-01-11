@@ -1140,7 +1140,7 @@ class Luxtronik extends IPSModule
             break;
         case 'Anpassung_RBE':
             $parameter = 1148;
-            if ($value >= 0 && $value <= 30) $value *= 10; // Wert für Raumbedieneinheit
+            if ($value >= 0 && $value <= 35) $value *= 10; // Wert für Raumbedieneinheit
             break;
         case 'Mode_Heizung':
             $parameter = 3;
