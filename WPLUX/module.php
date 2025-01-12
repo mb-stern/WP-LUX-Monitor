@@ -988,17 +988,13 @@ class Luxtronik extends IPSModule
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)|| ($id >= 232 && $id <= 233)|| ($id >= 267 && $id <= 268)):
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)|| ($id >= 232 && $id <= 233)|| $id == 267):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                     break;
 
                 case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
                     $this->RegisterVariableBoolean($ident, $ident, '~Switch', $id);
                     break;    
-    
-                case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
-                    $this->RegisterVariableString($ident, $ident, '', $id);
-                    break;
 
                 case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Std', $id);
@@ -1086,6 +1082,10 @@ class Luxtronik extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, 'WPLUX.kW', $id);
+                    break;
+
+                case ($id == 268):
+                    $this->RegisterVariableFloat($ident, $ident, '~Watt', $id);
                     break;
 
                 default:
