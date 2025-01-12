@@ -110,7 +110,7 @@ Version 3.15 (12.1.2025)
 
 - Raumbedieneinheit RBE als Steuervariable hinzugefügt
 - Fehlermeldung COP-Berechnung bei Einangangsleistung 0 abgefangen
-- ID 268 Leistungsaufnahme wird als Leistungsvariable erstellt
+- ID 268 Leistungsaufnahme wird als Leistungsvariable erstellt (wenn die Lux diesen ausgibt)
 
 Version 3.14 (22.12.2024)
 
