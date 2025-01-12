@@ -30,6 +30,7 @@ Die Bedeutung und ID's der Variablen sind hier zu finden: https://loxwiki.atlass
 * Die Anzeige des COP-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kW) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt werden.
 * Die Anzeige des JAZ-Faktor ist nun unter Zuhilfenahme einer externen Leistungsmessung (kWh) möglich. Die entsprechende Variable kann im Konfigurationsformular ausgewählt und die Berechnung bei Bedarf zurückgesetzt werden.
 * Es kann die interne Timerfunktion der Luxtronik genutzt werden. Es kann ausgewählt werden, wie viele Variablen (Zeitfenster) erstellt werden sollen, um nicht unnötige Variablen zu verwenden. Die maximale Menge ist analog den Programmiermöglichkeiten über das Webinterface. Beim deaktivieren der Timerfenster bleiben die ursprünglich gespeicherten Werte aber erhalten.
+* Der Sollwert der Raumtermperatur bei vorhandener Raumbedieneinheit kann angepasst werden.
 
 ### 2. Voraussetzungen
 
@@ -105,10 +106,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.15 (10.1.2025)
+Version 3.15 (12.1.2025)
 
 - Raumbedieneinheit RBE als Steuervariable hinzugefügt
 - Fehlermeldung COP-Berechnung bei Einangangsleistung 0 abgefangen
+- ID 268 Leistungsaufnahme wird als Leistungsvariable erstellt (wenn die Lux diesen ausgibt)
 
 Version 3.14 (22.12.2024)
 

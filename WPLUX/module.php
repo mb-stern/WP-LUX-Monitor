@@ -995,10 +995,6 @@ class Luxtronik extends IPSModule
                 case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
                     $this->RegisterVariableBoolean($ident, $ident, '~Switch', $id);
                     break;    
-    
-                case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
-                    $this->RegisterVariableString($ident, $ident, '', $id);
-                    break;
 
                 case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Std', $id);
@@ -1086,6 +1082,10 @@ class Luxtronik extends IPSModule
     
                 case ($id == 257):
                     $this->RegisterVariableFloat($ident, $ident, 'WPLUX.kW', $id);
+                    break;
+
+                case ($id == 268):
+                    $this->RegisterVariableFloat($ident, $ident, '~Watt', $id);
                     break;
 
                 default:
