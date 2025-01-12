@@ -18,6 +18,7 @@ class Luxtronik extends IPSModule
         $this->RegisterPropertyBoolean('WarmwasserVisible', false);
         $this->RegisterPropertyBoolean('TempsetVisible', false);
         $this->RegisterPropertyBoolean('WWsetVisible', false);
+        $this->RegisterPropertyBoolean('RBEsetVisible', false);
         $this->RegisterPropertyFloat('kwin', 0);
         $this->RegisterPropertyFloat('kwhin', 0);
         $this->RegisterPropertyFloat('kwhout', 0);
@@ -69,6 +70,7 @@ class Luxtronik extends IPSModule
         $warmwasserVisible = $this->ReadPropertyBoolean('WarmwasserVisible');
         $tempsetVisible = $this->ReadPropertyBoolean('TempsetVisible');
         $wwsetVisible = $this->ReadPropertyBoolean('WWsetVisible');
+        $rbesetVisible = $this->ReadPropertyBoolean('RBEsetVisible');
         $copVisible = $this->ReadPropertyFloat('kwin');
         $jazVisible = $this->ReadPropertyFloat('kwhin');
         $hz_timerWeekVisible = $this->ReadPropertyInteger('HZ_TimerWeekVisible');
@@ -139,9 +141,21 @@ class Luxtronik extends IPSModule
             $this->UnregisterVariable('Anpassung_WW');
         }
 
+        if ($rbesetVisible) 
+        {
+            $this->RegisterVariableFloat('Anpassung_RBE', 'Raumtemperatur Soll', 'WPLUX.Wset', 5);
+            $this->getParameter('Anpassung_RBE'); 
+            $Value = $this->GetValue('Anpassung_RBE'); 
+            $this->EnableAction('Anpassung_RBE');
+        } 
+        else 
+        {
+            $this->UnregisterVariable('Anpassung_RBE');
+        }
+
         if ($copVisible !== 0 && IPS_VariableExists($copVisible)) 
         {
-            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 5);
+            $this->RegisterVariableFloat('copfaktor', 'COP-Faktor', 'WPLUX.Cop', 6);
         } 
         else 
         {
@@ -150,7 +164,7 @@ class Luxtronik extends IPSModule
         
         if ($jazVisible !== 0 && IPS_VariableExists($jazVisible)) 
         {
-            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 6);
+            $this->RegisterVariableFloat('jazfaktor', 'JAZ-Faktor', 'WPLUX.Cop', 7);
         } 
         else 
         {
@@ -800,7 +814,7 @@ class Luxtronik extends IPSModule
             $this->SendDebug("Parameter $Ident", "Folgender Wert wird an die Funktion setParameter gesendet: $Value", 0);
         }
         // Weitere spezifische Werte wie 'Mode_Heizung', 'Mode_Kuehlung' usw.
-        elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp'])) 
+        elseif (in_array($Ident, ['Mode_Heizung', 'Mode_Kuehlung', 'Mode_WW', 'Anpassung_WW', 'Anpassung_Temp', 'Anpassung_RBE'])) 
         {
             // Funktionen aufrufen
             $this->setParameter($Ident, $Value);
@@ -981,10 +995,6 @@ class Luxtronik extends IPSModule
                 case (($id >= 29 && $id <= 55) || ($id >= 138 && $id <= 140) || $id == 146 || ($id >= 166 && $id <= 167) || ($id >= 170 && $id <= 171) || $id == 182 || $id == 186 || ($id >= 212 && $id <= 216)):
                     $this->RegisterVariableBoolean($ident, $ident, '~Switch', $id);
                     break;    
-    
-                case (($id >= 67 && $id <= 77) || $id == 120 || $id == 123 || $id == 141|| $id == 158 || $id == 161):
-                    $this->RegisterVariableString($ident, $ident, '', $id);
-                    break;
 
                 case ($id == 56 || $id == 58 || ($id >= 60 && $id <= 66)):
                     $this->RegisterVariableInteger($ident, $ident, 'WPLUX.Std', $id);
@@ -1074,6 +1084,10 @@ class Luxtronik extends IPSModule
                     $this->RegisterVariableFloat($ident, $ident, 'WPLUX.kW', $id);
                     break;
 
+                case ($id == 268):
+                    $this->RegisterVariableFloat($ident, $ident, '~Watt', $id);
+                    break;
+
                 default:
                     // Standardprofil, falls keine spezifische Zuordnung gefunden wird
                     $this->RegisterVariableString($ident, $ident, '', $id);
@@ -1123,6 +1137,10 @@ class Luxtronik extends IPSModule
         case 'Anpassung_WW':
             $parameter = 105;
             if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
+            break;
+        case 'Anpassung_RBE':
+            $parameter = 1148;
+            if ($value >= 0 && $value <= 35) $value *= 10; // Wert für Raumbedieneinheit
             break;
         case 'Mode_Heizung':
             $parameter = 3;
@@ -1193,47 +1211,56 @@ class Luxtronik extends IPSModule
 
         socket_close($socket);
 
-        switch ($mode) 
-        {
+        switch ($mode) {
             case 'Mode_Heizung':
             case 'Mode_WW':
             case 'Mode_Kuehlung':
             case 'Anpassung_Temp':
             case 'Anpassung_WW':
-                $index = $mode == 'Anpassung_Temp' ? 1 : ($mode == 'Anpassung_WW' ? 105 : ($mode == 'Mode_Heizung' ? 3 : ($mode == 'Mode_WW' ? 4 : 108)));
+            case 'Anpassung_RBE':
+                // Index bestimmen
+                $index = match ($mode) {
+                    'Anpassung_Temp' => 1,
+                    'Anpassung_WW'   => 105,
+                    'Mode_Heizung'   => 3,
+                    'Mode_WW'        => 4,
+                    'Mode_Kuehlung'  => 108,
+                    'Anpassung_RBE'  => 1148,
+                    default          => null
+                };
+        
+                if ($index === null || !isset($datenRaw[$index])) {
+                    $this->SendDebug("Parameter $mode", "Index $index ungültig oder Wert nicht gefunden.", 0);
+                    break;
+                }
+        
+                // Wert aus dem Index holen
                 $value = $datenRaw[$index];
-                if ($mode == 'Anpassung_Temp') 
-                {
-                    $value * 0.1;
-                    if ($value > 429496000) 
-                    {
+        
+                // Berechnungen basierend auf dem Modus durchführen
+                if ($mode === 'Anpassung_Temp') {
+                    if ($value > 429496000) {
                         $value -= 4294967296;
-                        $value *= 0.1;
                     }
-                    else 
-                    {
-                        $value *=0.1;
-                    }
-                } 
-                elseif ($mode == 'Anpassung_WW') 
-                {
+                    $value *= 0.1;
+                } elseif (in_array($mode, ['Anpassung_WW', 'Anpassung_RBE'], true)) {
                     $value *= 0.1;
                 }
+        
+                // Wert setzen und Debug-Info senden
                 $this->SetValue($mode, $value);
                 $this->SendDebug("Parameter $mode", "Wert des Parameters $mode: $value von der Lux geholt und in Variable gespeichert", 0);
                 break;
-                
-            default: //Hier werden die ganzen Timer geholt
-                if (strpos($mode, 'set_') === 0) 
-                {
+        
+            default: // Hier werden die ganzen Timer geholt
+                if (strpos($mode, 'set_') === 0) {
                     $index = (int) substr($mode, 4);
-                    if ($index >= 223 && $index <= 505) 
-                    {
+                    if ($index >= 223 && $index <= 505) {
                         $this->SetValue($mode, $datenRaw[$index] - 3600);
                     }
                 }
                 break;
-        }
+        }        
     }
 
     private function calc_cop($mode, $value) //COP berechnen
@@ -1241,16 +1268,22 @@ class Luxtronik extends IPSModule
         $copfaktorVariableID = @$this->GetIDForIdent('copfaktor');
         $copVisible = $this->ReadPropertyFloat('kwin');
         
-        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false)
-            {
-                $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
-                $cop = $value / $kw_in;
-                $this->SetValue('copfaktor', $cop);
-                
-                $this->SendDebug("COP-Faktor", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
+        if ($mode == 'cop' && $copVisible !== 0 && IPS_VariableExists($copVisible) && $copfaktorVariableID !== false) {
+            $kw_in = GetValue($this->ReadPropertyFloat('kwin'));
+            
+            if ($kw_in == 0) {
+                $this->SetValue('copfaktor', 0);
+                $this->SendDebug("COP-Faktor", "Eingangsleistung (kw_in) ist 0. COP-Faktor wurde auf 0 gesetzt.", 0);
+                return; 
             }
+            
+            $cop = $value / $kw_in;
+            $this->SetValue('copfaktor', $cop);
+            
+            $this->SendDebug("COP-Faktor", "Faktor: ".$cop." wurde berechnet anhand der Eingangsleistung: ".$kw_in." und Wärmeleistung: ".$value."", 0);
+        }
     }
-
+    
     private function calc_jaz(string $mode, float $value_out) 
 {
     $jazVisible = $this->ReadPropertyFloat('kwhin');
