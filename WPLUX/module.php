@@ -988,7 +988,7 @@ class Luxtronik extends IPSModule
         // Variable erstellen und Profil zuordnen
         switch ($id) 
         {
-                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)|| ($id >= 232 && $id <= 233)|| $id == 267):
+                case (($id >= 10 && $id <= 28) || $id == 122 || $id == 136 || $id == 137 || ($id >= 142 && $id <= 144) || ($id >= 175 && $id <= 177) || $id == 189 || ($id >= 194 && $id <= 195) || ($id >= 198 && $id <= 200) || ($id >= 227 && $id <= 229)|| ($id >= 232 && $id <= 233)|| ($id >= 267 && $id <= 268)):
                     $this->RegisterVariableFloat($ident, $ident, '~Temperature', $id);
                     break;
 

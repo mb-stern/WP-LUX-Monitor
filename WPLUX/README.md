@@ -106,10 +106,11 @@ Beispiel:
 
 ### 8. Versionen
 
-Version 3.15 (10.1.2025)
+Version 3.15 (12.1.2025)
 
 - Raumbedieneinheit RBE als Steuervariable hinzugefügt
 - Fehlermeldung COP-Berechnung bei Einangangsleistung 0 abgefangen
+- ID 268 Leistungsaufnahme als Temperaturvariable
 
 Version 3.14 (22.12.2024)
 
