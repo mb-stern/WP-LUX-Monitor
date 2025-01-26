@@ -1136,7 +1136,7 @@ class Luxtronik extends IPSModule
             break;
         case 'Anpassung_WW':
             $parameter = 105;
-            if ($value >= 30 && $value <= 52) $value *= 10; // Wert für Warmwasserkorrektur
+            if ($value >= 30 && $value <= 65) $value *= 10; // Wert für Warmwasserkorrektur
             break;
         case 'Anpassung_RBE':
             $parameter = 1148;
